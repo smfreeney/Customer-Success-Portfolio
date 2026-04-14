@@ -206,477 +206,412 @@
     .problem-grid {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      gap: 60px;
+      gap: 64px;
       align-items: start;
     }
-    .sticky-side { position: sticky; top: 144px; }
-    .problem-side h2 {
+    .problem-quote {
       font-family: var(--serif);
-      font-size: 32px;
-      font-weight: 500;
+      font-size: 21px;
+      line-height: 1.65;
       color: var(--text);
-      margin-bottom: 18px;
+      font-weight: 400;
+      margin-bottom: 22px;
     }
     .body-text {
-      font-family: var(--serif);
       font-size: 15px;
-      line-height: 1.68;
+      line-height: 1.85;
       color: var(--text-dim);
-      margin-bottom: 18px;
-    }
-
-    /* ── Pain points ── */
-    .pain-list { list-style: none; }
-    .pain-item {
-      background: rgba(251, 191, 36, 0.04);
-      border: 1px solid rgba(251, 191, 36, 0.2);
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-bottom: 14px;
-      position: relative;
-    }
-    .pain-item::before {
-      content: "⚠";
-      color: var(--accent);
-      font-size: 14px;
-      position: absolute;
-      left: 24px;
-      top: 20px;
-    }
-    .pain-item .body-text {
-      padding-left: 24px;
-      margin-bottom: 0;
+      margin-bottom: 16px;
     }
 
     /* ── Timeline ── */
-    #timeline { margin-top: 32px; }
-    .tl-item {
+    .timeline-grid {
+      position: relative;
+    }
+    .timeline-line {
+      position: absolute;
+      top: 16px; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent);
+    }
+    .timeline-items {
       display: grid;
-      grid-template-columns: 36px 1fr auto 2fr;
-      gap: 16px;
-      align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+      position: relative;
     }
-    .tl-item:last-child { border-bottom: none; }
-    .tl-dot-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    .tl-item { text-align: center; cursor: default; }
+    .tl-dot-wrap { display: flex; justify-content: center; margin-bottom: 14px; }
     .tl-dot {
-      width: 8px; height: 8px;
-      background: rgba(245, 245, 245, 0.3);
+      width: 14px; height: 14px;
       border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      position: relative; z-index: 1;
+      transition: all 0.2s;
     }
     .tl-dot.highlight {
       background: var(--accent);
-      width: 12px; height: 12px;
+      border-color: var(--accent);
+      box-shadow: 0 0 16px rgba(200, 169, 122, 0.45);
+    }
+    .tl-item:hover .tl-dot:not(.highlight) {
+      background: var(--teal);
+      border-color: var(--teal);
     }
     .tl-ver {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .tl-year {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text-muted);
-      text-align: right;
-    }
-    .tl-label {
       font-size: 13px;
-      color: var(--text-dim);
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      transition: color 0.2s;
     }
+    .tl-dot.highlight ~ .tl-ver,
+    .tl-item:hover .tl-ver { color: var(--text); }
+    .tl-dot.highlight + * + .tl-ver { color: var(--accent); font-weight: 600; }
+    .tl-year { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+    .tl-label {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      padding: 0 4px;
+      transition: color 0.2s;
+    }
+    .tl-item:hover .tl-label { color: var(--text-dim); }
 
-    /* ── Formats ── */
-    .formats-wrapper {
-      background: var(--bg-dark);
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
+    /* ── Formats tabs ── */
     .tab-bar {
       display: flex;
-      background: rgba(245, 245, 245, 0.05);
+      gap: 0;
+      margin-bottom: 32px;
       border-bottom: 1px solid var(--border);
     }
     .tab-btn {
-      flex: 1;
+      padding: 12px 22px;
       background: none;
       border: none;
-      color: var(--text-muted);
-      font-family: var(--mono);
-      font-size: 12px;
-      padding: 16px 20px;
-      cursor: pointer;
-      transition: all 0.2s;
       border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-family: var(--mono);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
     }
-    .tab-btn:hover { color: var(--accent); }
-    .tab-btn.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-      background: rgba(251, 191, 36, 0.05);
-    }
-    .format-panel {
-      padding: 32px;
-    }
+    .tab-btn.active { border-bottom-color: var(--accent); color: var(--text); }
+    .tab-btn:hover:not(.active) { color: var(--text-dim); }
+
     .format-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      gap: 48px;
       align-items: start;
     }
     .format-desc {
-      font-size: 15px;
+      font-size: 16px;
+      line-height: 1.75;
       color: var(--text-dim);
-      line-height: 1.68;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .format-cta {
       display: inline-flex;
       align-items: center;
-      color: var(--accent);
-      font-family: var(--mono);
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 6px;
       font-size: 13px;
       font-weight: 500;
-      padding: 8px 16px;
-      border: 1px solid rgba(251, 191, 36, 0.3);
-      border-radius: 6px;
-      background: rgba(251, 191, 36, 0.05);
-      transition: all 0.2s;
+      font-family: var(--mono);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      background: rgba(26, 26, 26, 0.5);
+      transition: opacity 0.2s;
+      cursor: pointer;
     }
-    .format-cta:hover {
-      background: rgba(251, 191, 36, 0.1);
-      border-color: var(--accent);
-    }
-
-    /* ── Features card ── */
+    .format-cta:hover { opacity: 0.75; }
     .features-card {
-      background: rgba(245, 245, 245, 0.03);
-      border: 1px solid rgba(245, 245, 245, 0.08);
-      border-radius: 8px;
-      padding: 20px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
     }
     .features-label {
-      font-family: var(--mono);
       font-size: 11px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--text-muted);
       margin-bottom: 16px;
     }
     .feature-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
-      margin-bottom: 10px;
       font-size: 13px;
       color: var(--text-dim);
-    }
-    .feature-item:last-child { margin-bottom: 0; }
-    .feature-arrow {
-      color: var(--accent);
-      font-family: var(--mono);
-      font-size: 12px;
-    }
-
-    /* ── Case study ── */
-    .case-section {
-      margin-bottom: 40px;
-    }
-    .case-section:last-child { margin-bottom: 0; }
-    .case-h3 {
-      font-family: var(--serif);
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--text);
+      line-height: 1.5;
       margin-bottom: 12px;
     }
+    .feature-item:last-child { margin-bottom: 0; }
+    .feature-arrow { color: var(--accent); margin-top: 1px; flex-shrink: 0; }
 
-    /* ── Pullquote ── */
-    .pullquote {
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(251, 191, 36, 0.03) 100%);
-      border: 1px solid rgba(251, 191, 36, 0.2);
-      border-radius: 12px;
-      padding: 32px;
-      margin: 48px 0;
-      position: relative;
-    }
-    .pullquote::before {
-      content: """;
-      position: absolute;
-      top: -8px; left: 32px;
-      font-size: 48px;
-      color: var(--accent);
+    /* ── Case study ── */
+    .case-section { margin-bottom: 44px; }
+    .case-h3 {
       font-family: var(--serif);
-      line-height: 1;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
+    }
+    .pullquote {
+      border-left: 2px solid var(--accent);
+      padding-left: 24px;
+      margin-top: 16px;
     }
     .pullquote p {
       font-family: var(--serif);
-      font-size: 18px;
+      font-size: 19px;
       font-style: italic;
-      color: var(--text);
-      line-height: 1.5;
-      margin-bottom: 0;
+      line-height: 1.65;
+      color: var(--text-dim);
     }
 
-    /* ── AI Note ── */
+    /* ── AI note ── */
     .ai-note-box {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 100%);
+      background: rgba(34, 197, 94, 0.06);
       border: 1px solid rgba(34, 197, 94, 0.2);
       border-radius: 12px;
-      padding: 32px;
-      position: relative;
+      padding: 36px 40px;
     }
     .ai-note-header {
       display: flex;
-      gap: 20px;
       align-items: flex-start;
+      gap: 20px;
     }
     .ai-icon {
-      flex-shrink: 0;
       width: 40px; height: 40px;
-      background: rgba(34, 197, 94, 0.15);
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: rgba(34, 197, 94, 0.15);
+      display: flex; align-items: center; justify-content: center;
       font-size: 18px;
+      flex-shrink: 0;
     }
     .ai-label {
-      font-family: var(--mono);
       font-size: 12px;
-      letter-spacing: 0.08em;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--teal);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .ai-footer {
-      margin-top: 20px;
+      border-top: 1px solid rgba(34, 197, 94, 0.2);
       padding-top: 20px;
-      border-top: 1px solid rgba(34, 197, 94, 0.15);
+      margin-top: 20px;
     }
     .ai-footer p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--teal);
       font-style: italic;
-      color: var(--text-dim);
-      margin-bottom: 0;
     }
 
     /* ── Skills ── */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
     }
     .skill-card {
       background: var(--bg-dark);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      transition: border-color 0.3s;
+      border-radius: 10px;
+      padding: 20px 22px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
-    .skill-card:hover { border-color: rgba(251, 191, 36, 0.4); }
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
     .skill-cat {
-      font-family: var(--mono);
-      font-size: 12px;
+      font-size: 11px;
+      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .skill-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-      font-size: 14px;
+      gap: 8px;
+      font-size: 13px;
       color: var(--text-dim);
+      margin-bottom: 8px;
     }
-    .skill-item:last-child { margin-bottom: 0; }
     .skill-dot {
       width: 4px; height: 4px;
-      background: var(--accent);
       border-radius: 50%;
+      background: var(--teal);
       flex-shrink: 0;
     }
 
     /* ── Footer ── */
     .page-footer {
-      background: var(--bg-dark);
-      border-top: 1px solid var(--border);
       padding: 40px 48px;
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 16px;
+      background: var(--bg-dark);
     }
-    .footer-name {
-      font-family: var(--serif);
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--text);
-    }
-    .footer-meta {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-left: 12px;
-    }
-    .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .footer-divider {
-      color: rgba(245, 245, 245, 0.3);
-    }
+    .footer-name { font-family: var(--serif); font-size: 16px; color: var(--accent); }
+    .footer-meta { font-size: 13px; color: var(--text-muted); margin-left: 16px; }
+    .footer-right { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); }
+    .footer-divider { color: var(--border); }
 
-    /* ── Mobile ── */
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-      nav {
-        padding: 0 24px;
-      }
-      .hero {
-        padding: 120px 24px 80px;
-      }
-      .section {
-        padding: 60px 24px;
-      }
-      .problem-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .sticky-side {
-        position: static;
-      }
-      .format-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .page-footer {
-        padding: 32px 24px;
-        flex-direction: column;
-        text-align: center;
-      }
-      .tab-bar {
-        flex-direction: column;
-      }
-      .tab-btn {
-        border-bottom: none;
-        border-right: 2px solid transparent;
-      }
-      .tab-btn.active {
-        border-right-color: var(--accent);
-        border-bottom-color: transparent;
-      }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      .section { padding: 60px 20px; }
+      .problem-grid { grid-template-columns: 1fr; gap: 32px; }
+      .timeline-items { grid-template-columns: repeat(4, 1fr); }
+      .format-grid { grid-template-columns: 1fr; gap: 28px; }
+      .tab-btn { padding: 10px 14px; font-size: 13px; }
+      .page-footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .timeline-items { grid-template-columns: repeat(3, 1fr); }
+      .hero h1 { font-size: 36px; }
     }
   </style>
 </head>
 <body>
-  <!-- Nav -->
-  <nav class="fade-in">
-    <div class="nav-brand">Sonya Freeney</div>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-brand">Sonya Freeney</span>
     <div class="nav-links">
       <a href="#problem">Problem</a>
-      <a href="#solution">Solution</a>
-      <a href="#case">Case Study</a>
+      <a href="#process">Process</a>
+      <a href="#formats">Formats</a>
+      <a href="#case-study">Case Study</a>
       <a href="#skills">Skills</a>
     </div>
     <a href="index.html" class="nav-back">← Portfolio</a>
   </nav>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <div class="hero dot-grid">
     <div class="hero-glow"></div>
     <div class="hero-inner">
-      <div class="hero-tags fade-up">
-        <span class="tag" style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.25)">Customer Onboarding</span>
-        <span class="tag" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.25)">Process Design</span>
-        <span class="tag" style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.25)">Fintech</span>
+      <div class="hero-tags fade-up" style="animation-delay:0.1s">
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Customer Success Manager</span>
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Fintech Operations</span>
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Multi-Format Documentation</span>
+        <a href="#ai-note" class="tag" style="background:rgba(34,197,94,0.1);color:var(--teal);border:1px solid rgba(34,197,94,0.25);cursor:pointer">⇣ AI tooling note</a>
       </div>
-      <h1 class="fade-up">Customer Onboarding <em>System Redesign</em></h1>
-      <div class="hero-sub fade-up">A white-label implementation template that standardizes payment processor onboarding across three platforms — Excel, Notion, and React. Built on eight years of operational knowledge from real implementations.</div>
-      <div class="hero-ctas fade-up">
-        <a href="https://drive.google.com/uc?export=download&id=1yXBbv6Tu-GvMsajNbijdKs2wTdxbiLZn" class="btn-primary-accent">Download Excel</a>
+      <h1 class="fade-up" style="animation-delay:0.2s">
+        Customer Onboarding<br />
+        <em>System Redesign</em>
+      </h1>
+      <p class="hero-sub fade-up" style="animation-delay:0.35s">
+        An eight-year-old payment processor onboarding workbook, rebuilt from scratch —
+        as a white-label Excel template, a Notion workspace, and a live React app.
+      </p>
+      <div class="hero-ctas fade-up" style="animation-delay:0.5s">
+        <a href="#formats" class="btn-primary-accent">See the work</a>
+        <a href="#case-study" class="btn-outline">Read case study</a>
+        <a href="https://drive.google.com/uc?export=download&id=1yXBbv6Tu-GvMsajNbijdKs2wTdxbiLZn" class="btn-outline">Download Excel</a>
         <a href="https://www.notion.so/338328dccb381df9abde2ed2d503e68" target="_blank" class="btn-outline">View Notion</a>
       </div>
     </div>
   </div>
 
-  <!-- Problem -->
+  <!-- PROBLEM -->
   <div id="problem" class="section">
     <div class="inner">
       <div class="problem-grid">
-        <div class="sticky-side">
-          <div class="reveal">
-            <div class="section-label">The Challenge</div>
-            <div class="section-rule"></div>
-          </div>
-          <h2 class="reveal">Why every processor implementation felt like starting from scratch</h2>
-          <p class="body-text reveal">Payment processor implementations follow predictable patterns, but each engagement felt custom. Same integration requirements, similar portal configurations, identical compliance checks — yet teams spent weeks rebuilding the same project structure.</p>
+        <div class="reveal">
+          <div class="section-label">The Problem</div>
+          <div class="section-rule"></div>
         </div>
-        <div>
-          <ul class="pain-list">
-            <li class="pain-item reveal">
-              <p class="body-text">Implementation managers rebuilt the same task dependencies every time — knowing that DNAC file configuration has to happen before real-time API testing, but starting each project with a blank checklist.</p>
-            </li>
-            <li class="pain-item reveal">
-              <p class="body-text">Cross-functional teams lost context when switching between Excel (for tracking), Notion (for collaboration), and email (for client updates) — no single source of truth for project status.</p>
-            </li>
-            <li class="pain-item reveal">
-              <p class="body-text">The accumulated knowledge lived in individual memories. When senior team members left, the next implementation started over with basic questions: Which portal roles are standard? How do velocity rules typically sequence? What's the standard timeline from LOI to go-live?</p>
-            </li>
-            <li class="pain-item reveal">
-              <p class="body-text">Client-facing deliverables required manual reformatting every time. The same project breakdown that worked as an internal Excel tracker needed complete restructuring to share with stakeholders or present in QBRs.</p>
-            </li>
-          </ul>
+        <div class="reveal">
+          <p class="problem-quote">
+            "A workbook built in 2016, last meaningfully updated in 2019 — with the company name hardcoded in hundreds of cells."
+          </p>
+          <p class="body-text">
+            Payment processor onboarding is one of those operational processes that can make or break a client relationship in the first 45 days. The original workbook was thorough and functional — eight tabs covering everything from merchant banking to IVR configuration. But after 18 revisions across three authors, it had become an institutional knowledge trap.
+          </p>
+          <p class="body-text">
+            Every implementation team maintained a slightly different version. No phase structure. No master checklist. No way to hand it to a new engagement without an hour of find-and-replace.
+          </p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Solution -->
-  <div id="solution" class="section section-alt">
+  <!-- TIMELINE -->
+  <div id="process" class="section section-alt">
     <div class="inner">
       <div class="reveal">
-        <div class="section-label">The Solution</div>
-        <p class="body-text" style="margin-top:6px;margin-bottom:40px">A template system that preserves institutional knowledge and adapts to any workflow.</p>
+        <div class="section-label">Version History</div>
+        <p class="body-text" style="margin-top:6px;margin-bottom:40px">Eight years of accumulated operational knowledge, carried forward.</p>
       </div>
-      
-      <div class="reveal">
-        <h2 style="font-size:28px;font-weight:500;color:var(--text);margin-bottom:18px">Evolution of the template</h2>
-        <p class="body-text">This didn't start as a template. It started as Charlotte Powell's implementation tracker in 2016. Version by version, it accumulated the edge cases, the sequence dependencies, the "lessons learned" that only surface after fifteen or twenty processor integrations.</p>
-        <div id="timeline"></div>
+      <div class="reveal timeline-grid">
+        <div class="timeline-line"></div>
+        <div class="timeline-items" id="timeline">
+          <!-- filled by JS -->
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="formats-wrapper reveal" style="margin-top:48px">
+  <!-- FORMATS -->
+  <div id="formats" class="section">
+    <div class="inner-wide">
+      <div class="reveal">
+        <div class="section-label">What I Built</div>
+        <p class="body-text" style="margin-top:6px;max-width:520px;margin-bottom:40px">
+          Three formats, each chosen for a specific user and use case — not interchangeable, deliberately distinct.
+        </p>
+      </div>
+      <div class="reveal">
         <div class="tab-bar" id="tab-bar"></div>
-        <div class="format-panel" id="format-panel"></div>
       </div>
+      <div class="reveal" id="format-panel"></div>
     </div>
   </div>
 
-  <!-- Case Study -->
-  <div id="case" class="section">
-    <div class="inner">
+  <!-- CASE STUDY -->
+  <div id="case-study" class="section section-dark">
+    <div class="inner" style="max-width:680px">
       <div class="reveal">
-        <div class="section-label">Case Study</div>
-        <h2 style="font-size:28px;font-weight:500;color:var(--text);margin-bottom:18px">What the v4.0 rebuild teaches about institutional knowledge</h2>
-        <p class="body-text">The 2026 white-label rebuild wasn't just a format conversion. It was a test: Could eight years of accumulated operational knowledge survive translation into a generic template?</p>
+        <div class="section-label" style="margin-bottom:36px">Case Study</div>
       </div>
 
       <div class="case-section reveal">
-        <h3 class="case-h3">The knowledge transfer problem</h3>
+        <h3 class="case-h3">The core insight</h3>
         <p class="body-text">
-          Every experienced implementation manager has mental models that don't appear in documentation. "Real-time API testing always surfaces issues with velocity rules" isn't written down anywhere, but it drives the project sequence. "Consumer portal configuration breaks if you configure roles before permission matrices" is the kind of detail that lives in someone's head until they leave the company.
+          This document had two distinct jobs — and was doing both poorly by trying to do them in the same format. Task management (who does what, by when, in what order) and reference documentation (what are the settings, what are the rules, what does the client need to provide) need different tools. The rebuild separated them.
         </p>
+      </div>
+
+      <div class="case-section reveal">
+        <h3 class="case-h3">The Excel approach</h3>
         <p class="body-text">
-          The v4.0 rebuild forced these implicit dependencies into explicit task sequences. The result isn't just a project template — it's a knowledge preservation system.
+          A Config &amp; Branding tab became the single source of truth. Change one cell — every tab updates. Processor names, URLs, the company name in phase banners, the checklist subtitle — all formula-linked. A new master Onboarding Checklist structures 60+ tasks across eight sequential phases with status dropdowns and conditional formatting. A README tab documents the system for anyone who opens it cold.
+        </p>
+      </div>
+
+      <div class="case-section reveal">
+        <h3 class="case-h3">The phase structure</h3>
+        <p class="body-text">
+          The eight phases aren't arbitrary: Discovery, Treasury Setup, Product Configuration, Branding, File Integration, Portal Access, Testing, Go-Live. They reflect how implementations actually sequence. You can't configure channels before processors are live. You can't run UAT before branding is approved. The dependencies are built into the order.
         </p>
       </div>
 
@@ -715,7 +650,7 @@
               AI-assisted tooling is increasingly embedded directly into merchant and biller portals, particularly around the areas this template covers most — permission management, velocity rule configuration, blacklist automation, and fraud pattern detection. Some platforms now surface role recommendations based on usage behavior, auto-adjust velocity thresholds from return history, or flag configuration anomalies before go-live.
             </p>
             <p class="body-text">
-              What that means for this template depends on the company using it. For a modern, AI-native portal, sections like Portal Roles & Blacklist and Payment Velocity Rules may overlap with functionality the platform already handles. For a processor running an older system, the full template applies.
+              What that means for this template depends on the company using it. For a modern, AI-native portal, sections like Portal Roles &amp; Blacklist and Payment Velocity Rules may overlap with functionality the platform already handles. For a processor running an older system, the full template applies.
             </p>
             <div class="ai-footer">
               <p>Treat this as a starting point and a knowledge base, not a final spec. The institutional knowledge here — what questions to ask, what configurations matter, how implementations sequence — remains useful regardless of how automated the underlying platform becomes. The judgment about which sections apply to a given engagement is the part that hasn't been automated yet.</p>
@@ -730,7 +665,7 @@
   <div id="skills" class="section section-alt">
     <div class="inner">
       <div class="reveal">
-        <div class="section-label">Skills & Domain Knowledge</div>
+        <div class="section-label">Skills &amp; Domain Knowledge</div>
         <p class="body-text" style="margin-top:6px;margin-bottom:40px">What this project demonstrates.</p>
       </div>
       <div class="skills-grid" id="skills-grid"></div>
