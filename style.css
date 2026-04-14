@@ -64,6 +64,11 @@ p {
 }
 
 /* ===== Hero Section ===== */
+.hero-logo {
+    max-width: 120px;
+    background: transparent;
+    mix-blend-mode: screen;
+}
 .hero-inner {
     display: flex;
     gap: 4rem;
