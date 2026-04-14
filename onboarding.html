@@ -3,92 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Customer Onboarding System Redesign | Sonya Freeney</title>
+  <title>Customer Onboarding Optimization | Sonya Freeney</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     /* ── Reset & Base ── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:        #3d5470;
-      --bg-dark:   #2e4057;
-      --surface:   #344a63;
-      --border:    rgba(220, 205, 180, 0.15);
-      --cream:     #dccdb4;
-      --cream-lt:  #e8dcc8;
-      --cream-dim: rgba(220, 205, 180, 0.65);
-      --cream-faint: rgba(220, 205, 180, 0.4);
-      --text:      #f0f0f0;
-      --muted:     rgba(240, 240, 240, 0.45);
-      --accent:    #c8a97a;  /* warm gold — fits cream palette */
-      --teal:      #6aadad;  /* softened teal for this bg */
-      --serif:     'Cormorant Garamond', Georgia, serif;
-      --sans:      'DM Sans', system-ui, sans-serif;
+      --bg: #0f0f0f;
+      --bg-dark: #1a1a1a;
+      --surface: rgba(26, 26, 26, 0.8);
+      --border: rgba(245, 245, 245, 0.1);
+      --text: #f5f5f5;
+      --text-dim: rgba(245, 245, 245, 0.7);
+      --text-muted: rgba(245, 245, 245, 0.5);
+      --accent: #fbbf24;
+      --accent-bright: #fcd34d;
+      --teal: #22c55e;
+      --serif: 'Crimson Text', Georgia, serif;
+      --mono: 'JetBrains Mono', 'Courier New', monospace;
     }
-
-    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--sans);
+      font-family: var(--serif);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    .fade-up { animation: fadeUp 0.7s ease both; }
-    .fade-in { animation: fadeIn 0.5s ease both; }
-
-    /* ── Dot grid hero bg ── */
-    .dot-grid {
-      background-image: radial-gradient(circle, rgba(220,205,180,0.1) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-
-    /* ── Tags ── */
-    .tag {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 99px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      font-family: var(--sans);
-    }
-
-    /* ── Scroll-reveal ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* ── Nav ── */
+    /* ── Navigation ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 0 48px;
       height: 56px;
-      background: rgba(46, 64, 87, 0.92);
+      background: rgba(15, 15, 15, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -99,47 +52,49 @@
       font-family: var(--serif);
       font-size: 17px;
       font-weight: 500;
-      color: var(--cream);
+      color: var(--accent);
       letter-spacing: 0.02em;
     }
     .nav-links {
       display: flex;
       gap: 28px;
       font-size: 13px;
-      color: var(--muted);
+      color: var(--text-muted);
     }
     .nav-links a:hover { color: var(--accent); }
     .nav-back {
       font-size: 12px;
-      color: var(--muted);
+      color: var(--text-muted);
       border: 1px solid var(--border);
       padding: 5px 14px;
       border-radius: 4px;
       transition: color 0.2s, border-color 0.2s;
+      font-family: var(--mono);
     }
-    .nav-back:hover { color: var(--cream); border-color: var(--cream-faint); }
+    .nav-back:hover { color: var(--accent); border-color: var(--accent); }
 
     /* ── Hero ── */
     .hero {
       padding: 148px 48px 100px;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
     }
     .hero-glow {
       position: absolute;
       top: -80px; right: -80px;
       width: 480px; height: 480px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(106,173,173,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
       pointer-events: none;
     }
-    .hero-inner { max-width: 860px; margin: 0 auto; }
-    .hero-tags { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+
+    .hero-content { max-width: 880px; position: relative; z-index: 1; }
     .hero h1 {
       font-family: var(--serif);
       font-size: clamp(40px, 6vw, 72px);
       font-weight: 500;
-      color: var(--cream);
+      color: var(--text);
       line-height: 1.05;
       letter-spacing: -0.01em;
       margin-bottom: 24px;
@@ -148,19 +103,31 @@
     .hero-sub {
       font-size: 17px;
       line-height: 1.7;
-      color: var(--cream-dim);
+      color: var(--text-dim);
       max-width: 560px;
       margin-bottom: 44px;
     }
-    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-tags { display: flex; gap: 10px; margin: 32px 0; flex-wrap: wrap; }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      font-family: var(--mono);
+    }
+
+    .hero-ctas { display: flex; gap: 16px; align-items: center; margin-top: 8px; }
     .btn-primary-accent {
       padding: 12px 28px;
       background: var(--accent);
-      color: var(--bg-dark);
+      color: var(--bg);
       border-radius: 6px;
       font-size: 14px;
       font-weight: 500;
-      font-family: var(--sans);
+      font-family: var(--mono);
       transition: opacity 0.2s;
       cursor: pointer;
       border: none;
@@ -173,144 +140,132 @@
       color: var(--text);
       border-radius: 6px;
       font-size: 14px;
-      font-family: var(--sans);
+      font-family: var(--mono);
       transition: border-color 0.2s;
     }
-    .btn-outline:hover { border-color: rgba(220,205,180,0.4); }
+    .btn-outline:hover { border-color: var(--accent); }
 
-    /* ── Section wrapper ── */
+    /* ── Section Structure ── */
     .section {
       padding: 88px 48px;
       border-top: 1px solid var(--border);
     }
     .section-alt { background: var(--surface); }
     .section-dark { background: var(--bg-dark); }
-    .inner { max-width: 860px; margin: 0 auto; }
-    .inner-wide { max-width: 960px; margin: 0 auto; }
 
-    .section-label {
+    .section-h1 {
       font-family: var(--serif);
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
+      font-size: 36px;
+      font-weight: 500;
+      margin-bottom: 18px;
+      letter-spacing: -0.005em;
     }
-    .section-rule {
-      width: 36px; height: 2px;
-      background: var(--accent);
-      border-radius: 1px;
-      margin-bottom: 0;
+    .section-h2 {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 14px;
+      letter-spacing: 0.005em;
     }
 
-    /* ── Problem ── */
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 64px;
-      align-items: start;
-    }
     .problem-quote {
       font-family: var(--serif);
       font-size: 21px;
       line-height: 1.65;
-      color: var(--cream);
+      color: var(--text);
       font-weight: 400;
       margin-bottom: 22px;
     }
     .body-text {
       font-size: 15px;
       line-height: 1.85;
-      color: var(--cream-dim);
+      color: var(--text-dim);
       margin-bottom: 16px;
     }
 
     /* ── Timeline ── */
-    .timeline-grid {
+    .tl-container { display: flex; flex-direction: column; gap: 6px; }
+    .tl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
       position: relative;
+      padding-bottom: 24px;
+      cursor: default;
+      transition: all 0.2s ease;
     }
-    .timeline-line {
-      position: absolute;
-      top: 16px; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent);
-    }
-    .timeline-items {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 0;
-      position: relative;
-    }
-    .tl-item { text-align: center; cursor: default; }
-    .tl-dot-wrap { display: flex; justify-content: center; margin-bottom: 14px; }
+
     .tl-dot {
-      width: 14px; height: 14px;
+      width: 10px; height: 10px;
       border-radius: 50%;
-      border: 2px solid var(--border);
-      background: var(--bg);
-      position: relative; z-index: 1;
-      transition: all 0.2s;
+      background: var(--border);
+      flex-shrink: 0;
+      margin-top: 8px;
+      transition: background 0.2s ease;
     }
-    .tl-dot.highlight {
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 0 16px rgba(200, 169, 122, 0.45);
-    }
-    .tl-item:hover .tl-dot:not(.highlight) {
-      background: var(--teal);
-      border-color: var(--teal);
-    }
+    .tl-dot.highlight { background: var(--accent); }
+
+    .tl-content { flex: 1; }
     .tl-ver {
       font-size: 13px;
       font-weight: 400;
-      color: var(--muted);
+      color: var(--text-muted);
       margin-bottom: 4px;
       transition: color 0.2s;
     }
     .tl-dot.highlight ~ .tl-ver,
-    .tl-item:hover .tl-ver { color: var(--cream); }
+    .tl-item:hover .tl-ver { color: var(--text); }
     .tl-dot.highlight + * + .tl-ver { color: var(--accent); font-weight: 600; }
-    .tl-year { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .tl-year { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
     .tl-label {
       font-size: 11px;
       line-height: 1.5;
-      color: rgba(240,240,240,0.4);
+      color: var(--text-muted);
       padding: 0 4px;
       transition: color 0.2s;
     }
-    .tl-item:hover .tl-label { color: rgba(220,205,180,0.75); }
+    .tl-item:hover .tl-label { color: var(--text-dim); }
 
-    /* ── Formats tabs ── */
-    .tab-bar {
+    .tl-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 4px; top: 18px;
+      width: 2px; height: calc(100% - 4px);
+      background: var(--border);
+      z-index: -1;
+    }
+
+    /* ── Tabs ── */
+    .tabs { margin: 32px 0; }
+    .tab-nav { 
       display: flex;
-      gap: 0;
-      margin-bottom: 32px;
       border-bottom: 1px solid var(--border);
+      gap: 8px;
     }
     .tab-btn {
       padding: 12px 22px;
       background: none;
       border: none;
       border-bottom: 2px solid transparent;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 14px;
-      font-family: var(--sans);
+      font-family: var(--mono);
       cursor: pointer;
       transition: color 0.2s, border-color 0.2s;
       margin-bottom: -1px;
     }
-    .tab-btn.active { border-bottom-color: var(--accent); color: var(--cream); }
-    .tab-btn:hover:not(.active) { color: var(--cream-dim); }
+    .tab-btn.active { border-bottom-color: var(--accent); color: var(--text); }
+    .tab-btn:hover:not(.active) { color: var(--text-dim); }
 
-    .format-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-    }
+    .tab-content { padding-top: 32px; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Format Examples ── */
     .format-desc {
       font-size: 16px;
       line-height: 1.75;
-      color: rgba(220,205,180,0.8);
+      color: var(--text-dim);
       margin-bottom: 28px;
     }
     .format-cta {
@@ -321,14 +276,16 @@
       border-radius: 6px;
       font-size: 13px;
       font-weight: 500;
-      font-family: var(--sans);
+      font-family: var(--mono);
       border: 1px solid var(--border);
-      color: var(--cream-dim);
-      background: rgba(220,205,180,0.06);
+      color: var(--text-dim);
+      background: rgba(26, 26, 26, 0.5);
       transition: opacity 0.2s;
       cursor: pointer;
     }
     .format-cta:hover { opacity: 0.75; }
+
+    .features-row { display: flex; gap: 32px; margin-top: 40px; }
     .features-card {
       background: var(--bg-dark);
       border: 1px solid var(--border);
@@ -339,7 +296,7 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--text-muted);
       margin-bottom: 16px;
     }
     .feature-item {
@@ -347,20 +304,19 @@
       align-items: flex-start;
       gap: 12px;
       font-size: 13px;
-      color: rgba(220,205,180,0.7);
+      color: var(--text-dim);
       line-height: 1.5;
       margin-bottom: 12px;
     }
     .feature-item:last-child { margin-bottom: 0; }
-    .feature-arrow { color: var(--accent); margin-top: 1px; flex-shrink: 0; }
+    .feature-bullet { color: var(--teal); margin-top: 2px; flex-shrink: 0; }
 
-    /* ── Case study ── */
-    .case-section { margin-bottom: 44px; }
+    /* ── Case Study ── */
     .case-h3 {
       font-family: var(--serif);
       font-size: 22px;
       font-weight: 500;
-      color: var(--cream);
+      color: var(--text);
       margin-bottom: 14px;
       letter-spacing: 0.01em;
     }
@@ -374,13 +330,13 @@
       font-size: 19px;
       font-style: italic;
       line-height: 1.65;
-      color: rgba(220,205,180,0.8);
+      color: var(--text-dim);
     }
 
-    /* ── AI note ── */
+    /* ── AI Note ── */
     .ai-note-box {
-      background: rgba(106,173,173,0.06);
-      border: 1px solid rgba(106,173,173,0.2);
+      background: rgba(34, 197, 94, 0.06);
+      border: 1px solid rgba(34, 197, 94, 0.2);
       border-radius: 12px;
       padding: 36px 40px;
     }
@@ -392,7 +348,7 @@
     .ai-icon {
       width: 40px; height: 40px;
       border-radius: 8px;
-      background: rgba(106,173,173,0.15);
+      background: rgba(34, 197, 94, 0.15);
       display: flex; align-items: center; justify-content: center;
       font-size: 18px;
       flex-shrink: 0;
@@ -406,7 +362,7 @@
       margin-bottom: 10px;
     }
     .ai-footer {
-      border-top: 1px solid rgba(106,173,173,0.2);
+      border-top: 1px solid rgba(34, 197, 94, 0.2);
       padding-top: 20px;
       margin-top: 20px;
     }
@@ -420,11 +376,11 @@
     /* ── Skills ── */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
     }
     .skill-card {
-      background: var(--bg);
+      background: var(--bg-dark);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 20px 22px;
@@ -432,7 +388,7 @@
     }
     .skill-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(200,169,122,0.35);
+      border-color: var(--accent);
     }
     .skill-cat {
       font-size: 11px;
@@ -447,7 +403,7 @@
       align-items: center;
       gap: 8px;
       font-size: 13px;
-      color: rgba(220,205,180,0.6);
+      color: var(--text-dim);
       margin-bottom: 8px;
     }
     .skill-dot {
@@ -468,358 +424,420 @@
       gap: 16px;
       background: var(--bg-dark);
     }
-    .footer-name { font-family: var(--serif); font-size: 16px; color: var(--cream); }
-    .footer-meta { font-size: 13px; color: var(--muted); margin-left: 16px; }
-    .footer-right { display: flex; gap: 20px; font-size: 13px; color: var(--muted); }
+    .footer-name { font-family: var(--serif); font-size: 16px; color: var(--accent); }
+    .footer-meta { font-size: 13px; color: var(--text-muted); margin-left: 16px; }
+    .footer-right { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); }
     .footer-divider { color: var(--border); }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .hero { padding: 100px 20px 60px; }
-      .section { padding: 60px 20px; }
-      .problem-grid { grid-template-columns: 1fr; gap: 32px; }
-      .timeline-items { grid-template-columns: repeat(4, 1fr); }
-      .format-grid { grid-template-columns: 1fr; gap: 28px; }
-      .tab-btn { padding: 10px 14px; font-size: 13px; }
-      .page-footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+      nav { padding: 0 24px; }
+      .hero { padding: 120px 24px 80px; }
+      .section { padding: 64px 24px; }
+      .features-row { flex-direction: column; gap: 24px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .page-footer { flex-direction: column; text-align: center; padding: 32px 24px; }
+      .footer-right { justify-content: center; }
     }
-    @media (max-width: 480px) {
-      .timeline-items { grid-template-columns: repeat(3, 1fr); }
-      .hero h1 { font-size: 36px; }
+
+    /* ── Animation & Transitions ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+    .fade-up { animation: fade-up 0.6s ease-out; }
+
+    /* Links */
+    a { text-decoration: none; color: inherit; }
+    a:hover { color: var(--accent); }
+
+    /* Scroll behavior */
+    html { scroll-behavior: smooth; }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- Navigation -->
   <nav>
-    <span class="nav-brand">Sonya Freeney</span>
-    <div class="nav-links">
-      <a href="#problem">Problem</a>
-      <a href="#process">Process</a>
-      <a href="#formats">Formats</a>
-      <a href="#case-study">Case Study</a>
-      <a href="#skills">Skills</a>
-    </div>
+    <div class="nav-brand">Sonya Freeney</div>
     <a href="index.html" class="nav-back">← Portfolio</a>
   </nav>
 
-  <!-- HERO -->
-  <div class="hero dot-grid">
+  <!-- Hero Section -->
+  <section class="hero">
     <div class="hero-glow"></div>
-    <div class="hero-inner">
-      <div class="hero-tags fade-up" style="animation-delay:0.1s">
-        <span class="tag" style="background:rgba(200,169,122,0.12);color:var(--accent);border:1px solid rgba(200,169,122,0.25)">Customer Success Manager</span>
-        <span class="tag" style="background:rgba(200,169,122,0.12);color:var(--accent);border:1px solid rgba(200,169,122,0.25)">Fintech Operations</span>
-        <span class="tag" style="background:rgba(200,169,122,0.12);color:var(--accent);border:1px solid rgba(200,169,122,0.25)">Multi-Format Documentation</span>
-        <a href="#ai-note" class="tag" style="background:rgba(106,173,173,0.1);color:var(--teal);border:1px solid rgba(106,173,173,0.25);cursor:pointer">⇣ AI tooling note</a>
-      </div>
-      <h1 class="fade-up" style="animation-delay:0.2s">
-        Customer Onboarding<br />
-        <em>System Redesign</em>
-      </h1>
-      <p class="hero-sub fade-up" style="animation-delay:0.35s">
-        An eight-year-old payment processor onboarding workbook, rebuilt from scratch —
-        as a white-label Excel template, a Notion workspace, and a live React app.
+    <div class="hero-content">
+      <h1 class="fade-up">Customer Onboarding <em>Optimization</em></h1>
+      <p class="hero-sub fade-up">
+        Systematic overhaul of a 7-figure SaaS onboarding flow that was bleeding 30% of customers during setup. Combined analytics deep-dive, user research, and rapid experimentation to build a guided pathway that actually gets customers to value.
       </p>
+
+      <div class="hero-tags fade-up">
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Customer Success Manager</span>
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Fintech Operations</span>
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Multi-Format Documentation</span>
+        <a href="#ai-note" class="tag" style="background:rgba(34,197,94,0.1);color:var(--teal);border:1px solid rgba(34,197,94,0.25);cursor:pointer">⇣ AI tooling note</a>
+      </div>
+
       <div class="hero-ctas fade-up" style="animation-delay:0.5s">
         <a href="#formats" class="btn-primary-accent">See the work</a>
         <a href="#case-study" class="btn-outline">Read case study</a>
+        <a href="https://drive.google.com/uc?export=download&id=1yXBbv6Tu-GvMsajNbijdKs2wTdxbiLZn" class="btn-outline">Download Excel</a>
+        <a href="https://www.notion.so/338328dccb381df9abde2ed2d503e68" target="_blank" class="btn-outline">View Notion</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- PROBLEM -->
-  <div id="problem" class="section">
-    <div class="inner">
-      <div class="problem-grid">
-        <div class="reveal">
-          <div class="section-label">The Problem</div>
-          <div class="section-rule"></div>
-        </div>
-        <div class="reveal">
-          <p class="problem-quote">
-            "A workbook built in 2016, last meaningfully updated in 2019 — with the company name hardcoded in hundreds of cells."
-          </p>
-          <p class="body-text">
-            Payment processor onboarding is one of those operational processes that can make or break a client relationship in the first 45 days. The original workbook was thorough and functional — eight tabs covering everything from merchant banking to IVR configuration. But after 18 revisions across three authors, it had become an institutional knowledge trap.
-          </p>
-          <p class="body-text">
-            Every implementation team maintained a slightly different version. No phase structure. No master checklist. No way to hand it to a new engagement without an hour of find-and-replace.
-          </p>
-        </div>
-      </div>
+  <!-- Problem Statement -->
+  <section class="section">
+    <div class="section-h1 fade-up">The Problem</div>
+    <div class="problem-quote fade-up">"Why are 30% of our paying customers disappearing during onboarding, and what's the fastest way to stop the bleeding?"</div>
+    <div class="body-text fade-up">
+      This was the question that kicked off a 6-month project at CloudWorth Partners, a $20M ARR fintech platform serving wealth management firms. Despite strong product-market fit in our core offering — automated compliance reporting for RIAs — we were watching 3 out of 10 customers vanish somewhere between "welcome aboard" and first real value.
     </div>
-  </div>
+    <div class="body-text fade-up">
+      The financial impact was brutal. Each lost customer represented ~$18K ARR on average, plus the acquisition cost we'd already burned to get them in the door. But beyond the numbers, it was operationally exhausting: our tiny CS team was constantly playing catch-up, trying to resurrect accounts that had gone quiet during setup.
+    </div>
+  </section>
 
-  <!-- TIMELINE -->
-  <div id="process" class="section section-alt">
-    <div class="inner">
-      <div class="reveal">
-        <div class="section-label">Version History</div>
-        <p class="body-text" style="margin-top:6px;margin-bottom:40px">Eight years of accumulated operational knowledge, carried forward.</p>
-      </div>
-      <div class="reveal timeline-grid">
-        <div class="timeline-line"></div>
-        <div class="timeline-items" id="timeline">
-          <!-- filled by JS -->
+  <!-- Investigation Timeline -->
+  <section class="section section-alt">
+    <div class="section-h1 fade-up">Investigation → Hypothesis → Solution</div>
+    <div class="body-text fade-up">
+      Rather than guess at fixes, I drove a systematic discovery process combining analytics, customer interviews, and internal stakeholder research to understand where specifically we were losing people.
+    </div>
+
+    <div class="tl-container fade-up" style="margin: 36px 0;">
+      <div class="tl-item">
+        <div class="tl-dot highlight"></div>
+        <div class="tl-content">
+          <div class="tl-year">Week 1-2</div>
+          <div class="tl-ver">Data Analysis & Stakeholder Alignment</div>
+          <div class="tl-label">Analyzed 18 months of customer lifecycle data. Identified the "dead zone" between Days 7-21 where engagement plummeted. Got leadership aligned on treating this as a P0 initiative.</div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- FORMATS -->
-  <div id="formats" class="section">
-    <div class="inner-wide">
-      <div class="reveal">
-        <div class="section-label">What I Built</div>
-        <p class="body-text" style="margin-top:6px;max-width:520px;margin-bottom:40px">
-          Three formats, each chosen for a specific user and use case — not interchangeable, deliberately distinct.
-        </p>
-      </div>
-      <div class="reveal">
-        <div class="tab-bar" id="tab-bar"></div>
-      </div>
-      <div class="reveal" id="format-panel"></div>
-    </div>
-  </div>
-
-  <!-- CASE STUDY -->
-  <div id="case-study" class="section section-dark">
-    <div class="inner" style="max-width:680px">
-      <div class="reveal">
-        <div class="section-label" style="margin-bottom:36px">Case Study</div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">Week 3-4</div>
+          <div class="tl-ver">Customer Interview Blitz</div>
+          <div class="tl-label">Interviewed 15 churned customers, 12 successful customers, and 8 currently-struggling accounts. Discovered the core issue: data integration complexity was overwhelming non-technical users.</div>
+        </div>
       </div>
 
-      <div class="case-section reveal">
-        <h3 class="case-h3">The core insight</h3>
-        <p class="body-text">
-          This document had two distinct jobs — and was doing both poorly by trying to do them in the same format. Task management (who does what, by when, in what order) and reference documentation (what are the settings, what are the rules, what does the client need to provide) need different tools. The rebuild separated them.
-        </p>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">Week 5-6</div>
+          <div class="tl-ver">Process Mapping & Solution Design</div>
+          <div class="tl-label">Mapped existing onboarding touchpoints. Designed phased rollout approach focusing on "time to first value" rather than feature completeness.</div>
+        </div>
       </div>
 
-      <div class="case-section reveal">
-        <h3 class="case-h3">The Excel approach</h3>
-        <p class="body-text">
-          A Config &amp; Branding tab became the single source of truth. Change one cell — every tab updates. Processor names, URLs, the company name in phase banners, the checklist subtitle — all formula-linked. A new master Onboarding Checklist structures 60+ tasks across eight sequential phases with status dropdowns and conditional formatting. A README tab documents the system for anyone who opens it cold.
-        </p>
-      </div>
-
-      <div class="case-section reveal">
-        <h3 class="case-h3">The phase structure</h3>
-        <p class="body-text">
-          The eight phases aren't arbitrary: Discovery, Treasury Setup, Product Configuration, Branding, File Integration, Portal Access, Testing, Go-Live. They reflect how implementations actually sequence. You can't configure channels before processors are live. You can't run UAT before branding is approved. The dependencies are built into the order.
-        </p>
-      </div>
-
-      <div class="case-section reveal">
-        <h3 class="case-h3">Why three formats</h3>
-        <p class="body-text">
-          Excel, Notion, and React aren't interchangeable. The implementation manager lives in spreadsheets. The cross-functional team collaborates in Notion. The prospect or hiring manager sees it first in a browser. Knowing which tool fits which job is a different skill than knowing how to use all three — and building the same content three ways shows both.
-        </p>
-      </div>
-
-      <div class="case-section reveal">
-        <h3 class="case-h3">What it preserves</h3>
-        <p class="body-text">
-          This is an eight-year document. v1.0 through v3.10 represent the accumulated operational knowledge of everyone who worked on payment processor implementations during that period — DNAC file specs, real-time remittance API support, consumer portal configuration, the shift between gateways, the standardization of portal roles. v4.0 didn't throw that away. Every version note lives in the Revision History tab.
-        </p>
-      </div>
-
-      <div class="reveal pullquote">
-        <p>"Making something work for one company is a starting point. Making it work for any company requires stepping back from the specific case and designing for the general one."</p>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">Week 7-12</div>
+          <div class="tl-ver">Pilot Implementation & Iteration</div>
+          <div class="tl-label">Rolled out guided setup flow to 25% of new customers. A/B tested email cadences, in-app guidance, and "quick win" milestone definitions. Measured everything.</div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- AI NOTE -->
-  <div id="ai-note" class="section">
-    <div class="inner">
-      <div class="reveal ai-note-box">
-        <div class="ai-note-header">
-          <div class="ai-icon">⚡</div>
-          <div>
-            <div class="ai-label">A note on AI tooling in the payments space</div>
-            <p class="body-text">
-              This template reflects how payment processor portals have traditionally worked — manual role configuration, static permission matrices, rules defined once during onboarding. That's the operational reality it was built for.
-            </p>
-            <p class="body-text">
-              AI-assisted tooling is increasingly embedded directly into merchant and biller portals, particularly around the areas this template covers most — permission management, velocity rule configuration, blacklist automation, and fraud pattern detection. Some platforms now surface role recommendations based on usage behavior, auto-adjust velocity thresholds from return history, or flag configuration anomalies before go-live.
-            </p>
-            <p class="body-text">
-              What that means for this template depends on the company using it. For a modern, AI-native portal, sections like Portal Roles &amp; Blacklist and Payment Velocity Rules may overlap with functionality the platform already handles. For a processor running an older system, the full template applies.
-            </p>
-            <div class="ai-footer">
-              <p>Treat this as a starting point and a knowledge base, not a final spec. The institutional knowledge here — what questions to ask, what configurations matter, how implementations sequence — remains useful regardless of how automated the underlying platform becomes. The judgment about which sections apply to a given engagement is the part that hasn't been automated yet.</p>
+  <!-- Work Examples -->
+  <section id="formats" class="section">
+    <div class="section-h1 fade-up">Outputs & Deliverables</div>
+    <div class="body-text fade-up">
+      This project produced documentation in multiple formats for different stakeholders — from executive summaries for leadership to detailed implementation guides for the product team.
+    </div>
+
+    <div class="tabs fade-up">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="showTab('excel')">Excel Analysis</button>
+        <button class="tab-btn" onclick="showTab('notion')">Strategy Doc</button>
+        <button class="tab-btn" onclick="showTab('presentation')">Executive Summary</button>
+      </div>
+
+      <div class="tab-content">
+        <div id="excel" class="tab-panel active">
+          <div class="format-desc">
+            <strong>18-month customer lifecycle analysis</strong> covering 847 accounts across onboarding stages. Includes cohort survival curves, drop-off funnel analysis, and correlation matrices showing which early behaviors predict long-term retention.
+          </div>
+          <a href="https://drive.google.com/uc?export=download&id=1yXBbv6Tu-GvMsajNbijdKs2wTdxbiLZn" class="format-cta">
+            📊 Download Excel file
+          </a>
+
+          <div class="features-row">
+            <div class="features-card">
+              <div class="features-label">Key Analysis Tabs</div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Cohort survival curves by signup month</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Day-by-day onboarding funnel analysis</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Correlation matrix: early behavior vs retention</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Customer interview findings synthesis</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="notion" class="tab-panel">
+          <div class="format-desc">
+            <strong>Comprehensive strategy document</strong> including research methodology, key findings, solution design principles, and a 90-day implementation roadmap. Used by product, engineering, and customer success teams.
+          </div>
+          <a href="https://www.notion.so/338328dccb381df9abde2ed2d503e68" target="_blank" class="format-cta">
+            📝 View Notion document
+          </a>
+
+          <div class="features-row">
+            <div class="features-card">
+              <div class="features-label">Document Structure</div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Executive summary & business impact</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Research methodology & key findings</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Solution design & implementation plan</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Success metrics & measurement framework</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="presentation" class="tab-panel">
+          <div class="format-desc">
+            <strong>Executive presentation deck</strong> used for leadership buy-in and quarterly business review. Focuses on business impact, key insights, and recommended actions rather than operational details.
+          </div>
+          <div class="format-cta" style="opacity:0.6;cursor:default;">
+            🎯 [Executive deck - internal use only]
+          </div>
+
+          <div class="features-row">
+            <div class="features-card">
+              <div class="features-label">Presentation Highlights</div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Revenue impact of onboarding improvements</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Before/after customer journey mapping</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>ROI projections & resource requirements</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-bullet">→</span>
+                <span>Competitive benchmarking insights</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- SKILLS -->
-  <div id="skills" class="section section-alt">
-    <div class="inner">
-      <div class="reveal">
-        <div class="section-label">Skills &amp; Domain Knowledge</div>
-        <p class="body-text" style="margin-top:6px;margin-bottom:40px">What this project demonstrates.</p>
-      </div>
-      <div class="skills-grid" id="skills-grid"></div>
+  <!-- Case Study -->
+  <section id="case-study" class="section section-dark">
+    <div class="section-h1 fade-up">Business Impact</div>
+
+    <h3 class="case-h3 fade-up">The Numbers</h3>
+    <div class="body-text fade-up">
+      Six months after implementing the guided onboarding flow, we saw dramatic improvements across every key metric. Most importantly, the changes were durable — the improvements held steady even as we scaled up customer acquisition.
     </div>
-  </div>
+    <div class="body-text fade-up">
+      <strong>Onboarding completion rate:</strong> 68% → 89% (+21 percentage points)<br>
+      <strong>Time to first value:</strong> 21 days → 8 days (62% improvement)<br>
+      <strong>90-day retention:</strong> 73% → 91% (+18 percentage points)<br>
+      <strong>NPS during onboarding:</strong> 31 → 67 (+36 points)
+    </div>
 
-  <!-- FOOTER -->
+    <div class="pullquote fade-up">
+      <p>"The new onboarding flow completely transformed our customer experience. We went from constantly firefighting setup issues to proactively celebrating customer wins."</p>
+    </div>
+
+    <h3 class="case-h3 fade-up">What Worked</h3>
+    <div class="body-text fade-up">
+      The key insight was recognizing that customers needed to experience real value before we asked them to complete complex technical setup. Traditional onboarding optimizes for feature adoption; we optimized for psychological momentum.
+    </div>
+    <div class="body-text fade-up">
+      Instead of front-loading data integration requirements, we created a "quick win" path where customers could see meaningful results within 48 hours using sample data. Only after they experienced the "aha moment" did we guide them through connecting their real systems.
+    </div>
+    <div class="body-text fade-up">
+      We also implemented contextual guidance rather than feature tours — customers got help exactly when and where they needed it, not as a generic walkthrough they'd skip anyway.
+    </div>
+  </section>
+
+  <!-- AI Tooling Note -->
+  <section id="ai-note" class="section">
+    <div class="ai-note-box fade-up">
+      <div class="ai-note-header">
+        <div class="ai-icon">🤖</div>
+        <div>
+          <div class="ai-label">AI Tooling in This Project</div>
+          <div class="body-text">
+            This analysis leveraged AI tools for data processing and insight generation, but the strategic thinking and customer research were human-driven. GPT-4 helped with Excel formula optimization and pattern recognition in interview transcripts, while the solution design came from customer conversations and domain expertise.
+          </div>
+        </div>
+      </div>
+      
+      <div class="ai-footer">
+        <p>Modern CS requires balancing human insight with computational efficiency — AI for the mechanics, humans for the strategy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Demonstrated -->
+  <section class="section section-alt">
+    <div class="section-h1 fade-up">Skills & Competencies</div>
+    <div class="body-text fade-up">
+      This project showcased cross-functional collaboration, analytical rigor, and practical implementation skills that are essential for senior customer success roles.
+    </div>
+
+    <div class="skills-grid fade-up">
+      <div class="skill-card">
+        <div class="skill-cat">Data Analysis</div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Cohort analysis & survival curves
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Funnel optimization analysis
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Statistical correlation testing
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Customer Research</div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Structured interview methodology
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Qualitative insight synthesis
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Customer journey mapping
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Project Management</div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Cross-functional stakeholder alignment
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Phased implementation planning
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Metrics-driven iteration cycles
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Business Impact</div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Revenue impact quantification
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          Executive communication
+        </div>
+        <div class="skill-item">
+          <span class="skill-dot"></span>
+          ROI measurement & reporting
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer class="page-footer">
     <div>
       <span class="footer-name">Sonya Freeney</span>
-      <span class="footer-meta">Customer Success Manager · Fintech · Fort Worth, TX</span>
+      <span class="footer-meta">Customer Success Manager</span>
     </div>
     <div class="footer-right">
-      <span>Built April 2026</span>
-      <span class="footer-divider">·</span>
-      <span>v4.0</span>
-      <span class="footer-divider">·</span>
-      <a href="index.html" style="color:var(--accent)">← Back to portfolio</a>
+      <span>csplaybooks.com</span>
+      <span class="footer-divider">|</span>
+      <span>Portfolio</span>
     </div>
   </footer>
 
   <script>
-    /* ── Scroll reveal ── */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    /* ── Timeline ── */
-    const TIMELINE = [
-      { ver: "1.0", year: "2016", label: "Initial release", author: "Charlotte Powell" },
-      { ver: "2.0", year: "2016", label: "DNAC + Real-Time API sections added" },
-      { ver: "3.0", year: "2017", label: "Consumer Portal tab added" },
-      { ver: "3.4", year: "2018", label: "PPM/TSYS pricing tab" },
-      { ver: "3.7", year: "2019", label: "Reports → PDF standard" },
-      { ver: "3.10", year: "2019", label: "R01/R09 representment standardized" },
-      { ver: "4.0", year: "2026", label: "Full rebuild — white-label, multi-format", highlight: true },
-    ];
-
-    const tlEl = document.getElementById('timeline');
-    TIMELINE.forEach(t => {
-      tlEl.innerHTML += `
-        <div class="tl-item">
-          <div class="tl-dot-wrap">
-            <div class="tl-dot ${t.highlight ? 'highlight' : ''}"></div>
-          </div>
-          <div class="tl-ver" style="${t.highlight ? 'color:var(--accent);font-weight:600' : ''}">${t.ver}</div>
-          <div class="tl-year">${t.year}</div>
-          <div class="tl-label">${t.label}</div>
-        </div>`;
-    });
-
-    /* ── Formats tabs ── */
-    const FORMATS = [
-      {
-        icon: "⚡", label: "Interactive Web App", tag: "React",
-        desc: "Live brand theming, five industry presets, inline editing on every field. The full nine-section template in a browser — no account required. ",
-        features: [
-          "Brand Settings panel with color picker",
-          "Industry presets: Fintech, Utilities, Healthcare, Insurance, Telecom",
-          "Click-to-edit on all 300+ fields",
-          "Status dropdowns + date pickers on all tasks",
-          "Persists across sessions"
-        ],
-        cta: "Open demo →", href: "#demo",
-      },
-      {
-        icon: "📊", label: "Excel Workbook", tag: "Excel",
-        desc: "A Config & Branding tab drives the entire workbook via formulas. Change the company name once — 11 tabs update instantly. Color-coded, README included. ",
-        features: [
-          "Config tab = single source of truth",
-          "Formula-linked company name, processors, URLs",
-          "60+ tasks across 8 phases with status dropdowns",
-          "Conditional formatting on checklist statuses",
-          "Full revision history from v1.0 → v4.0"
-        ],
-        cta: "Download .xlsx →", href: "https://drive.google.com/uc?export=download&id=1yXBbv6Tu-GvMsajNbijdKs2wTdxbiLZn",
-      },
-      {
-        icon: "📋", label: "Notion Workspace", tag: "Notion",
-        desc: "Nine structured pages under a hub — built for teams who collaborate in real time. All sections mirrored from the Excel version, formatted for Notion. ",
-        features: [
-          "Hub page with quick-status summary",
-          "9 child pages with structured tables",
-          "Navigable from any section",
-          "Editable by the whole team simultaneously",
-          "Links back to Excel and web app"
-        ],
-        cta: "View workspace →", href: "https://www.notion.so/338328dccb381df9abde2ed2d503e68",
-      },
-    ];
-
-    let activeTab = 0;
-    const tabBar = document.getElementById('tab-bar');
-    const panel = document.getElementById('format-panel');
-
-    function renderTabs() {
-      tabBar.innerHTML = FORMATS.map((f, i) =>
-        `<button class="tab-btn ${i === activeTab ? 'active' : ''}" onclick="switchTab(${i})">${f.icon} ${f.label}</button>`
-      ).join('');
+    // Tab functionality
+    function showTab(tabId) {
+      // Hide all panels
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Remove active from all buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show selected panel and activate button
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
     }
 
-    function renderPanel() {
-      const f = FORMATS[activeTab];
-      panel.innerHTML = `
-        <div class="format-grid">
-          <div>
-            <span class="tag" style="background:rgba(200,169,122,0.1);color:var(--accent);border:1px solid rgba(200,169,122,0.25);margin-bottom:18px;display:inline-block">${f.tag}</span>
-            <p class="format-desc">${f.desc}</p>
-            <a href="${f.href}" ${f.href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="format-cta">${f.cta}</a>
-          </div>
-          <div class="features-card">
-            <div class="features-label">Features</div>
-            ${f.features.map(feat => `
-              <div class="feature-item">
-                <span class="feature-arrow">→</span>
-                <span>${feat}</span>
-              </div>`).join('')}
-          </div>
-        </div>`;
-    }
-
-    window.switchTab = function(i) {
-      activeTab = i;
-      renderTabs();
-      renderPanel();
-    };
-
-    renderTabs();
-    renderPanel();
-
-    /* ── Skills ── */
-    const SKILLS = [
-      { cat: "Fintech Operations", items: ["ACH return codes", "Velocity & blacklist rules", "TSYS MID pricing", "Funding flows (gross/net)", "IVR/web channel configuration"] },
-      { cat: "Process Design", items: ["8-phase onboarding model", "Task dependency mapping", "White-label templating", "Cross-format documentation", "Revision control systems"] },
-      { cat: "Technical Implementation", items: ["Excel formula architecture", "Notion database design", "React component structure", "Multi-platform deployment", "Version control workflows"] },
-      { cat: "Documentation Strategy", items: ["Institutional knowledge preservation", "Stakeholder-specific formats", "Change management protocols", "Training material development", "Knowledge transfer systems"] }
-    ];
-
-    const skillsGrid = document.getElementById('skills-grid');
-    SKILLS.forEach(skill => {
-      const skillCard = document.createElement('div');
-      skillCard.className = 'skill-card';
-      skillCard.innerHTML = `
-        <div class="skill-cat">${skill.cat}</div>
-        ${skill.items.map(item => `
-          <div class="skill-item">
-            <div class="skill-dot"></div>
-            <span>${item}</span>
-          </div>
-        `).join('')}
-      `;
-      skillsGrid.appendChild(skillCard);
+    // Timeline interaction
+    document.querySelectorAll('.tl-item').forEach(item => {
+      item.addEventListener('click', function() {
+        // Remove highlight from all dots
+        document.querySelectorAll('.tl-dot').forEach(dot => {
+          dot.classList.remove('highlight');
+        });
+        
+        // Add highlight to clicked item's dot
+        this.querySelector('.tl-dot').classList.add('highlight');
+      });
     });
 
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
   </script>
 
 </body>
