@@ -65,10 +65,11 @@ p {
 
 /* ===== Hero Section ===== */
 .hero-logo {
-    max-width: 120px;
-    background: transparent;
-    mix-blend-mode: screen;
+    max-width: 220px;
+    display: block;
+    margin-bottom: 1rem;
 }
+
 .hero-inner {
     display: flex;
     gap: 2rem;
@@ -83,12 +84,6 @@ p {
     flex: 1;
     text-align: left;
     padding-left: 0;
-}
-
-.hero-logo {
-    max-width: 300px;
-    margin-bottom: 1rem;
-    display: block;
 }
 
 .cta-buttons {
@@ -273,7 +268,7 @@ p {
 }
 
 .expertise-area li:before {
-    content: "→";
+    content: "\2192";
     position: absolute;
     left: 0;
     color: var(--cream);
@@ -379,17 +374,4 @@ p {
     .project-card {
         padding: 1.5rem;
     }
-}
-.logo-name {
-    color: #ffffff;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.2rem;
-}
-
-.logo-tagline {
-    color: #c8b89a;
-    font-size: 0.85rem;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.05em;
 }
