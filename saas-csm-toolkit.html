@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaaS CSM Toolkit | Sonya Freeney</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #1e293b;
+      --bg-card: #334155;
+      --text: #f1f5f9;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      --accent: #8b5cf6;
+      --accent-hover: #7c3aed;
+      --accent-light: rgba(139, 92, 246, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: #475569;
+      --shadow: rgba(0, 0, 0, 0.3);
+      --shadow-lg: rgba(0, 0, 0, 0.5);
+      --sans: 'Poppins', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .nav-back {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .nav-back:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 140px 40px 100px;
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 22px;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-bottom: 40px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-size: 16px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* Sections */
+    .section {
+      padding: 80px 40px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-subtitle {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 20px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    .feature-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .feature-desc {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Modules Grid */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    .module-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    .module-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 18px;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    .module-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .module-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .module-features {
+      list-style: none;
+    }
+    .module-features li {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+      padding-left: 16px;
+      position: relative;
+    }
+    .module-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    /* Platform Options */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .platform-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    .platform-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    .platform-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .footer-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .footer-desc {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 120px 20px 80px; }
+      .section { padding: 60px 20px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .btn { justify-content: center; }
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .fade-up-1 { animation-delay: 0.1s; }
+    .fade-up-2 { animation-delay: 0.2s; }
+    .fade-up-3 { animation-delay: 0.3s; }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: var(--bg-card);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 32px;
+      margin: 40px 0;
+      position: relative;
+      text-align: center;
+    }
+    .highlight-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent);
+      border-radius: 12px 12px 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-brand">Sonya Freeney</div>
+    <a href="index.html" class="nav-back">← Portfolio</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge fade-up">
+        🚀 Complete Operating System
+      </div>
+      <h1 class="fade-up fade-up-1">SaaS CSM Toolkit</h1>
+      <p class="hero-desc fade-up fade-up-2">
+        The all-in-one Customer Success Manager operating system — task tracker, documentation hub, brag book, project planner, and performance review ammo. Built for Notion and Excel.
+      </p>
+      <div class="hero-cta fade-up fade-up-3">
+        <a href="https://github.com/smfreeney/saas_csm-toolkit" target="_blank" class="btn btn-primary">
+          📂 View on GitHub
+        </a>
+        <a href="https://github.com/smfreeney/saas_csm-toolkit/raw/main/CSM-Operating-System.xlsx" class="btn btn-secondary">
+          📊 Download Excel
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Statement -->
+  <section class="section">
+    <div class="container">
+      <div class="highlight-box fade-up">
+        <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 16px; color: var(--accent);">The CSM Reality Check</h3>
+        <p style="color: var(--text-muted); font-size: 18px; margin-bottom: 20px;">
+          You're juggling 30+ accounts, hopping between Zoom calls, chasing down action items in Slack threads, and somehow expected to remember that thing you did six months ago when review season hits.
+        </p>
+        <p style="color: var(--text); font-weight: 500;">
+          This toolkit fixes that.
+        </p>
+      </div>
+
+      <div class="section-header">
+        <div class="section-subtitle">Complete System</div>
+        <h2 class="section-title">Built for How CSMs Actually Work</h2>
+        <p class="section-desc">
+          Not generic project management. Not repurposed sales templates. Built from the ground up for Customer Success Managers who work in SaaS.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Modules -->
+  <section class="section" style="background: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">Toolkit Modules</div>
+        <h2 class="section-title">Everything You Need in One System</h2>
+        <p class="section-desc">
+          Seven integrated modules covering the full spectrum of CS work
+        </p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card fade-up">
+          <div class="module-icon">📋</div>
+          <h3 class="module-title">Task & Action Item Tracker</h3>
+          <p class="module-desc">Track action items by account, priority, and due date with automatic rollover</p>
+          <ul class="module-features">
+            <li>Meeting-linked tasks</li>
+            <li>Automatic rollover for overdue items</li>
+            <li>Weekly review dashboard</li>
+            <li>Priority-based sorting</li>
+          </ul>
+        </div>
+
+        <div class="module-card fade-up fade-up-1">
+          <div class="module-icon">📞</div>
+          <h3 class="module-title">Call & Meeting Log</h3>
+          <p class="module-desc">Pre-call prep templates with live note-taking structure and searchable history</p>
+          <ul class="module-features">
+            <li>Pre-call prep templates</li>
+            <li>Structured note-taking</li>
+            <li>Searchable call history</li>
+            <li>QBR and EBR planning</li>
+          </ul>
+        </div>
+
+        <div class="module-card fade-up fade-up-2">
+          <div class="module-icon">📊</div>
+          <h3 class="module-title">Account Health Dashboard</h3>
+          <p class="module-desc">Health score tracking with risk signals, renewal timeline, and stakeholder mapping</p>
+          <ul class="module-features">
+            <li>Usage & engagement tracking</li>
+            <li>Risk and expansion signals</li>
+            <li>Renewal countdown timers</li>
+            <li>Stakeholder relationship maps</li>
+          </ul>
+        </div>
+
+        <div class="module-card fade-up fade-up-3">
+          <div class="module-icon">🏆</div>
+          <h3 class="module-title">Brag Book / Win Tracker</h3>
+          <p class="module-desc">Log wins as they happen with quantified impact for performance reviews</p>
+          <ul class="module-features">
+            <li>Win categorization system</li>
+            <li>Revenue impact tracking</li>
+            <li>NPS & churn prevention logs</li>
+            <li>Auto-generated review talking points</li>
+          </ul>
+        </div>
+
+        <div class="module-card fade-up">
+          <div class="module-icon">📈</div>
+          <h3 class="module-title">Project Planner</h3>
+          <p class="module-desc">Onboarding project templates with milestone tracking and collaboration tools</p>
+          <ul class="module-features">
+            <li>30/60/90 day templates</li>
+            <li>Cross-functional collaboration</li>
+            <li>Customer journey stages</li>
+            <li>Implementation milestones</li>
+          </ul>
+        </div>
+
+        <div class="module-card fade-up fade-up-1">
+          <div class="module-icon">📖</div>
+          <h3 class="module-title">Best Practices Playbook</h3>
+          <p class="module-desc">Discovery frameworks, QBR structures, escalation handling, and expansion guides</p>
+          <ul class="module-features">
+            <li>Discovery call frameworks</li>
+            <li>Escalation playbooks</li>
+            <li>Upsell conversation guides</li>
+            <li>Stakeholder management tactics</li>
+          </ul>
+        </div>
+
+        <div class="module-card fade-up fade-up-2">
+          <div class="module-icon">🔄</div>
+          <h3 class="module-title">Performance & Growth</h3>
+          <p class="module-desc">Weekly assessments, goal tracking, and quarterly review preparation</p>
+          <ul class="module-features">
+            <li>Weekly self-assessment prompts</li>
+            <li>OKR / KPI tracking</li>
+            <li>Skills development tracker</li>
+            <li>Review prep worksheets</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Options -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">Implementation Options</div>
+        <h2 class="section-title">Choose Your Platform</h2>
+        <p class="section-desc">
+          Multiple implementation options to fit your workflow and preferences
+        </p>
+      </div>
+
+      <div class="platform-grid">
+        <div class="platform-card fade-up">
+          <div class="platform-badge">Fastest Setup</div>
+          <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 16px;">Excel Workbook</h3>
+          <p style="color: var(--text-muted); margin-bottom: 20px;">
+            Ready-to-use Excel workbook with sample data, formulas, and conditional formatting. Download and start using immediately.
+          </p>
+          <ul style="text-align: left; list-style: none; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              Pre-built formulas and charts
+            </li>
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              Works offline
+            </li>
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              No platform dependencies
+            </li>
+          </ul>
+        </div>
+
+        <div class="platform-card fade-up fade-up-1">
+          <div class="platform-badge">Most Powerful</div>
+          <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 16px;">Notion Workspace</h3>
+          <p style="color: var(--text-muted); margin-bottom: 20px;">
+            Full Notion implementation with relational databases, automation, and collaborative features. Includes CSV import files and setup guide.
+          </p>
+          <ul style="text-align: left; list-style: none; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              Relational database structure
+            </li>
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              Team collaboration features
+            </li>
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              Advanced automation
+            </li>
+          </ul>
+        </div>
+
+        <div class="platform-card fade-up fade-up-2">
+          <div class="platform-badge">Custom Build</div>
+          <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 16px;">Build From Scratch</h3>
+          <p style="color: var(--text-muted); margin-bottom: 20px;">
+            Complete database schemas, field definitions, and documentation for building in your preferred platform (Airtable, Monday, etc.).
+          </p>
+          <ul style="text-align: left; list-style: none; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              Platform agnostic
+            </li>
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              Detailed documentation
+            </li>
+            <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--success);">✓</span>
+              Full customization control
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SaaS-Specific Features -->
+  <section class="section" style="background: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">SaaS-Specific</div>
+        <h2 class="section-title">Built for SaaS Realities</h2>
+        <p class="section-desc">
+          Every piece is designed around SaaS CS workflows — not generic task management
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card fade-up">
+          <div class="feature-icon">💰</div>
+          <h3 class="feature-title">Revenue Tracking</h3>
+          <p class="feature-desc">
+            ARR/MRR tracking per account with renewal dates, expansion opportunities, and churn risk scoring framework.
+          </p>
+        </div>
+
+        <div class="feature-card fade-up fade-up-1">
+          <div class="feature-icon">📱</div>
+          <h3 class="feature-title">Product Adoption</h3>
+          <p class="feature-desc">
+            Integration points for product adoption metrics, feature request tracking to bridge CS ↔ Product teams.
+          </p>
+        </div>
+
+        <div class="feature-card fade-up fade-up-2">
+          <div class="feature-icon">📈</div>
+          <h3 class="feature-title">Health Scoring</h3>
+          <p class="feature-desc">
+            NPS/CSAT score logging, support ticket correlation with account health, multi-threading stakeholder management.
+          </p>
+        </div>
+
+        <div class="feature-card fade-up fade-up-3">
+          <div class="feature-icon">🎯</div>
+          <h3 class="feature-title">Expansion Focus</h3>
+          <p class="feature-desc">
+            Land and expand opportunity tracking, structured upsell conversation frameworks, and expansion pipeline management.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h3 class="footer-title">Ready to Get Organized?</h3>
+      <p class="footer-desc">
+        Built by a CSM, for CSMs. Because we deserve better tools than a messy spreadsheet and a prayer.
+      </p>
+      <div class="footer-links">
+        <a href="https://github.com/smfreeney/saas_csm-toolkit" target="_blank" class="btn btn-primary">Get the Toolkit</a>
+        <a href="index.html" class="btn btn-secondary">← Back to Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Fade in animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -20px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
