@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Churn Risk Signal Framework | Sonya Freeney</title>
+  <title>Churn Risk Signal Framework | CS Playbooks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,7 +43,6 @@
       overflow-x: hidden;
     }
 
-    /* Animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -55,7 +54,6 @@
     .fade-up { animation: fadeUp 0.8s ease both; }
     .slide-in { animation: slideIn 0.6s ease both; }
 
-    /* Navigation */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -74,6 +72,7 @@
       font-size: 20px;
       font-weight: 600;
       color: var(--accent);
+      text-decoration: none;
     }
     .nav-back {
       font-family: var(--mono);
@@ -90,7 +89,6 @@
       border-color: var(--accent);
     }
 
-    /* Hero */
     .hero {
       padding: 140px 40px 80px;
       background: linear-gradient(135deg, var(--bg) 0%, rgba(26, 26, 26, 0.8) 100%);
@@ -154,22 +152,11 @@
       margin-bottom: 4px;
     }
 
-    /* Section styles */
-    .section {
-      padding: 80px 40px;
-    }
-    .section-alt {
-      background: rgba(26, 26, 26, 0.5);
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+    .section { padding: 80px 40px; }
+    .section-alt { background: rgba(26, 26, 26, 0.5); }
+    .container { max-width: 1000px; margin: 0 auto; }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
+    .section-header { text-align: center; margin-bottom: 60px; }
     .section-subtitle {
       font-family: var(--mono);
       font-size: 13px;
@@ -178,19 +165,9 @@
       letter-spacing: 0.1em;
       margin-bottom: 12px;
     }
-    .section-title {
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-    .section-desc {
-      font-size: 20px;
-      color: var(--text-dim);
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    .section-title { font-size: 36px; font-weight: 600; margin-bottom: 16px; }
+    .section-desc { font-size: 20px; color: var(--text-dim); max-width: 600px; margin: 0 auto; }
 
-    /* Risk Tiers */
     .risk-tiers {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -216,40 +193,16 @@
     .risk-tier.moderate::before { background: var(--tier-moderate); }
     .risk-tier.high::before { background: var(--tier-high); }
     .risk-tier.critical::before { background: var(--tier-critical); }
-
-    .risk-tier:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px var(--shadow);
-    }
-    .tier-name {
-      font-family: var(--mono);
-      font-size: 14px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
-    }
+    .risk-tier:hover { transform: translateY(-4px); box-shadow: 0 20px 40px var(--shadow); }
+    .tier-name { font-family: var(--mono); font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
     .tier-name.low { color: var(--tier-low); }
     .tier-name.moderate { color: var(--tier-moderate); }
     .tier-name.high { color: var(--tier-high); }
     .tier-name.critical { color: var(--tier-critical); }
+    .tier-range { font-size: 24px; font-weight: 600; margin-bottom: 12px; }
+    .tier-action { font-size: 16px; color: var(--text-dim); line-height: 1.4; }
 
-    .tier-range {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    .tier-action {
-      font-size: 16px;
-      color: var(--text-dim);
-      line-height: 1.4;
-    }
-
-    /* Signal Categories */
-    .categories {
-      display: grid;
-      gap: 40px;
-    }
+    .categories { display: grid; gap: 40px; }
     .category {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -257,47 +210,22 @@
       padding: 40px;
       transition: all 0.3s ease;
     }
-    .category:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 32px rgba(251, 191, 36, 0.1);
-    }
-
-    .category-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
+    .category:hover { border-color: var(--accent); box-shadow: 0 8px 32px rgba(251, 191, 36, 0.1); }
+    .category-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
     .category-number {
       font-family: var(--mono);
       font-size: 14px;
       font-weight: 500;
       background: var(--accent);
       color: var(--bg);
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
-    .category-title {
-      font-size: 28px;
-      font-weight: 600;
-    }
+    .category-title { font-size: 28px; font-weight: 600; }
+    .category-desc { font-size: 18px; color: var(--text-dim); margin-bottom: 32px; line-height: 1.7; }
 
-    .category-desc {
-      font-size: 18px;
-      color: var(--text-dim);
-      margin-bottom: 32px;
-      line-height: 1.7;
-    }
-
-    .signals-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 16px;
-    }
+    .signals-table { width: 100%; border-collapse: collapse; font-size: 16px; }
     .signals-table th {
       font-family: var(--mono);
       font-size: 13px;
@@ -308,96 +236,28 @@
       border-bottom: 2px solid var(--border);
       text-align: left;
     }
-    .signals-table td {
-      padding: 20px 12px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
-    .signals-table tr:hover {
-      background: rgba(251, 191, 36, 0.05);
-    }
-
-    .signal-name {
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .signal-weight {
-      font-family: var(--mono);
-      font-size: 14px;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-weight: 500;
-    }
+    .signals-table td { padding: 20px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .signals-table tr:hover { background: rgba(251, 191, 36, 0.05); }
+    .signal-name { font-weight: 500; color: var(--text); margin-bottom: 4px; }
+    .signal-weight { font-family: var(--mono); font-size: 14px; padding: 4px 8px; border-radius: 4px; font-weight: 500; }
     .signal-weight.critical { background: rgba(239, 68, 68, 0.2); color: var(--tier-critical); }
     .signal-weight.high { background: rgba(249, 115, 22, 0.2); color: var(--tier-high); }
     .signal-weight.medium { background: rgba(251, 191, 36, 0.2); color: var(--tier-moderate); }
     .signal-weight.low { background: rgba(34, 197, 94, 0.2); color: var(--tier-low); }
+    .signal-urgency { font-family: var(--mono); font-size: 13px; color: var(--text-muted); }
+    .signal-action { color: var(--text-dim); line-height: 1.5; }
 
-    .signal-urgency {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-    .signal-action {
-      color: var(--text-dim);
-      line-height: 1.5;
-    }
+    .implementation { background: var(--bg-card); border-radius: 16px; padding: 40px; margin-top: 60px; }
+    .implementation h3 { font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--accent); }
+    .implementation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+    .implementation-item h4 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+    .implementation-item p { color: var(--text-dim); line-height: 1.6; }
 
-    /* Implementation */
-    .implementation {
-      background: var(--bg-card);
-      border-radius: 16px;
-      padding: 40px;
-      margin-top: 60px;
-    }
-    .implementation h3 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 24px;
-      color: var(--accent);
-    }
-    .implementation-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
-    }
-    .implementation-item h4 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    .implementation-item p {
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--bg-card);
-      padding: 40px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-    .footer-content {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .footer-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    .footer-desc {
-      color: var(--text-dim);
-      margin-bottom: 24px;
-    }
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
+    .footer { background: var(--bg-card); padding: 40px; text-align: center; border-top: 1px solid var(--border); }
+    .footer-content { max-width: 600px; margin: 0 auto; }
+    .footer-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+    .footer-desc { color: var(--text-dim); margin-bottom: 24px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
     .footer-link {
       font-family: var(--mono);
       font-size: 14px;
@@ -408,12 +268,8 @@
       border-radius: 4px;
       transition: all 0.2s ease;
     }
-    .footer-link:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
+    .footer-link:hover { background: var(--accent); color: var(--bg); }
 
-    /* Responsive */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .hero { padding: 120px 20px 60px; }
@@ -430,13 +286,11 @@
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav>
-    <div class="nav-brand">Sonya Freeney</div>
+    <a href="index.html" class="nav-brand">CS Playbooks</a>
     <a href="index.html" class="nav-back">← Portfolio</a>
   </nav>
 
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <div class="hero-subtitle fade-up">Customer Success Framework</div>
@@ -445,23 +299,13 @@
         A practitioner's guide to identifying, scoring, and responding to churn risk signals across the customer lifecycle
       </p>
       <div class="hero-stats fade-up" style="animation-delay: 0.3s">
-        <div class="stat">
-          <span class="stat-value">5</span>
-          Signal Categories
-        </div>
-        <div class="stat">
-          <span class="stat-value">20+</span>
-          Risk Indicators
-        </div>
-        <div class="stat">
-          <span class="stat-value">4</span>
-          Response Tiers
-        </div>
+        <div class="stat"><span class="stat-value">5</span>Signal Categories</div>
+        <div class="stat"><span class="stat-value">20+</span>Risk Indicators</div>
+        <div class="stat"><span class="stat-value">4</span>Response Tiers</div>
       </div>
     </div>
   </section>
 
-  <!-- Risk Tiers -->
   <section class="section">
     <div class="container">
       <div class="section-header">
@@ -469,33 +313,15 @@
         <h2 class="section-title">Response Framework</h2>
         <p class="section-desc">Four-tier system for prioritizing and responding to churn risk signals based on composite scoring</p>
       </div>
-
       <div class="risk-tiers">
-        <div class="risk-tier low slide-in">
-          <div class="tier-name low">Low Risk</div>
-          <div class="tier-range">0-19%</div>
-          <div class="tier-action">Continue standard cadence. Log signals and monitor monthly.</div>
-        </div>
-        <div class="risk-tier moderate slide-in" style="animation-delay: 0.1s">
-          <div class="tier-name moderate">Moderate Risk</div>
-          <div class="tier-range">20-39%</div>
-          <div class="tier-action">Proactive outreach within 2 weeks. Schedule a health check call.</div>
-        </div>
-        <div class="risk-tier high slide-in" style="animation-delay: 0.2s">
-          <div class="tier-name high">High Risk</div>
-          <div class="tier-range">40-64%</div>
-          <div class="tier-action">Recovery plan required. Involve leadership and build a success roadmap.</div>
-        </div>
-        <div class="risk-tier critical slide-in" style="animation-delay: 0.3s">
-          <div class="tier-name critical">Critical Risk</div>
-          <div class="tier-range">65-100%</div>
-          <div class="tier-action">Immediate executive escalation. Emergency call within 48 hours.</div>
-        </div>
+        <div class="risk-tier low slide-in"><div class="tier-name low">Low Risk</div><div class="tier-range">0-19%</div><div class="tier-action">Continue standard cadence. Log signals and monitor monthly.</div></div>
+        <div class="risk-tier moderate slide-in" style="animation-delay: 0.1s"><div class="tier-name moderate">Moderate Risk</div><div class="tier-range">20-39%</div><div class="tier-action">Proactive outreach within 2 weeks. Schedule a health check call.</div></div>
+        <div class="risk-tier high slide-in" style="animation-delay: 0.2s"><div class="tier-name high">High Risk</div><div class="tier-range">40-64%</div><div class="tier-action">Recovery plan required. Involve leadership and build a success roadmap.</div></div>
+        <div class="risk-tier critical slide-in" style="animation-delay: 0.3s"><div class="tier-name critical">Critical Risk</div><div class="tier-range">65-100%</div><div class="tier-action">Immediate executive escalation. Emergency call within 48 hours.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- Signal Categories -->
   <section class="section section-alt">
     <div class="container">
       <div class="section-header">
@@ -503,234 +329,67 @@
         <h2 class="section-title">Signal Categories</h2>
         <p class="section-desc">Five interconnected signal types that provide comprehensive account health visibility</p>
       </div>
-
       <div class="categories">
-        <!-- Category 1: Engagement Signals -->
         <div class="category fade-up">
-          <div class="category-header">
-            <div class="category-number">1</div>
-            <h3 class="category-title">Engagement Signals</h3>
-          </div>
-          <p class="category-desc">
-            Measures quality and frequency of contact between customer and your team. Sudden drops in responsiveness or loss of internal champions are among the most reliable early warning signs.
-          </p>
-          <table class="signals-table">
-            <thead>
-              <tr>
-                <th>Signal</th>
-                <th>Weight</th>
-                <th>Urgency</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="signal-name">No executive sponsor contact in 90+ days</div></td>
-                <td><span class="signal-weight high">High (3)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Schedule executive alignment call within 5 business days</div></td>
-              </tr>
-              <tr>
-                <td><div class="signal-name">Primary champion left or changed roles</div></td>
-                <td><span class="signal-weight high">High (3)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Map new stakeholders immediately. Book relationship reset</div></td>
-              </tr>
-              <tr>
-                <td><div class="signal-name">QBR/EBR declined or not scheduled</div></td>
-                <td><span class="signal-weight medium">Medium (2)</span></td>
-                <td><span class="signal-urgency">Act Within 2 Weeks</span></td>
-                <td><div class="signal-action">Reframe as 30-min informal check-in. Lower the barrier</div></td>
-              </tr>
-              <tr>
-                <td><div class="signal-name">Response times to CSM outreach have slowed</div></td>
-                <td><span class="signal-weight medium">Medium (2)</span></td>
-                <td><span class="signal-urgency">Act Within 2 Weeks</span></td>
-                <td><div class="signal-action">Switch channels. Try Loom, direct call, or different contact</div></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="category-header"><div class="category-number">1</div><h3 class="category-title">Engagement Signals</h3></div>
+          <p class="category-desc">Measures quality and frequency of contact between customer and your team. Sudden drops in responsiveness or loss of internal champions are among the most reliable early warning signs.</p>
+          <table class="signals-table"><thead><tr><th>Signal</th><th>Weight</th><th>Urgency</th><th>Action</th></tr></thead><tbody>
+            <tr><td><div class="signal-name">No executive sponsor contact in 90+ days</div></td><td><span class="signal-weight high">High (3)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Schedule executive alignment call within 5 business days</div></td></tr>
+            <tr><td><div class="signal-name">Primary champion left or changed roles</div></td><td><span class="signal-weight high">High (3)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Map new stakeholders immediately. Book relationship reset</div></td></tr>
+            <tr><td><div class="signal-name">QBR/EBR declined or not scheduled</div></td><td><span class="signal-weight medium">Medium (2)</span></td><td><span class="signal-urgency">Act Within 2 Weeks</span></td><td><div class="signal-action">Reframe as 30-min informal check-in. Lower the barrier</div></td></tr>
+            <tr><td><div class="signal-name">Response times to CSM outreach have slowed</div></td><td><span class="signal-weight medium">Medium (2)</span></td><td><span class="signal-urgency">Act Within 2 Weeks</span></td><td><div class="signal-action">Switch channels. Try Loom, direct call, or different contact</div></td></tr>
+          </tbody></table>
         </div>
-
-        <!-- Category 2: Product Usage Signals -->
         <div class="category fade-up" style="animation-delay: 0.1s">
-          <div class="category-header">
-            <div class="category-number">2</div>
-            <h3 class="category-title">Product Usage Signals</h3>
-          </div>
-          <p class="category-desc">
-            Usage data is often the most objective signal available. The key is distinguishing between seasonal dips and structural disengagement.
-          </p>
-          <table class="signals-table">
-            <thead>
-              <tr>
-                <th>Signal</th>
-                <th>Weight</th>
-                <th>Urgency</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="signal-name">Login/active user count declining 2+ consecutive months</div></td>
-                <td><span class="signal-weight critical">Critical (4)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Conduct usage audit. Identify dropped-off users and schedule re-onboarding</div></td>
-              </tr>
-              <tr>
-                <td><div class="signal-name">Core feature usage dropping or stalled</div></td>
-                <td><span class="signal-weight high">High (3)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Run value audit tied to their original success metrics</div></td>
-              </tr>
-              <tr>
-                <td><div class="signal-name">Spike in data exports (possible migration prep)</div></td>
-                <td><span class="signal-weight medium">Medium (2)</span></td>
-                <td><span class="signal-urgency">Act Within 2 Weeks</span></td>
-                <td><div class="signal-action">Have honest conversation about satisfaction and evaluation</div></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="category-header"><div class="category-number">2</div><h3 class="category-title">Product Usage Signals</h3></div>
+          <p class="category-desc">Usage data is often the most objective signal available. The key is distinguishing between seasonal dips and structural disengagement.</p>
+          <table class="signals-table"><thead><tr><th>Signal</th><th>Weight</th><th>Urgency</th><th>Action</th></tr></thead><tbody>
+            <tr><td><div class="signal-name">Login/active user count declining 2+ consecutive months</div></td><td><span class="signal-weight critical">Critical (4)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Conduct usage audit. Identify dropped-off users and schedule re-onboarding</div></td></tr>
+            <tr><td><div class="signal-name">Core feature usage dropping or stalled</div></td><td><span class="signal-weight high">High (3)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Run value audit tied to their original success metrics</div></td></tr>
+            <tr><td><div class="signal-name">Spike in data exports (possible migration prep)</div></td><td><span class="signal-weight medium">Medium (2)</span></td><td><span class="signal-urgency">Act Within 2 Weeks</span></td><td><div class="signal-action">Have honest conversation about satisfaction and evaluation</div></td></tr>
+          </tbody></table>
         </div>
-
-        <!-- Category 3: Support & Sentiment -->
         <div class="category fade-up" style="animation-delay: 0.2s">
-          <div class="category-header">
-            <div class="category-number">3</div>
-            <h3 class="category-title">Support & Sentiment Signals</h3>
-          </div>
-          <p class="category-desc">
-            How customers talk about their experience reveals underlying emotional state. Escalations and score drops require immediate human response.
-          </p>
-          <table class="signals-table">
-            <thead>
-              <tr>
-                <th>Signal</th>
-                <th>Weight</th>
-                <th>Urgency</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="signal-name">Executive-level escalation or cancellation threat</div></td>
-                <td><span class="signal-weight high">High (3)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Assign exec sponsor. Emergency call within 48 hours</div></td>
-              </tr>
-              <tr>
-                <td><div class="signal-name">NPS or CSAT dropped 15+ points from prior period</div></td>
-                <td><span class="signal-weight medium">Medium (2)</span></td>
-                <td><span class="signal-urgency">Act Within 2 Weeks</span></td>
-                <td><div class="signal-action">Hold structured win-back conversation</div></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="category-header"><div class="category-number">3</div><h3 class="category-title">Support &amp; Sentiment Signals</h3></div>
+          <p class="category-desc">How customers talk about their experience reveals underlying emotional state. Escalations and score drops require immediate human response.</p>
+          <table class="signals-table"><thead><tr><th>Signal</th><th>Weight</th><th>Urgency</th><th>Action</th></tr></thead><tbody>
+            <tr><td><div class="signal-name">Executive-level escalation or cancellation threat</div></td><td><span class="signal-weight high">High (3)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Assign exec sponsor. Emergency call within 48 hours</div></td></tr>
+            <tr><td><div class="signal-name">NPS or CSAT dropped 15+ points from prior period</div></td><td><span class="signal-weight medium">Medium (2)</span></td><td><span class="signal-urgency">Act Within 2 Weeks</span></td><td><div class="signal-action">Hold structured win-back conversation</div></td></tr>
+          </tbody></table>
         </div>
-
-        <!-- Category 4: Commercial & Relationship -->
         <div class="category fade-up" style="animation-delay: 0.3s">
-          <div class="category-header">
-            <div class="category-number">4</div>
-            <h3 class="category-title">Commercial & Relationship Signals</h3>
-          </div>
-          <p class="category-desc">
-            Indicates organizational context changes that affect platform commitment. Budget changes and competitive evaluations operate on external timelines.
-          </p>
-          <table class="signals-table">
-            <thead>
-              <tr>
-                <th>Signal</th>
-                <th>Weight</th>
-                <th>Urgency</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="signal-name">Known competitive evaluation or pilot underway</div></td>
-                <td><span class="signal-weight critical">Critical (4)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Request meeting. Reinforce differentiated value</div></td>
-              </tr>
-              <tr>
-                <td><div class="signal-name">Renewal stalled or major price concession pushed</div></td>
-                <td><span class="signal-weight high">High (3)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Involve leadership. Build business case before discounting</div></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="category-header"><div class="category-number">4</div><h3 class="category-title">Commercial &amp; Relationship Signals</h3></div>
+          <p class="category-desc">Indicates organizational context changes that affect platform commitment. Budget changes and competitive evaluations operate on external timelines.</p>
+          <table class="signals-table"><thead><tr><th>Signal</th><th>Weight</th><th>Urgency</th><th>Action</th></tr></thead><tbody>
+            <tr><td><div class="signal-name">Known competitive evaluation or pilot underway</div></td><td><span class="signal-weight critical">Critical (4)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Request meeting. Reinforce differentiated value</div></td></tr>
+            <tr><td><div class="signal-name">Renewal stalled or major price concession pushed</div></td><td><span class="signal-weight high">High (3)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Involve leadership. Build business case before discounting</div></td></tr>
+          </tbody></table>
         </div>
-
-        <!-- Category 5: Outcome & Value -->
         <div class="category fade-up" style="animation-delay: 0.4s">
-          <div class="category-header">
-            <div class="category-number">5</div>
-            <h3 class="category-title">Outcome & Value Realization Signals</h3>
-          </div>
-          <p class="category-desc">
-            The most preventable form of churn is value gap churn—where customers never fully experienced ROI. Strong CSMs can have direct impact here.
-          </p>
-          <table class="signals-table">
-            <thead>
-              <tr>
-                <th>Signal</th>
-                <th>Weight</th>
-                <th>Urgency</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="signal-name">Customer cannot articulate ROI or business outcomes</div></td>
-                <td><span class="signal-weight critical">Critical (4)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Build and deliver custom ROI summary using their data</div></td>
-              </tr>
-              <tr>
-                <td><div class="signal-name">Onboarding success metrics unmet and not revisited</div></td>
-                <td><span class="signal-weight high">High (3)</span></td>
-                <td><span class="signal-urgency">Act Now</span></td>
-                <td><div class="signal-action">Reset mutual goals. Create 60-day gap-closure plan</div></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="category-header"><div class="category-number">5</div><h3 class="category-title">Outcome &amp; Value Realization Signals</h3></div>
+          <p class="category-desc">The most preventable form of churn is value gap churn — where customers never fully experienced ROI. Strong CSMs can have direct impact here.</p>
+          <table class="signals-table"><thead><tr><th>Signal</th><th>Weight</th><th>Urgency</th><th>Action</th></tr></thead><tbody>
+            <tr><td><div class="signal-name">Customer cannot articulate ROI or business outcomes</div></td><td><span class="signal-weight critical">Critical (4)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Build and deliver custom ROI summary using their data</div></td></tr>
+            <tr><td><div class="signal-name">Onboarding success metrics unmet and not revisited</div></td><td><span class="signal-weight high">High (3)</span></td><td><span class="signal-urgency">Act Now</span></td><td><div class="signal-action">Reset mutual goals. Create 60-day gap-closure plan</div></td></tr>
+          </tbody></table>
         </div>
       </div>
-
-      <!-- Implementation Guide -->
       <div class="implementation fade-up" style="animation-delay: 0.5s">
         <h3>Using This Framework in Practice</h3>
         <div class="implementation-grid">
-          <div class="implementation-item">
-            <h4>During QBRs and EBRs</h4>
-            <p>Use the signal checklist as a pre-meeting diagnostic. Score the account before entering the room so you arrive with a clear picture of where you stand.</p>
-          </div>
-          <div class="implementation-item">
-            <h4>In Your CRM</h4>
-            <p>Map each signal category to custom fields in Salesforce. Track signal trends over time and surface patterns at the portfolio level.</p>
-          </div>
-          <div class="implementation-item">
-            <h4>For Internal Escalations</h4>
-            <p>A scored risk assessment transforms "this account feels at risk" into a quantified business case for leadership action.</p>
-          </div>
-          <div class="implementation-item">
-            <h4>As Onboarding Checkpoints</h4>
-            <p>Run brief signal reviews at 90-day, 180-day, and annual marks. Early signals are especially predictive in the first year.</p>
-          </div>
+          <div class="implementation-item"><h4>During QBRs and EBRs</h4><p>Use the signal checklist as a pre-meeting diagnostic. Score the account before entering the room so you arrive with a clear picture of where you stand.</p></div>
+          <div class="implementation-item"><h4>In Your CRM</h4><p>Map each signal category to custom fields in Salesforce. Track signal trends over time and surface patterns at the portfolio level.</p></div>
+          <div class="implementation-item"><h4>For Internal Escalations</h4><p>A scored risk assessment transforms "this account feels at risk" into a quantified business case for leadership action.</p></div>
+          <div class="implementation-item"><h4>As Onboarding Checkpoints</h4><p>Run brief signal reviews at 90-day, 180-day, and annual marks. Early signals are especially predictive in the first year.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <h3 class="footer-title">Interactive Scoring Tool Available</h3>
-      <p class="footer-desc">
-        This framework is implemented as a dynamic scoring model in the Churn Risk Scorer tool, part of the CS Playbooks portfolio.
-      </p>
+      <p class="footer-desc">This framework is implemented as a dynamic scoring model in the Churn Risk Scorer tool, part of the CS Playbooks portfolio.</p>
       <div class="footer-links">
         <a href="#" class="footer-link">View Scoring Tool</a>
         <a href="index.html" class="footer-link">← Back to Portfolio</a>
@@ -740,34 +399,14 @@
   </footer>
 
   <script>
-    // Scroll reveal animation
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, observerOptions);
-
-    // Observe all animatable elements
-    document.querySelectorAll('.fade-up, .slide-in').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Add visible class for elements that come into view
+    document.querySelectorAll('.fade-up, .slide-in').forEach(el => observer.observe(el));
     const style = document.createElement('style');
-    style.textContent = `
-      .fade-up:not(.visible) { opacity: 0; transform: translateY(30px); }
-      .slide-in:not(.visible) { opacity: 0; transform: translateX(-20px); }
-      .visible { opacity: 1 !important; transform: translate(0) !important; }
-    `;
+    style.textContent = `.fade-up:not(.visible) { opacity: 0; transform: translateY(30px); } .slide-in:not(.visible) { opacity: 0; transform: translateX(-20px); } .visible { opacity: 1 !important; transform: translate(0) !important; }`;
     document.head.appendChild(style);
   </script>
-
 </body>
 </html>
