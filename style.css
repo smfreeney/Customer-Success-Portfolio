@@ -110,7 +110,8 @@ p {
 /* ===== Buttons ===== */
 .cta-buttons {
     display: flex;
-    gap: 1.5rem;
+    flex-direction: row;
+    gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
 }
