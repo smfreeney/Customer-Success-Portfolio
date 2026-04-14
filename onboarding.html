@@ -799,4 +799,28 @@
     /* ── Skills ── */
     const SKILLS = [
       { cat: "Fintech Operations", items: ["ACH return codes", "Velocity & blacklist rules", "TSYS MID pricing", "Funding flows (gross/net)", "IVR/web channel configuration"] },
-      { cat: "Process Design", items: ["8-phase onboarding model", "Task dependency mapping
+      { cat: "Process Design", items: ["8-phase onboarding model", "Task dependency mapping", "White-label templating", "Cross-format documentation", "Revision control systems"] },
+      { cat: "Technical Implementation", items: ["Excel formula architecture", "Notion database design", "React component structure", "Multi-platform deployment", "Version control workflows"] },
+      { cat: "Documentation Strategy", items: ["Institutional knowledge preservation", "Stakeholder-specific formats", "Change management protocols", "Training material development", "Knowledge transfer systems"] }
+    ];
+
+    const skillsGrid = document.getElementById('skills-grid');
+    SKILLS.forEach(skill => {
+      const skillCard = document.createElement('div');
+      skillCard.className = 'skill-card';
+      skillCard.innerHTML = `
+        <div class="skill-cat">${skill.cat}</div>
+        ${skill.items.map(item => `
+          <div class="skill-item">
+            <div class="skill-dot"></div>
+            <span>${item}</span>
+          </div>
+        `).join('')}
+      `;
+      skillsGrid.appendChild(skillCard);
+    });
+
+  </script>
+
+</body>
+</html>
