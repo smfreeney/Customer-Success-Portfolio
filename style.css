@@ -67,7 +67,7 @@ p {
 .hero-logo {
     max-width: 220px;
     display: block;
-    margin: 0 0 1rem 0;
+    margin: 0 0 1rem -12px;
 }
 
 .hero-inner {
