@@ -8,22 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #0f0f0f; --bg-alt: #1a1a1a; --bg-card: rgba(26,26,26,0.8);
-      --text: #f5f5f5; --text-muted: rgba(245,245,245,0.5); --text-dim: rgba(245,245,245,0.7);
-      --accent: #fbbf24; --accent-hover: #fcd34d; --accent-light: rgba(251,191,36,0.1);
-      --success: #22c55e; --border: rgba(245,245,245,0.1); --shadow-lg: rgba(0,0,0,0.6);
-      --serif: 'Crimson Text', Georgia, serif; --mono: 'JetBrains Mono', 'Courier New', monospace;
-    }
+    .sf-nav { position:fixed;top:0;left:0;right:0;z-index:9999;padding:0 2rem;height:56px;background:#0f0f0f;border-bottom:1px solid #2a2a2a;display:flex;align-items:center;justify-content:space-between; }
+    .sf-nav-logo { font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;color:#fbbf24;text-transform:uppercase;text-decoration:none; }
+    .sf-nav-links { display:flex;gap:1.75rem; }
+    .sf-nav-links a { font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a8a8a;text-decoration:none; }
+    .sf-nav-links a:hover { color:#f5f0e8; }
+    :root { --bg: #0f0f0f; --bg-alt: #1a1a1a; --bg-card: rgba(26,26,26,0.8); --text: #f5f5f5; --text-muted: rgba(245,245,245,0.5); --text-dim: rgba(245,245,245,0.7); --accent: #fbbf24; --accent-hover: #fcd34d; --accent-light: rgba(251,191,36,0.1); --success: #22c55e; --border: rgba(245,245,245,0.1); --shadow-lg: rgba(0,0,0,0.6); --serif: 'Crimson Text', Georgia, serif; --mono: 'JetBrains Mono', 'Courier New', monospace; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; overflow-x: hidden; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(15,15,15,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 70px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-brand { font-size: 20px; font-weight: 600; color: var(--accent); font-family: var(--serif); text-decoration: none; }
-    .nav-back { font-family: var(--mono); font-size: 14px; color: var(--text-muted); text-decoration: none; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s ease; }
-    .nav-back:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
-    .api-notice { margin-top: 70px; background: rgba(251,191,36,0.08); border-bottom: 1px solid rgba(251,191,36,0.25); padding: 14px 40px; display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--mono); font-size: 13px; color: rgba(245,245,245,0.8); text-align: center; flex-wrap: wrap; }
-    .api-notice svg { width: 16px; height: 16px; stroke: var(--accent); flex-shrink: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; overflow-x: hidden; padding-top: 56px; }
+    .api-notice { background: rgba(251,191,36,0.08); border-bottom: 1px solid rgba(251,191,36,0.25); padding: 14px 40px; display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--mono); font-size: 13px; color: rgba(245,245,245,0.8); text-align: center; flex-wrap: wrap; }
     .api-notice a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(251,191,36,0.4); }
     .hero { padding: 60px 40px 100px; background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%); position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 25% 25%, rgba(251,191,36,0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(34,197,94,0.08) 0%, transparent 50%); pointer-events: none; }
@@ -73,92 +67,32 @@
     .footer-title { font-size: 24px; font-weight: 600; margin-bottom: 16px; color: var(--accent); }
     .footer-desc { color: var(--text-dim); margin-bottom: 32px; }
     .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-    @media (max-width: 768px) { nav { padding: 0 20px; } .api-notice { padding: 12px 20px; font-size: 12px; } .hero { padding: 40px 20px 80px; } .section { padding: 60px 20px; } .features-grid { grid-template-columns: 1fr; } .hero-cta { flex-direction: column; align-items: center; } .btn { justify-content: center; } }
+    @media (max-width: 768px) { .api-notice { padding: 12px 20px; font-size: 12px; } .hero { padding: 40px 20px 80px; } .section { padding: 60px 20px; } .features-grid { grid-template-columns: 1fr; } .hero-cta { flex-direction: column; align-items: center; } .btn { justify-content: center; } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .fade-up { animation: fadeUp 0.6s ease both; } .fade-up-1 { animation-delay: 0.1s; } .fade-up-2 { animation-delay: 0.2s; } .fade-up-3 { animation-delay: 0.3s; }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html" class="nav-brand">CS Playbooks</a>
-    <a href="index.html" class="nav-back">&larr; Portfolio</a>
-  </nav>
-  <div class="api-notice">
-    <i data-lucide="zap"></i>
-    <span>This tool runs on a shared API key with usage limits by design. If you hit an error, <a href="mailto:sonya.freeney@gmail.com">email me</a> and I'll reset it &mdash; usually within a few hours.</span>
+<nav class="sf-nav">
+  <a class="sf-nav-logo" href="index.html">SF / CS Playbooks</a>
+  <div class="sf-nav-links">
+    <a href="index.html">Home</a>
+    <a href="churn-risk-case-study-updated.html">Churn Risk</a>
+    <a href="playbook-generator.html">Playbook Gen</a>
+    <a href="saas-csm-toolkit-updated.html">Toolkit</a>
+    <a href="writing/index.html">Writing</a>
   </div>
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge fade-up"><i data-lucide="bot"></i> AI-Powered Tool</div>
-      <h1 class="fade-up fade-up-1">CS Account Playbook Generator</h1>
-      <p class="hero-desc fade-up fade-up-2">Drop in your account details and get back a 7-section CS playbook, health score with risk flags, and 4 ready-to-send email templates &mdash; all tailored to that specific account.</p>
-      <div class="hero-cta fade-up fade-up-3">
-        <a href="https://cs-playbook-generator.vercel.app" target="_blank" class="btn btn-primary"><i data-lucide="rocket"></i> Try Live Demo</a>
-        <a href="https://github.com/smfreeney/cs-playbook-generator" target="_blank" class="btn btn-secondary"><i data-lucide="github"></i> View Source</a>
-        <a href="#features" class="btn btn-secondary"><i data-lucide="clipboard-list"></i> See Features</a>
-        <a href="#process" class="btn btn-secondary"><i data-lucide="settings"></i> How It Works</a>
-      </div>
-    </div>
-  </section>
-  <section id="features" class="section">
-    <div class="container">
-      <div class="section-header"><div class="section-subtitle">Core Features</div><h2 class="section-title">Built for Real CS Work</h2><p class="section-desc">No generic templates. No signup required. Account-specific strategies that actually make sense in B2B SaaS environments.</p></div>
-      <div class="features-grid">
-        <div class="feature-card fade-up"><div class="feature-icon"><i data-lucide="clipboard-list"></i></div><h3 class="feature-title">7-Section Playbook</h3><p class="feature-desc">Complete playbook covering onboarding, health scoring, QBRs, escalations, renewals, success metrics, and project status &mdash; all personalized to your account.</p></div>
-        <div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i data-lucide="target"></i></div><h3 class="feature-title">Health Score Calculator</h3><p class="feature-desc">0-100 scoring based on account stage, risk signals, renewal proximity, and engagement. Shows exactly what's dragging the score down.</p></div>
-        <div class="feature-card fade-up fade-up-2"><div class="feature-icon"><i data-lucide="mail"></i></div><h3 class="feature-title">Ready-to-Send Emails</h3><p class="feature-desc">Four templates pre-written for your account: kickoff, QBR invite, renewal outreach, and escalation acknowledgment. 80% of the work done.</p></div>
-        <div class="feature-card fade-up fade-up-3"><div class="feature-icon"><i data-lucide="file-text"></i></div><h3 class="feature-title">Word Doc Export</h3><p class="feature-desc">Everything formatted and ready to drop into your CRM or share with your team. No copy-paste hassles.</p></div>
-        <div class="feature-card fade-up"><div class="feature-icon"><i data-lucide="lock"></i></div><h3 class="feature-title">Privacy First</h3><p class="feature-desc">No signup, no data collection, no tracking. Entirely stateless. Your account data never leaves your browser.</p></div>
-        <div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i data-lucide="zap"></i></div><h3 class="feature-title">10-Second Generation</h3><p class="feature-desc">Fill in the form, hit generate, wait ~10-15 seconds. Domain expertise built into the AI prompts for realistic strategies.</p></div>
-      </div>
-    </div>
-  </section>
-  <section id="process" class="section" style="background: var(--bg-alt);">
-    <div class="container">
-      <div class="section-header"><div class="section-subtitle">Process</div><h2 class="section-title">How It Works</h2><p class="section-desc">Simple form to comprehensive playbook in four steps</p></div>
-      <div class="process-flow">
-        <div class="process-step fade-up"><div class="process-number">1</div><h3 class="process-title">Fill Account Details</h3><p class="process-desc">Company, industry, ARR, stage, renewal date, stakeholders, goals, and pain points</p></div>
-        <div class="process-step fade-up fade-up-1"><div class="process-number">2</div><h3 class="process-title">AI Generation</h3><p class="process-desc">Claude API builds personalized playbook using 20+ years of CS domain expertise</p></div>
-        <div class="process-step fade-up fade-up-2"><div class="process-number">3</div><h3 class="process-title">Review &amp; Customize</h3><p class="process-desc">Health score breakdown, email templates, and account-specific action items</p></div>
-        <div class="process-step fade-up fade-up-3"><div class="process-number">4</div><h3 class="process-title">Export &amp; Execute</h3><p class="process-desc">Download formatted Word doc ready for your CRM or team collaboration</p></div>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card fade-up"><div class="stat-value">7</div><div class="stat-label">Playbook Sections</div></div>
-        <div class="stat-card fade-up fade-up-1"><div class="stat-value">4</div><div class="stat-label">Email Templates</div></div>
-        <div class="stat-card fade-up fade-up-2"><div class="stat-value">15s</div><div class="stat-label">Generation Time</div></div>
-        <div class="stat-card fade-up fade-up-3"><div class="stat-value">0</div><div class="stat-label">Data Collected</div></div>
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container">
-      <div class="tech-stack fade-up">
-        <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 16px;">Built With</h3>
-        <p style="color: var(--text-dim); margin-bottom: 0;">Modern stack optimized for speed and privacy</p>
-        <div class="tech-grid">
-          <div class="tech-item"><div class="tech-name">React + Vite</div><div class="tech-desc">Frontend</div></div>
-          <div class="tech-item"><div class="tech-name">Vercel</div><div class="tech-desc">Deployment</div></div>
-          <div class="tech-item"><div class="tech-name">Claude API</div><div class="tech-desc">AI Generation</div></div>
-          <div class="tech-item"><div class="tech-name">docx.js</div><div class="tech-desc">Word Export</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <footer class="footer">
-    <div class="footer-content">
-      <h3 class="footer-title">Ready to Build Smarter Playbooks?</h3>
-      <p class="footer-desc">Try the generator with your accounts. No signup required, no data stored. Just better CS strategy in seconds.<br><br>
-      <span style="font-family: var(--mono); font-size: 13px; color: rgba(245,245,245,0.5);">Running into an error? The shared API key has usage limits. <a href="mailto:sonya.freeney@gmail.com" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(251,191,36,0.4);">Email me</a> and I'll reset it.</span></p>
-      <div class="footer-links">
-        <a href="https://cs-playbook-generator.vercel.app" target="_blank" class="btn btn-primary">Launch Tool</a>
-        <a href="index.html" class="btn btn-secondary">&larr; Back to Portfolio</a>
-      </div>
-    </div>
-  </footer>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</nav>
+  <div class="api-notice"><span>⚡ This tool runs on a shared API key with usage limits by design. If you hit an error, <a href="mailto:sonya.freeney@gmail.com">email me</a> and I'll reset it &mdash; usually within a few hours.</span></div>
+  <section class="hero"><div class="hero-content"><div class="hero-badge fade-up"><i data-lucide="bot"></i> AI-Powered Tool</div><h1 class="fade-up fade-up-1">CS Account Playbook Generator</h1><p class="hero-desc fade-up fade-up-2">Drop in your account details and get back a 7-section CS playbook, health score with risk flags, and 4 ready-to-send email templates &mdash; all tailored to that specific account.</p><div class="hero-cta fade-up fade-up-3"><a href="https://cs-playbook-generator.vercel.app" target="_blank" class="btn btn-primary"><i data-lucide="rocket"></i> Try Live Demo</a><a href="https://github.com/smfreeney/cs-playbook-generator" target="_blank" class="btn btn-secondary"><i data-lucide="github"></i> View Source</a><a href="#features" class="btn btn-secondary"><i data-lucide="clipboard-list"></i> See Features</a><a href="#process" class="btn btn-secondary"><i data-lucide="settings"></i> How It Works</a></div></div></section>
+  <section id="features" class="section"><div class="container"><div class="section-header"><div class="section-subtitle">Core Features</div><h2 class="section-title">Built for Real CS Work</h2><p class="section-desc">No generic templates. No signup required. Account-specific strategies that actually make sense in B2B SaaS environments.</p></div><div class="features-grid"><div class="feature-card fade-up"><div class="feature-icon"><i data-lucide="clipboard-list"></i></div><h3 class="feature-title">7-Section Playbook</h3><p class="feature-desc">Complete playbook covering onboarding, health scoring, QBRs, escalations, renewals, success metrics, and project status &mdash; all personalized to your account.</p></div><div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i data-lucide="target"></i></div><h3 class="feature-title">Health Score Calculator</h3><p class="feature-desc">0-100 scoring based on account stage, risk signals, renewal proximity, and engagement. Shows exactly what's dragging the score down.</p></div><div class="feature-card fade-up fade-up-2"><div class="feature-icon"><i data-lucide="mail"></i></div><h3 class="feature-title">Ready-to-Send Emails</h3><p class="feature-desc">Four templates pre-written for your account: kickoff, QBR invite, renewal outreach, and escalation acknowledgment. 80% of the work done.</p></div><div class="feature-card fade-up fade-up-3"><div class="feature-icon"><i data-lucide="file-text"></i></div><h3 class="feature-title">Word Doc Export</h3><p class="feature-desc">Everything formatted and ready to drop into your CRM or share with your team. No copy-paste hassles.</p></div><div class="feature-card fade-up"><div class="feature-icon"><i data-lucide="lock"></i></div><h3 class="feature-title">Privacy First</h3><p class="feature-desc">No signup, no data collection, no tracking. Entirely stateless. Your account data never leaves your browser.</p></div><div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i data-lucide="zap"></i></div><h3 class="feature-title">10-Second Generation</h3><p class="feature-desc">Fill in the form, hit generate, wait ~10-15 seconds. Domain expertise built into the AI prompts for realistic strategies.</p></div></div></div></section>
+  <section id="process" class="section" style="background: var(--bg-alt);"><div class="container"><div class="section-header"><div class="section-subtitle">Process</div><h2 class="section-title">How It Works</h2><p class="section-desc">Simple form to comprehensive playbook in four steps</p></div><div class="process-flow"><div class="process-step fade-up"><div class="process-number">1</div><h3 class="process-title">Fill Account Details</h3><p class="process-desc">Company, industry, ARR, stage, renewal date, stakeholders, goals, and pain points</p></div><div class="process-step fade-up fade-up-1"><div class="process-number">2</div><h3 class="process-title">AI Generation</h3><p class="process-desc">Claude API builds personalized playbook using 20+ years of CS domain expertise</p></div><div class="process-step fade-up fade-up-2"><div class="process-number">3</div><h3 class="process-title">Review &amp; Customize</h3><p class="process-desc">Health score breakdown, email templates, and account-specific action items</p></div><div class="process-step fade-up fade-up-3"><div class="process-number">4</div><h3 class="process-title">Export &amp; Execute</h3><p class="process-desc">Download formatted Word doc ready for your CRM or team collaboration</p></div></div><div class="stats-grid"><div class="stat-card fade-up"><div class="stat-value">7</div><div class="stat-label">Playbook Sections</div></div><div class="stat-card fade-up fade-up-1"><div class="stat-value">4</div><div class="stat-label">Email Templates</div></div><div class="stat-card fade-up fade-up-2"><div class="stat-value">15s</div><div class="stat-label">Generation Time</div></div><div class="stat-card fade-up fade-up-3"><div class="stat-value">0</div><div class="stat-label">Data Collected</div></div></div></div></section>
+  <section class="section"><div class="container"><div class="tech-stack fade-up"><h3 style="font-size:24px;font-weight:600;margin-bottom:16px;">Built With</h3><p style="color:var(--text-dim);margin-bottom:0;">Modern stack optimized for speed and privacy</p><div class="tech-grid"><div class="tech-item"><div class="tech-name">React + Vite</div><div class="tech-desc">Frontend</div></div><div class="tech-item"><div class="tech-name">Vercel</div><div class="tech-desc">Deployment</div></div><div class="tech-item"><div class="tech-name">Claude API</div><div class="tech-desc">AI Generation</div></div><div class="tech-item"><div class="tech-name">docx.js</div><div class="tech-desc">Word Export</div></div></div></div></div></section>
+  <footer class="footer"><div class="footer-content"><h3 class="footer-title">Ready to Build Smarter Playbooks?</h3><p class="footer-desc">Try the generator with your accounts. No signup required, no data stored. Just better CS strategy in seconds.<br><br><span style="font-family:var(--mono);font-size:13px;color:rgba(245,245,245,0.5);">Running into an error? The shared API key has usage limits. <a href="mailto:sonya.freeney@gmail.com" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(251,191,36,0.4);">Email me</a> and I'll reset it.</span></p><div class="footer-links"><a href="https://cs-playbook-generator.vercel.app" target="_blank" class="btn btn-primary">Launch Tool</a><a href="index.html" class="btn btn-secondary">&larr; Back to Portfolio</a></div></div></footer>
+  <script src="https://unpkg.com/lucide@0.263.1/dist/umd/lucide.min.js"></script>
   <script>
-    lucide.createIcons();
-    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; } }); }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; } }); }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => { el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity 0.6s ease, transform 0.6s ease'; observer.observe(el); });
   </script>
 </body>
