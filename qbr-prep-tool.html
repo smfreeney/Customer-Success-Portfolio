@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QBR Prep Tool — CS Playbooks by Sonya Freeney</title>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#0f0f0f;--surface:#171717;--border:#2a2a2a;--slate:#4a6fa5;--slate-lt:#6b8ec4;--amber:#fbbf24;--amber-dim:#c9901a;--cream:#f5f0e8;--muted:#8a8a8a;--text:#e8e4dc;--green:#4ade80;--red:#f87171;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,serif;font-size:1rem;line-height:1.7;min-height:100vh;}
+    header{padding:2rem 2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .hb{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);text-decoration:none;display:block;margin-bottom:0.5rem;}
+    .ht{font-family:'Crimson Text',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--cream);}
+    .ht em{font-style:italic;color:var(--amber);}
+    .hs{font-size:0.88rem;color:var(--muted);margin-top:0.3rem;}
+    .hc{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-align:right;}
+    .hc a{color:var(--amber);text-decoration:none;}
+    .aw{max-width:860px;margin:0 auto;padding:2rem 2rem 5rem;}
+    .ks{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--slate);padding:1.25rem 1.5rem;border-radius:2px;margin-bottom:2rem;}
+    .kl{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--slate-lt);margin-bottom:0.6rem;}
+    .kr{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;}
+    .ki{flex:1;min-width:200px;background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:0.55rem 0.9rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text);outline:none;transition:border-color 0.2s;}
+    .ki:focus{border-color:var(--slate);}
+    .ki::placeholder{color:var(--muted);}
+    .kst{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--muted);white-space:nowrap;}
+    .kst.set{color:var(--green);}
+    .kh{font-size:0.82rem;color:var(--muted);margin-top:0.5rem;}
+    .kh a{color:var(--amber);text-decoration:none;}
+    .tb{display:flex;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto;}
+    .tbtn{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.65rem 1.1rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;transition:color 0.2s,border-color 0.2s;margin-bottom:-1px;white-space:nowrap;}
+    .tbtn.active{color:var(--amber);border-bottom-color:var(--amber);}
+    .tbtn:hover:not(.active){color:var(--cream);}
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+    .fg.single{grid-template-columns:1fr;}
+    .fld{display:flex;flex-direction:column;gap:0.4rem;}
+    .fld.s2{grid-column:span 2;}
+    label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+    input[type="text"],input[type="number"],select,textarea{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:0.6rem 0.85rem;font-family:'Crimson Text',Georgia,serif;font-size:0.95rem;color:var(--text);outline:none;transition:border-color 0.2s;width:100%;}
+    input:focus,select:focus,textarea:focus{border-color:var(--slate);}
+    input::placeholder,textarea::placeholder{color:var(--muted);font-style:italic;}
+    select{cursor:pointer;}select option{background:#1e1e1e;}
+    textarea{resize:vertical;min-height:80px;line-height:1.6;}
+    .fs{margin-bottom:2rem;}
+    .sl{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--slate-lt);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+    .gr{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);}
+    .bg{background:var(--amber);border:none;border-radius:2px;padding:0.8rem 2rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--bg);cursor:pointer;transition:background 0.2s;font-weight:700;}
+    .bg:hover{background:var(--amber-dim);}
+    .bg:disabled{opacity:0.4;cursor:not-allowed;}
+    .bc2{background:transparent;border:1px solid var(--border);border-radius:2px;padding:0.8rem 1.1rem;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+    .bc2:hover{border-color:var(--muted);color:var(--cream);}
+    .gm{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);font-style:italic;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+    .dt{animation:blink 1s ease-in-out infinite;display:inline-block;}
+    .dt:nth-child(2){animation-delay:0.2s;}.dt:nth-child(3){animation-delay:0.4s;}
+    .ow{margin-top:3rem;border-top:2px solid var(--amber);padding-top:2rem;}
+    .oh{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:0.75rem;}
+    .ot{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--amber);}
+    .bcp{background:transparent;border:1px solid var(--border);border-radius:2px;padding:0.4rem 0.85rem;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+    .bcp:hover{border-color:var(--amber);color:var(--amber);}
+    .bcp.copied{border-color:var(--green);color:var(--green);}
+    .bs{margin-bottom:2.25rem;}
+    .bst{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--slate-lt);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.6rem;}
+    .bst::after{content:'';flex:1;height:1px;background:var(--border);}
+    .bc{font-size:1rem;line-height:1.8;color:var(--text);}
+    .ol{background:var(--surface);border:1px solid rgba(251,191,36,0.25);border-left:3px solid var(--amber);padding:1rem 1.25rem;border-radius:2px;font-style:italic;color:var(--cream);font-size:1.05rem;line-height:1.7;}
+    .ri{margin-bottom:0.85rem;padding-bottom:0.85rem;border-bottom:1px solid var(--border);}
+    .ri:last-child{border-bottom:none;}
+    .rh{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.3rem;}
+    .rp{font-family:'JetBrains Mono',monospace;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:2px;}
+    .rhp{background:rgba(248,113,113,0.1);color:var(--red);border:1px solid rgba(248,113,113,0.25);}
+    .rmp{background:rgba(251,191,36,0.08);color:var(--amber);border:1px solid rgba(251,191,36,0.2);}
+    .rlp{background:rgba(74,222,128,0.08);color:var(--green);border:1px solid rgba(74,222,128,0.2);}
+    .rfn{font-weight:600;color:var(--cream);font-size:0.98rem;}
+    .rd{font-size:0.95rem;}
+    .pi{display:grid;grid-template-columns:1.75rem 1fr;gap:0.85rem;margin-bottom:0.9rem;align-items:start;}
+    .pn{font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:700;color:var(--bg);background:var(--amber);width:1.75rem;height:1.75rem;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.1rem;}
+    .pnm{font-weight:600;color:var(--cream);font-size:0.98rem;margin-bottom:0.2rem;}
+    .prt{font-size:0.93rem;}
+    .oc{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:1rem 1.25rem;margin-bottom:0.85rem;}
+    .oq{font-weight:600;color:var(--cream);margin-bottom:0.5rem;font-size:0.98rem;}
+    .oq::before{content:'"';color:var(--amber);}.oq::after{content:'"';color:var(--amber);}
+    .oa{font-size:0.93rem;padding-left:0.75rem;border-left:2px solid var(--slate);}
+    .reb{background:rgba(74,111,165,0.08);border:1px solid rgba(74,111,165,0.2);border-radius:2px;padding:1rem 1.25rem;font-size:0.98rem;line-height:1.75;}
+    .err{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-radius:2px;padding:1rem 1.25rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--red);line-height:1.6;}
+    footer{margin-top:4rem;padding:1.5rem 2rem;border-top:1px solid var(--border);text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+    footer a{color:var(--amber);text-decoration:none;}
+    @media(max-width:600px){.aw{padding:1.5rem 1.25rem 4rem;}.fg{grid-template-columns:1fr;}.fld.s2{grid-column:span 1;}header{padding:1.5rem 1.25rem;}}
+  </style>
+</head>
+<body>
+<header>
+  <div><a class="hb" href="https://csplaybooks.com" target="_blank">SF / CS Playbooks</a><div class="ht">QBR Brief <em>Generator</em></div><div class="hs">Real narrative. Real risk flags. Real objection prep. Not just your metrics in a slide.</div></div>
+  <div class="hc">Built by <a href="https://csplaybooks.com" target="_blank">Sonya Freeney</a><br>csplaybooks.com<br><br>Your key stays in<br>your browser. Always.</div>
+</header>
+<div class="aw">
+  <div class="ks"><div class="kl">Anthropic API Key</div><div class="kr"><input class="ki" id="apiKey" type="password" placeholder="sk-ant-..." oninput="ks()"/><span class="kst" id="kstat">Not set</span></div><p class="kh">Get a free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — roughly $0.01–0.03 per brief. Stays in your browser.</p></div>
+  <div class="tb">
+    <button class="tbtn active" onclick="st('account',this)">Account</button>
+    <button class="tbtn" onclick="st('health',this)">Health &amp; Issues</button>
+    <button class="tbtn" onclick="st('stakeholders',this)">Stakeholders</button>
+    <button class="tbtn" onclick="st('context',this)">Goals &amp; Context</button>
+  </div>
+  <div id="ta">
+    <div class="fs"><div class="sl">Account Details</div><div class="fg">
+      <div class="fld"><label>Company Name</label><input type="text" id="cn" placeholder="Acme Corp"/></div>
+      <div class="fld"><label>Vertical</label><select id="vt"><option value="">Select vertical</option><option>AP/AR Automation</option><option>Payment Processing / Gateway</option><option>Utility Billing &amp; Payments</option><option>B2B SaaS — General Fintech</option><option>Other</option></select></div>
+      <div class="fld"><label>ARR / Account Tier</label><input type="text" id="ar" placeholder="e.g. $280K ARR — Mid-market"/></div>
+      <div class="fld"><label>Days Until Renewal</label><input type="number" id="rd" placeholder="e.g. 47"/></div>
+      <div class="fld"><label>Contract History</label><input type="text" id="ch" placeholder="e.g. 2nd renewal, expanded from $180K"/></div>
+      <div class="fld"><label>Expansion Opportunities</label><input type="text" id="ex" placeholder="e.g. New subsidiary, additional seats"/></div>
+    </div></div>
+  </div>
+  <div id="th" style="display:none">
+    <div class="fs"><div class="sl">Platform Health</div><div class="fg">
+      <div class="fld"><label>Uptime / Downtime</label><input type="text" id="up" placeholder="e.g. 99.1% — one 4hr outage Q3"/></div>
+      <div class="fld"><label>Usage Trend</label><select id="ut"><option value="">Select trend</option><option>Growing — adoption up across the board</option><option>Stable — consistent usage</option><option>Mixed — core up, some features stalled</option><option>Declining — usage dropping</option></select></div>
+      <div class="fld s2"><label>Support Ticket History</label><textarea id="tk" placeholder="Volume, open vs closed, P1s, notable issues..."></textarea></div>
+      <div class="fld s2"><label>Escalations</label><textarea id="es" placeholder="Exec escalations, how resolved, current status..."></textarea></div>
+      <div class="fld s2"><label>Ongoing Projects / Integrations / Upgrades</label><textarea id="pr" placeholder="What's in flight, delayed, pending sign-off..."></textarea></div>
+      <div class="fld"><label>Avg Time to Close</label><input type="text" id="tc" placeholder="e.g. 18hrs, down from 31hrs"/></div>
+      <div class="fld"><label>NPS / CSAT</label><input type="text" id="np" placeholder="e.g. NPS 42, up from 31"/></div>
+    </div></div>
+  </div>
+  <div id="ts" style="display:none">
+    <div class="fs"><div class="sl">Who's In The Room</div><div class="fg single">
+      <div class="fld"><label>Primary Champion</label><input type="text" id="cp" placeholder="Name, title, what they care about, how they advocate"/></div>
+      <div class="fld"><label>Economic Buyer / Decision Maker</label><input type="text" id="eb" placeholder="Name, title, priorities, what makes them say yes"/></div>
+      <div class="fld"><label>Other Stakeholders</label><textarea id="os" placeholder="Title, engagement level, concerns..."></textarea></div>
+      <div class="fld"><label>Relationship Health</label><select id="rh"><option value="">Select status</option><option>Strong — engaged, responsive, advocate</option><option>Neutral — professional, transactional</option><option>Strained — past issues, guarded</option><option>At risk — disengaged or actively unhappy</option></select></div>
+    </div></div>
+  </div>
+  <div id="tc2" style="display:none">
+    <div class="fs"><div class="sl">Goals &amp; Previous QBR</div><div class="fg single">
+      <div class="fld"><label>Previous QBR Action Items</label><textarea id="pa" placeholder="Status: DONE / IN PROGRESS / NOT STARTED / NOT DONE"></textarea></div>
+      <div class="fld"><label>Customer's Internal Goals</label><textarea id="cg" placeholder="What are they trying to achieve this year?"></textarea></div>
+      <div class="fld"><label>Your Goals for This Account</label><textarea id="yg" placeholder="Renewal, expansion, re-engagement, exec access..."></textarea></div>
+      <div class="fld"><label>Additional Context</label><textarea id="ac" placeholder="Org changes, competitor mentions, anything unusual..."></textarea></div>
+    </div></div>
+  </div>
+  <div class="gr">
+    <button class="bg" id="gb" onclick="gen()">Generate QBR Brief</button>
+    <button class="bc2" onclick="clr()">Clear All</button>
+    <span id="gm" style="display:none" class="gm">Building your brief<span class="dt">.</span><span class="dt">.</span><span class="dt">.</span></span>
+  </div>
+  <div id="ow" style="display:none">
+    <div class="ow"><div class="oh"><span class="ot" id="ot">QBR Brief</span><button class="bcp" id="cb" onclick="cp()">Copy All</button></div><div id="bo"></div></div>
+  </div>
+</div>
+<footer>Built by <a href="https://csplaybooks.com" target="_blank">Sonya Freeney</a> · csplaybooks.com · Your API key never leaves your browser</footer>
+<script>
+function st(tab,btn){['ta','th','ts','tc2'].forEach((t,i)=>{document.getElementById(t).style.display=(['account','health','stakeholders','context'][i]===tab)?'block':'none';});document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');}
+function ks(){const k=document.getElementById('apiKey').value.trim(),s=document.getElementById('kstat');if(k.startsWith('sk-ant-')&&k.length>20){s.textContent='✓ Ready';s.className='kst set';}else if(k.length>0){s.textContent='Check format';s.className='kst';}else{s.textContent='Not set';s.className='kst';}}
+const flds={cn:'companyName',vt:'vertical',ar:'arr',rd:'renewalDays',ch:'contractHistory',ex:'expansion',up:'uptime',ut:'usageTrend',tk:'tickets',es:'escalations',pr:'projects',tc:'ttc',np:'nps',cp:'champion',eb:'econBuyer',os:'otherStakeholders',rh:'relationshipHealth',pa:'prevActions',cg:'customerGoals',yg:'yourGoals',ac:'additionalContext'};
+function gv(){const d={};Object.entries(flds).forEach(([id,key])=>{const el=document.getElementById(id);d[key]=el?el.value.trim():'';});return d;}
+function bp(d){return`You are a senior CS strategist preparing a QBR brief. Be specific, direct, opinionated. Do NOT summarize — interpret. Tell the CSM what the data means and what to do.\n\nACCOUNT: ${d.companyName||'Account'} | ${d.vertical||'Fintech SaaS'} | ${d.arr} | Renewal: ${d.renewalDays} days | History: ${d.contractHistory} | Expansion: ${d.expansion}\nHEALTH: Uptime: ${d.uptime} | Trend: ${d.usageTrend} | Tickets: ${d.tickets} | Escalations: ${d.escalations} | Projects: ${d.projects} | TTC: ${d.ttc} | NPS: ${d.nps}\nSTAKEHOLDERS: Champion: ${d.champion} | Buyer: ${d.econBuyer} | Others: ${d.otherStakeholders} | Health: ${d.relationshipHealth}\nHISTORY: Actions: ${d.prevActions} | Customer goals: ${d.customerGoals} | CSM goals: ${d.yourGoals} | Context: ${d.additionalContext}\n\nReturn ONLY valid JSON:\n{"openingLine":"One sentence after pleasantries. Shows account knowledge. Opens real conversation.","narrative":"3-4 sentences. Honest account story. Business outcome terms not platform metrics.","riskFlags":[{"level":"high|medium|low","flag":"Short label","detail":"Risk, why it matters here, one action."}],"priorities":[{"priority":"Short label","rationale":"90-day focus grounded in customer goals."}],"objections":[{"question":"Exact thing this specific buyer would say","response":"Specific confident response."}],"goals":"2-3 sentences. Partnership goals framing. The why-renew answer.","renewalExpansion":"2-3 sentences. When to bring up renewal, how to frame it, what the ask is."}`;
+}
+async function gen(){const k=document.getElementById('apiKey').value.trim();if(!k||!k.startsWith('sk-ant-')){alert('Please enter a valid Anthropic API key (starts with sk-ant-)');return;}
+const d=gv();if(!d.companyName){alert('Please enter the company name.');return;}
+document.getElementById('gb').disabled=true;document.getElementById('gm').style.display='inline';document.getElementById('ow').style.display='none';
+try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':k,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:bp(d)}]})});
+const data=await res.json();if(data.error)throw new Error(data.error.message);
+const raw=data.content[0].text.replace(/```json|```/g,'').trim();
+const brief=JSON.parse(raw);rb(d.companyName||'Account',brief);
+}catch(err){document.getElementById('ow').style.display='block';document.getElementById('bo').innerHTML=`<div class="err">Error: ${err.message}<br><br>Check your API key and try again.</div>`;}
+document.getElementById('gb').disabled=false;document.getElementById('gm').style.display='none';}
+function rb(company,b){document.getElementById('ot').textContent=`QBR Brief — ${company}`;document.getElementById('ow').style.display='block';
+const rc={high:'rhp',medium:'rmp',low:'rlp'};let html='';
+html+=`<div class="bs"><div class="bst">Open With This</div><div class="ol">${b.openingLine}</div></div>`;
+html+=`<div class="bs"><div class="bst">The Account Story</div><div class="bc"><p>${b.narrative}</p></div></div>`;
+html+=`<div class="bs"><div class="bst">Risk Flags</div><div class="bc">`;
+(b.riskFlags||[]).forEach(r=>{html+=`<div class="ri"><div class="rh"><span class="rp ${rc[r.level]||'rmp'}">${r.level}</span><span class="rfn">${r.flag}</span></div><div class="rd">${r.detail}</div></div>`;});
+html+=`</div></div><div class="bs"><div class="bst">90-Day Priorities</div><div class="bc">`;
+(b.priorities||[]).forEach((p,i)=>{html+=`<div class="pi"><div class="pn">${i+1}</div><div><div class="pnm">${p.priority}</div><div class="prt">${p.rationale}</div></div></div>`;});
+html+=`</div></div><div class="bs"><div class="bst">Objections &amp; Responses</div><div class="bc">`;
+(b.objections||[]).forEach(o=>{html+=`<div class="oc"><div class="oq">${o.question}</div><div class="oa">${o.response}</div></div>`;});
+html+=`</div></div>`;
+html+=`<div class="bs"><div class="bst">Partnership Goals</div><div class="bc"><p>${b.goals}</p></div></div>`;
+html+=`<div class="bs"><div class="bst">Renewal &amp; Expansion</div><div class="reb">${b.renewalExpansion}</div></div>`;
+document.getElementById('bo').innerHTML=html;
+document.getElementById('ow').scrollIntoView({behavior:'smooth',block:'start'});}
+function cp(){const text=document.getElementById('bo').innerText;navigator.clipboard.writeText(text).then(()=>{const btn=document.getElementById('cb');btn.textContent='Copied!';btn.className='bcp copied';setTimeout(()=>{btn.textContent='Copy All';btn.className='bcp';},2000);});}
+function clr(){Object.keys(flds).forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('ow').style.display='none';}
+</script>
+</body>
+</html>
