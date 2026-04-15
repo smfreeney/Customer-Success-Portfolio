@@ -95,12 +95,12 @@
   <a class="nav-logo" href="../index.html">SF / CS Playbooks</a>
   <div class="nav-links">
     <a href="../index.html">Home</a>
-    <a href="index.html">Writing</a>
+    <a href="index.html">Field Notes</a>
     <a href="../fintech-cs-framework.html">Frameworks</a>
   </div>
 </nav>
 <article class="article-wrap">
-  <a class="back-link" href="index.html">Writing</a>
+  <a class="back-link" href="index.html">Field Notes</a>
   <div class="article-tag">AI in Customer Success</div>
   <h1>Building AI Agents That Know<br/><em>When to Step Back</em></h1>
   <div class="byline">
@@ -116,10 +116,7 @@
     <h2>Why I wrote this from a CS perspective</h2>
     <p>I've spent two decades in customer-facing roles in fintech and B2B SaaS. I've been on the receiving end of bad automation — the chatbot that confidently tells a controller that her ACH run failed "due to a system error" when the real issue is a misconfigured bank connector that needs a human to fix it. The damage there isn't just the wrong answer. It's the erosion of trust that happens when a customer realizes the system that was supposed to help her just wasted 40 minutes of her month-end close.</p>
     <p>Good AI support agents aren't about deflection rate. They're about resolution quality. And resolution quality in high-stakes environments requires knowing exactly when to stop and hand off — with full context intact — to a person who can actually help.</p>
-    <div class="callout">
-      <div class="callout-label">The core principle</div>
-      <p>First-call resolution isn't just "did the bot answer." It's "did the customer leave with their problem solved." Sometimes that means the agent's best move is a fast, graceful handoff.</p>
-    </div>
+    <div class="callout"><div class="callout-label">The core principle</div><p>First-call resolution isn't just "did the bot answer." It's "did the customer leave with their problem solved." Sometimes that means the agent's best move is a fast, graceful handoff.</p></div>
     <h2>The architecture in plain terms</h2>
     <p>Before any code, here's the mental model. An AI support agent for a financial operations product needs to do five things reliably:</p>
     <ol class="step-list">
@@ -165,9 +162,7 @@ Return ONLY the JSON.`</span>,
     <h2>Confidence scoring: the mechanism that makes handoffs smart</h2>
     <p>Once you've classified the intent and retrieved relevant knowledge, you run response generation — but with a second ask baked in: <em>rate your own confidence.</em></p>
     <p>This isn't magic. LLMs are reasonably good at knowing when they're on solid ground versus when they're extrapolating. A question about resetting two-factor authentication? The model either has that in its knowledge base or it doesn't, and it usually knows which. A question about why a specific ACH transaction returned an R29 code and whether it triggers a NACHA reporting obligation? Uncertain territory — and a well-prompted model will tell you so.</p>
-    <div class="info-block">
-      <p>In testing across AP/AR support scenarios, a confidence threshold of 0.72 worked well as the auto-respond cutoff. Below that, escalation with the AI-generated summary consistently outperformed attempting a low-confidence answer — customers preferred "I'm getting a specialist who can confirm this" over a hedged non-answer.</p>
-    </div>
+    <div class="info-block"><p>In testing across AP/AR support scenarios, a confidence threshold of 0.72 worked well as the auto-respond cutoff. Below that, escalation with the AI-generated summary consistently outperformed attempting a low-confidence answer — customers preferred "I'm getting a specialist who can confirm this" over a hedged non-answer.</p></div>
     <h2>The escalation handoff: what it looks like in practice</h2>
     <p>When the agent escalates, it doesn't just punt. It passes a structured summary to the human queue: the classified intent, urgency, sentiment, the conversation so far, and a plain-language description of why it escalated. The human CSM picks up the ticket already knowing what they're dealing with.</p>
     <p>This is the piece most AI support demos skip entirely. They show the bot answering. They don't show what happens when the bot can't answer — and that's exactly what gets a fintech company in trouble at 11pm before a payment run.</p>
@@ -175,10 +170,7 @@ Return ONLY the JSON.`</span>,
     <p>The demo below uses the Claude API to run a real intent classification and response pipeline against a simulated AP/AR knowledge base. Try the sample messages or type your own. Watch how the tier classification and confidence score change — and notice when it escalates versus resolves.</p>
   </div>
   <div class="demo-wrapper">
-    <div class="demo-header">
-      <span class="demo-title">Live demo — AP/AR support agent</span>
-      <span class="demo-badge">● Live via Claude API</span>
-    </div>
+    <div class="demo-header"><span class="demo-title">Live demo — AP/AR support agent</span><span class="demo-badge">● Live via Claude API</span></div>
     <div class="demo-body">
       <div class="sample-prompts">
         <button class="sample-btn" onclick="setInput('How do I add a new vendor to our approved payment list?')">Add vendor</button>
@@ -188,10 +180,7 @@ Return ONLY the JSON.`</span>,
         <button class="sample-btn" onclick="setInput('The NetSuite integration is throwing a 422 error on invoice sync.')">ERP error</button>
       </div>
       <div class="chat-messages" id="chatMessages">
-        <div class="msg agent">
-          <div class="msg-bubble">Hi — I'm the AP/AR support agent. Ask me anything about payment processing, reconciliation, or your account. For urgent issues, I'll get you to a specialist fast.</div>
-          <div class="msg-meta">Agent · ready</div>
-        </div>
+        <div class="msg agent"><div class="msg-bubble">Hi — I'm the AP/AR support agent. Ask me anything about payment processing, reconciliation, or your account. For urgent issues, I'll get you to a specialist fast.</div><div class="msg-meta">Agent · ready</div></div>
       </div>
       <div id="confidenceStrip" class="confidence-strip" style="display:none">
         <span class="conf-label">Confidence</span>
@@ -216,10 +205,7 @@ Return ONLY the JSON.`</span>,
     <p>AI support agents are not a headcount reduction strategy dressed up in friendly UI. The best implementations I've seen treat the AI as the first line of a triage system, not a replacement for the humans who understand the domain, carry the relationships, and can make judgment calls that no model should be making alone.</p>
     <p>The measure of a good agent is not how rarely it escalates. It's how well it escalates when it needs to — fast, with full context, without making the customer feel like they've been passed off.</p>
     <p>That's a CS standard, not a technology standard. It just happens to require technology to implement at scale.</p>
-    <div class="callout">
-      <div class="callout-label">If you build this</div>
-      <p>I'd genuinely love to hear how it goes — especially if you're working in payments, AP/AR, or regulated financial operations. Reach me at <a href="mailto:sonya.freeney@gmail.com" style="color:var(--amber)">sonya.freeney@gmail.com</a> or <a href="https://www.linkedin.com/in/sonya-freeney" target="_blank" style="color:var(--amber)">LinkedIn</a>.</p>
-    </div>
+    <div class="callout"><div class="callout-label">If you build this</div><p>I'd genuinely love to hear how it goes — especially if you're working in payments, AP/AR, or regulated financial operations. Reach me at <a href="mailto:sonya.freeney@gmail.com" style="color:var(--amber)">sonya.freeney@gmail.com</a> or <a href="https://www.linkedin.com/in/sonya-freeney" target="_blank" style="color:var(--amber)">LinkedIn</a>.</p></div>
   </div>
   <div class="tag-row">
     <span class="tag">AI Agents</span><span class="tag">Customer Success</span><span class="tag">AP/AR</span>
@@ -255,76 +241,16 @@ Escalation rules:
 - T1 questions can self-resolve if confidence >= 0.75
 Return ONLY the JSON.`;
 
-function setInput(t) { document.getElementById('chatInput').value = t; document.getElementById('chatInput').focus(); }
-function tierClass(t) { return t<=1?'t1-pill':t===2?'t2-pill':'t3-pill'; }
-function confColor(c) { return c>=0.75?'var(--green)':c>=0.5?'var(--amber)':'var(--red)'; }
-
-function addMessage(role, text, meta) {
-  const wrap = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'msg ' + role;
-  div.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-meta">${meta}</div>`;
-  wrap.appendChild(div);
-  wrap.scrollTop = wrap.scrollHeight;
-}
-
-function addEscalation(reason) {
-  const wrap = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'escalate-msg';
-  div.innerHTML = `⚑ Escalating to human specialist — ${reason}`;
-  wrap.appendChild(div);
-  wrap.scrollTop = wrap.scrollHeight;
-}
-
-function updateConfidence(score, tier) {
-  const strip = document.getElementById('confidenceStrip');
-  strip.style.display = 'flex';
-  const bar = document.getElementById('confBar');
-  bar.style.width = Math.round(score*100)+'%';
-  bar.style.background = confColor(score);
-  document.getElementById('confVal').textContent = Math.round(score*100)+'%';
-  const pill = document.getElementById('tierPill');
-  pill.textContent = 'T'+tier;
-  pill.className = 'tier-pill ' + tierClass(tier);
-}
-
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const btn = document.getElementById('sendBtn');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = ''; btn.disabled = true;
-  addMessage('user', text, 'You');
-  const thinking = document.createElement('div');
-  thinking.className = 'msg agent';
-  thinking.innerHTML = '<div class="msg-bubble" style="color:var(--muted);font-style:italic">Classifying and retrieving context…</div>';
-  document.getElementById('chatMessages').appendChild(thinking);
-  document.getElementById('chatMessages').scrollTop = 99999;
-  try {
-    const res = await fetch('https://cs-playbook-generator.vercel.app/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 600, system: SYSTEM_PROMPT, messages: [{ role: 'user', content: text }] })
-    });
-    const data = await res.json();
-    thinking.remove();
-    let parsed;
-    try { parsed = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim()); }
-    catch(e) { addMessage('agent', "I'm having trouble processing that. Let me get a specialist.", 'Agent · fallback'); btn.disabled=false; return; }
-    updateConfidence(parsed.confidence, parsed.tier);
-    if (parsed.shouldEscalate) {
-      addMessage('agent', parsed.response, `Agent · T${parsed.tier} · ${parsed.urgency}`);
-      addEscalation(parsed.escalateReason || 'Issue requires specialist review');
-    } else {
-      addMessage('agent', parsed.response, `Agent · T${parsed.tier} · ${Math.round(parsed.confidence*100)}% confidence`);
-    }
-  } catch(err) {
-    thinking.remove();
-    addMessage('agent', 'Connection issue — please try again or contact support directly.', 'Agent · error');
-  }
-  btn.disabled = false;
-}
+function setInput(t){document.getElementById('chatInput').value=t;document.getElementById('chatInput').focus();}
+function tierClass(t){return t<=1?'t1-pill':t===2?'t2-pill':'t3-pill';}
+function confColor(c){return c>=0.75?'var(--green)':c>=0.5?'var(--amber)':'var(--red)';}
+function addMessage(role,text,meta){const wrap=document.getElementById('chatMessages');const div=document.createElement('div');div.className='msg '+role;div.innerHTML=`<div class="msg-bubble">${text}</div><div class="msg-meta">${meta}</div>`;wrap.appendChild(div);wrap.scrollTop=wrap.scrollHeight;}
+function addEscalation(reason){const wrap=document.getElementById('chatMessages');const div=document.createElement('div');div.className='escalate-msg';div.innerHTML=`⚑ Escalating to human specialist — ${reason}`;wrap.appendChild(div);wrap.scrollTop=wrap.scrollHeight;}
+function updateConfidence(score,tier){const strip=document.getElementById('confidenceStrip');strip.style.display='flex';const bar=document.getElementById('confBar');bar.style.width=Math.round(score*100)+'%';bar.style.background=confColor(score);document.getElementById('confVal').textContent=Math.round(score*100)+'%';const pill=document.getElementById('tierPill');pill.textContent='T'+tier;pill.className='tier-pill '+tierClass(tier);}
+async function sendMessage(){const input=document.getElementById('chatInput');const btn=document.getElementById('sendBtn');const text=input.value.trim();if(!text)return;input.value='';btn.disabled=true;addMessage('user',text,'You');const thinking=document.createElement('div');thinking.className='msg agent';thinking.innerHTML='<div class="msg-bubble" style="color:var(--muted);font-style:italic">Classifying and retrieving context…</div>';document.getElementById('chatMessages').appendChild(thinking);document.getElementById('chatMessages').scrollTop=99999;
+try{const res=await fetch('https://cs-playbook-generator.vercel.app/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:SYSTEM_PROMPT,messages:[{role:'user',content:text}]})});const data=await res.json();thinking.remove();let parsed;try{parsed=JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());}catch(e){addMessage('agent',"I'm having trouble processing that. Let me get a specialist.",'Agent · fallback');btn.disabled=false;return;}updateConfidence(parsed.confidence,parsed.tier);if(parsed.shouldEscalate){addMessage('agent',parsed.response,`Agent · T${parsed.tier} · ${parsed.urgency}`);addEscalation(parsed.escalateReason||'Issue requires specialist review');}else{addMessage('agent',parsed.response,`Agent · T${parsed.tier} · ${Math.round(parsed.confidence*100)}% confidence`);}}
+catch(err){thinking.remove();addMessage('agent','Connection issue — please try again or contact support directly.','Agent · error');}
+btn.disabled=false;}
 </script>
 </body>
 </html>

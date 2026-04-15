@@ -3,135 +3,37 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Writing — Sonya Freeney</title>
+  <title>Field Notes — Sonya Freeney</title>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #0f0f0f;
-      --surface: #171717;
-      --border: #2a2a2a;
-      --slate: #4a6fa5;
-      --slate-lt: #6b8ec4;
-      --amber: #fbbf24;
-      --cream: #f5f0e8;
-      --muted: #8a8a8a;
-      --text: #e8e4dc;
+      --bg: #0f0f0f; --surface: #171717; --border: #2a2a2a;
+      --slate: #4a6fa5; --slate-lt: #6b8ec4; --amber: #fbbf24;
+      --cream: #f5f0e8; --muted: #8a8a8a; --text: #e8e4dc;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Crimson Text', Georgia, serif;
-      font-size: 1.125rem;
-      line-height: 1.75;
-      min-height: 100vh;
-    }
-    nav {
-      padding: 1.25rem 2rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      color: var(--amber);
-      text-transform: uppercase;
-      text-decoration: none;
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'Crimson Text', Georgia, serif; font-size: 1.125rem; line-height: 1.75; min-height: 100vh; }
+    nav { padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; color: var(--amber); text-transform: uppercase; text-decoration: none; }
     .nav-links { display: flex; gap: 1.75rem; }
-    .nav-links a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--cream); }
-    .page-wrap {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 5rem 2rem 8rem;
-    }
-    .page-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 5rem 2rem 8rem; }
+    .page-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
     .page-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--amber); }
-    h1 {
-      font-family: 'Crimson Text', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 0.75rem;
-    }
-    .page-sub {
-      font-size: 1.15rem;
-      color: var(--muted);
-      margin-bottom: 3.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
+    h1 { font-family: 'Crimson Text', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--cream); margin-bottom: 0.75rem; }
+    .page-sub { font-size: 1.15rem; color: var(--muted); margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
     .post-list { display: flex; flex-direction: column; }
-    .post-card {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1.5rem;
-      align-items: start;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none;
-      transition: background 0.2s;
-    }
+    .post-card { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--border); text-decoration: none; }
     .post-card:hover .post-title { color: var(--amber); }
-    .post-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--slate-lt);
-      margin-bottom: 0.6rem;
-    }
-    .post-title {
-      font-family: 'Crimson Text', serif;
-      font-size: 1.55rem;
-      font-weight: 600;
-      color: var(--cream);
-      line-height: 1.25;
-      margin-bottom: 0.6rem;
-      transition: color 0.2s;
-    }
+    .post-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate-lt); margin-bottom: 0.6rem; }
+    .post-title { font-family: 'Crimson Text', serif; font-size: 1.55rem; font-weight: 600; color: var(--cream); line-height: 1.25; margin-bottom: 0.6rem; transition: color 0.2s; }
     .post-excerpt { font-size: 1rem; color: var(--muted); line-height: 1.65; max-width: 560px; }
-    .post-meta {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.4rem;
-      padding-top: 0.2rem;
-    }
+    .post-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; padding-top: 0.2rem; }
     .post-date { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); white-space: nowrap; }
     .post-read { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--border); white-space: nowrap; }
     .read-arrow { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--amber); margin-top: 0.5rem; }
-    @media (max-width: 580px) {
-      .page-wrap { padding: 3rem 1.25rem 5rem; }
-      .post-card { grid-template-columns: 1fr; gap: 0.75rem; }
-      .post-meta { flex-direction: row; align-items: center; }
-    }
+    @media (max-width: 580px) { .page-wrap { padding: 3rem 1.25rem 5rem; } .post-card { grid-template-columns: 1fr; gap: 0.75rem; } .post-meta { flex-direction: row; align-items: center; } }
   </style>
 </head>
 <body>
@@ -139,12 +41,12 @@
   <a class="nav-logo" href="../index.html">SF / CS Playbooks</a>
   <div class="nav-links">
     <a href="../index.html">Home</a>
-    <a href="index.html">Writing</a>
+    <a href="index.html">Field Notes</a>
     <a href="../fintech-cs-framework.html">Frameworks</a>
   </div>
 </nav>
 <div class="page-wrap">
-  <div class="page-tag">Writing</div>
+  <div class="page-tag">Field Notes</div>
   <h1>Thinking Out Loud</h1>
   <p class="page-sub">Long-form writing on AI in customer success, CS operations, and building tools that make the work better. From someone who's spent 20 years in the weeds.</p>
   <div class="post-list">
