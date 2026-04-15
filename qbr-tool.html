@@ -5,8 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>QBR Brief Generator | CS Playbooks</title>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
-  <style>
-    :root{--bg:#0f0f0f;--surface:#171717;--surface-2:#1e1e1e;--border:#2a2a2a;--slate:#4a6fa5;--slate-lt:#6b8ec4;--amber:#fbbf24;--amber-dim:#c9901a;--cream:#f5f0e8;--muted:#8a8a8a;--text:#e8e4dc;--green:#4ade80;--red:#f87171;}
+  <script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
+  <style id="print-styles">
+    @media print {
+      nav, .mode-toggle, .demo-notice, .key-section, .tab-bar,
+      #tab-account, #tab-health, #tab-stakeholders, #tab-context,
+      .generate-row, .dl-cta, .btn-copy, .output-company { display: none !important; }
+      body { background: #fff !important; color: #1a1a1a !important; font-family: Arial, sans-serif !important; font-size: 11pt !important; }
+      .output-wrap { border-top: 3px solid #c9901a !important; padding-top: 1rem !important; margin-top: 0 !important; }
+      .export-actions { display: none !important; }
+      .bs { margin-bottom: 1.5rem !important; page-break-inside: avoid; }
+      .bst { color: #3a5068 !important; border: none !important; font-size: 8pt !important; }
+      .bst::after { background: #ccc !important; }
+      .ol { background: #f9f6f0 !important; border-left: 3px solid #c9901a !important; color: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .ri { border-bottom: 1px solid #eee !important; }
+      .rh-pill,.rm-pill,.rl-pill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .oc { background: #f5f5f5 !important; border: 1px solid #ddd !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .reb { background: #f0f4f8 !important; border: 1px solid #c8d8e8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .app-header { display: none !important; }
+      #outputWrap { display: block !important; }
+      @page { margin: 1in; }
+    }
+  </style>
+  <style>:root{--bg:#0f0f0f;--surface:#171717;--surface-2:#1e1e1e;--border:#2a2a2a;--slate:#4a6fa5;--slate-lt:#6b8ec4;--amber:#fbbf24;--amber-dim:#c9901a;--cream:#f5f0e8;--muted:#8a8a8a;--text:#e8e4dc;--green:#4ade80;--red:#f87171;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,serif;font-size:1rem;line-height:1.7;min-height:100vh;}
     nav{padding:1rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg);position:sticky;top:0;z-index:100;}
@@ -49,8 +70,7 @@
     input[type="text"],input[type="number"],select,textarea{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:0.6rem 0.85rem;font-family:'Crimson Text',Georgia,serif;font-size:0.95rem;color:var(--text);outline:none;transition:border-color 0.2s;width:100%;}
     input:focus,select:focus,textarea:focus{border-color:var(--slate);}
     input::placeholder,textarea::placeholder{color:var(--muted);font-style:italic;}
-    select{cursor:pointer;}
-    select option{background:#1e1e1e;}
+    select{cursor:pointer;}select option{background:#1e1e1e;}
     textarea{resize:vertical;min-height:80px;line-height:1.6;}
     .form-section{margin-bottom:2rem;}
     .section-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--slate-lt);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
@@ -63,14 +83,15 @@
     .gen-msg{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);font-style:italic;}
     @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
     .dot{animation:blink 1s ease-in-out infinite;display:inline-block;}
-    .dot:nth-child(2){animation-delay:0.2s;}
-    .dot:nth-child(3){animation-delay:0.4s;}
+    .dot:nth-child(2){animation-delay:0.2s;}.dot:nth-child(3){animation-delay:0.4s;}
     .output-wrap{margin-top:3rem;border-top:2px solid var(--amber);padding-top:2rem;}
     .output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:0.75rem;}
     .output-company{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--amber);}
-    .btn-copy{background:transparent;border:1px solid var(--border);border-radius:2px;padding:0.4rem 0.85rem;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s;}
-    .btn-copy:hover{border-color:var(--amber);color:var(--amber);}
+    .export-actions{display:flex;gap:0.5rem;flex-wrap:wrap;}
+    .btn-copy,.btn-export{background:transparent;border:1px solid var(--border);border-radius:2px;padding:0.4rem 0.85rem;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+    .btn-copy:hover,.btn-export:hover{border-color:var(--amber);color:var(--amber);}
     .btn-copy.copied{border-color:var(--green);color:var(--green);}
+    .btn-export:disabled{opacity:0.4;cursor:not-allowed;}
     .bs{margin-bottom:2.25rem;}
     .bst{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--slate-lt);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.6rem;}
     .bst::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -91,8 +112,7 @@
     .prat{font-size:0.93rem;}
     .oc{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:1rem 1.25rem;margin-bottom:0.85rem;}
     .oq{font-weight:600;color:var(--cream);margin-bottom:0.5rem;font-size:0.98rem;}
-    .oq::before{content:'"';color:var(--amber);}
-    .oq::after{content:'"';color:var(--amber);}
+    .oq::before{content:'"';color:var(--amber);}.oq::after{content:'"';color:var(--amber);}
     .oa{font-size:0.93rem;padding-left:0.75rem;border-left:2px solid var(--slate);}
     .reb{background:rgba(74,111,165,0.08);border:1px solid rgba(74,111,165,0.2);border-radius:2px;padding:1rem 1.25rem;font-size:0.98rem;line-height:1.75;}
     .err{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-radius:2px;padding:1rem 1.25rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--red);line-height:1.6;}
@@ -135,47 +155,35 @@
     <button class="tab-btn" onclick="switchTab('stakeholders',this)">Stakeholders</button>
     <button class="tab-btn" onclick="switchTab('context',this)">Goals &amp; Context</button>
   </div>
-  <div id="tab-account">
-    <div class="form-section"><div class="section-label">Account Details</div>
-    <div class="form-grid">
-      <div class="field"><label>Company Name</label><input type="text" id="companyName" placeholder="Acme Corp"/></div>
-      <div class="field"><label>Vertical</label><select id="vertical"><option value="">Select vertical</option><option>AP/AR Automation</option><option>Payment Processing / Gateway</option><option>Utility Billing &amp; Payments</option><option>B2B SaaS — General Fintech</option><option>Other</option></select></div>
-      <div class="field"><label>ARR / Account Tier</label><input type="text" id="arr" placeholder="e.g. $280K ARR — Mid-market"/></div>
-      <div class="field"><label>Days Until Renewal</label><input type="number" id="renewalDays" placeholder="e.g. 47"/></div>
-      <div class="field"><label>Contract History</label><input type="text" id="contractHistory" placeholder="e.g. 2nd renewal, expanded from $180K last year"/></div>
-      <div class="field"><label>Expansion Opportunities</label><input type="text" id="expansion" placeholder="e.g. New subsidiary, additional seats"/></div>
-    </div></div>
-  </div>
-  <div id="tab-health" style="display:none">
-    <div class="form-section"><div class="section-label">Platform Health</div>
-    <div class="form-grid">
-      <div class="field"><label>Uptime / Downtime</label><input type="text" id="uptime" placeholder="e.g. 99.1% — one 4hr outage Q3"/></div>
-      <div class="field"><label>Usage Trend</label><select id="usageTrend"><option value="">Select trend</option><option>Growing — adoption up across the board</option><option>Stable — consistent usage</option><option>Mixed — core up, some features stalled</option><option>Declining — usage dropping</option></select></div>
-      <div class="field span2"><label>Support Ticket History</label><textarea id="tickets" placeholder="Volume, open vs closed, any P1s, notable issues..."></textarea></div>
-      <div class="field span2"><label>Escalations</label><textarea id="escalations" placeholder="Any exec escalations, how resolved, current status..."></textarea></div>
-      <div class="field span2"><label>Ongoing Projects / Integrations / Upgrades</label><textarea id="projects" placeholder="What's in flight, delayed, pending sign-off..."></textarea></div>
-      <div class="field"><label>Avg Time to Close (Support)</label><input type="text" id="ttc" placeholder="e.g. 18hrs avg, down from 31hrs"/></div>
-      <div class="field"><label>NPS / CSAT</label><input type="text" id="nps" placeholder="e.g. NPS 42, up from 31 last quarter"/></div>
-    </div></div>
-  </div>
-  <div id="tab-stakeholders" style="display:none">
-    <div class="form-section"><div class="section-label">Who's In The Room</div>
-    <div class="form-grid single">
-      <div class="field"><label>Primary Champion</label><input type="text" id="champion" placeholder="Name, title, what they care about, how they show up internally"/></div>
-      <div class="field"><label>Economic Buyer / Decision Maker</label><input type="text" id="econBuyer" placeholder="Name, title, priorities, what makes them say yes or no"/></div>
-      <div class="field"><label>Other Stakeholders</label><textarea id="otherStakeholders" placeholder="Anyone else in the room — title, engagement level, concerns"></textarea></div>
-      <div class="field"><label>Relationship Health</label><select id="relationshipHealth"><option value="">Select status</option><option>Strong — engaged, responsive, advocate</option><option>Neutral — professional, transactional</option><option>Strained — past issues, guarded</option><option>At risk — disengaged or actively unhappy</option></select></div>
-    </div></div>
-  </div>
-  <div id="tab-context" style="display:none">
-    <div class="form-section"><div class="section-label">Goals &amp; Previous QBR</div>
-    <div class="form-grid single">
-      <div class="field"><label>Previous QBR Action Items</label><textarea id="prevActions" placeholder="List with status: DONE / IN PROGRESS / NOT STARTED / NOT DONE"></textarea></div>
-      <div class="field"><label>Customer's Internal Business Goals</label><textarea id="customerGoals" placeholder="What are they trying to achieve in their business this year?"></textarea></div>
-      <div class="field"><label>Your Goals for This Account</label><textarea id="yourGoals" placeholder="Renewal, expansion, re-engagement, exec access..."></textarea></div>
-      <div class="field"><label>Additional Context</label><textarea id="additionalContext" placeholder="Org changes, competitor activity, anything unusual..."></textarea></div>
-    </div></div>
-  </div>
+  <div id="tab-account"><div class="form-section"><div class="section-label">Account Details</div><div class="form-grid">
+    <div class="field"><label>Company Name</label><input type="text" id="companyName" placeholder="Acme Corp"/></div>
+    <div class="field"><label>Vertical</label><select id="vertical"><option value="">Select vertical</option><option>AP/AR Automation</option><option>Payment Processing / Gateway</option><option>Utility Billing &amp; Payments</option><option>B2B SaaS — General Fintech</option><option>Other</option></select></div>
+    <div class="field"><label>ARR / Account Tier</label><input type="text" id="arr" placeholder="e.g. $280K ARR — Mid-market"/></div>
+    <div class="field"><label>Days Until Renewal</label><input type="number" id="renewalDays" placeholder="e.g. 47"/></div>
+    <div class="field"><label>Contract History</label><input type="text" id="contractHistory" placeholder="e.g. 2nd renewal, expanded from $180K last year"/></div>
+    <div class="field"><label>Expansion Opportunities</label><input type="text" id="expansion" placeholder="e.g. New subsidiary, additional seats"/></div>
+  </div></div></div>
+  <div id="tab-health" style="display:none"><div class="form-section"><div class="section-label">Platform Health</div><div class="form-grid">
+    <div class="field"><label>Uptime / Downtime</label><input type="text" id="uptime" placeholder="e.g. 99.1% — one 4hr outage Q3"/></div>
+    <div class="field"><label>Usage Trend</label><select id="usageTrend"><option value="">Select trend</option><option>Growing — adoption up across the board</option><option>Stable — consistent usage</option><option>Mixed — core up, some features stalled</option><option>Declining — usage dropping</option></select></div>
+    <div class="field span2"><label>Support Ticket History</label><textarea id="tickets" placeholder="Volume, open vs closed, P1s, notable issues..."></textarea></div>
+    <div class="field span2"><label>Escalations</label><textarea id="escalations" placeholder="Exec escalations, how resolved, current status..."></textarea></div>
+    <div class="field span2"><label>Ongoing Projects / Integrations / Upgrades</label><textarea id="projects" placeholder="What's in flight, delayed, pending sign-off..."></textarea></div>
+    <div class="field"><label>Avg Time to Close (Support)</label><input type="text" id="ttc" placeholder="e.g. 18hrs avg, down from 31hrs"/></div>
+    <div class="field"><label>NPS / CSAT</label><input type="text" id="nps" placeholder="e.g. NPS 42, up from 31 last quarter"/></div>
+  </div></div></div>
+  <div id="tab-stakeholders" style="display:none"><div class="form-section"><div class="section-label">Who's In The Room</div><div class="form-grid single">
+    <div class="field"><label>Primary Champion</label><input type="text" id="champion" placeholder="Name, title, what they care about, how they advocate"/></div>
+    <div class="field"><label>Economic Buyer / Decision Maker</label><input type="text" id="econBuyer" placeholder="Name, title, priorities, what makes them say yes"/></div>
+    <div class="field"><label>Other Stakeholders</label><textarea id="otherStakeholders" placeholder="Title, engagement level, concerns..."></textarea></div>
+    <div class="field"><label>Relationship Health</label><select id="relationshipHealth"><option value="">Select status</option><option>Strong — engaged, responsive, advocate</option><option>Neutral — professional, transactional</option><option>Strained — past issues, guarded</option><option>At risk — disengaged or actively unhappy</option></select></div>
+  </div></div></div>
+  <div id="tab-context" style="display:none"><div class="form-section"><div class="section-label">Goals &amp; Previous QBR</div><div class="form-grid single">
+    <div class="field"><label>Previous QBR Action Items</label><textarea id="prevActions" placeholder="Status: DONE / IN PROGRESS / NOT STARTED / NOT DONE"></textarea></div>
+    <div class="field"><label>Customer's Internal Business Goals</label><textarea id="customerGoals" placeholder="What are they trying to achieve this year?"></textarea></div>
+    <div class="field"><label>Your Goals for This Account</label><textarea id="yourGoals" placeholder="Renewal, expansion, re-engagement, exec access..."></textarea></div>
+    <div class="field"><label>Additional Context</label><textarea id="additionalContext" placeholder="Org changes, competitor mentions, anything unusual..."></textarea></div>
+  </div></div></div>
   <div class="generate-row">
     <button class="btn-generate" id="generateBtn" onclick="generateBrief()">Generate QBR Brief</button>
     <button class="btn-sec" onclick="resetForm()">Clear</button>
@@ -183,7 +191,14 @@
   </div>
   <div id="outputWrap" style="display:none">
     <div class="output-wrap">
-      <div class="output-header"><span class="output-company" id="outputTitle">QBR Brief</span><button class="btn-copy" id="copyBtn" onclick="copyBrief()">Copy All</button></div>
+      <div class="output-header">
+        <span class="output-company" id="outputTitle">QBR Brief</span>
+        <div class="export-actions">
+          <button class="btn-copy" id="copyBtn" onclick="copyBrief()">Copy All</button>
+          <button class="btn-export" id="pdfBtn" onclick="doExportPDF()">Export PDF</button>
+          <button class="btn-export" id="docxBtn" onclick="doExportDOCX()">Export Word</button>
+        </div>
+      </div>
       <div id="briefOutput"></div>
     </div>
     <div class="dl-cta" id="dlCta" style="display:none">
@@ -194,7 +209,7 @@
 </div>
 <script>
 const TD={companyName:'Tardis Payments',vertical:'AP/AR Automation',arr:'$280K ARR — Mid-market',renewalDays:'47',contractHistory:'Second renewal cycle. Expanded from $180K ARR at last renewal after adding the reconciliation module. Originally a 12-month pilot that converted.',expansion:'Onboarding a new subsidiary (Tardis Payments EU) — early conversations started. 2 unused licenses on current contract.',uptime:'99.1% — one 4-hour payment processing outage in Q3, root cause was a third-party banking connector failure. RCA delivered within 24hrs.',usageTrend:'Mixed — core up, some features stalled',tickets:'14 tickets last quarter. 12 closed. 2 open: one P1 ERP sync failure with NetSuite (engineering engaged, ETA 5 days), one low-priority reporting display bug. Avg resolution time down to 18hrs from 31hrs last quarter.',escalations:'One exec escalation in Q2 — CFO flagged a payment run delay that caused a vendor complaint. Resolved within 4hrs, full RCA delivered. No escalations in Q3. Relationship with CFO has been cautious but stable since.',projects:'NetSuite connector upgrade 60% complete (delayed from original Q3 target due to their IT resource constraints, not platform issues). Tardis Payments EU subsidiary onboarding in discovery phase. SSO rollout pending IT Director sign-off — has been pending for 6 weeks.',ttc:'18hrs average, down from 31hrs last quarter',nps:'NPS 38 — up from 24 last quarter. AP Manager gave a 9. CFO gave a 6.',champion:'Clara Oswald, AP Manager — power user, runs payment operations daily, strong internal advocate. Has been with Tardis Payments 4 years. Wants to show ROI to her CFO to protect the budget.',econBuyer:"The Doctor (yes, that's his name on the contract) — CFO, been in role 18 months. Highly analytical, skeptical of SaaS spend, focused on cost reduction and audit readiness. Rarely attends QBRs but confirmed for this one.",otherStakeholders:'Danny Pink, IT Director — passive participant, concerned about integration complexity and security. Has been slow to approve the SSO rollout. Rose Tyler, Controller — joined 3 months ago, has never attended a QBR with us, relationship is a blank slate.',relationshipHealth:'Neutral — professional, transactional',prevActions:'1. Deliver NetSuite connector upgrade roadmap — DONE. 2. Resolve Q2 payment run delay and deliver RCA — DONE. 3. Schedule intro meeting with new IT Director — NOT DONE (fell through twice). 4. Deliver ROI summary for CFO ahead of renewal — IN PROGRESS, draft shared, no feedback received. 5. Complete SSO setup — NOT STARTED, blocked on IT sign-off.',customerGoals:'Reduce AP headcount by 1 FTE through automation by end of fiscal year. Close monthly books 2 days faster. Expand the platform to their EU subsidiary without increasing overall software spend significantly.',yourGoals:'Secure renewal at current ARR ($280K). Open the expansion conversation around Tardis Payments EU subsidiary. Re-engage the CFO positively after the Q2 escalation. Get IT Director moving on SSO.',additionalContext:"The CFO (The Doctor) attending this QBR is significant — he hasn't attended one since the Q2 escalation. He will almost certainly ask about ROI and the open P1 ticket. A competitor (Vortex AP) was mentioned casually by Clara in a call 6 weeks ago — she said they'd received an outreach email but wasn't interested. Worth being aware of."};
-let mode='demo';
+let mode='demo', lastBrief=null, lastInputs=null;
 function setMode(m){mode=m;document.getElementById('modeDemo').classList.toggle('active',m==='demo');document.getElementById('modeLive').classList.toggle('active',m==='live');document.getElementById('demoNotice').style.display=m==='demo'?'block':'none';document.getElementById('keySection').style.display=m==='live'?'block':'none';if(m==='demo')loadDemo();else clearForm();}
 function loadDemo(){Object.entries(TD).forEach(([k,v])=>{const el=document.getElementById(k);if(el)el.value=v;});}
 function clearForm(){['companyName','vertical','arr','renewalDays','contractHistory','expansion','uptime','usageTrend','tickets','escalations','projects','ttc','nps','champion','econBuyer','otherStakeholders','relationshipHealth','prevActions','customerGoals','yourGoals','additionalContext'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});}
@@ -202,18 +217,9 @@ window.addEventListener('DOMContentLoaded',loadDemo);
 function switchTab(tab,btn){['account','health','stakeholders','context'].forEach(t=>{document.getElementById('tab-'+t).style.display=t===tab?'block':'none';});document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');}
 function updateKeyStatus(){const k=document.getElementById('apiKey').value.trim(),s=document.getElementById('keyStatus');if(k.startsWith('sk-ant-')&&k.length>20){s.textContent='✓ Ready';s.className='key-status set';}else if(k.length>0){s.textContent='Check format';s.className='key-status';}else{s.textContent='Not set';s.className='key-status';}}
 function g(id){const el=document.getElementById(id);return el?el.value.trim():'';}
-function buildPrompt(d){return`You are a senior Customer Success strategist preparing a QBR brief. Be specific, direct, opinionated. Do NOT summarize data — interpret it. Tell the CSM what it means and what to do.
-
-ACCOUNT: ${d.companyName} | ${d.vertical||'Fintech SaaS'} | ${d.arr} | Renewal in ${d.renewalDays} days | ${d.contractHistory} | Expansion: ${d.expansion}
-HEALTH: Uptime: ${d.uptime} | Trend: ${d.usageTrend} | Tickets: ${d.tickets} | Escalations: ${d.escalations} | Projects: ${d.projects} | TTC: ${d.ttc} | NPS: ${d.nps}
-STAKEHOLDERS: Champion: ${d.champion} | Buyer: ${d.econBuyer} | Others: ${d.otherStakeholders} | Health: ${d.relationshipHealth}
-HISTORY: Actions: ${d.prevActions} | Customer goals: ${d.customerGoals} | CSM goals: ${d.yourGoals} | Context: ${d.additionalContext}
-
-Return ONLY valid JSON:
-{"openingLine":"One sentence after pleasantries. Shows you know the account. Sets real conversation.","narrative":"3-4 sentences. Honest story of where account stands. Business outcome terms not platform metrics.","riskFlags":[{"level":"high|medium|low","flag":"Short label","detail":"What risk is, why it matters here, one thing to do about it."}],"priorities":[{"priority":"Short label","rationale":"Why this is the 90-day focus grounded in customer goals."}],"objections":[{"question":"Exact thing this specific buyer is likely to say","response":"Specific confident response."}],"goals":"2-3 sentences. Partnership goals framing — joint commitments. The why-renew answer.","renewalExpansion":"2-3 sentences. Renewal and expansion play — when, how, what the ask is."}`;
-}
-async function generateBrief(){const d={companyName:g('companyName')||'the account',vertical:g('vertical'),arr:g('arr'),renewalDays:g('renewalDays'),contractHistory:g('contractHistory'),expansion:g('expansion'),uptime:g('uptime'),usageTrend:g('usageTrend'),tickets:g('tickets'),escalations:g('escalations'),projects:g('projects'),ttc:g('ttc'),nps:g('nps'),champion:g('champion'),econBuyer:g('econBuyer'),otherStakeholders:g('otherStakeholders'),relationshipHealth:g('relationshipHealth'),prevActions:g('prevActions'),customerGoals:g('customerGoals'),yourGoals:g('yourGoals'),additionalContext:g('additionalContext')};
-if(d.companyName==='the account'){alert('Please enter the company name.');return;}
+function gatherInputs(){return{companyName:g('companyName')||'the account',vertical:g('vertical'),arr:g('arr'),renewalDays:g('renewalDays'),contractHistory:g('contractHistory'),expansion:g('expansion'),uptime:g('uptime'),usageTrend:g('usageTrend'),tickets:g('tickets'),escalations:g('escalations'),projects:g('projects'),ttc:g('ttc'),nps:g('nps'),champion:g('champion'),econBuyer:g('econBuyer'),otherStakeholders:g('otherStakeholders'),relationshipHealth:g('relationshipHealth'),prevActions:g('prevActions'),customerGoals:g('customerGoals'),yourGoals:g('yourGoals'),additionalContext:g('additionalContext')};}
+function buildPrompt(d){return`You are a senior CS strategist preparing a QBR brief. Be specific, direct, opinionated. Do NOT summarize data — interpret it.\n\nACCOUNT: ${d.companyName} | ${d.vertical||'Fintech SaaS'} | ${d.arr} | Renewal: ${d.renewalDays} days | History: ${d.contractHistory} | Expansion: ${d.expansion}\nHEALTH: Uptime: ${d.uptime} | Trend: ${d.usageTrend} | Tickets: ${d.tickets} | Escalations: ${d.escalations} | Projects: ${d.projects} | TTC: ${d.ttc} | NPS: ${d.nps}\nSTAKEHOLDERS: Champion: ${d.champion} | Buyer: ${d.econBuyer} | Others: ${d.otherStakeholders} | Health: ${d.relationshipHealth}\nHISTORY: Actions: ${d.prevActions} | Customer goals: ${d.customerGoals} | CSM goals: ${d.yourGoals} | Context: ${d.additionalContext}\n\nReturn ONLY valid JSON:\n{"openingLine":"One sentence after pleasantries. Shows account knowledge. Opens real conversation.","narrative":"3-4 sentences. Honest account story. Business outcome terms.","riskFlags":[{"level":"high|medium|low","flag":"Short label","detail":"Risk, why it matters here, one action."}],"priorities":[{"priority":"Short label","rationale":"90-day focus grounded in customer goals."}],"objections":[{"question":"Exact thing this specific buyer would say","response":"Specific confident response."}],"goals":"2-3 sentences. Partnership goals. The why-renew answer.","renewalExpansion":"2-3 sentences. When to bring up renewal, how to frame it, what the ask is."}`;}
+async function generateBrief(){const d=gatherInputs();if(d.companyName==='the account'){alert('Please enter the company name.');return;}
 if(mode==='live'){const k=document.getElementById('apiKey').value.trim();if(!k||!k.startsWith('sk-ant-')){alert('Please enter a valid Anthropic API key.');return;}}
 document.getElementById('generateBtn').disabled=true;document.getElementById('genMsg').style.display='inline';document.getElementById('outputWrap').style.display='none';
 try{
@@ -223,7 +229,9 @@ if(mode==='demo'){res=await fetch('https://cs-playbook-generator.vercel.app/api/
 else{const k=document.getElementById('apiKey').value.trim();res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':k,'anthropic-version':'2023-06-01'},body:JSON.stringify(payload)});}
 const data=await res.json();if(data.error)throw new Error(data.error.message);
 const raw=data.content[0].text.replace(/```json|```/g,'').trim();
-const brief=JSON.parse(raw);renderBrief(d.companyName,brief);
+const brief=JSON.parse(raw);
+lastBrief=brief;lastInputs=d;
+renderBrief(d.companyName,brief);
 }catch(err){document.getElementById('outputWrap').style.display='block';document.getElementById('briefOutput').innerHTML=`<div class="err">Error: ${err.message}<br><br>Check your key and try again.</div>`;}
 document.getElementById('generateBtn').disabled=false;document.getElementById('genMsg').style.display='none';}
 function renderBrief(company,b){document.getElementById('outputTitle').textContent=`QBR Brief — ${company}`;document.getElementById('outputWrap').style.display='block';
@@ -232,11 +240,9 @@ html+=`<div class="bs"><div class="bst">Open With This</div><div class="ol">${b.
 html+=`<div class="bs"><div class="bst">The Account Story</div><div class="bc"><p>${b.narrative}</p></div></div>`;
 html+=`<div class="bs"><div class="bst">Risk Flags</div><div class="bc">`;
 (b.riskFlags||[]).forEach(r=>{html+=`<div class="ri"><div class="rh"><span class="rp ${rc[r.level]||'rm-pill'}">${r.level}</span><span class="rfn">${r.flag}</span></div><div class="rd">${r.detail}</div></div>`;});
-html+=`</div></div>`;
-html+=`<div class="bs"><div class="bst">90-Day Priorities</div><div class="bc">`;
+html+=`</div></div><div class="bs"><div class="bst">90-Day Priorities</div><div class="bc">`;
 (b.priorities||[]).forEach((p,i)=>{html+=`<div class="pi"><div class="pn">${i+1}</div><div><div class="pname">${p.priority}</div><div class="prat">${p.rationale}</div></div></div>`;});
-html+=`</div></div>`;
-html+=`<div class="bs"><div class="bst">Objections &amp; Responses</div><div class="bc">`;
+html+=`</div></div><div class="bs"><div class="bst">Objections &amp; Responses</div><div class="bc">`;
 (b.objections||[]).forEach(o=>{html+=`<div class="oc"><div class="oq">${o.question}</div><div class="oa">${o.response}</div></div>`;});
 html+=`</div></div>`;
 html+=`<div class="bs"><div class="bst">Partnership Goals</div><div class="bc"><p>${b.goals}</p></div></div>`;
@@ -246,6 +252,43 @@ document.getElementById('dlCta').style.display=mode==='demo'?'block':'none';
 document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'start'});}
 function copyBrief(){const text=document.getElementById('briefOutput').innerText;navigator.clipboard.writeText(text).then(()=>{const btn=document.getElementById('copyBtn');btn.textContent='Copied!';btn.className='btn-copy copied';setTimeout(()=>{btn.textContent='Copy All';btn.className='btn-copy';},2000);});}
 function resetForm(){if(mode==='demo')loadDemo();else clearForm();document.getElementById('outputWrap').style.display='none';}
+function doExportPDF(){window.print();}
+async function doExportDOCX(){if(!lastBrief||!lastInputs){alert('Generate a brief first.');return;}const btn=document.getElementById('docxBtn');btn.textContent='Building…';btn.disabled=true;try{await exportDOCX(lastInputs.companyName||'Account',lastBrief,lastInputs);}catch(e){alert('Export failed: '+e.message);}btn.textContent='Export Word';btn.disabled=false;}
+async function exportDOCX(company,brief,inputs){
+const{Document,Packer,Paragraph,TextRun,AlignmentType,BorderStyle}=docx;
+const AMBER='C9901A',SLATE='3A5068',MUTED='888888';
+const ch=[];
+function sh(t){return new Paragraph({children:[new TextRun({text:t,bold:true,color:SLATE,size:24,font:'Arial'})],spacing:{before:320,after:120},border:{bottom:{style:BorderStyle.SINGLE,size:6,color:AMBER,space:1}}});}
+function bp(t,ind){return new Paragraph({children:[new TextRun({text:t||'',size:22,font:'Arial',color:'333333'})],spacing:{before:80,after:80},indent:ind?{left:360}:{}}); }
+function lv(l,v){if(!v)return null;return new Paragraph({children:[new TextRun({text:l+': ',bold:true,size:20,font:'Arial',color:MUTED}),new TextRun({text:v,size:20,font:'Arial',color:'333333'})],spacing:{before:60,after:60}});}
+function rc(l){return l==='high'?'C0392B':l==='medium'?'C9901A':'27AE60';}
+ch.push(new Paragraph({children:[new TextRun({text:'QBR BRIEF',size:36,bold:true,font:'Arial',color:AMBER})],spacing:{before:0,after:60}}));
+ch.push(new Paragraph({children:[new TextRun({text:company,size:52,bold:true,font:'Arial',color:'1A1A1A'})],spacing:{before:0,after:80}}));
+ch.push(new Paragraph({children:[new TextRun({text:`Generated ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} · csplaybooks.com`,size:18,font:'Arial',color:MUTED})],spacing:{before:0,after:480},border:{bottom:{style:BorderStyle.SINGLE,size:6,color:AMBER,space:1}}}));
+ch.push(sh('OPEN WITH THIS'));
+ch.push(new Paragraph({children:[new TextRun({text:`"${brief.openingLine}"`,size:24,font:'Arial',italics:true,color:'1A1A1A'})],spacing:{before:120,after:240},indent:{left:360},border:{left:{style:BorderStyle.SINGLE,size:12,color:AMBER,space:10}}}));
+ch.push(sh('THE ACCOUNT STORY'));ch.push(bp(brief.narrative));
+ch.push(sh('RISK FLAGS'));
+(brief.riskFlags||[]).forEach(r=>{ch.push(new Paragraph({children:[new TextRun({text:`[${r.level.toUpperCase()} RISK]  `,size:18,font:'Arial',bold:true,color:rc(r.level)}),new TextRun({text:r.flag,size:22,font:'Arial',bold:true,color:'1A1A1A'})],spacing:{before:160,after:60}}));ch.push(bp(r.detail,true));});
+ch.push(sh('90-DAY PRIORITIES'));
+(brief.priorities||[]).forEach((p,i)=>{ch.push(new Paragraph({children:[new TextRun({text:`${i+1}.  `,size:22,font:'Arial',bold:true,color:AMBER}),new TextRun({text:p.priority,size:22,font:'Arial',bold:true,color:'1A1A1A'})],spacing:{before:160,after:60}}));ch.push(bp(p.rationale,true));});
+ch.push(sh('OBJECTIONS & RESPONSES'));
+(brief.objections||[]).forEach(o=>{ch.push(new Paragraph({children:[new TextRun({text:`"${o.question}"`,size:22,font:'Arial',bold:true,italics:true,color:'1A1A1A'})],spacing:{before:160,after:60}}));ch.push(new Paragraph({children:[new TextRun({text:'→  ',size:22,font:'Arial',bold:true,color:SLATE}),new TextRun({text:o.response,size:22,font:'Arial',color:'333333'})],spacing:{before:0,after:80},indent:{left:360}}));});
+ch.push(sh('PARTNERSHIP GOALS'));ch.push(bp(brief.goals));
+ch.push(sh('RENEWAL & EXPANSION'));
+ch.push(new Paragraph({children:[new TextRun({text:brief.renewalExpansion,size:22,font:'Arial',color:'333333'})],spacing:{before:120,after:240},indent:{left:360},border:{left:{style:BorderStyle.SINGLE,size:12,color:SLATE,space:10}}}));
+ch.push(new Paragraph({children:[],pageBreakBefore:true}));
+ch.push(new Paragraph({children:[new TextRun({text:'ACCOUNT INPUTS',size:36,bold:true,font:'Arial',color:AMBER})],spacing:{before:0,after:60}}));
+ch.push(new Paragraph({children:[new TextRun({text:'The data used to generate this brief',size:20,font:'Arial',color:MUTED})],spacing:{before:0,after:320},border:{bottom:{style:BorderStyle.SINGLE,size:4,color:'DDDDDD',space:1}}}));
+const secs=[{h:'Account Details',f:[['Company',inputs.companyName],['Vertical',inputs.vertical],['ARR / Tier',inputs.arr],['Days Until Renewal',inputs.renewalDays],['Contract History',inputs.contractHistory],['Expansion',inputs.expansion]]},{h:'Platform Health',f:[['Uptime',inputs.uptime],['Usage Trend',inputs.usageTrend],['Support Tickets',inputs.tickets],['Escalations',inputs.escalations],['Projects',inputs.projects],['Avg Time to Close',inputs.ttc],['NPS / CSAT',inputs.nps]]},{h:'Stakeholders',f:[['Champion',inputs.champion],['Economic Buyer',inputs.econBuyer],['Other Stakeholders',inputs.otherStakeholders],['Relationship Health',inputs.relationshipHealth]]},{h:'Goals & Context',f:[['Previous Actions',inputs.prevActions],['Customer Goals',inputs.customerGoals],['CSM Goals',inputs.yourGoals],['Additional Context',inputs.additionalContext]]}];
+secs.forEach(s=>{ch.push(new Paragraph({children:[new TextRun({text:s.h.toUpperCase(),size:20,bold:true,font:'Arial',color:SLATE})],spacing:{before:280,after:100}}));s.f.forEach(([l,v])=>{if(v){const p=lv(l,v);if(p)ch.push(p);}});});
+ch.push(new Paragraph({spacing:{before:480,after:0}}));
+ch.push(new Paragraph({children:[new TextRun({text:`Generated by QBR Brief Generator · csplaybooks.com · ${new Date().toLocaleDateString()}`,size:16,font:'Arial',color:MUTED,italics:true})],alignment:AlignmentType.CENTER}));
+const doc=new Document({styles:{default:{document:{run:{font:'Arial',size:22}}}},sections:[{properties:{page:{size:{width:12240,height:15840},margin:{top:1440,right:1440,bottom:1440,left:1440}}},children:ch}]});
+const blob=await Packer.toBlob(doc);
+const url=URL.createObjectURL(blob);
+const a=document.createElement('a');a.href=url;a.download=`QBR-Brief-${company.replace(/[^a-z0-9]/gi,'-')}-${new Date().toISOString().slice(0,10)}.docx`;
+document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
 </script>
 </body>
 </html>
