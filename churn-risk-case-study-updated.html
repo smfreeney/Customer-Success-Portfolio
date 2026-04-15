@@ -1,1 +1,203 @@
-<!-- PATCH_SCRIPT -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Churn Risk Signal Framework Case Study | CS Playbooks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/dist/index.umd.js"></script>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-card: #1a1a1a;
+      --bg-alt: rgba(26, 26, 26, 0.5);
+      --text: #f5f5f5;
+      --text-dim: rgba(245, 245, 245, 0.7);
+      --text-muted: rgba(245, 245, 245, 0.5);
+      --accent: #fbbf24;
+      --accent-bright: #fcd34d;
+      --accent-light: rgba(251, 191, 36, 0.1);
+      --success: #22c55e;
+      --warning: #f97316;
+      --danger: #ef4444;
+      --border: rgba(245, 245, 245, 0.1);
+      --shadow: rgba(0, 0, 0, 0.3);
+      --shadow-lg: rgba(0, 0, 0, 0.5);
+      --serif: 'Crimson Text', Georgia, serif;
+      --mono: 'JetBrains Mono', 'Courier New', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--serif); font-size: 18px; line-height: 1.6; overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 70px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--accent); text-decoration: none; }
+    .nav-back { font-family: var(--mono); font-size: 14px; color: var(--text-muted); text-decoration: none; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s ease; }
+    .nav-back:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
+    .hero { padding: 140px 40px 100px; background: linear-gradient(135deg, var(--bg) 0%, rgba(26, 26, 26, 0.8) 100%); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(249, 115, 22, 0.1) 0%, transparent 50%); pointer-events: none; }
+    .hero-content { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); padding: 8px 16px; border-radius: 24px; font-family: var(--mono); font-size: 13px; font-weight: 500; margin-bottom: 24px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 600; line-height: 1.1; margin-bottom: 24px; background: linear-gradient(135deg, var(--text) 0%, var(--accent-bright) 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-desc { font-size: 22px; color: var(--text-dim); max-width: 700px; margin-bottom: 40px; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 8px; font-weight: 500; text-decoration: none; transition: all 0.2s ease; font-size: 16px; font-family: var(--mono); }
+    .btn i { font-size: 18px; }
+    .btn-primary { background: var(--accent); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent-bright); transform: translateY(-1px); }
+    .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .section { padding: 80px 40px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-subtitle { font-family: var(--mono); font-size: 14px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .section-title { font-size: 36px; font-weight: 600; margin-bottom: 16px; }
+    .section-desc { font-size: 20px; color: var(--text-dim); max-width: 600px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-bottom: 80px; }
+    .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--success)); opacity: 0; transition: opacity 0.3s ease; }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px var(--shadow-lg); border-color: var(--accent); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .feature-icon i { font-size: 24px; color: var(--accent); }
+    .feature-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+    .feature-desc { color: var(--text-dim); line-height: 1.7; }
+    .challenge-solution { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; margin: 60px 0; }
+    .challenge-card, .solution-card { background: var(--bg-card); border-radius: 16px; padding: 40px; border: 1px solid var(--border); }
+    .challenge-card { border-left: 4px solid var(--danger); }
+    .solution-card { border-left: 4px solid var(--success); }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .card-icon i { font-size: 18px; }
+    .challenge-card .card-icon { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    .solution-card .card-icon { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+    .card-title { font-size: 24px; font-weight: 600; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin: 60px 0; }
+    .stat-card { text-align: center; background: var(--bg-card); padding: 32px 24px; border-radius: 16px; border: 1px solid var(--border); }
+    .stat-value { font-size: 36px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+    .stat-label { font-size: 16px; color: var(--text-muted); }
+    .process-timeline { position: relative; margin: 60px 0; }
+    .process-timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--accent); transform: translateX(-50%); }
+    .timeline-item { display: flex; align-items: center; margin-bottom: 60px; position: relative; }
+    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+    .timeline-content { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; width: calc(50% - 30px); position: relative; }
+    .timeline-number { position: absolute; left: 50%; width: 40px; height: 40px; background: var(--accent); color: var(--bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 600; font-size: 14px; transform: translateX(-50%); }
+    .timeline-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+    .timeline-desc { color: var(--text-dim); line-height: 1.6; }
+    .implementation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 40px; }
+    .implementation-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: all 0.3s ease; }
+    .implementation-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px var(--shadow-lg); border-color: var(--accent); }
+    .implementation-icon { width: 40px; height: 40px; background: var(--accent-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .implementation-icon i { font-size: 20px; color: var(--accent); }
+    .implementation-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--accent); }
+    .implementation-desc { color: var(--text-dim); line-height: 1.6; }
+    .footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 60px 40px; text-align: center; }
+    .footer-content { max-width: 600px; margin: 0 auto; }
+    .footer-title { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+    .footer-desc { color: var(--text-dim); margin-bottom: 32px; }
+    .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    @media (max-width: 768px) { nav { padding: 0 20px; } .hero { padding: 120px 20px 80px; } .section { padding: 60px 20px; } .features-grid { grid-template-columns: 1fr; } .hero-cta { flex-direction: column; align-items: center; } .challenge-solution { grid-template-columns: 1fr; gap: 24px; } .process-timeline::before { display: none; } .timeline-item { flex-direction: column !important; } .timeline-content { width: 100%; } .timeline-number { position: relative; left: auto; transform: none; margin-bottom: 16px; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .fade-up-1 { animation-delay: 0.1s; }
+    .fade-up-2 { animation-delay: 0.2s; }
+    .fade-up-3 { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-brand">CS Playbooks</a>
+    <a href="index.html" class="nav-back">&larr; Portfolio</a>
+  </nav>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge fade-up"><i class="ph-duotone ph-chart-bar"></i> CS Framework Development</div>
+      <h1 class="fade-up fade-up-1">Churn Risk Signal Framework</h1>
+      <p class="hero-desc fade-up fade-up-2">A systematic approach to early churn detection and prevention &mdash; transforming reactive customer success into proactive risk management through structured signal identification and weighted scoring.</p>
+      <div class="hero-cta fade-up fade-up-3">
+        <a href="churn-framework.html" class="btn btn-primary"><i class="ph-duotone ph-clipboard-text"></i> View Full Framework</a>
+        <a href="Churn_Risk_Signal_Framework.docx" class="btn btn-secondary"><i class="ph-duotone ph-file-text"></i> Download Guide</a>
+        <a href="#framework" class="btn btn-secondary"><i class="ph-duotone ph-magnifying-glass"></i> Framework Overview</a>
+        <a href="#process" class="btn btn-secondary"><i class="ph-duotone ph-gear"></i> Development Process</a>
+        <a href="#implementation" class="btn btn-secondary"><i class="ph-duotone ph-rocket-launch"></i> Implementation</a>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="challenge-solution fade-up">
+        <div class="challenge-card"><div class="card-header"><div class="card-icon"><i class="ph-duotone ph-warning"></i></div><h3 class="card-title">The Problem</h3></div><p>Most churn happens gradually, then suddenly. By the time customers explicitly signal dissatisfaction, recovery is expensive and often too late. CSMs need systematic early warning systems that detect risk before it becomes crisis.</p><br><p>Traditional health scoring relies on lagging indicators &mdash; usage drops and survey responses that capture problems after they've crystallized. This reactive approach means CSMs are always playing catch-up.</p></div>
+        <div class="solution-card"><div class="card-header"><div class="card-icon"><i class="ph-duotone ph-check-circle"></i></div><h3 class="card-title">The Framework</h3></div><p>A comprehensive signal detection system that combines leading and lagging indicators across five risk categories. Each signal carries a weighted score that feeds into a composite risk assessment and triggered response protocol.</p><br><p>Rather than waiting for customers to tell us they're unhappy, this framework teaches CSMs to read the early signs &mdash; from engagement patterns to stakeholder changes to outcome misalignment.</p></div>
+      </div>
+    </div>
+  </section>
+  <section id="framework" class="section" style="background: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header"><div class="section-subtitle">Framework Architecture</div><h2 class="section-title">Five-Category Risk Detection System</h2><p class="section-desc">Comprehensive signal taxonomy covering the full customer lifecycle and organizational context</p></div>
+      <div class="features-grid">
+        <div class="feature-card fade-up"><div class="feature-icon"><i class="ph-duotone ph-users-three"></i></div><h3 class="feature-title">Engagement Signals</h3><p class="feature-desc">Measures quality and frequency of contact. Champion departures, declining responsiveness, and executive disengagement often precede formal churn discussions by months.</p></div>
+        <div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i class="ph-duotone ph-device-mobile"></i></div><h3 class="feature-title">Product Usage Signals</h3><p class="feature-desc">Objective behavioral data showing platform adoption trends. Declining logins, stalled core feature usage, and data export spikes indicate structural disengagement.</p></div>
+        <div class="feature-card fade-up fade-up-2"><div class="feature-icon"><i class="ph-duotone ph-chat-circle"></i></div><h3 class="feature-title">Support &amp; Sentiment</h3><p class="feature-desc">How customers talk about their experience reveals emotional state. Escalation patterns, satisfaction score trends, and language analysis provide sentiment indicators.</p></div>
+        <div class="feature-card fade-up fade-up-3"><div class="feature-icon"><i class="ph-duotone ph-briefcase"></i></div><h3 class="feature-title">Commercial &amp; Relationship</h3><p class="feature-desc">Organizational context changes affecting platform commitment. Budget pressures, competitive evaluations, and renewal negotiations operate on external timelines.</p></div>
+        <div class="feature-card fade-up"><div class="feature-icon"><i class="ph-duotone ph-target"></i></div><h3 class="feature-title">Outcome &amp; Value Realization</h3><p class="feature-desc">The most preventable churn type. Customers who never fully experience ROI are recoverable with proper intervention. Success metric gaps are CSM-addressable.</p></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card fade-up"><div class="stat-value">20+</div><div class="stat-label">Risk Indicators</div></div>
+        <div class="stat-card fade-up fade-up-1"><div class="stat-value">4</div><div class="stat-label">Response Tiers</div></div>
+        <div class="stat-card fade-up fade-up-2"><div class="stat-value">5</div><div class="stat-label">Signal Categories</div></div>
+        <div class="stat-card fade-up fade-up-3"><div class="stat-value">100%</div><div class="stat-label">Lifecycle Coverage</div></div>
+      </div>
+    </div>
+  </section>
+  <section id="process" class="section">
+    <div class="container">
+      <div class="section-header"><div class="section-subtitle">Development Process</div><h2 class="section-title">Building a Practitioner's Framework</h2><p class="section-desc">How domain expertise and pattern recognition became a systematic methodology</p></div>
+      <div class="process-timeline">
+        <div class="timeline-item fade-up"><div class="timeline-content"><h4 class="timeline-title">Pattern Recognition &amp; Data Audit</h4><p class="timeline-desc">Analyzed 18+ months of churn cases across payments, AR automation, and utility tech accounts. Identified recurring signal patterns that appeared 60-120 days before formal churn discussions.</p></div><div class="timeline-number">1</div></div>
+        <div class="timeline-item fade-up fade-up-1"><div class="timeline-content"><h4 class="timeline-title">Signal Taxonomy Development</h4><p class="timeline-desc">Categorized 23 distinct risk indicators into five logical groupings. Developed weighted scoring system based on predictive strength and CSM's ability to influence outcomes.</p></div><div class="timeline-number">2</div></div>
+        <div class="timeline-item fade-up fade-up-2"><div class="timeline-content"><h4 class="timeline-title">Response Protocol Design</h4><p class="timeline-desc">Created four-tier intervention system with specific action items, timelines, and escalation criteria. Balanced proactive outreach with resource constraints and customer relationship dynamics.</p></div><div class="timeline-number">3</div></div>
+        <div class="timeline-item fade-up fade-up-3"><div class="timeline-content"><h4 class="timeline-title">Validation &amp; Refinement</h4><p class="timeline-desc">Field-tested the framework across 15 at-risk accounts over 6 months. Refined signal weights based on predictive accuracy and adjusted response protocols based on customer feedback.</p></div><div class="timeline-number">4</div></div>
+      </div>
+    </div>
+  </section>
+  <section id="implementation" class="section" style="background: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header"><div class="section-subtitle">Practical Application</div><h2 class="section-title">Using the Framework in Daily CS Work</h2><p class="section-desc">Four implementation contexts where systematic risk assessment transforms CS effectiveness</p></div>
+      <div class="implementation-grid">
+        <div class="implementation-card fade-up"><div class="implementation-icon"><i class="ph-duotone ph-calendar-blank"></i></div><h3 class="implementation-title">QBR &amp; EBR Preparation</h3><p class="implementation-desc">Run signal assessment before executive meetings. Arrive with quantified risk picture and specific mitigation strategies rather than general health status.</p></div>
+        <div class="implementation-card fade-up fade-up-1"><div class="implementation-icon"><i class="ph-duotone ph-buildings"></i></div><h3 class="implementation-title">CRM Integration</h3><p class="implementation-desc">Map signal categories to Salesforce custom fields. Track signal trends over time and surface patterns at portfolio level for proactive intervention.</p></div>
+        <div class="implementation-card fade-up fade-up-2"><div class="implementation-icon"><i class="ph-duotone ph-siren"></i></div><h3 class="implementation-title">Internal Escalations</h3><p class="implementation-desc">Transform "this account feels at risk" into quantified business case for leadership action. Scored risk assessment accelerates resource allocation decisions.</p></div>
+        <div class="implementation-card fade-up fade-up-3"><div class="implementation-icon"><i class="ph-duotone ph-trend-up"></i></div><h3 class="implementation-title">Onboarding Checkpoints</h3><p class="implementation-desc">Systematic signal reviews at 90-day, 180-day, and annual marks. Early signals are especially predictive in first year when intervention impact is highest.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-header"><div class="section-subtitle">Framework Features</div><h2 class="section-title">What Makes This Approach Work</h2><p class="section-desc">Practical design decisions that make systematic churn prevention actionable for working CSMs</p></div>
+      <div class="features-grid">
+        <div class="feature-card fade-up"><div class="feature-icon"><i class="ph-duotone ph-scales"></i></div><h3 class="feature-title">Weighted Scoring System</h3><p class="feature-desc">Not all signals are equal. Champion departure carries more predictive weight than missed QBR. Scoring reflects real-world impact on churn probability.</p></div>
+        <div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i class="ph-duotone ph-target"></i></div><h3 class="feature-title">Actionable Response Tiers</h3><p class="feature-desc">Each risk level triggers specific actions with defined timelines. No ambiguity about what constitutes appropriate response to calculated risk scores.</p></div>
+        <div class="feature-card fade-up fade-up-2"><div class="feature-icon"><i class="ph-duotone ph-arrows-clockwise"></i></div><h3 class="feature-title">Leading &amp; Lagging Indicators</h3><p class="feature-desc">Combines predictive signals (engagement changes) with confirmatory ones (usage drops). Balances early warning capability with signal reliability.</p></div>
+        <div class="feature-card fade-up fade-up-3"><div class="feature-icon"><i class="ph-duotone ph-clipboard-text"></i></div><h3 class="feature-title">Implementation Agnostic</h3><p class="feature-desc">Framework works in spreadsheets, CRM systems, or dedicated CS platforms. Focus on methodology rather than tools allows adaptation to any tech stack.</p></div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-content">
+      <h3 class="footer-title">Transform Reactive CS Into Proactive Risk Management</h3>
+      <p class="footer-desc">This framework represents 20+ years of customer-side experience translated into systematic methodology. Built for CSMs who want to get ahead of churn rather than react to it.</p>
+      <div class="footer-links">
+        <a href="churn-framework.html" class="btn btn-primary">View Complete Framework</a>
+        <a href="index.html" class="btn btn-secondary">&larr; Back to Portfolio</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.fade-up').forEach((el) => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(el); });
+  </script>
+</body>
+</html>
