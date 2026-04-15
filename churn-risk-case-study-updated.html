@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/index.js"></script>
   <style>
     :root {
       --bg: #0f0f0f;
@@ -62,7 +63,8 @@
     .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--success)); opacity: 0; transition: opacity 0.3s ease; }
     .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px var(--shadow-lg); border-color: var(--accent); }
     .feature-card:hover::before { opacity: 1; }
-    .feature-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 20px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .feature-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .feature-icon i { font-size: 24px; color: var(--accent); }
     .feature-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
     .feature-desc { color: var(--text-dim); line-height: 1.7; }
     .challenge-solution { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; margin: 60px 0; }
@@ -70,7 +72,8 @@
     .challenge-card { border-left: 4px solid var(--danger); }
     .solution-card { border-left: 4px solid var(--success); }
     .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .card-icon i { font-size: 18px; }
     .challenge-card .card-icon { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
     .solution-card .card-icon { background: rgba(34, 197, 94, 0.2); color: var(--success); }
     .card-title { font-size: 24px; font-weight: 600; }
@@ -89,7 +92,8 @@
     .implementation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 40px; }
     .implementation-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: all 0.3s ease; }
     .implementation-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px var(--shadow-lg); border-color: var(--accent); }
-    .implementation-icon { width: 40px; height: 40px; background: var(--accent-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 18px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .implementation-icon { width: 40px; height: 40px; background: var(--accent-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .implementation-icon i { font-size: 20px; color: var(--accent); }
     .implementation-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--accent); }
     .implementation-desc { color: var(--text-dim); line-height: 1.6; }
     .footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 60px 40px; text-align: center; }
@@ -123,23 +127,23 @@
   </nav>
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge fade-up">📊 CS Framework Development</div>
+      <div class="hero-badge fade-up"><i class="ph-duotone ph-chart-bar"></i> CS Framework Development</div>
       <h1 class="fade-up fade-up-1">Churn Risk Signal Framework</h1>
       <p class="hero-desc fade-up fade-up-2">A systematic approach to early churn detection and prevention — transforming reactive customer success into proactive risk management through structured signal identification and weighted scoring.</p>
       <div class="hero-cta fade-up fade-up-3">
-        <a href="churn-framework.html" class="btn btn-primary">📋 View Full Framework</a>
-        <a href="Churn_Risk_Signal_Framework.docx" class="btn btn-secondary">📄 Download Guide</a>
-        <a href="#framework" class="btn btn-secondary">🔍 Framework Overview</a>
-        <a href="#process" class="btn btn-secondary">⚙️ Development Process</a>
-        <a href="#implementation" class="btn btn-secondary">🚀 Implementation</a>
+        <a href="churn-framework.html" class="btn btn-primary"><i class="ph-duotone ph-clipboard-text"></i> View Full Framework</a>
+        <a href="Churn_Risk_Signal_Framework.docx" class="btn btn-secondary"><i class="ph-duotone ph-file-text"></i> Download Guide</a>
+        <a href="#framework" class="btn btn-secondary"><i class="ph-duotone ph-magnifying-glass"></i> Framework Overview</a>
+        <a href="#process" class="btn btn-secondary"><i class="ph-duotone ph-gear"></i> Development Process</a>
+        <a href="#implementation" class="btn btn-secondary"><i class="ph-duotone ph-rocket-launch"></i> Implementation</a>
       </div>
     </div>
   </section>
   <section class="section">
     <div class="container">
       <div class="challenge-solution fade-up">
-        <div class="challenge-card"><div class="card-header"><div class="card-icon">⚠️</div><h3 class="card-title">The Problem</h3></div><p>Most churn happens gradually, then suddenly. By the time customers explicitly signal dissatisfaction, recovery is expensive and often too late. CSMs need systematic early warning systems that detect risk before it becomes crisis.</p><br><p>Traditional health scoring relies on lagging indicators — usage drops and survey responses that capture problems after they've crystallized. This reactive approach means CSMs are always playing catch-up.</p></div>
-        <div class="solution-card"><div class="card-header"><div class="card-icon">✅</div><h3 class="card-title">The Framework</h3></div><p>A comprehensive signal detection system that combines leading and lagging indicators across five risk categories. Each signal carries a weighted score that feeds into a composite risk assessment and triggered response protocol.</p><br><p>Rather than waiting for customers to tell us they're unhappy, this framework teaches CSMs to read the early signs — from engagement patterns to stakeholder changes to outcome misalignment.</p></div>
+        <div class="challenge-card"><div class="card-header"><div class="card-icon"><i class="ph-duotone ph-warning"></i></div><h3 class="card-title">The Problem</h3></div><p>Most churn happens gradually, then suddenly. By the time customers explicitly signal dissatisfaction, recovery is expensive and often too late. CSMs need systematic early warning systems that detect risk before it becomes crisis.</p><br><p>Traditional health scoring relies on lagging indicators — usage drops and survey responses that capture problems after they've crystallized. This reactive approach means CSMs are always playing catch-up.</p></div>
+        <div class="solution-card"><div class="card-header"><div class="card-icon"><i class="ph-duotone ph-check-circle"></i></div><h3 class="card-title">The Framework</h3></div><p>A comprehensive signal detection system that combines leading and lagging indicators across five risk categories. Each signal carries a weighted score that feeds into a composite risk assessment and triggered response protocol.</p><br><p>Rather than waiting for customers to tell us they're unhappy, this framework teaches CSMs to read the early signs — from engagement patterns to stakeholder changes to outcome misalignment.</p></div>
       </div>
     </div>
   </section>
@@ -147,11 +151,11 @@
     <div class="container">
       <div class="section-header"><div class="section-subtitle">Framework Architecture</div><h2 class="section-title">Five-Category Risk Detection System</h2><p class="section-desc">Comprehensive signal taxonomy covering the full customer lifecycle and organizational context</p></div>
       <div class="features-grid">
-        <div class="feature-card fade-up"><div class="feature-icon">👥</div><h3 class="feature-title">Engagement Signals</h3><p class="feature-desc">Measures quality and frequency of contact. Champion departures, declining responsiveness, and executive disengagement often precede formal churn discussions by months.</p></div>
-        <div class="feature-card fade-up fade-up-1"><div class="feature-icon">📱</div><h3 class="feature-title">Product Usage Signals</h3><p class="feature-desc">Objective behavioral data showing platform adoption trends. Declining logins, stalled core feature usage, and data export spikes indicate structural disengagement.</p></div>
-        <div class="feature-card fade-up fade-up-2"><div class="feature-icon">💬</div><h3 class="feature-title">Support &amp; Sentiment</h3><p class="feature-desc">How customers talk about their experience reveals emotional state. Escalation patterns, satisfaction score trends, and language analysis provide sentiment indicators.</p></div>
-        <div class="feature-card fade-up fade-up-3"><div class="feature-icon">💼</div><h3 class="feature-title">Commercial &amp; Relationship</h3><p class="feature-desc">Organizational context changes affecting platform commitment. Budget pressures, competitive evaluations, and renewal negotiations operate on external timelines.</p></div>
-        <div class="feature-card fade-up"><div class="feature-icon">🎯</div><h3 class="feature-title">Outcome &amp; Value Realization</h3><p class="feature-desc">The most preventable churn type. Customers who never fully experience ROI are recoverable with proper intervention. Success metric gaps are CSM-addressable.</p></div>
+        <div class="feature-card fade-up"><div class="feature-icon"><i class="ph-duotone ph-users-three"></i></div><h3 class="feature-title">Engagement Signals</h3><p class="feature-desc">Measures quality and frequency of contact. Champion departures, declining responsiveness, and executive disengagement often precede formal churn discussions by months.</p></div>
+        <div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i class="ph-duotone ph-device-mobile"></i></div><h3 class="feature-title">Product Usage Signals</h3><p class="feature-desc">Objective behavioral data showing platform adoption trends. Declining logins, stalled core feature usage, and data export spikes indicate structural disengagement.</p></div>
+        <div class="feature-card fade-up fade-up-2"><div class="feature-icon"><i class="ph-duotone ph-chat-circle"></i></div><h3 class="feature-title">Support &amp; Sentiment</h3><p class="feature-desc">How customers talk about their experience reveals emotional state. Escalation patterns, satisfaction score trends, and language analysis provide sentiment indicators.</p></div>
+        <div class="feature-card fade-up fade-up-3"><div class="feature-icon"><i class="ph-duotone ph-briefcase"></i></div><h3 class="feature-title">Commercial &amp; Relationship</h3><p class="feature-desc">Organizational context changes affecting platform commitment. Budget pressures, competitive evaluations, and renewal negotiations operate on external timelines.</p></div>
+        <div class="feature-card fade-up"><div class="feature-icon"><i class="ph-duotone ph-target"></i></div><h3 class="feature-title">Outcome &amp; Value Realization</h3><p class="feature-desc">The most preventable churn type. Customers who never fully experience ROI are recoverable with proper intervention. Success metric gaps are CSM-addressable.</p></div>
       </div>
       <div class="stats-grid">
         <div class="stat-card fade-up"><div class="stat-value">20+</div><div class="stat-label">Risk Indicators</div></div>
@@ -176,10 +180,10 @@
     <div class="container">
       <div class="section-header"><div class="section-subtitle">Practical Application</div><h2 class="section-title">Using the Framework in Daily CS Work</h2><p class="section-desc">Four implementation contexts where systematic risk assessment transforms CS effectiveness</p></div>
       <div class="implementation-grid">
-        <div class="implementation-card fade-up"><div class="implementation-icon">📅</div><h3 class="implementation-title">QBR &amp; EBR Preparation</h3><p class="implementation-desc">Run signal assessment before executive meetings. Arrive with quantified risk picture and specific mitigation strategies rather than general health status.</p></div>
-        <div class="implementation-card fade-up fade-up-1"><div class="implementation-icon">🏢</div><h3 class="implementation-title">CRM Integration</h3><p class="implementation-desc">Map signal categories to Salesforce custom fields. Track signal trends over time and surface patterns at portfolio level for proactive intervention.</p></div>
-        <div class="implementation-card fade-up fade-up-2"><div class="implementation-icon">🚨</div><h3 class="implementation-title">Internal Escalations</h3><p class="implementation-desc">Transform "this account feels at risk" into quantified business case for leadership action. Scored risk assessment accelerates resource allocation decisions.</p></div>
-        <div class="implementation-card fade-up fade-up-3"><div class="implementation-icon">📈</div><h3 class="implementation-title">Onboarding Checkpoints</h3><p class="implementation-desc">Systematic signal reviews at 90-day, 180-day, and annual marks. Early signals are especially predictive in first year when intervention impact is highest.</p></div>
+        <div class="implementation-card fade-up"><div class="implementation-icon"><i class="ph-duotone ph-calendar-blank"></i></div><h3 class="implementation-title">QBR &amp; EBR Preparation</h3><p class="implementation-desc">Run signal assessment before executive meetings. Arrive with quantified risk picture and specific mitigation strategies rather than general health status.</p></div>
+        <div class="implementation-card fade-up fade-up-1"><div class="implementation-icon"><i class="ph-duotone ph-buildings"></i></div><h3 class="implementation-title">CRM Integration</h3><p class="implementation-desc">Map signal categories to Salesforce custom fields. Track signal trends over time and surface patterns at portfolio level for proactive intervention.</p></div>
+        <div class="implementation-card fade-up fade-up-2"><div class="implementation-icon"><i class="ph-duotone ph-siren"></i></div><h3 class="implementation-title">Internal Escalations</h3><p class="implementation-desc">Transform "this account feels at risk" into quantified business case for leadership action. Scored risk assessment accelerates resource allocation decisions.</p></div>
+        <div class="implementation-card fade-up fade-up-3"><div class="implementation-icon"><i class="ph-duotone ph-trend-up"></i></div><h3 class="implementation-title">Onboarding Checkpoints</h3><p class="implementation-desc">Systematic signal reviews at 90-day, 180-day, and annual marks. Early signals are especially predictive in first year when intervention impact is highest.</p></div>
       </div>
     </div>
   </section>
@@ -187,10 +191,10 @@
     <div class="container">
       <div class="section-header"><div class="section-subtitle">Framework Features</div><h2 class="section-title">What Makes This Approach Work</h2><p class="section-desc">Practical design decisions that make systematic churn prevention actionable for working CSMs</p></div>
       <div class="features-grid">
-        <div class="feature-card fade-up"><div class="feature-icon">⚖️</div><h3 class="feature-title">Weighted Scoring System</h3><p class="feature-desc">Not all signals are equal. Champion departure carries more predictive weight than missed QBR. Scoring reflects real-world impact on churn probability.</p></div>
-        <div class="feature-card fade-up fade-up-1"><div class="feature-icon">🎯</div><h3 class="feature-title">Actionable Response Tiers</h3><p class="feature-desc">Each risk level triggers specific actions with defined timelines. No ambiguity about what constitutes appropriate response to calculated risk scores.</p></div>
-        <div class="feature-card fade-up fade-up-2"><div class="feature-icon">🔄</div><h3 class="feature-title">Leading &amp; Lagging Indicators</h3><p class="feature-desc">Combines predictive signals (engagement changes) with confirmatory ones (usage drops). Balances early warning capability with signal reliability.</p></div>
-        <div class="feature-card fade-up fade-up-3"><div class="feature-icon">📋</div><h3 class="feature-title">Implementation Agnostic</h3><p class="feature-desc">Framework works in spreadsheets, CRM systems, or dedicated CS platforms. Focus on methodology rather than tools allows adaptation to any tech stack.</p></div>
+        <div class="feature-card fade-up"><div class="feature-icon"><i class="ph-duotone ph-scales"></i></div><h3 class="feature-title">Weighted Scoring System</h3><p class="feature-desc">Not all signals are equal. Champion departure carries more predictive weight than missed QBR. Scoring reflects real-world impact on churn probability.</p></div>
+        <div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i class="ph-duotone ph-target"></i></div><h3 class="feature-title">Actionable Response Tiers</h3><p class="feature-desc">Each risk level triggers specific actions with defined timelines. No ambiguity about what constitutes appropriate response to calculated risk scores.</p></div>
+        <div class="feature-card fade-up fade-up-2"><div class="feature-icon"><i class="ph-duotone ph-arrows-clockwise"></i></div><h3 class="feature-title">Leading &amp; Lagging Indicators</h3><p class="feature-desc">Combines predictive signals (engagement changes) with confirmatory ones (usage drops). Balances early warning capability with signal reliability.</p></div>
+        <div class="feature-card fade-up fade-up-3"><div class="feature-icon"><i class="ph-duotone ph-clipboard-text"></i></div><h3 class="feature-title">Implementation Agnostic</h3><p class="feature-desc">Framework works in spreadsheets, CRM systems, or dedicated CS platforms. Focus on methodology rather than tools allows adaptation to any tech stack.</p></div>
       </div>
     </div>
   </section>
