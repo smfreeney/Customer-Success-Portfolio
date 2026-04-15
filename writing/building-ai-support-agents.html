@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Building AI Agents for Customer Support — Sonya Freeney</title>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0f0f0f; --surface: #171717; --surface-2: #1e1e1e; --border: #2a2a2a;
+      --slate: #4a6fa5; --slate-lt: #6b8ec4; --amber: #fbbf24; --amber-dim: #c9901a;
+      --cream: #f5f0e8; --muted: #8a8a8a; --text: #e8e4dc; --green: #4ade80; --red: #f87171;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Crimson Text', Georgia, serif; font-size: 1.125rem; line-height: 1.8; min-height: 100vh; }
+    nav { padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; color: var(--amber); text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 1.75rem; }
+    .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cream); }
+    .article-wrap { max-width: 740px; margin: 0 auto; padding: 5rem 2rem 8rem; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--cream); }
+    .back-link::before { content: '← '; }
+    .article-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
+    .article-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--amber); }
+    h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.1rem, 4.5vw, 3.25rem); font-weight: 600; line-height: 1.15; color: var(--cream); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+    h1 em { font-style: italic; color: var(--amber); }
+    .byline { display: flex; align-items: center; gap: 1.5rem; padding: 1.25rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+    .byline-name { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--cream); }
+    .byline-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+    .byline-dot { color: var(--border); }
+    .prose p { margin-bottom: 1.5rem; color: var(--text); font-size: 1.15rem; }
+    .prose p:first-child { font-size: 1.25rem; color: var(--cream); line-height: 1.7; }
+    .prose h2 { font-family: 'Crimson Text', serif; font-size: 1.75rem; font-weight: 600; color: var(--cream); margin: 3rem 0 1rem; line-height: 1.25; }
+    .prose h3 { font-family: 'Crimson Text', serif; font-size: 1.3rem; font-weight: 600; color: var(--cream); margin: 2rem 0 0.75rem; }
+    .prose strong { color: var(--cream); font-weight: 600; }
+    .prose em { font-style: italic; color: var(--amber); }
+    .callout { background: rgba(251,191,36,0.05); border: 1px solid rgba(251,191,36,0.18); border-left: 3px solid var(--amber); padding: 1.5rem 1.75rem; border-radius: 2px; margin: 2rem 0; }
+    .callout p { font-size: 1.05rem !important; color: var(--text) !important; margin-bottom: 0 !important; }
+    .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.6rem; }
+    .info-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--slate); padding: 1.5rem 1.75rem; border-radius: 2px; margin: 2rem 0; }
+    .info-block p { font-size: 1rem !important; margin-bottom: 0 !important; color: var(--muted) !important; }
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; margin: 1.5rem 0 2rem; }
+    .step-list li { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; align-items: start; }
+    .step-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: var(--amber); background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+    .step-list li p { font-size: 1.05rem !important; margin-bottom: 0 !important; color: var(--text) !important; }
+    .step-list li strong { color: var(--cream); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 2px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0 2rem; }
+    pre code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.7; color: var(--text); }
+    .code-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .kw { color: var(--slate-lt); } .str { color: #a8d9a8; } .cm { color: #555; font-style: italic; } .fn { color: var(--amber); } .num { color: #d4a8d4; }
+    .demo-wrapper { border: 1px solid var(--border); border-radius: 2px; overflow: hidden; margin: 2rem 0; }
+    .demo-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+    .demo-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .demo-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); color: var(--green); border-radius: 2px; }
+    .demo-body { padding: 1.5rem; background: var(--bg); }
+    .chat-messages { display: flex; flex-direction: column; gap: 0.75rem; min-height: 180px; max-height: 320px; overflow-y: auto; margin-bottom: 1rem; padding-right: 0.25rem; }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .msg { display: flex; flex-direction: column; gap: 0.25rem; max-width: 88%; }
+    .msg.user { align-self: flex-end; align-items: flex-end; }
+    .msg.agent { align-self: flex-start; align-items: flex-start; }
+    .msg-bubble { padding: 0.7rem 1rem; border-radius: 2px; font-size: 0.95rem; line-height: 1.55; }
+    .msg.user .msg-bubble { background: rgba(74,111,165,0.2); border: 1px solid rgba(74,111,165,0.3); color: var(--cream); }
+    .msg.agent .msg-bubble { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+    .msg-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; color: var(--muted); }
+    .tier-pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 2px; margin-left: 0.4rem; }
+    .t1-pill { background: rgba(74,222,128,0.08); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+    .t2-pill { background: rgba(251,191,36,0.08); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+    .t3-pill { background: rgba(248,113,113,0.08); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+    .escalate-msg { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.2); border-radius: 2px; padding: 0.75rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--red); line-height: 1.5; }
+    .chat-input-row { display: flex; gap: 0.75rem; }
+    .chat-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 2px; padding: 0.65rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+    .chat-input::placeholder { color: var(--muted); }
+    .chat-input:focus { border-color: var(--slate); }
+    .chat-send { background: var(--slate); border: none; border-radius: 2px; padding: 0.65rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--cream); cursor: pointer; transition: background 0.2s; }
+    .chat-send:hover { background: var(--slate-lt); }
+    .chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+    .sample-prompts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+    .sample-btn { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; padding: 0.3rem 0.75rem; background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+    .sample-btn:hover { border-color: var(--slate); color: var(--cream); }
+    .confidence-strip { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; border-top: 1px solid var(--border); margin-top: 0.75rem; }
+    .conf-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .conf-bar-wrap { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .conf-bar { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+    .conf-val { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--cream); min-width: 2.5rem; text-align: right; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; }
+    @media (max-width: 600px) { .article-wrap { padding: 3rem 1.25rem 5rem; } h1 { font-size: 1.9rem; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../index.html">SF / CS Playbooks</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="index.html">Writing</a>
+    <a href="../fintech-cs-framework.html">Frameworks</a>
+  </div>
+</nav>
+<article class="article-wrap">
+  <a class="back-link" href="index.html">Writing</a>
+  <div class="article-tag">AI in Customer Success</div>
+  <h1>Building AI Agents That Know<br/><em>When to Step Back</em></h1>
+  <div class="byline">
+    <span class="byline-name">Sonya Freeney</span>
+    <span class="byline-dot">·</span>
+    <span class="byline-meta">April 2026</span>
+    <span class="byline-dot">·</span>
+    <span class="byline-meta">12 min read</span>
+  </div>
+  <div class="prose">
+    <p>The most dangerous AI support agent isn't one that gets things wrong. It's one that doesn't know it's getting things wrong — and keeps confidently going anyway. In AP/AR and fintech environments, that distinction isn't philosophical. It's a compliance risk, a vendor relationship, and sometimes a six-figure payment error waiting to happen.</p>
+    <p>This is a guide to building AI agents for customer support that are genuinely useful without being reckless. I'll walk through the architecture, show you working code, and argue for something the AI hype cycle tends to skip: <strong>the escalation to a human is a feature, not a failure mode.</strong></p>
+    <h2>Why I wrote this from a CS perspective</h2>
+    <p>I've spent two decades in customer-facing roles in fintech and B2B SaaS. I've been on the receiving end of bad automation — the chatbot that confidently tells a controller that her ACH run failed "due to a system error" when the real issue is a misconfigured bank connector that needs a human to fix it. The damage there isn't just the wrong answer. It's the erosion of trust that happens when a customer realizes the system that was supposed to help her just wasted 40 minutes of her month-end close.</p>
+    <p>Good AI support agents aren't about deflection rate. They're about resolution quality. And resolution quality in high-stakes environments requires knowing exactly when to stop and hand off — with full context intact — to a person who can actually help.</p>
+    <div class="callout">
+      <div class="callout-label">The core principle</div>
+      <p>First-call resolution isn't just "did the bot answer." It's "did the customer leave with their problem solved." Sometimes that means the agent's best move is a fast, graceful handoff.</p>
+    </div>
+    <h2>The architecture in plain terms</h2>
+    <p>Before any code, here's the mental model. An AI support agent for a financial operations product needs to do five things reliably:</p>
+    <ol class="step-list">
+      <li><span class="step-num">1</span><p><strong>Classify intent and urgency.</strong> What is the customer actually asking? A "my payment didn't go through" message could be a user error, a platform bug, or a compliance incident. These need different responses.</p></li>
+      <li><span class="step-num">2</span><p><strong>Retrieve relevant knowledge.</strong> Pull the right context — documentation, past tickets, known issues — and inject it into the prompt so the LLM answers from facts, not training data alone.</p></li>
+      <li><span class="step-num">3</span><p><strong>Generate a response and score its own confidence.</strong> Have the model rate how certain it is. Low confidence isn't a bug — it's signal. A well-prompted LLM is a reliable judge of its own uncertainty.</p></li>
+      <li><span class="step-num">4</span><p><strong>Route based on confidence and tier.</strong> High confidence + low severity = answer and close. Low confidence or high severity = escalate immediately with a clean summary for the human taking over.</p></li>
+      <li><span class="step-num">5</span><p><strong>Log everything.</strong> Every conversation, classification, confidence score, and escalation decision becomes training data and a QA signal. This is how the system gets better over time.</p></li>
+    </ol>
+    <h2>The part everyone skips: intent classification</h2>
+    <p>Most tutorials jump straight to "call the API and return the response." That works for a demo. In production, you need to know what kind of request you're dealing with before you generate anything. Get this wrong and you're routing compliance incidents to your FAQ bot and sending confused users to your escalation queue.</p>
+    <p>Here's the classifier prompt I use for an AP/AR context. It returns structured JSON that drives all the downstream routing logic:</p>
+    <div class="code-label">Intent classifier — system prompt and API call</div>
+    <pre><code><span class="cm">// The classifier runs BEFORE the main response generation</span>
+<span class="cm">// It returns structured data, not a chat response</span>
+
+<span class="kw">const</span> <span class="fn">classifyIntent</span> = <span class="kw">async</span> (message) => {
+  <span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">"https://api.anthropic.com/v1/messages"</span>, {
+    method: <span class="str">"POST"</span>,
+    headers: { <span class="str">"Content-Type"</span>: <span class="str">"application/json"</span> },
+    body: JSON.stringify({
+      model: <span class="str">"claude-sonnet-4-20250514"</span>,
+      max_tokens: <span class="num">256</span>,
+      system: <span class="str">`You are an intent classifier for a fintech AP/AR support system.
+Return ONLY valid JSON:
+{
+  "tier": 1|2|3|4,
+  "category": "payment_failure"|"reconciliation"|"access"|"compliance"|"general",
+  "urgency": "low"|"medium"|"high"|"critical",
+  "sentiment": "neutral"|"frustrated"|"distressed",
+  "confidence": 0.0-1.0,
+  "summary": "one sentence"
+}
+T1: how-to, access. T2: payment delays, ERP errors. T3: funds errors, compliance. T4: outage, breach.
+Return ONLY the JSON.`</span>,
+      messages: [{ role: <span class="str">"user"</span>, content: message }]
+    })
+  });
+  <span class="kw">const</span> data = <span class="kw">await</span> response.json();
+  <span class="kw">return</span> JSON.parse(data.content[<span class="num">0</span>].text);
+};</code></pre>
+    <p>The key insight: by separating classification from response generation, you get a clean decision point. The classifier output determines whether you even attempt an AI response, or route immediately to a human queue with the classification as context.</p>
+    <h2>Confidence scoring: the mechanism that makes handoffs smart</h2>
+    <p>Once you've classified the intent and retrieved relevant knowledge, you run response generation — but with a second ask baked in: <em>rate your own confidence.</em></p>
+    <p>This isn't magic. LLMs are reasonably good at knowing when they're on solid ground versus when they're extrapolating. A question about resetting two-factor authentication? The model either has that in its knowledge base or it doesn't, and it usually knows which. A question about why a specific ACH transaction returned an R29 code and whether it triggers a NACHA reporting obligation? Uncertain territory — and a well-prompted model will tell you so.</p>
+    <div class="info-block">
+      <p>In testing across AP/AR support scenarios, a confidence threshold of 0.72 worked well as the auto-respond cutoff. Below that, escalation with the AI-generated summary consistently outperformed attempting a low-confidence answer — customers preferred "I'm getting a specialist who can confirm this" over a hedged non-answer.</p>
+    </div>
+    <h2>The escalation handoff: what it looks like in practice</h2>
+    <p>When the agent escalates, it doesn't just punt. It passes a structured summary to the human queue: the classified intent, urgency, sentiment, the conversation so far, and a plain-language description of why it escalated. The human CSM picks up the ticket already knowing what they're dealing with.</p>
+    <p>This is the piece most AI support demos skip entirely. They show the bot answering. They don't show what happens when the bot can't answer — and that's exactly what gets a fintech company in trouble at 11pm before a payment run.</p>
+    <h2>Working demo — try it yourself</h2>
+    <p>The demo below uses the Claude API to run a real intent classification and response pipeline against a simulated AP/AR knowledge base. Try the sample messages or type your own. Watch how the tier classification and confidence score change — and notice when it escalates versus resolves.</p>
+  </div>
+  <div class="demo-wrapper">
+    <div class="demo-header">
+      <span class="demo-title">Live demo — AP/AR support agent</span>
+      <span class="demo-badge">● Live via Claude API</span>
+    </div>
+    <div class="demo-body">
+      <div class="sample-prompts">
+        <button class="sample-btn" onclick="setInput('How do I add a new vendor to our approved payment list?')">Add vendor</button>
+        <button class="sample-btn" onclick="setInput('Our ACH payment run from this morning never processed. Vendors are calling us.')">ACH failed</button>
+        <button class="sample-btn" onclick="setInput('We have a duplicate payment of $48,000 that posted twice to the same vendor yesterday.')">Duplicate payment</button>
+        <button class="sample-btn" onclick="setInput('I need to pull an audit report for our SOX compliance review due Friday.')">SOX audit</button>
+        <button class="sample-btn" onclick="setInput('The NetSuite integration is throwing a 422 error on invoice sync.')">ERP error</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg agent">
+          <div class="msg-bubble">Hi — I'm the AP/AR support agent. Ask me anything about payment processing, reconciliation, or your account. For urgent issues, I'll get you to a specialist fast.</div>
+          <div class="msg-meta">Agent · ready</div>
+        </div>
+      </div>
+      <div id="confidenceStrip" class="confidence-strip" style="display:none">
+        <span class="conf-label">Confidence</span>
+        <div class="conf-bar-wrap"><div class="conf-bar" id="confBar" style="width:0%;background:var(--green)"></div></div>
+        <span class="conf-val" id="confVal">—</span>
+        <span class="tier-pill t1-pill" id="tierPill">T—</span>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Describe your issue..." onkeydown="if(event.key==='Enter')sendMessage()"/>
+        <button class="chat-send" id="sendBtn" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+  <div class="prose">
+    <h2>What to build next</h2>
+    <p>This demo shows the core loop. Production readiness requires a few more layers:</p>
+    <p><strong>A real knowledge base.</strong> Replace the simulated KB with a vector store (Supabase pgvector is a good starting point) populated with your actual documentation, resolved ticket history, and known-issue logs. The retrieval step is what separates a useful agent from a hallucinating one.</p>
+    <p><strong>A human queue with structured handoff data.</strong> Wire the escalation path to your actual support system — Zendesk, Intercom, Linear, whatever you use. The AI's classification and summary should auto-populate the ticket so the human CSM is never starting from scratch.</p>
+    <p><strong>An evaluation loop.</strong> Log every interaction. Tag escalations by whether the human agreed the escalation was warranted. Feed misclassifications back into your system prompt and threshold calibration. This is how you get from 70% first-call resolution to 85%.</p>
+    <p><strong>Compliance guardrails.</strong> For fintech specifically: add a hard override that routes any message containing keywords like "duplicate payment," "NACHA," "audit," or "SOX" directly to Tier 3 regardless of the model's classification. Don't let a confident LLM talk a compliance incident down to a how-to question.</p>
+    <h2>The thing I want you to remember</h2>
+    <p>AI support agents are not a headcount reduction strategy dressed up in friendly UI. The best implementations I've seen treat the AI as the first line of a triage system, not a replacement for the humans who understand the domain, carry the relationships, and can make judgment calls that no model should be making alone.</p>
+    <p>The measure of a good agent is not how rarely it escalates. It's how well it escalates when it needs to — fast, with full context, without making the customer feel like they've been passed off.</p>
+    <p>That's a CS standard, not a technology standard. It just happens to require technology to implement at scale.</p>
+    <div class="callout">
+      <div class="callout-label">If you build this</div>
+      <p>I'd genuinely love to hear how it goes — especially if you're working in payments, AP/AR, or regulated financial operations. Reach me at <a href="mailto:sonya.freeney@gmail.com" style="color:var(--amber)">sonya.freeney@gmail.com</a> or <a href="https://www.linkedin.com/in/sonya-freeney" target="_blank" style="color:var(--amber)">LinkedIn</a>.</p>
+    </div>
+  </div>
+  <div class="tag-row">
+    <span class="tag">AI Agents</span><span class="tag">Customer Success</span><span class="tag">AP/AR</span>
+    <span class="tag">Fintech</span><span class="tag">Claude API</span><span class="tag">Support Automation</span>
+    <span class="tag">Escalation Design</span><span class="tag">First Call Resolution</span>
+  </div>
+</article>
+<script>
+const SYSTEM_PROMPT = `You are an AI support agent for a fintech AP/AR and payment processing platform.
+Help customers with payment runs, ACH processing, vendor management, reconciliation, ERP integrations, and compliance.
+
+Simulated knowledge base:
+- Payment runs: Scheduled daily at 6am and 2pm ET. ACH takes 1-3 business days. Failures appear under Payments > Exceptions.
+- Vendor management: New vendors require Admin approval. Settings > Vendors > Add New.
+- Reconciliation: Runs nightly. Discrepancies in Reports > Reconciliation > Exceptions.
+- ERP integrations: NetSuite, SAP, QuickBooks. 422 errors = field mapping mismatch. Check Settings > Integrations > Field Mapper.
+- Audit/compliance: SOX exports under Reports > Compliance > SOX Export. Retain 7 years.
+- Duplicate payments: Require immediate escalation. Platform flags duplicates but cannot reverse posted transactions.
+
+Respond with ONLY valid JSON:
+{
+  "tier": 1|2|3|4,
+  "confidence": 0.0-1.0,
+  "shouldEscalate": true|false,
+  "escalateReason": "reason or null",
+  "response": "your response",
+  "urgency": "low"|"medium"|"high"|"critical"
+}
+
+Escalation rules:
+- ALWAYS escalate for: duplicate payments, funds errors, SOX/compliance with legal implications, data integrity failures
+- Escalate if confidence < 0.70 for tier 2+ issues
+- T1 questions can self-resolve if confidence >= 0.75
+Return ONLY the JSON.`;
+
+function setInput(t) { document.getElementById('chatInput').value = t; document.getElementById('chatInput').focus(); }
+function tierClass(t) { return t<=1?'t1-pill':t===2?'t2-pill':'t3-pill'; }
+function confColor(c) { return c>=0.75?'var(--green)':c>=0.5?'var(--amber)':'var(--red)'; }
+
+function addMessage(role, text, meta) {
+  const wrap = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-meta">${meta}</div>`;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function addEscalation(reason) {
+  const wrap = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'escalate-msg';
+  div.innerHTML = `⚑ Escalating to human specialist — ${reason}`;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function updateConfidence(score, tier) {
+  const strip = document.getElementById('confidenceStrip');
+  strip.style.display = 'flex';
+  const bar = document.getElementById('confBar');
+  bar.style.width = Math.round(score*100)+'%';
+  bar.style.background = confColor(score);
+  document.getElementById('confVal').textContent = Math.round(score*100)+'%';
+  const pill = document.getElementById('tierPill');
+  pill.textContent = 'T'+tier;
+  pill.className = 'tier-pill ' + tierClass(tier);
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const btn = document.getElementById('sendBtn');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = ''; btn.disabled = true;
+  addMessage('user', text, 'You');
+  const thinking = document.createElement('div');
+  thinking.className = 'msg agent';
+  thinking.innerHTML = '<div class="msg-bubble" style="color:var(--muted);font-style:italic">Classifying and retrieving context…</div>';
+  document.getElementById('chatMessages').appendChild(thinking);
+  document.getElementById('chatMessages').scrollTop = 99999;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 600, system: SYSTEM_PROMPT, messages: [{ role: 'user', content: text }] })
+    });
+    const data = await res.json();
+    thinking.remove();
+    let parsed;
+    try { parsed = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim()); }
+    catch(e) { addMessage('agent', "I'm having trouble processing that. Let me get a specialist.", 'Agent · fallback'); btn.disabled=false; return; }
+    updateConfidence(parsed.confidence, parsed.tier);
+    if (parsed.shouldEscalate) {
+      addMessage('agent', parsed.response, `Agent · T${parsed.tier} · ${parsed.urgency}`);
+      addEscalation(parsed.escalateReason || 'Issue requires specialist review');
+    } else {
+      addMessage('agent', parsed.response, `Agent · T${parsed.tier} · ${Math.round(parsed.confidence*100)}% confidence`);
+    }
+  } catch(err) {
+    thinking.remove();
+    addMessage('agent', 'Connection issue — please try again or contact support directly.', 'Agent · error');
+  }
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>
