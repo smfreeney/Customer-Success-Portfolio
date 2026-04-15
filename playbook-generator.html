@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/dist/duotone/index.umd.js"></script>
   <style>
     :root {
       --bg: #0f0f0f;
@@ -39,35 +40,28 @@
     .nav-brand { font-size: 20px; font-weight: 600; color: var(--accent); font-family: var(--serif); text-decoration: none; }
     .nav-back { font-family: var(--mono); font-size: 14px; color: var(--text-muted); text-decoration: none; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s ease; }
     .nav-back:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-light); }
-
-    /* API Notice Banner */
     .api-notice {
       margin-top: 70px;
       background: rgba(251, 191, 36, 0.08);
       border-bottom: 1px solid rgba(251, 191, 36, 0.25);
       padding: 14px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      font-family: var(--mono);
-      font-size: 13px;
-      color: rgba(245, 245, 245, 0.8);
-      text-align: center;
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      font-family: var(--mono); font-size: 13px; color: rgba(245, 245, 245, 0.8);
+      text-align: center; flex-wrap: wrap;
     }
-    .api-notice-icon { font-size: 16px; flex-shrink: 0; }
+    .api-notice-icon { font-size: 18px; color: var(--accent); flex-shrink: 0; }
     .api-notice a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(251, 191, 36, 0.4); transition: border-color 0.2s; }
     .api-notice a:hover { border-color: var(--accent); }
-
     .hero { padding: 60px 40px 100px; background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%); position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: radial-gradient(circle at 25% 25%, rgba(251, 191, 36, 0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(34, 197, 94, 0.08) 0%, transparent 50%); pointer-events: none; }
     .hero-content { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); padding: 8px 16px; border-radius: 24px; font-family: var(--mono); font-size: 13px; font-weight: 500; margin-bottom: 24px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); padding: 8px 16px; border-radius: 24px; font-family: var(--mono); font-size: 13px; font-weight: 500; margin-bottom: 24px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .hero-badge i { font-size: 16px; }
     .hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 600; line-height: 1.1; margin-bottom: 24px; color: var(--text); }
     .hero-desc { font-size: 22px; color: var(--text-dim); max-width: 700px; margin-bottom: 40px; }
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 8px; font-weight: 500; text-decoration: none; transition: all 0.2s ease; font-size: 16px; font-family: var(--mono); }
+    .btn i { font-size: 18px; }
     .btn-primary { background: var(--accent); color: var(--bg); }
     .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
     .btn-secondary { background: var(--bg-card); color: var(--text); border: 1px solid var(--border); }
@@ -83,7 +77,8 @@
     .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); opacity: 0; transition: opacity 0.3s ease; }
     .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px var(--shadow-lg); border-color: var(--accent); }
     .feature-card:hover::before { opacity: 1; }
-    .feature-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 20px; }
+    .feature-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .feature-icon i { font-size: 24px; color: var(--accent); }
     .feature-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
     .feature-desc { color: var(--text-dim); line-height: 1.7; }
     .tech-stack { background: var(--bg-alt); border-radius: 16px; padding: 40px; text-align: center; }
@@ -126,25 +121,24 @@
 
   <nav>
     <a href="index.html" class="nav-brand">CS Playbooks</a>
-    <a href="index.html" class="nav-back">← Portfolio</a>
+    <a href="index.html" class="nav-back">&larr; Portfolio</a>
   </nav>
 
-  <!-- API Usage Notice -->
   <div class="api-notice">
-    <span class="api-notice-icon">⚡</span>
-    <span>This tool runs on a shared API key with usage limits by design. If you hit an error, <a href="mailto:sonya.freeney@gmail.com">email me</a> and I'll reset it — usually within a few hours.</span>
+    <i class="ph-duotone ph-lightning api-notice-icon"></i>
+    <span>This tool runs on a shared API key with usage limits by design. If you hit an error, <a href="mailto:sonya.freeney@gmail.com">email me</a> and I'll reset it &mdash; usually within a few hours.</span>
   </div>
 
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge fade-up">🤖 AI-Powered Tool</div>
+      <div class="hero-badge fade-up"><i class="ph-duotone ph-robot"></i> AI-Powered Tool</div>
       <h1 class="fade-up fade-up-1">CS Account Playbook Generator</h1>
-      <p class="hero-desc fade-up fade-up-2">Drop in your account details and get back a 7-section CS playbook, health score with risk flags, and 4 ready-to-send email templates — all tailored to that specific account.</p>
+      <p class="hero-desc fade-up fade-up-2">Drop in your account details and get back a 7-section CS playbook, health score with risk flags, and 4 ready-to-send email templates &mdash; all tailored to that specific account.</p>
       <div class="hero-cta fade-up fade-up-3">
-        <a href="https://cs-playbook-generator.vercel.app" target="_blank" class="btn btn-primary">🚀 Try Live Demo</a>
-        <a href="https://github.com/smfreeney/cs-playbook-generator" target="_blank" class="btn btn-secondary">📂 View Source</a>
-        <a href="#features" class="btn btn-secondary">📋 See Features</a>
-        <a href="#process" class="btn btn-secondary">⚙️ How It Works</a>
+        <a href="https://cs-playbook-generator.vercel.app" target="_blank" class="btn btn-primary"><i class="ph-duotone ph-rocket-launch"></i> Try Live Demo</a>
+        <a href="https://github.com/smfreeney/cs-playbook-generator" target="_blank" class="btn btn-secondary"><i class="ph-duotone ph-github-logo"></i> View Source</a>
+        <a href="#features" class="btn btn-secondary"><i class="ph-duotone ph-clipboard-text"></i> See Features</a>
+        <a href="#process" class="btn btn-secondary"><i class="ph-duotone ph-gear"></i> How It Works</a>
       </div>
     </div>
   </section>
@@ -157,12 +151,12 @@
         <p class="section-desc">No generic templates. No signup required. Account-specific strategies that actually make sense in B2B SaaS environments.</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card fade-up"><div class="feature-icon">📋</div><h3 class="feature-title">7-Section Playbook</h3><p class="feature-desc">Complete playbook covering onboarding, health scoring, QBRs, escalations, renewals, success metrics, and project status — all personalized to your account.</p></div>
-        <div class="feature-card fade-up fade-up-1"><div class="feature-icon">🎯</div><h3 class="feature-title">Health Score Calculator</h3><p class="feature-desc">0-100 scoring based on account stage, risk signals, renewal proximity, and engagement. Shows exactly what's dragging the score down.</p></div>
-        <div class="feature-card fade-up fade-up-2"><div class="feature-icon">📧</div><h3 class="feature-title">Ready-to-Send Emails</h3><p class="feature-desc">Four templates pre-written for your account: kickoff, QBR invite, renewal outreach, and escalation acknowledgment. 80% of the work done.</p></div>
-        <div class="feature-card fade-up fade-up-3"><div class="feature-icon">📄</div><h3 class="feature-title">Word Doc Export</h3><p class="feature-desc">Everything formatted and ready to drop into your CRM or share with your team. No copy-paste hassles.</p></div>
-        <div class="feature-card fade-up"><div class="feature-icon">🔒</div><h3 class="feature-title">Privacy First</h3><p class="feature-desc">No signup, no data collection, no tracking. Entirely stateless. Your account data never leaves your browser.</p></div>
-        <div class="feature-card fade-up fade-up-1"><div class="feature-icon">⚡</div><h3 class="feature-title">10-Second Generation</h3><p class="feature-desc">Fill in the form, hit generate, wait ~10-15 seconds. Domain expertise built into the AI prompts for realistic strategies.</p></div>
+        <div class="feature-card fade-up"><div class="feature-icon"><i class="ph-duotone ph-clipboard-text"></i></div><h3 class="feature-title">7-Section Playbook</h3><p class="feature-desc">Complete playbook covering onboarding, health scoring, QBRs, escalations, renewals, success metrics, and project status &mdash; all personalized to your account.</p></div>
+        <div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i class="ph-duotone ph-target"></i></div><h3 class="feature-title">Health Score Calculator</h3><p class="feature-desc">0-100 scoring based on account stage, risk signals, renewal proximity, and engagement. Shows exactly what's dragging the score down.</p></div>
+        <div class="feature-card fade-up fade-up-2"><div class="feature-icon"><i class="ph-duotone ph-envelope"></i></div><h3 class="feature-title">Ready-to-Send Emails</h3><p class="feature-desc">Four templates pre-written for your account: kickoff, QBR invite, renewal outreach, and escalation acknowledgment. 80% of the work done.</p></div>
+        <div class="feature-card fade-up fade-up-3"><div class="feature-icon"><i class="ph-duotone ph-file-doc"></i></div><h3 class="feature-title">Word Doc Export</h3><p class="feature-desc">Everything formatted and ready to drop into your CRM or share with your team. No copy-paste hassles.</p></div>
+        <div class="feature-card fade-up"><div class="feature-icon"><i class="ph-duotone ph-lock"></i></div><h3 class="feature-title">Privacy First</h3><p class="feature-desc">No signup, no data collection, no tracking. Entirely stateless. Your account data never leaves your browser.</p></div>
+        <div class="feature-card fade-up fade-up-1"><div class="feature-icon"><i class="ph-duotone ph-lightning"></i></div><h3 class="feature-title">10-Second Generation</h3><p class="feature-desc">Fill in the form, hit generate, wait ~10-15 seconds. Domain expertise built into the AI prompts for realistic strategies.</p></div>
       </div>
     </div>
   </section>
@@ -177,8 +171,8 @@
       <div class="process-flow">
         <div class="process-step fade-up"><div class="process-number">1</div><h3 class="process-title">Fill Account Details</h3><p class="process-desc">Company, industry, ARR, stage, renewal date, stakeholders, goals, and pain points</p></div>
         <div class="process-step fade-up fade-up-1"><div class="process-number">2</div><h3 class="process-title">AI Generation</h3><p class="process-desc">Claude API builds personalized playbook using 20+ years of CS domain expertise</p></div>
-        <div class="process-step fade-up fade-up-2"><div class="process-number">3</div><h3 class="process-title">Review & Customize</h3><p class="process-desc">Health score breakdown, email templates, and account-specific action items</p></div>
-        <div class="process-step fade-up fade-up-3"><div class="process-number">4</div><h3 class="process-title">Export & Execute</h3><p class="process-desc">Download formatted Word doc ready for your CRM or team collaboration</p></div>
+        <div class="process-step fade-up fade-up-2"><div class="process-number">3</div><h3 class="process-title">Review &amp; Customize</h3><p class="process-desc">Health score breakdown, email templates, and account-specific action items</p></div>
+        <div class="process-step fade-up fade-up-3"><div class="process-number">4</div><h3 class="process-title">Export &amp; Execute</h3><p class="process-desc">Download formatted Word doc ready for your CRM or team collaboration</p></div>
       </div>
       <div class="stats-grid">
         <div class="stat-card fade-up"><div class="stat-value">7</div><div class="stat-label">Playbook Sections</div></div>
@@ -212,7 +206,7 @@
       </p>
       <div class="footer-links">
         <a href="https://cs-playbook-generator.vercel.app" target="_blank" class="btn btn-primary">Launch Tool</a>
-        <a href="index.html" class="btn btn-secondary">← Back to Portfolio</a>
+        <a href="index.html" class="btn btn-secondary">&larr; Back to Portfolio</a>
       </div>
     </div>
   </footer>
