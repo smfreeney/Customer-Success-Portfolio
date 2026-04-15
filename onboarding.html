@@ -8,6 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    .sf-nav{position:fixed;top:0;left:0;right:0;z-index:9999;padding:0 2rem;height:56px;background:#0f0f0f;border-bottom:1px solid #2a2a2a;display:flex;align-items:center;justify-content:space-between;}
+    .sf-nav-logo{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.12em;color:#fbbf24;text-transform:uppercase;text-decoration:none;}
+    .sf-nav-links{display:flex;gap:1.75rem;}
+    .sf-nav-links a{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#8a8a8a;text-decoration:none;}
+    .sf-nav-links a:hover{color:#f5f0e8;}
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #0f0f0f; --bg-dark: #1a1a1a; --surface: rgba(26, 26, 26, 0.8);
@@ -17,7 +22,7 @@
       --serif: 'Crimson Text', Georgia, serif; --mono: 'JetBrains Mono', 'Courier New', monospace;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; overflow-x: hidden; padding-top: 56px; }
     a { color: inherit; text-decoration: none; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -27,19 +32,7 @@
     .tag { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; font-family: var(--mono); }
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0 48px; height: 56px;
-      background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-brand { font-family: var(--serif); font-size: 17px; font-weight: 500; color: var(--accent); letter-spacing: 0.02em; text-decoration: none; }
-    .nav-links { display: flex; gap: 28px; font-size: 13px; color: var(--text-muted); }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-back { font-size: 12px; color: var(--text-muted); border: 1px solid var(--border); padding: 5px 14px; border-radius: 4px; transition: color 0.2s, border-color 0.2s; }
-    .nav-back:hover { color: var(--accent); border-color: var(--accent); }
-    .hero { padding: 148px 48px 100px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%); }
+    .hero { padding: 80px 48px 100px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%); }
     .hero-glow { position: absolute; top: -80px; right: -80px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%); pointer-events: none; }
     .hero-inner { max-width: 860px; margin: 0 auto; }
     .hero-tags { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
@@ -108,8 +101,7 @@
     .footer-right { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); }
     .footer-divider { color: var(--border); }
     @media (max-width: 768px) {
-      nav { padding: 0 20px; } .nav-links { display: none; }
-      .hero { padding: 100px 20px 60px; } .section { padding: 60px 20px; }
+      .hero { padding: 60px 20px 60px; } .section { padding: 60px 20px; }
       .problem-grid { grid-template-columns: 1fr; gap: 32px; }
       .timeline-items { grid-template-columns: repeat(4, 1fr); }
       .format-grid { grid-template-columns: 1fr; gap: 28px; }
@@ -120,17 +112,16 @@
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html" class="nav-brand">CS Playbooks</a>
-    <div class="nav-links">
-      <a href="#problem">Problem</a>
-      <a href="#process">Process</a>
-      <a href="#formats">Formats</a>
-      <a href="#case-study">Case Study</a>
-      <a href="#skills">Skills</a>
-    </div>
-    <a href="index.html" class="nav-back">← Portfolio</a>
-  </nav>
+<nav class="sf-nav">
+  <a class="sf-nav-logo" href="index.html">SF / CS Playbooks</a>
+  <div class="sf-nav-links">
+    <a href="index.html">Home</a>
+    <a href="churn-risk-case-study-updated.html">Churn Risk</a>
+    <a href="playbook-generator.html">Playbook Gen</a>
+    <a href="saas-csm-toolkit-updated.html">Toolkit</a>
+    <a href="writing/index.html">Writing</a>
+  </div>
+</nav>
   <div class="hero dot-grid">
     <div class="hero-glow"></div>
     <div class="hero-inner">
@@ -155,7 +146,7 @@
       <div class="problem-grid">
         <div class="reveal"><div class="section-label">The Problem</div><div class="section-rule"></div></div>
         <div class="reveal">
-          <p class="problem-quote">"A workbook built in 2016, last meaningfully updated in 2019 — with the company name hardcoded in hundreds of cells."</p>
+          <p class="problem-quote">“A workbook built in 2016, last meaningfully updated in 2019 — with the company name hardcoded in hundreds of cells.”</p>
           <p class="body-text">Payment processor onboarding is one of those operational processes that can make or break a client relationship in the first 45 days. The original workbook was thorough and functional — eight tabs covering everything from merchant banking to IVR configuration. But after 18 revisions across three authors, it had become an institutional knowledge trap.</p>
           <p class="body-text">Every implementation team maintained a slightly different version. No phase structure. No master checklist. No way to hand it to a new engagement without an hour of find-and-replace.</p>
         </div>
@@ -186,7 +177,7 @@
       <div class="case-section reveal"><h3 class="case-h3">The phase structure</h3><p class="body-text">The eight phases aren't arbitrary: Discovery, Treasury Setup, Product Configuration, Branding, File Integration, Portal Access, Testing, Go-Live. They reflect how implementations actually sequence. You can't configure channels before processors are live. You can't run UAT before branding is approved. The dependencies are built into the order.</p></div>
       <div class="case-section reveal"><h3 class="case-h3">Why three formats</h3><p class="body-text">Excel, Notion, and React aren't interchangeable. The implementation manager lives in spreadsheets. The cross-functional team collaborates in Notion. The prospect or hiring manager sees it first in a browser. Knowing which tool fits which job is a different skill than knowing how to use all three — and building the same content three ways shows both.</p></div>
       <div class="case-section reveal"><h3 class="case-h3">What it preserves</h3><p class="body-text">This is an eight-year document. v1.0 through v3.10 represent the accumulated operational knowledge of everyone who worked on payment processor implementations during that period — DNAC file specs, real-time remittance API support, consumer portal configuration, the shift between gateways, the standardization of portal roles. v4.0 didn't throw that away. Every version note lives in the Revision History tab.</p></div>
-      <div class="reveal pullquote"><p>"Making something work for one company is a starting point. Making it work for any company requires stepping back from the specific case and designing for the general one."</p></div>
+      <div class="reveal pullquote"><p>“Making something work for one company is a starting point. Making it work for any company requires stepping back from the specific case and designing for the general one.”</p></div>
     </div>
   </div>
   <div id="ai-note" class="section">
@@ -225,7 +216,7 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     const TIMELINE = [
-      { ver: "1.0", year: "2016", label: "Initial release", author: "Charlotte Powell" },
+      { ver: "1.0", year: "2016", label: "Initial release" },
       { ver: "2.0", year: "2016", label: "DNAC + Real-Time API sections added" },
       { ver: "3.0", year: "2017", label: "Consumer Portal tab added" },
       { ver: "3.4", year: "2018", label: "PPM/TSYS pricing tab" },
