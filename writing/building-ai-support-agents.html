@@ -302,7 +302,7 @@ async function sendMessage() {
   document.getElementById('chatMessages').appendChild(thinking);
   document.getElementById('chatMessages').scrollTop = 99999;
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('https://cs-playbook-generator.vercel.app/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 600, system: SYSTEM_PROMPT, messages: [{ role: 'user', content: text }] })
