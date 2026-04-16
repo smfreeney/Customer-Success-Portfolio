@@ -36,6 +36,10 @@
     .meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
     .meta-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
     .meta-value { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text); }
+    .download-bar { max-width: 900px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1rem; }
+    .btn-download { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.65rem 1.25rem; background: var(--amber); color: #fff; border-radius: 4px; text-decoration: none; transition: background 0.2s; }
+    .btn-download:hover { background: var(--amber-dim); }
+    .btn-download svg { width: 14px; height: 14px; stroke: currentColor; flex-shrink: 0; }
     .content { max-width: 900px; margin: 0 auto; padding: 3.5rem 2rem 6rem; display: flex; flex-direction: column; gap: 4rem; }
     .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate-lt); margin-bottom: 0.75rem; }
     h2 { font-family: 'Crimson Text', serif; font-size: 1.9rem; font-weight: 600; color: var(--text); margin-bottom: 1.25rem; line-height: 1.25; }
@@ -114,6 +118,13 @@
       <div class="meta-item"><span class="meta-label">Last Updated</span><span class="meta-value">April 2026</span></div>
     </div>
   </header>
+  <div class="download-bar">
+    <a href="Fintech_CS_Escalation_Framework.docx" download class="btn-download">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download .docx
+    </a>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--muted);">Word document — shareable &amp; printable</span>
+  </div>
   <main class="content">
     <section>
       <div class="section-label">01 — Context</div>
