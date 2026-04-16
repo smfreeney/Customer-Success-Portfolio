@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Onboarding System Redesign | CS Playbooks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+        .sf-nav{position:fixed;top:0;left:0;right:0;z-index:9999;padding:0 2rem;height:56px;background:#f5f0e8;border-bottom:1px solid #ddd7cc;display:flex;align-items:center;justify-content:space-between;}
+    .sf-nav-logo{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.12em;color:#c9901a;text-transform:uppercase;text-decoration:none;}
+    .sf-nav-links{display:flex;gap:1.75rem;}
+    .sf-nav-links a{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#7a6e66;text-decoration:none;}
+    .sf-nav-links a:hover{color:#1a1210;}
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+      --bg:           #f5f0e8;
+      --bg-card:      #ffffff;
+      --bg-alt:       #f9f6f1;
+      --bg-dark:      #2a1f1a;
+      --text:         #1a1210;
+      --text-dim:     #4a4038;
+      --text-muted:   #7a6e66;
+      --accent:       #c9901a;
+      --accent-bright:#e8a020;
+      --accent-hover: #e8a020;
+      --accent-light: rgba(201,144,26,0.1);
+      --accent-border:rgba(201,144,26,0.25);
+      --slate:        #4a6fa5;
+      --slate-lt:     #6b8ec4;
+      --slate-light:  rgba(74,111,165,0.1);
+      --slate-border: rgba(74,111,165,0.25);
+      --success:      #1d9e75;
+      --warning:      #c9901a;
+      --danger:       #c0392b;
+      --teal:         #1d9e75;
+      --border:       #ddd7cc;
+      --border-light: #ede7dc;
+      --shadow:       rgba(42,31,26,0.08);
+      --shadow-lg:    rgba(42,31,26,0.14);
+      --serif: 'Crimson Text', Georgia, serif;
+      --mono:  'JetBrains Mono', 'Courier New', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; overflow-x: hidden; padding-top: 56px; }
+    a { color: inherit; text-decoration: none; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    .fade-in { animation: fadeIn 0.5s ease both; }
+    .dot-grid { background-image: radial-gradient(circle, rgba(220,205,180,0.1) 1px, transparent 1px); background-size: 28px 28px; }
+    .tag { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; font-family: var(--mono); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .hero { padding: 80px 48px 100px; position: relative; overflow: hidden; background: linear-gradient(145deg, var(--bg) 0%, #ede7da 60%, #e6ddd0 100%); }
+    .hero-glow { position: absolute; top: -80px; right: -80px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 860px; margin: 0 auto; }
+    .hero-tags { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(40px, 6vw, 72px); font-weight: 500; color: var(--text); line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 24px; }
+    .hero h1 em { color: var(--accent); font-style: italic; }
+    .hero-sub { font-size: 17px; line-height: 1.7; color: var(--text-dim); max-width: 560px; margin-bottom: 44px; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary-accent { padding: 12px 28px; background: var(--accent); color: var(--bg); border-radius: 6px; font-size: 14px; font-weight: 500; font-family: var(--mono); transition: opacity 0.2s; cursor: pointer; border: none; }
+    .btn-primary-accent:hover { opacity: 0.85; }
+    .btn-outline { padding: 12px 28px; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 6px; font-size: 14px; font-family: var(--mono); transition: border-color 0.2s; }
+    .btn-outline:hover { border-color: var(--accent); }
+    .section { padding: 88px 48px; border-top: 1px solid var(--border); }
+    .section-alt { background: var(--bg-alt); }
+    .section-dark { background: var(--bg-dark); }
+    .inner { max-width: 860px; margin: 0 auto; }
+    .inner-wide { max-width: 960px; margin: 0 auto; }
+    .section-label { font-family: var(--serif); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .section-rule { width: 36px; height: 2px; background: var(--accent); border-radius: 1px; margin-bottom: 0; }
+    .problem-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+    .problem-quote { font-family: var(--serif); font-size: 21px; line-height: 1.65; color: var(--text); font-weight: 400; margin-bottom: 22px; }
+    .body-text { font-size: 15px; line-height: 1.85; color: var(--text-dim); margin-bottom: 16px; }
+    .timeline-grid { position: relative; }
+    .timeline-line { position: absolute; top: 16px; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent); }
+    .timeline-items { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; position: relative; }
+    .tl-item { text-align: center; cursor: default; }
+    .tl-dot-wrap { display: flex; justify-content: center; margin-bottom: 14px; }
+    .tl-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg); position: relative; z-index: 1; transition: all 0.2s; }
+    .tl-dot.highlight { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 16px rgba(200, 169, 122, 0.45); }
+    .tl-item:hover .tl-dot:not(.highlight) { background: var(--teal); border-color: var(--teal); }
+    .tl-ver { font-size: 13px; font-weight: 400; color: var(--text-muted); margin-bottom: 4px; transition: color 0.2s; }
+    .tl-year { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+    .tl-label { font-size: 11px; line-height: 1.5; color: var(--text-muted); padding: 0 4px; transition: color 0.2s; }
+    .tl-item:hover .tl-label { color: var(--text-dim); }
+    .tab-bar { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 1px solid var(--border); }
+    .tab-btn { padding: 12px 22px; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-size: 14px; font-family: var(--mono); cursor: pointer; transition: color 0.2s, border-color 0.2s; margin-bottom: -1px; }
+    .tab-btn.active { border-bottom-color: var(--accent); color: var(--text); }
+    .tab-btn:hover:not(.active) { color: var(--text-dim); }
+    .format-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .format-desc { font-size: 16px; line-height: 1.75; color: var(--text-dim); margin-bottom: 28px; }
+    .format-cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 500; font-family: var(--mono); border: 1px solid var(--border); color: var(--text-dim); background: var(--bg-alt); transition: opacity 0.2s; cursor: pointer; }
+    .format-cta:hover { opacity: 0.75; }
+    .features-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; }
+    .features-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+    .feature-item { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: var(--text-dim); line-height: 1.5; margin-bottom: 12px; }
+    .feature-item:last-child { margin-bottom: 0; }
+    .feature-arrow { color: var(--accent); margin-top: 1px; flex-shrink: 0; }
+    .case-section { margin-bottom: 44px; }
+    .case-h3 { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 14px; letter-spacing: 0.01em; }
+    .pullquote { border-left: 2px solid var(--accent); padding-left: 24px; margin-top: 16px; }
+    .pullquote p { font-family: var(--serif); font-size: 19px; font-style: italic; line-height: 1.65; color: var(--text-dim); }
+    .ai-note-box { background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 12px; padding: 36px 40px; }
+    .ai-note-header { display: flex; align-items: flex-start; gap: 20px; }
+    .ai-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(34, 197, 94, 0.15); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .ai-label { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .ai-footer { border-top: 1px solid rgba(34, 197, 94, 0.2); padding-top: 20px; margin-top: 20px; }
+    .ai-footer p { font-size: 14px; line-height: 1.7; color: var(--teal); font-style: italic; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; transition: transform 0.25s ease, border-color 0.25s ease; }
+    .skill-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .skill-cat { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .skill-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+    .skill-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+    .page-footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--bg-dark); }
+    .footer-name { font-family: var(--serif); font-size: 16px; color: var(--accent); }
+    .footer-meta { font-size: 13px; color: var(--text-muted); margin-left: 16px; }
+    .footer-right { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); }
+    .footer-divider { color: var(--border); }
+    @media (max-width: 768px) {
+      .hero { padding: 60px 20px 60px; } .section { padding: 60px 20px; }
+      .problem-grid { grid-template-columns: 1fr; gap: 32px; }
+      .timeline-items { grid-template-columns: repeat(4, 1fr); }
+      .format-grid { grid-template-columns: 1fr; gap: 28px; }
+      .tab-btn { padding: 10px 14px; font-size: 13px; }
+      .page-footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) { .timeline-items { grid-template-columns: repeat(3, 1fr); } .hero h1 { font-size: 36px; } }
+  </style>
+</head>
+<body>
+<nav class="sf-nav">
+  <a class="sf-nav-logo" href="index.html">SF / CS Playbooks</a>
+  <div class="sf-nav-links">
+    <a href="index.html">Home</a>
+    <a href="churn-risk-case-study-updated.html">Churn Risk</a>
+    <a href="playbook-generator.html">Playbook Gen</a>
+    <a href="saas-csm-toolkit-updated.html">Toolkit</a>
+    <a href="writing/index.html">Field Notes</a>
+  </div>
+</nav>
+  <div class="hero dot-grid">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-tags fade-up" style="animation-delay:0.1s">
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Customer Success Manager</span>
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Fintech Operations</span>
+        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Multi-Format Documentation</span>
+        <a href="#ai-note" class="tag" style="background:rgba(34,197,94,0.1);color:var(--teal);border:1px solid rgba(34,197,94,0.25);cursor:pointer">&#8611; AI tooling note</a>
+      </div>
+      <h1 class="fade-up" style="animation-delay:0.2s">Customer Onboarding<br /><em>System Redesign</em></h1>
+      <p class="hero-sub fade-up" style="animation-delay:0.35s">An eight-year-old payment processor onboarding workbook, rebuilt from scratch &mdash; as a white-label Excel template, a Notion workspace, and a live React app.</p>
+      <div class="hero-ctas fade-up" style="animation-delay:0.5s">
+        <a href="#formats" class="btn-primary-accent">See the work</a>
+        <a href="#case-study" class="btn-outline">Read case study</a>
+        <a href="https://drive.google.com/uc?export=download&id=1yXBbv6Tu-GvMsajNbijdKs2wTdxbiLZn" class="btn-outline">Download Excel</a>
+        <a href="https://www.notion.so/338328dccb381df9abde2ed2d503e68" target="_blank" class="btn-outline">View Notion</a>
+      </div>
+    </div>
+  </div>
+  <div id="problem" class="section">
+    <div class="inner">
+      <div class="problem-grid">
+        <div class="reveal"><div class="section-label">The Problem</div><div class="section-rule"></div></div>
+        <div class="reveal">
+          <p class="problem-quote">&ldquo;A workbook built in 2016, last meaningfully updated in 2019 &mdash; with the company name hardcoded in hundreds of cells.&rdquo;</p>
+          <p class="body-text">Payment processor onboarding is one of those operational processes that can make or break a client relationship in the first 45 days. The original workbook was thorough and functional &mdash; eight tabs covering everything from merchant banking to IVR configuration. But after 18 revisions across three authors, it had become an institutional knowledge trap.</p>
+          <p class="body-text">Every implementation team maintained a slightly different version. No phase structure. No master checklist. No way to hand it to a new engagement without an hour of find-and-replace.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="process" class="section section-alt">
+    <div class="inner">
+      <div class="reveal"><div class="section-label">Version History</div><p class="body-text" style="margin-top:6px;margin-bottom:40px">Eight years of accumulated operational knowledge, carried forward.</p></div>
+      <div class="reveal timeline-grid">
+        <div class="timeline-line"></div>
+        <div class="timeline-items" id="timeline"></div>
+      </div>
+    </div>
+  </div>
+  <div id="formats" class="section">
+    <div class="inner-wide">
+      <div class="reveal"><div class="section-label">What I Built</div><p class="body-text" style="margin-top:6px;max-width:520px;margin-bottom:40px">Three formats, each chosen for a specific user and use case &mdash; not interchangeable, deliberately distinct.</p></div>
+      <div class="reveal"><div class="tab-bar" id="tab-bar"></div></div>
+      <div class="reveal" id="format-panel"></div>
+    </div>
+  </div>
+  <div id="case-study" class="section section-dark">
+    <div class="inner" style="max-width:680px">
+      <div class="reveal"><div class="section-label" style="margin-bottom:36px">Case Study</div></div>
+      <div class="case-section reveal"><h3 class="case-h3">The core insight</h3><p class="body-text">This document had two distinct jobs &mdash; and was doing both poorly by trying to do them in the same format. Task management (who does what, by when, in what order) and reference documentation (what are the settings, what are the rules, what does the client need to provide) need different tools. The rebuild separated them.</p></div>
+      <div class="case-section reveal"><h3 class="case-h3">The Excel approach</h3><p class="body-text">A Config &amp; Branding tab became the single source of truth. Change one cell &mdash; every tab updates. Processor names, URLs, the company name in phase banners, the checklist subtitle &mdash; all formula-linked. A new master Onboarding Checklist structures 60+ tasks across eight sequential phases with status dropdowns and conditional formatting. A README tab documents the system for anyone who opens it cold.</p></div>
+      <div class="case-section reveal"><h3 class="case-h3">The phase structure</h3><p class="body-text">The eight phases aren't arbitrary: Discovery, Treasury Setup, Product Configuration, Branding, File Integration, Portal Access, Testing, Go-Live. They reflect how implementations actually sequence. You can't configure channels before processors are live. You can't run UAT before branding is approved. The dependencies are built into the order.</p></div>
+      <div class="case-section reveal"><h3 class="case-h3">Why three formats</h3><p class="body-text">Excel, Notion, and React aren't interchangeable. The implementation manager lives in spreadsheets. The cross-functional team collaborates in Notion. The prospect or hiring manager sees it first in a browser. Knowing which tool fits which job is a different skill than knowing how to use all three &mdash; and building the same content three ways shows both.</p></div>
+      <div class="case-section reveal"><h3 class="case-h3">What it preserves</h3><p class="body-text">This is an eight-year document. v1.0 through v3.10 represent the accumulated operational knowledge of everyone who worked on payment processor implementations during that period &mdash; DNAC file specs, real-time remittance API support, consumer portal configuration, the shift between gateways, the standardization of portal roles. v4.0 didn't throw that away. Every version note lives in the Revision History tab.</p></div>
+      <div class="reveal pullquote"><p>&ldquo;Making something work for one company is a starting point. Making it work for any company requires stepping back from the specific case and designing for the general one.&rdquo;</p></div>
+    </div>
+  </div>
+  <div id="ai-note" class="section">
+    <div class="inner">
+      <div class="reveal ai-note-box">
+        <div class="ai-note-header">
+          <div class="ai-icon">&#9889;</div>
+          <div>
+            <div class="ai-label">A note on AI tooling in the payments space</div>
+            <p class="body-text">This template reflects how payment processor portals have traditionally worked &mdash; manual role configuration, static permission matrices, rules defined once during onboarding. That's the operational reality it was built for.</p>
+            <p class="body-text">AI-assisted tooling is increasingly embedded directly into merchant and biller portals, particularly around the areas this template covers most &mdash; permission management, velocity rule configuration, blacklist automation, and fraud pattern detection.</p>
+            <p class="body-text">What that means for this template depends on the company using it. For a modern, AI-native portal, sections like Portal Roles &amp; Blacklist and Payment Velocity Rules may overlap with functionality the platform already handles. For a processor running an older system, the full template applies.</p>
+            <div class="ai-footer"><p>Treat this as a starting point and a knowledge base, not a final spec. The institutional knowledge here &mdash; what questions to ask, what configurations matter, how implementations sequence &mdash; remains useful regardless of how automated the underlying platform becomes.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="skills" class="section section-alt">
+    <div class="inner">
+      <div class="reveal"><div class="section-label">Skills &amp; Domain Knowledge</div><p class="body-text" style="margin-top:6px;margin-bottom:40px">What this project demonstrates.</p></div>
+      <div class="skills-grid" id="skills-grid"></div>
+    </div>
+  </div>
+  <footer class="page-footer">
+    <div><span class="footer-name">CS Playbooks</span><span class="footer-meta">Customer Success Manager &middot; Fintech &middot; Fort Worth, TX</span></div>
+    <div class="footer-right">
+      <span>Built April 2026</span><span class="footer-divider">&middot;</span>
+      <span>v4.0</span><span class="footer-divider">&middot;</span>
+      <a href="index.html" style="color:var(--accent)">&larr; Back to portfolio</a>
+    </div>
+  </footer>
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const TIMELINE = [
+      { ver: "1.0", year: "2016", label: "Initial release" },
+      { ver: "2.0", year: "2016", label: "DNAC + Real-Time API sections added" },
+      { ver: "3.0", year: "2017", label: "Consumer Portal tab added" },
+      { ver: "3.4", year: "2018", label: "PPM/TSYS pricing tab" },
+      { ver: "3.7", year: "2019", label: "Reports &rarr; PDF standard" },
+      { ver: "3.10", year: "2019", label: "R01/R09 representment standardized" },
+      { ver: "4.0", year: "2026", label: "Full rebuild &mdash; white-label, multi-format", highlight: true },
+    ];
+    const tlEl = document.getElementById('timeline');
+    TIMELINE.forEach(t => { tlEl.innerHTML += `<div class="tl-item"><div class="tl-dot-wrap"><div class="tl-dot ${t.highlight ? 'highlight' : ''}"></div></div><div class="tl-ver" style="${t.highlight ? 'color:var(--accent);font-weight:600' : ''}">${t.ver}</div><div class="tl-year">${t.year}</div><div class="tl-label">${t.label}</div></div>`; });
+    const FORMATS = [
+      { icon: "&#9889;", label: "Interactive Web App", tag: "React", desc: "Live brand theming, five industry presets, inline editing on every field. The full nine-section template in a browser &mdash; no account required.", features: ["Brand Settings panel with color picker", "Industry presets: Fintech, Utilities, Healthcare, Insurance, Telecom", "Click-to-edit on all 300+ fields", "Status dropdowns + date pickers on all tasks", "Persists across sessions"], cta: "Open demo &rarr;", href: "#demo" },
+      { icon: "&#128202;", label: "Excel Workbook", tag: "Excel", desc: "A Config &amp; Branding tab drives the entire workbook via formulas. Change the company name once &mdash; 11 tabs update instantly. Color-coded, README included.", features: ["Config tab = single source of truth", "Formula-linked company name, processors, URLs", "60+ tasks across 8 phases with status dropdowns", "Conditional formatting on checklist statuses", "Full revision history from v1.0 &rarr; v4.0"], cta: "Download .xlsx &rarr;", href: "https://drive.google.com/uc?export=download&id=1yXBbv6Tu-GvMsajNbijdKs2wTdxbiLZn" },
+      { icon: "&#128203;", label: "Notion Workspace", tag: "Notion", desc: "Nine structured pages under a hub &mdash; built for teams who collaborate in real time. All sections mirrored from the Excel version, formatted for Notion.", features: ["Hub page with quick-status summary", "9 child pages with structured tables", "Navigable from any section", "Editable by the whole team simultaneously", "Links back to Excel and web app"], cta: "View workspace &rarr;", href: "https://www.notion.so/338328dccb381df9abde2ed2d503e68" },
+    ];
+    let activeTab = 0;
+    const tabBar = document.getElementById('tab-bar');
+    const panel = document.getElementById('format-panel');
+    function renderTabs() { tabBar.innerHTML = FORMATS.map((f, i) => `<button class="tab-btn ${i === activeTab ? 'active' : ''}" onclick="switchTab(${i})">${f.icon} ${f.label}</button>`).join(''); }
+    function renderPanel() { const f = FORMATS[activeTab]; panel.innerHTML = `<div class="format-grid"><div><span class="tag" style="background:rgba(200,169,122,0.1);color:var(--accent);border:1px solid rgba(200,169,122,0.25);margin-bottom:18px;display:inline-block">${f.tag}</span><p class="format-desc">${f.desc}</p><a href="${f.href}" ${f.href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="format-cta">${f.cta}</a></div><div class="features-card"><div class="features-label">Features</div>${f.features.map(feat => `<div class="feature-item"><span class="feature-arrow">&rarr;</span><span>${feat}</span></div>`).join('')}</div></div>`; }
+    window.switchTab = function(i) { activeTab = i; renderTabs(); renderPanel(); };
+    renderTabs(); renderPanel();
+    const SKILLS = [
+      { cat: "Fintech Operations", items: ["ACH return codes", "Velocity & blacklist rules", "TSYS MID pricing", "Funding flows (gross/net)", "IVR/web channel configuration"] },
+      { cat: "Process Design", items: ["8-phase onboarding model", "Task dependency mapping", "45-day go-live sequencing", "Owner / contact matrix", "UAT planning"] },
+      { cat: "Technical", items: ["React (hooks, state, storage)", "Excel formula architecture", "Notion MCP integration", "White-label system design", "Conditional formatting"] },
+      { cat: "Documentation", items: ["README authoring", "Version control discipline", "Industry preset logic", "Cross-format consistency", "Stakeholder-facing comms"] },
+    ];
+    const grid = document.getElementById('skills-grid');
+    SKILLS.forEach(s => { grid.innerHTML += `<div class="skill-card reveal"><div class="skill-cat">${s.cat}</div>${s.items.map(item => `<div class="skill-item"><span class="skill-dot"></span>${item}</div>`).join('')}</div>`; });
+    document.querySelectorAll('.skill-card').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
