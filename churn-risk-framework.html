@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Risk Signal Framework | Sonya Freeney</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .sf-nav{position:fixed;top:0;left:0;right:0;z-index:9999;padding:0 2rem;height:56px;background:#f5f0e8;border-bottom:1px solid #ddd7cc;display:flex;align-items:center;justify-content:space-between;}
+        .sf-nav-logo{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.12em;color:#c9901a;text-transform:uppercase;text-decoration:none;}
+        .sf-nav-links{display:flex;gap:1.75rem;}
+        .sf-nav-links a{font-family:'JetBrains Mono',monospace;font-size:0.85rem;letter-spacing:.1em;text-transform:uppercase;color:#7a6e66;text-decoration:none;}
+        .sf-nav-links a:hover{color:#1a1210;}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Crimson Text', Georgia, serif; background-color: #f5f0e8; color: #1a1210; line-height: 1.7; padding-top: 56px; }
+        .page-header { background: linear-gradient(135deg, #f5f0e8 0%, #ede7da 100%); color: #1a1210; padding: 48px 24px 40px; text-align: center; border-bottom: 1px solid #ddd7cc; }
+        .page-header .back-link { display: inline-block; color: #c9901a; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+        .page-header .back-link:hover { color: #1a1210; }
+        .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; color: #1a1210; }
+        .page-header .subtitle { font-size: 1rem; color: #7a6e66; font-weight: 400; max-width: 600px; margin: 0 auto 16px; }
+        .page-header .byline { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #7a6e66; letter-spacing: 0.06em; }
+        .download-bar { background: #c9901a; text-align: center; padding: 14px 24px; }
+        .download-bar a { color: #fff; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; }
+        .download-bar a:hover { text-decoration: underline; }
+        .container { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+        .intro-section { background: #fff; border-left: 4px solid #4a6fa5; padding: 28px 32px; margin-bottom: 40px; border-radius: 0 8px 8px 0; border: 1px solid #ddd7cc; border-left-width: 4px; border-left-color: #4a6fa5; }
+        .intro-section h2 { font-size: 1.1rem; font-weight: 700; color: #4a6fa5; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'JetBrains Mono', monospace; }
+        .intro-section p { font-size: 0.95rem; color: #4a4038; margin-bottom: 10px; }
+        .intro-section p:last-child { margin-bottom: 0; }
+        .tier-section { margin-bottom: 48px; }
+        .section-title { font-size: 1.3rem; font-weight: 700; color: #1a1210; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid #c9901a; }
+        .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px; }
+        .tier-card { padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #ddd7cc; background: #fff; }
+        .tier-card.low { border-top: 4px solid #1d9e75; }
+        .tier-card.moderate { border-top: 4px solid #c9901a; }
+        .tier-card.high { border-top: 4px solid #e6781e; }
+        .tier-card.critical { border-top: 4px solid #c0392b; }
+        .tier-card .tier-name { font-weight: 700; color: #1a1210; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+        .tier-card .tier-range { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: #1a1210; }
+        .tier-card .tier-action { font-size: 0.8rem; color: #7a6e66; line-height: 1.5; }
+        .category-section { margin-bottom: 48px; }
+        .category-header { background: #2a1f1a; color: #f5f0e8; padding: 16px 24px; border-radius: 8px 8px 0 0; }
+        .category-header h3 { font-size: 1.1rem; font-weight: 600; }
+        .category-description { background: #fff; padding: 20px 24px; border-left: 1px solid #ddd7cc; border-right: 1px solid #ddd7cc; font-size: 0.9rem; color: #7a6e66; font-style: italic; }
+        .signal-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 0 0 8px 8px; overflow: hidden; border: 1px solid #ddd7cc; border-top: none; }
+        .signal-table thead { background-color: #f9f6f1; }
+        .signal-table th { padding: 12px 16px; text-align: left; font-size: 0.75rem; font-weight: 700; color: #c9901a; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 2px solid #ddd7cc; font-family: 'JetBrains Mono', monospace; }
+        .signal-table td { padding: 14px 16px; font-size: 0.88rem; vertical-align: top; border-bottom: 1px solid #ede7dc; color: #1a1210; }
+        .signal-table tr:last-child td { border-bottom: none; }
+        .signal-table tr:hover td { background-color: #f9f6f1; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; font-family: 'JetBrains Mono', monospace; }
+        .badge-critical { background-color: rgba(192,57,43,0.1); color: #c0392b; }
+        .badge-high { background-color: rgba(230,120,30,0.1); color: #e6781e; }
+        .badge-medium { background-color: rgba(201,144,26,0.1); color: #c9901a; }
+        .badge-low { background-color: rgba(29,158,117,0.1); color: #1d9e75; }
+        .urgency-now { background-color: rgba(192,57,43,0.1); color: #c0392b; }
+        .urgency-two-weeks { background-color: rgba(201,144,26,0.1); color: #c9901a; }
+        .urgency-monitor { background-color: rgba(29,158,117,0.1); color: #1d9e75; }
+        .usage-section { background: #fff; border-radius: 8px; padding: 32px; margin-bottom: 48px; border: 1px solid #ddd7cc; }
+        .usage-section h3 { font-size: 0.8rem; font-weight: 700; color: #4a6fa5; margin-bottom: 12px; margin-top: 20px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.06em; }
+        .usage-section h3:first-child { margin-top: 0; }
+        .usage-section p { font-size: 0.9rem; color: #7a6e66; margin-bottom: 10px; }
+        .page-footer { background: #2a1f1a; color: rgba(245,240,232,0.65); text-align: center; padding: 24px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.8rem; }
+        .page-footer a { color: #c9901a; text-decoration: none; }
+        .page-footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { .page-header h1 { font-size: 1.5rem; } .signal-table th:nth-child(3), .signal-table td:nth-child(3) { display: none; } .tier-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+<nav class="sf-nav">
+  <a class="sf-nav-logo" href="index.html">SF / CS Playbooks</a>
+  <div class="sf-nav-links">
+    <a href="index.html">Home</a>
+    <a href="churn-risk-case-study-updated.html">Churn Risk</a>
+    <a href="playbook-generator.html">Playbook Gen</a>
+    <a href="saas-csm-toolkit-updated.html">Toolkit</a>
+    <a href="writing/index.html">Field Notes</a>
+  </div>
+</nav>
+    <header class="page-header">
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+        <h1>Churn Risk Signal Framework</h1>
+        <p class="subtitle">A practitioner's guide to identifying, scoring, and responding to churn risk signals across the customer lifecycle</p>
+        <p class="byline">Sonya Freeney &nbsp;|&nbsp; Customer Success Manager &nbsp;|&nbsp; csplaybooks.com</p>
+    </header>
+    <div class="download-bar"><a href="Churn_Risk_Signal_Framework.docx" download>⬇ Download as Word Document</a></div>
+    <div class="container">
+        <div class="intro-section"><h2>Why early detection matters</h2><p>By the time a customer formally announces their intent to leave, the decision has often already been made. The signals that predict churn typically appear weeks or months before an official notice arrives -- in usage data, in engagement patterns, in the emotional tone of support interactions.</p><p>This framework is built around five signal categories that, taken together, give a comprehensive picture of account health. No single signal is a definitive indicator on its own. It is the pattern and combination of signals that reveals true risk.</p><p>Each signal carries a weight from 1 to 4. A composite score is calculated as a percentage of the maximum possible score, which determines the risk tier.</p></div>
+        <div class="tier-section"><h2 class="section-title">Risk Tier Thresholds</h2><div class="tier-grid"><div class="tier-card low"><div class="tier-name">Low Risk</div><div class="tier-range">0 - 19%</div><div class="tier-action">Continue standard cadence. Log signals and monitor monthly.</div></div><div class="tier-card moderate"><div class="tier-name">Moderate Risk</div><div class="tier-range">20 - 39%</div><div class="tier-action">Proactive outreach within 2 weeks. Schedule a health check call.</div></div><div class="tier-card high"><div class="tier-name">High Risk</div><div class="tier-range">40 - 64%</div><div class="tier-action">Recovery plan required. Involve leadership and build a success roadmap.</div></div><div class="tier-card critical"><div class="tier-name">Critical Risk</div><div class="tier-range">65 - 100%</div><div class="tier-action">Immediate executive escalation. Emergency call within 48 hours.</div></div></div></div>
+        <div class="category-section"><div class="category-header"><h3>Category 1: Engagement Signals</h3></div><div class="category-description">Engagement signals measure the quality and frequency of contact between the customer and your team. A sudden drop in responsiveness or a loss of internal champions are among the most reliable early warning signs of churn risk.</div><table class="signal-table"><thead><tr><th>Signal</th><th>Risk Weight</th><th>Urgency</th><th>Recommended Action</th></tr></thead><tbody><tr><td>No executive sponsor contact in 90+ days</td><td><span class="badge badge-high">High (3)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Schedule executive alignment call within 5 business days.</td></tr><tr><td>Primary champion left or changed roles</td><td><span class="badge badge-high">High (3)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Map new stakeholders immediately. Book a relationship reset.</td></tr><tr><td>QBR / EBR declined or not scheduled</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Reframe as a 30-min informal check-in. Lower the barrier.</td></tr><tr><td>Response times to CSM outreach have slowed</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Switch channels. Try Loom, a direct call, or a different contact.</td></tr><tr><td>Drop in webinars, training, or user group attendance</td><td><span class="badge badge-low">Low (1)</span></td><td><span class="badge urgency-monitor">Monitor</span></td><td>Offer a tailored 1:1 session on their specific workflow.</td></tr></tbody></table></div>
+        <div class="category-section"><div class="category-header"><h3>Category 2: Product Usage Signals</h3></div><div class="category-description">Usage data is often the most objective signal available to a CSM. When customers stop using a platform, they are effectively telling you something without saying a word. The key is distinguishing between seasonal dips and structural disengagement.</div><table class="signal-table"><thead><tr><th>Signal</th><th>Risk Weight</th><th>Urgency</th><th>Recommended Action</th></tr></thead><tbody><tr><td>Login / active user count declining 2+ consecutive months</td><td><span class="badge badge-critical">Critical (4)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Conduct a usage audit. Identify dropped-off users and schedule re-onboarding.</td></tr><tr><td>Core feature usage dropping or stalled</td><td><span class="badge badge-high">High (3)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Run a value audit tied to their original success metrics.</td></tr><tr><td>Integrations or automations disabled / disconnected</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Reach out proactively. Offer a technical health check.</td></tr><tr><td>Spike in data exports (possible migration prep)</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Have an honest conversation about satisfaction and evaluation.</td></tr><tr><td>No new users added despite known team growth</td><td><span class="badge badge-low">Low (1)</span></td><td><span class="badge urgency-monitor">Monitor</span></td><td>Present a seat expansion plan tied to their team growth.</td></tr></tbody></table></div>
+        <div class="category-section"><div class="category-header"><h3>Category 3: Support and Sentiment Signals</h3></div><div class="category-description">How a customer talks about their experience -- and how they behave in support interactions -- reveals their underlying emotional state. Escalations, repeated complaints, and score drops are direct distress signals that require an immediate human response.</div><table class="signal-table"><thead><tr><th>Signal</th><th>Risk Weight</th><th>Urgency</th><th>Recommended Action</th></tr></thead><tbody><tr><td>Executive-level escalation or cancellation threat</td><td><span class="badge badge-high">High (3)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Assign exec sponsor. Emergency call within 48 hours. Draft remediation plan.</td></tr><tr><td>Unresolved critical tickets open 14+ days</td><td><span class="badge badge-high">High (3)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Escalate to engineering. Send customer daily status updates.</td></tr><tr><td>NPS or CSAT dropped 15+ points from prior period</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Hold a structured win-back conversation. Acknowledge and present improvement plan.</td></tr><tr><td>Repeated negative feedback across multiple channels</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Consolidate feedback and present it back. Co-create a resolution roadmap.</td></tr><tr><td>Ticket volume dropped sharply (possible disengagement)</td><td><span class="badge badge-low">Low (1)</span></td><td><span class="badge urgency-monitor">Monitor</span></td><td>Proactively check on platform health -- do not assume satisfaction.</td></tr></tbody></table></div>
+        <div class="category-section"><div class="category-header"><h3>Category 4: Commercial and Relationship Signals</h3></div><div class="category-description">Commercial signals often indicate that a customer's organizational context has changed in ways that affect their commitment to your platform. Budget changes, M&amp;A activity, and competitive evaluations are particularly high-stakes.</div><table class="signal-table"><thead><tr><th>Signal</th><th>Risk Weight</th><th>Urgency</th><th>Recommended Action</th></tr></thead><tbody><tr><td>Known competitive evaluation or pilot underway</td><td><span class="badge badge-critical">Critical (4)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Request a meeting. Reinforce differentiated value tied to their use case.</td></tr><tr><td>Renewal stalled or major price concession being pushed</td><td><span class="badge badge-high">High (3)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Involve leadership. Build a business case before discounting.</td></tr><tr><td>Overdue payment or pattern of late payments</td><td><span class="badge badge-high">High (3)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Loop in finance and leadership. Direct conversation about commitment.</td></tr><tr><td>Expansion / upsell conversations have gone quiet</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Revisit with new framing tied to a business outcome they care about.</td></tr><tr><td>Budget cuts, M&amp;A activity, or major leadership change</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Conduct a relationship reset. Retell your value story to new stakeholders.</td></tr></tbody></table></div>
+        <div class="category-section"><div class="category-header"><h3>Category 5: Outcome and Value Realization Signals</h3></div><div class="category-description">The most preventable form of churn is value gap churn -- where the customer never fully understood or experienced the ROI from your platform. This is where strong CSMs can have the most direct impact.</div><table class="signal-table"><thead><tr><th>Signal</th><th>Risk Weight</th><th>Urgency</th><th>Recommended Action</th></tr></thead><tbody><tr><td>Customer cannot articulate ROI or business outcomes</td><td><span class="badge badge-critical">Critical (4)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Build and deliver a custom ROI summary using their own data.</td></tr><tr><td>Onboarding success metrics unmet and not revisited</td><td><span class="badge badge-high">High (3)</span></td><td><span class="badge urgency-now">Act Now</span></td><td>Reset mutual goals. Create a 60-day gap-closure plan together.</td></tr><tr><td>Platform use narrowed significantly from original scope</td><td><span class="badge badge-medium">Medium (2)</span></td><td><span class="badge urgency-two-weeks">Act Within 2 Weeks</span></td><td>Investigate root cause -- product gap, training gap, or business change?</td></tr><tr><td>No adoption of relevant new features or releases</td><td><span class="badge badge-low">Low (1)</span></td><td><span class="badge urgency-monitor">Monitor</span></td><td>Send a personalized release summary showing their specific use cases.</td></tr></tbody></table></div>
+        <div class="usage-section"><h2 class="section-title">Using This Framework in Your Practice</h2><h3>During QBRs and EBRs</h3><p>Use the signal checklist as a pre-meeting diagnostic. Score the account before entering the room so you arrive with a clear picture of where you stand and which topics need direct attention.</p><h3>In Your CRM</h3><p>Map each signal category to a custom field or activity type in Salesforce or your CRM of choice. This allows you to track signal trends over time and surface patterns at the portfolio level.</p><h3>At Onboarding Checkpoints</h3><p>Run a lightweight version of this diagnostic at 30, 60, and 90 days post-launch. Early detection of value gap signals is far more effective than reactive intervention after churn momentum has built.</p></div>
+    </div>
+    <footer class="page-footer"><p>Sonya Freeney &nbsp;|&nbsp; <a href="index.html">csplaybooks.com</a> &nbsp;|&nbsp; <a href="Churn_Risk_Signal_Framework.docx" download>Download .docx</a></p><p style="margin-top:8px;font-size:0.8rem;">Signal categories and weightings grounded in industry research and practitioner consensus across the CS community.</p></footer>
+</body>
+</html>
