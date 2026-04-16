@@ -8,13 +8,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-        .sf-nav{position:fixed;top:0;left:0;right:0;z-index:9999;padding:0 2rem;height:56px;background:#f5f0e8;border-bottom:1px solid #ddd7cc;display:flex;align-items:center;justify-content:space-between;}
+    .sf-nav{position:fixed;top:0;left:0;right:0;z-index:9999;padding:0 2rem;height:56px;background:#f5f0e8;border-bottom:1px solid #ddd7cc;display:flex;align-items:center;justify-content:space-between;}
     .sf-nav-logo{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.12em;color:#c9901a;text-transform:uppercase;text-decoration:none;}
     .sf-nav-links{display:flex;gap:1.75rem;}
     .sf-nav-links a{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#7a6e66;text-decoration:none;}
     .sf-nav-links a:hover{color:#1a1210;}
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
+    :root {
       --bg:           #f5f0e8;
       --bg-card:      #ffffff;
       --bg-alt:       #f9f6f1;
@@ -24,16 +24,11 @@
       --text-muted:   #7a6e66;
       --accent:       #c9901a;
       --accent-bright:#e8a020;
-      --accent-hover: #e8a020;
       --accent-light: rgba(201,144,26,0.1);
       --accent-border:rgba(201,144,26,0.25);
       --slate:        #4a6fa5;
       --slate-lt:     #6b8ec4;
-      --slate-light:  rgba(74,111,165,0.1);
-      --slate-border: rgba(74,111,165,0.25);
       --success:      #1d9e75;
-      --warning:      #c9901a;
-      --danger:       #c0392b;
       --teal:         #1d9e75;
       --border:       #ddd7cc;
       --border-light: #ede7dc;
@@ -49,78 +44,90 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .fade-up { animation: fadeUp 0.7s ease both; }
     .fade-in { animation: fadeIn 0.5s ease both; }
-    .dot-grid { background-image: radial-gradient(circle, rgba(220,205,180,0.1) 1px, transparent 1px); background-size: 28px 28px; }
+    .dot-grid { background-image: radial-gradient(circle, rgba(201,144,26,0.08) 1px, transparent 1px); background-size: 28px 28px; }
     .tag { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; font-family: var(--mono); }
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
+    /* Hero */
     .hero { padding: 80px 48px 100px; position: relative; overflow: hidden; background: linear-gradient(145deg, var(--bg) 0%, #ede7da 60%, #e6ddd0 100%); }
-    .hero-glow { position: absolute; top: -80px; right: -80px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%); pointer-events: none; }
+    .hero-glow { position: absolute; top: -80px; right: -80px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(201,144,26,0.08) 0%, transparent 70%); pointer-events: none; }
     .hero-inner { max-width: 860px; margin: 0 auto; }
     .hero-tags { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
     .hero h1 { font-family: var(--serif); font-size: clamp(40px, 6vw, 72px); font-weight: 500; color: var(--text); line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 24px; }
     .hero h1 em { color: var(--accent); font-style: italic; }
     .hero-sub { font-size: 17px; line-height: 1.7; color: var(--text-dim); max-width: 560px; margin-bottom: 44px; }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn-primary-accent { padding: 12px 28px; background: var(--accent); color: var(--bg); border-radius: 6px; font-size: 14px; font-weight: 500; font-family: var(--mono); transition: opacity 0.2s; cursor: pointer; border: none; }
+    .btn-primary-accent { padding: 12px 28px; background: var(--accent); color: #fff; border-radius: 6px; font-size: 14px; font-weight: 500; font-family: var(--mono); transition: opacity 0.2s; cursor: pointer; border: none; }
     .btn-primary-accent:hover { opacity: 0.85; }
-    .btn-outline { padding: 12px 28px; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 6px; font-size: 14px; font-family: var(--mono); transition: border-color 0.2s; }
-    .btn-outline:hover { border-color: var(--accent); }
+    .btn-outline { padding: 12px 28px; background: transparent; border: 1px solid var(--border); color: var(--text-dim); border-radius: 6px; font-size: 14px; font-family: var(--mono); transition: border-color 0.2s; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    /* Sections */
     .section { padding: 88px 48px; border-top: 1px solid var(--border); }
     .section-alt { background: var(--bg-alt); }
     .section-dark { background: var(--bg-dark); }
     .inner { max-width: 860px; margin: 0 auto; }
     .inner-wide { max-width: 960px; margin: 0 auto; }
-    .section-label { font-family: var(--serif); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .section-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
     .section-rule { width: 36px; height: 2px; background: var(--accent); border-radius: 1px; margin-bottom: 0; }
+    /* Problem */
     .problem-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
     .problem-quote { font-family: var(--serif); font-size: 21px; line-height: 1.65; color: var(--text); font-weight: 400; margin-bottom: 22px; }
     .body-text { font-size: 15px; line-height: 1.85; color: var(--text-dim); margin-bottom: 16px; }
+    /* Timeline */
     .timeline-grid { position: relative; }
     .timeline-line { position: absolute; top: 16px; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent); }
     .timeline-items { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; position: relative; }
     .tl-item { text-align: center; cursor: default; }
     .tl-dot-wrap { display: flex; justify-content: center; margin-bottom: 14px; }
     .tl-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg); position: relative; z-index: 1; transition: all 0.2s; }
-    .tl-dot.highlight { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 16px rgba(200, 169, 122, 0.45); }
+    .tl-dot.highlight { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 16px rgba(201,144,26,0.35); }
     .tl-item:hover .tl-dot:not(.highlight) { background: var(--teal); border-color: var(--teal); }
     .tl-ver { font-size: 13px; font-weight: 400; color: var(--text-muted); margin-bottom: 4px; transition: color 0.2s; }
     .tl-year { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
     .tl-label { font-size: 11px; line-height: 1.5; color: var(--text-muted); padding: 0 4px; transition: color 0.2s; }
     .tl-item:hover .tl-label { color: var(--text-dim); }
+    /* Tabs */
     .tab-bar { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 1px solid var(--border); }
     .tab-btn { padding: 12px 22px; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-size: 14px; font-family: var(--mono); cursor: pointer; transition: color 0.2s, border-color 0.2s; margin-bottom: -1px; }
     .tab-btn.active { border-bottom-color: var(--accent); color: var(--text); }
     .tab-btn:hover:not(.active) { color: var(--text-dim); }
+    /* Formats */
     .format-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
     .format-desc { font-size: 16px; line-height: 1.75; color: var(--text-dim); margin-bottom: 28px; }
-    .format-cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 500; font-family: var(--mono); border: 1px solid var(--border); color: var(--text-dim); background: var(--bg-alt); transition: opacity 0.2s; cursor: pointer; }
-    .format-cta:hover { opacity: 0.75; }
+    .format-cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 500; font-family: var(--mono); border: 1px solid var(--border); color: var(--text-dim); background: var(--bg-alt); transition: border-color 0.2s, color 0.2s; cursor: pointer; }
+    .format-cta:hover { border-color: var(--accent); color: var(--accent); }
     .features-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 24px 28px; }
-    .features-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+    .features-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; font-family: var(--mono); }
     .feature-item { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: var(--text-dim); line-height: 1.5; margin-bottom: 12px; }
     .feature-item:last-child { margin-bottom: 0; }
     .feature-arrow { color: var(--accent); margin-top: 1px; flex-shrink: 0; }
+    /* Case study — light background */
+    .section-dark .inner { max-width: 680px; }
+    .section-dark .section-label { color: var(--accent); }
     .case-section { margin-bottom: 44px; }
     .case-h3 { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 14px; letter-spacing: 0.01em; }
     .pullquote { border-left: 2px solid var(--accent); padding-left: 24px; margin-top: 16px; }
     .pullquote p { font-family: var(--serif); font-size: 19px; font-style: italic; line-height: 1.65; color: var(--text-dim); }
-    .ai-note-box { background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 12px; padding: 36px 40px; }
+    /* AI note */
+    .ai-note-box { background: rgba(29,158,117,0.05); border: 1px solid rgba(29,158,117,0.2); border-radius: 12px; padding: 36px 40px; }
     .ai-note-header { display: flex; align-items: flex-start; gap: 20px; }
-    .ai-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(34, 197, 94, 0.15); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-    .ai-label { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
-    .ai-footer { border-top: 1px solid rgba(34, 197, 94, 0.2); padding-top: 20px; margin-top: 20px; }
+    .ai-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(29,158,117,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .ai-label { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; font-family: var(--mono); }
+    .ai-footer { border-top: 1px solid rgba(29,158,117,0.2); padding-top: 20px; margin-top: 20px; }
     .ai-footer p { font-size: 14px; line-height: 1.7; color: var(--teal); font-style: italic; }
+    /* Skills */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
     .skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; transition: transform 0.25s ease, border-color 0.25s ease; }
     .skill-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-    .skill-cat { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .skill-cat { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; font-family: var(--mono); }
     .skill-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
     .skill-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+    /* Footer */
     .page-footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--bg-dark); }
     .footer-name { font-family: var(--serif); font-size: 16px; color: var(--accent); }
-    .footer-meta { font-size: 13px; color: var(--text-muted); margin-left: 16px; }
-    .footer-right { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); }
-    .footer-divider { color: var(--border); }
+    .footer-meta { font-size: 13px; color: rgba(245,240,232,0.5); margin-left: 16px; }
+    .footer-right { display: flex; gap: 20px; font-size: 13px; color: rgba(245,240,232,0.5); }
+    .footer-divider { color: rgba(245,240,232,0.2); }
     @media (max-width: 768px) {
       .hero { padding: 60px 20px 60px; } .section { padding: 60px 20px; }
       .problem-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -147,10 +154,10 @@
     <div class="hero-glow"></div>
     <div class="hero-inner">
       <div class="hero-tags fade-up" style="animation-delay:0.1s">
-        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Customer Success Manager</span>
-        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Fintech Operations</span>
-        <span class="tag" style="background:rgba(251,191,36,0.12);color:var(--accent);border:1px solid rgba(251,191,36,0.25)">Multi-Format Documentation</span>
-        <a href="#ai-note" class="tag" style="background:rgba(34,197,94,0.1);color:var(--teal);border:1px solid rgba(34,197,94,0.25);cursor:pointer">&#8611; AI tooling note</a>
+        <span class="tag" style="background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border)">Customer Success Manager</span>
+        <span class="tag" style="background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border)">Fintech Operations</span>
+        <span class="tag" style="background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border)">Multi-Format Documentation</span>
+        <a href="#ai-note" class="tag" style="background:rgba(29,158,117,0.08);color:var(--teal);border:1px solid rgba(29,158,117,0.2);cursor:pointer">&#8611; AI tooling note</a>
       </div>
       <h1 class="fade-up" style="animation-delay:0.2s">Customer Onboarding<br /><em>System Redesign</em></h1>
       <p class="hero-sub fade-up" style="animation-delay:0.35s">An eight-year-old payment processor onboarding workbook, rebuilt from scratch &mdash; as a white-label Excel template, a Notion workspace, and a live React app.</p>
@@ -190,7 +197,7 @@
       <div class="reveal" id="format-panel"></div>
     </div>
   </div>
-  <div id="case-study" class="section section-dark">
+  <div id="case-study" class="section section-alt">
     <div class="inner" style="max-width:680px">
       <div class="reveal"><div class="section-label" style="margin-bottom:36px">Case Study</div></div>
       <div class="case-section reveal"><h3 class="case-h3">The core insight</h3><p class="body-text">This document had two distinct jobs &mdash; and was doing both poorly by trying to do them in the same format. Task management (who does what, by when, in what order) and reference documentation (what are the settings, what are the rules, what does the client need to provide) need different tools. The rebuild separated them.</p></div>
@@ -256,7 +263,7 @@
     const tabBar = document.getElementById('tab-bar');
     const panel = document.getElementById('format-panel');
     function renderTabs() { tabBar.innerHTML = FORMATS.map((f, i) => `<button class="tab-btn ${i === activeTab ? 'active' : ''}" onclick="switchTab(${i})">${f.icon} ${f.label}</button>`).join(''); }
-    function renderPanel() { const f = FORMATS[activeTab]; panel.innerHTML = `<div class="format-grid"><div><span class="tag" style="background:rgba(200,169,122,0.1);color:var(--accent);border:1px solid rgba(200,169,122,0.25);margin-bottom:18px;display:inline-block">${f.tag}</span><p class="format-desc">${f.desc}</p><a href="${f.href}" ${f.href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="format-cta">${f.cta}</a></div><div class="features-card"><div class="features-label">Features</div>${f.features.map(feat => `<div class="feature-item"><span class="feature-arrow">&rarr;</span><span>${feat}</span></div>`).join('')}</div></div>`; }
+    function renderPanel() { const f = FORMATS[activeTab]; panel.innerHTML = `<div class="format-grid"><div><span class="tag" style="background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);margin-bottom:18px;display:inline-block">${f.tag}</span><p class="format-desc">${f.desc}</p><a href="${f.href}" ${f.href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="format-cta">${f.cta}</a></div><div class="features-card"><div class="features-label">Features</div>${f.features.map(feat => `<div class="feature-item"><span class="feature-arrow">&rarr;</span><span>${feat}</span></div>`).join('')}</div></div>`; }
     window.switchTab = function(i) { activeTab = i; renderTabs(); renderPanel(); };
     renderTabs(); renderPanel();
     const SKILLS = [
