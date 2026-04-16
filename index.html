@@ -16,6 +16,68 @@
   gtag('js', new Date());
   gtag('config', 'G-YSCSHBBL7R');
 </script>
+<style>
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(220, 205, 180, 0.2);
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .hero-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: rgba(220, 205, 180, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .hero-domains {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(220, 205, 180, 0.2);
+  }
+  .hero-domains-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: rgba(220, 205, 180, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .hero-domain-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .hero-domain-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--cream);
+    background: rgba(220, 205, 180, 0.1);
+    border: 1px solid rgba(220, 205, 180, 0.25);
+    border-radius: 4px;
+    padding: 0.3rem 0.65rem;
+    white-space: nowrap;
+  }
+  @media (max-width: 768px) {
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 <header class="hero">
@@ -33,6 +95,38 @@
         <a href="writing/index.html" class="btn btn-secondary">Field Notes</a>
         <a href="#contact" class="btn btn-secondary">Get in Touch</a>
     </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">9 yrs</span>
+        <span class="hero-stat-label">CS &amp; Implementation</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">13 yrs</span>
+        <span class="hero-stat-label">Customer-side Ops</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">20+</span>
+        <span class="hero-stat-label">Years in Fintech &amp; Payments</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">DFW</span>
+        <span class="hero-stat-label">Open to Remote</span>
+      </div>
+    </div>
+
+    <div class="hero-domains">
+      <div class="hero-domains-label">Domain Focus</div>
+      <div class="hero-domain-tags">
+        <span class="hero-domain-tag">AP/AR Automation</span>
+        <span class="hero-domain-tag">Payments</span>
+        <span class="hero-domain-tag">Utility Tech</span>
+        <span class="hero-domain-tag">Fintech SaaS</span>
+        <span class="hero-domain-tag">Onboarding</span>
+        <span class="hero-domain-tag">ERP Integration</span>
+      </div>
+    </div>
+
 </div>
         <div class="hero-right">
             <h2>About Me</h2>
