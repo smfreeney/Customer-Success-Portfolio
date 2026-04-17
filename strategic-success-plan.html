@@ -44,7 +44,6 @@
     a { color: var(--amber-light); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ─── NAV ─── */
     nav {
       position: sticky; top: 0; z-index: 100;
       background: rgba(245,240,232,0.95);
@@ -54,424 +53,101 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 60px;
     }
-    .nav-logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      color: var(--amber);
-      letter-spacing: 0.05em;
-    }
-    .nav-links {
-      display: flex; gap: 2rem; list-style: none;
-    }
-    .nav-links a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-secondary);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--amber); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; }
     .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
 
-    /* ─── HERO ─── */
-    .hero {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 6rem 2rem 4rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-eyebrow {
-      display: flex; align-items: center; gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--amber);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: block; width: 32px; height: 1px;
-      background: var(--amber);
-    }
-    .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--text-primary);
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.01em;
-    }
-    .hero h1 em {
-      color: var(--amber-light);
-      font-style: italic;
-    }
-    .hero-desc {
-      font-size: 1.15rem;
-      color: var(--cream-dim);
-      max-width: 600px;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
-    .hero-meta {
-      display: flex; flex-wrap: wrap; gap: 1.5rem;
-      align-items: center;
-    }
-    .hero-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      padding: 4px 10px;
-      border: 1px solid var(--border-accent);
-      border-radius: 3px;
-      color: var(--amber);
-      background: var(--amber-glow);
-    }
+    .hero { max-width: 880px; margin: 0 auto; padding: 6rem 2rem 4rem; border-bottom: 1px solid var(--border); }
+    .hero-eyebrow { display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--amber); }
+    .hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 600; line-height: 1.15; color: var(--text-primary); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+    .hero h1 em { color: var(--amber-light); font-style: italic; }
+    .hero-desc { font-size: 1.15rem; color: var(--cream-dim); max-width: 600px; line-height: 1.8; margin-bottom: 2.5rem; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+    .hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; padding: 4px 10px; border: 1px solid var(--border-accent); border-radius: 3px; color: var(--amber); background: var(--amber-glow); }
+    .hero-download { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; padding: 4px 12px; border: 1px solid var(--slate-light); border-radius: 3px; color: var(--slate); background: rgba(74,111,165,0.06); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .hero-download:hover { background: rgba(74,111,165,0.12); text-decoration: none; }
 
-    /* ─── MAIN CONTENT ─── */
-    .content {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
+    .content { max-width: 880px; margin: 0 auto; padding: 4rem 2rem; }
 
-    /* ─── SECTION HEADERS ─── */
-    .section-header {
-      display: flex; align-items: baseline; gap: 1rem;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--amber);
-      letter-spacing: 0.1em;
-      padding-top: 4px;
-    }
-    .section-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
+    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); letter-spacing: 0.1em; padding-top: 4px; }
+    .section-title { font-size: 1.6rem; font-weight: 600; color: var(--text-primary); }
 
-    /* ─── INTRO PULL QUOTE ─── */
-    .pull-quote {
-      border-left: 2px solid var(--amber);
-      padding: 1.25rem 1.75rem;
-      margin: 0 0 3rem;
-      background: var(--amber-glow);
-      border-radius: 0 4px 4px 0;
-    }
-    .pull-quote p {
-      font-size: 1.2rem;
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.75;
-    }
+    .pull-quote { border-left: 2px solid var(--amber); padding: 1.25rem 1.75rem; margin: 0 0 3rem; background: var(--amber-glow); border-radius: 0 4px 4px 0; }
+    .pull-quote p { font-size: 1.2rem; font-style: italic; color: var(--text-primary); line-height: 1.75; }
 
-    /* ─── FRAMEWORK PHASES ─── */
     .phases { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
-
-    .phase-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-      transition: border-color 0.2s;
-    }
+    .phase-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: border-color 0.2s; }
     .phase-card:hover { border-color: rgba(201,144,26,0.3); }
-
-    .phase-header {
-      display: flex; align-items: flex-start; gap: 1rem;
-      padding: 1.5rem 1.75rem 1rem;
-    }
-    .phase-icon {
-      width: 36px; height: 36px; flex-shrink: 0;
-      border-radius: 50%;
-      background: var(--amber-glow);
-      border: 1px solid var(--border-accent);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--amber);
-      margin-top: 2px;
-    }
+    .phase-header { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem 1.75rem 1rem; }
+    .phase-icon { width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: var(--amber-glow); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; color: var(--amber); margin-top: 2px; }
     .phase-icon svg { width: 16px; height: 16px; }
-
     .phase-title-block { flex: 1; }
-    .phase-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--amber);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .phase-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0;
-    }
-    .phase-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.04em;
-    }
+    .phase-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+    .phase-title { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0; }
+    .phase-subtitle { font-size: 0.9rem; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+    .phase-body { padding: 0 1.75rem 1.75rem 1.75rem; padding-left: calc(1.75rem + 36px + 1rem); }
+    .phase-body p { color: var(--cream-dim); font-size: 1rem; margin-bottom: 1rem; line-height: 1.75; }
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.98rem; color: var(--cream-dim); line-height: 1.6; }
+    .checklist li .check-icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--slate-light); margin-top: 3px; }
 
-    .phase-body {
-      padding: 0 1.75rem 1.75rem 1.75rem;
-      padding-left: calc(1.75rem + 36px + 1rem);
-    }
-    .phase-body p {
-      color: var(--cream-dim);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      line-height: 1.75;
-    }
-
-    .checklist {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .checklist li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 0.98rem;
-      color: var(--cream-dim);
-      line-height: 1.6;
-    }
-    .checklist li .check-icon {
-      width: 16px; height: 16px;
-      flex-shrink: 0;
-      color: var(--slate-light);
-      margin-top: 3px;
-    }
-
-    /* ─── SUCCESS METRICS GRID ─── */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-    .metric-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.25rem 1.5rem;
-      transition: border-color 0.2s;
-    }
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
+    .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; transition: border-color 0.2s; }
     .metric-card:hover { border-color: rgba(74,111,165,0.4); }
-    .metric-icon {
-      width: 32px; height: 32px;
-      color: var(--slate-light);
-      margin-bottom: 0.75rem;
-    }
+    .metric-icon { width: 32px; height: 32px; color: var(--slate-light); margin-bottom: 0.75rem; }
     .metric-icon svg { width: 20px; height: 20px; }
-    .metric-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .metric-value {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      line-height: 1.2;
-    }
-    .metric-desc {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
+    .metric-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .metric-value { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
+    .metric-desc { font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px; }
 
-    /* ─── TEMPLATE SECTION ─── */
-    .template-block {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      margin-bottom: 3rem;
-      overflow: hidden;
-    }
-    .template-block-header {
-      background: var(--bg-alt);
-      padding: 1rem 1.75rem;
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .template-block-header span {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
+    .template-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 3rem; overflow: hidden; }
+    .template-block-header { background: var(--bg-alt); padding: 1rem 1.75rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .template-block-header span { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); }
     .template-block-header .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
-    .template-block-body { padding: 1.75rem; }
-    .template-row {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 0;
-      border-bottom: 1px solid var(--border);
-    }
+    .template-row { display: grid; grid-template-columns: 200px 1fr; gap: 0; border-bottom: 1px solid var(--border); }
     .template-row:last-child { border-bottom: none; }
-    .template-field {
-      padding: 1rem 1.25rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--amber);
-      letter-spacing: 0.06em;
-      background: rgba(201,144,26,0.04);
-      border-right: 1px solid var(--border);
-      display: flex; align-items: flex-start;
-      padding-top: 1.1rem;
-    }
-    .template-value {
-      padding: 1rem 1.25rem;
-      font-size: 0.95rem;
-      color: var(--cream-dim);
-      line-height: 1.65;
-    }
-    .template-value em {
-      color: var(--text-muted);
-      font-style: italic;
-    }
-    .template-value ul {
-      list-style: none;
-      margin-top: 4px;
-      display: flex; flex-direction: column; gap: 4px;
-    }
-    .template-value ul li::before {
-      content: '›  ';
-      color: var(--amber);
-    }
+    .template-field { padding: 1rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); letter-spacing: 0.06em; background: rgba(201,144,26,0.04); border-right: 1px solid var(--border); display: flex; align-items: flex-start; padding-top: 1.1rem; }
+    .template-value { padding: 1rem 1.25rem; font-size: 0.95rem; color: var(--cream-dim); line-height: 1.65; }
+    .template-value em { color: var(--text-muted); font-style: italic; }
+    .template-value ul { list-style: none; margin-top: 4px; display: flex; flex-direction: column; gap: 4px; }
+    .template-value ul li::before { content: '›  '; color: var(--amber); }
 
-    /* ─── STAKEHOLDER MAP ─── */
-    .stakeholder-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-    .stakeholder-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.25rem 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .stakeholder-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    }
+    .stakeholder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
+    .stakeholder-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; position: relative; overflow: hidden; }
+    .stakeholder-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
     .stakeholder-card.exec::before { background: var(--amber); }
     .stakeholder-card.ops::before { background: var(--slate); }
     .stakeholder-card.end-user::before { background: #4a9e6e; }
     .stakeholder-card.finance::before { background: #9e4a6e; }
-    .stakeholder-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .stakeholder-role {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-    .stakeholder-desc {
-      font-size: 0.92rem;
-      color: var(--cream-dim);      line-height: 1.6;
-    }
-    .stakeholder-wants {
-      margin-top: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .stakeholder-wants + p {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-top: 3px;
-    }
+    .stakeholder-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+    .stakeholder-role { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+    .stakeholder-desc { font-size: 0.92rem; color: var(--cream-dim); line-height: 1.6; }
+    .stakeholder-wants { margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .stakeholder-wants + p { font-size: 0.88rem; color: var(--text-secondary); margin-top: 3px; }
 
-    /* ─── TIMELINE ─── */
     .timeline { position: relative; margin-bottom: 3rem; padding-left: 2rem; }
-    .timeline::before {
-      content: '';
-      position: absolute; left: 0; top: 8px; bottom: 8px;
-      width: 1px; background: var(--border);
-    }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--border); }
     .timeline-item { position: relative; margin-bottom: 2rem; }
-    .timeline-item::before {
-      content: '';
-      position: absolute; left: -2rem; top: 8px;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--bg-card);
-      border: 1px solid var(--amber);
-      transform: translateX(-50%);
-      margin-left: 1px;
-    }
-    .timeline-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--amber);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .timeline-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-    }
-    .timeline-desc {
-      font-size: 0.95rem;
-      color: var(--cream-dim);
-      line-height: 1.7;
-    }
+    .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--amber); transform: translateX(-50%); margin-left: 1px; }
+    .timeline-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .timeline-title { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+    .timeline-desc { font-size: 0.95rem; color: var(--cream-dim); line-height: 1.7; }
 
-    /* ─── CALLOUT BOX ─── */
-    .callout {
-      display: flex; gap: 1rem;
-      background: rgba(74,111,165,0.08);
-      border: 1px solid rgba(74,111,165,0.25);
-      border-radius: 6px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 3rem;
-    }
+    .callout { display: flex; gap: 1rem; background: rgba(74,111,165,0.08); border: 1px solid rgba(74,111,165,0.25); border-radius: 6px; padding: 1.25rem 1.5rem; margin-bottom: 3rem; }
     .callout-icon { color: var(--slate-light); flex-shrink: 0; margin-top: 2px; }
     .callout-icon svg { width: 18px; height: 18px; }
     .callout-text { font-size: 0.98rem; color: var(--cream-dim); line-height: 1.75; }
     .callout-text strong { color: var(--text-primary); font-weight: 600; }
 
-    /* ─── SECTION SPACING ─── */
     .section { margin-bottom: 4rem; }
 
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
-    }
-    footer p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-    }
+    footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
+    footer p { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; }
     footer a { color: var(--amber); }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 640px) {
       .template-row { grid-template-columns: 1fr; }
       .template-field { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
@@ -482,7 +158,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-logo">cs // playbooks</div>
     <ul class="nav-links">
@@ -493,7 +168,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <header class="hero">
     <div class="hero-eyebrow">Framework</div>
     <h1>How to Build a <em>Strategic Success Plan</em> for Your Customers</h1>
@@ -505,13 +179,13 @@
       <span class="hero-tag">QBR Prep</span>
       <span class="hero-tag">Value Realization</span>
       <span class="hero-tag">Retention</span>
+      <a href="Strategic-Success-Plan-Template.docx" download class="hero-download"><i data-lucide="file-text" style="width:13px;height:13px;"></i> Download Template</a>
+      <a href="CS-Success-Plan-Tracker.xlsx" download class="hero-download"><i data-lucide="table" style="width:13px;height:13px;"></i> Download Tracker</a>
     </div>
   </header>
 
-  <!-- CONTENT -->
   <main class="content">
 
-    <!-- INTRO -->
     <section class="section">
       <div class="pull-quote">
         <p>A Strategic Success Plan isn't a document you hand to a customer. It's a living contract between you and the account — one that answers "why are we here, what are we building toward, and how will we know it's working?"</p>
@@ -522,7 +196,6 @@
       <p style="color: var(--cream-dim); line-height: 1.8;">
         This framework outlines the six phases I use to build Strategic Success Plans — from initial discovery through ongoing measurement. Each phase includes the key questions to ask, the outputs to produce, and the signals that tell you it's working.
       </p>
-
       <div style="display:flex; gap:1rem; background:rgba(74,111,165,0.07); border:1px solid rgba(74,111,165,0.22); border-left: 3px solid var(--slate); border-radius: 0 6px 6px 0; padding: 1.25rem 1.5rem; margin-top: 2rem;">
         <div style="flex-shrink:0; color:var(--slate); margin-top:2px;"><i data-lucide="plug" style="width:18px;height:18px;"></i></div>
         <div>
@@ -532,16 +205,12 @@
       </div>
     </section>
 
-    <!-- PHASE 1-6 -->
     <section class="section">
       <div class="section-header">
         <span class="section-num">01</span>
         <h2 class="section-title">The Six-Phase Framework</h2>
       </div>
-
       <div class="phases">
-
-        <!-- Phase 1 -->
         <div class="phase-card">
           <div class="phase-header">
             <div class="phase-icon"><i data-lucide="search"></i></div>
@@ -562,8 +231,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- Phase 2 -->
         <div class="phase-card">
           <div class="phase-header">
             <div class="phase-icon"><i data-lucide="users"></i></div>
@@ -583,8 +250,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- Phase 3 -->
         <div class="phase-card">
           <div class="phase-header">
             <div class="phase-icon"><i data-lucide="target"></i></div>
@@ -605,8 +270,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- Phase 4 -->
         <div class="phase-card">
           <div class="phase-header">
             <div class="phase-icon"><i data-lucide="map"></i></div>
@@ -627,8 +290,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- Phase 5 -->
         <div class="phase-card">
           <div class="phase-header">
             <div class="phase-icon"><i data-lucide="activity"></i></div>
@@ -649,8 +310,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- Phase 6 -->
         <div class="phase-card">
           <div class="phase-header">
             <div class="phase-icon"><i data-lucide="refresh-cw"></i></div>
@@ -671,233 +330,90 @@
             </ul>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- METRICS -->
     <section class="section">
       <div class="section-header">
         <span class="section-num">02</span>
         <h2 class="section-title">Key Metrics to Track</h2>
       </div>
-
       <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-icon"><i data-lucide="trending-up"></i></div>
-          <div class="metric-label">Primary</div>
-          <div class="metric-value">Goal Attainment</div>
-          <div class="metric-desc">% of stated success outcomes achieved at each review cycle</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon"><i data-lucide="zap"></i></div>
-          <div class="metric-label">Engagement</div>
-          <div class="metric-value">Product Adoption</div>
-          <div class="metric-desc">Active users, feature utilization, and usage trend vs. baseline</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon"><i data-lucide="dollar-sign"></i></div>
-          <div class="metric-label">Commercial</div>
-          <div class="metric-value">ROI Realized</div>
-          <div class="metric-desc">Quantified value delivered against the baseline set in Phase 3</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon"><i data-lucide="heart"></i></div>
-          <div class="metric-label">Sentiment</div>
-          <div class="metric-value">Health Score</div>
-          <div class="metric-desc">Composite signal combining NPS, support load, and engagement data</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon"><i data-lucide="clock"></i></div>
-          <div class="metric-label">Velocity</div>
-          <div class="metric-value">Time to Value</div>
-          <div class="metric-desc">Days from contract close to first measurable outcome achieved</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-icon"><i data-lucide="repeat"></i></div>
-          <div class="metric-label">Retention</div>
-          <div class="metric-value">Plan Renewal Rate</div>
-          <div class="metric-desc">Accounts with active success plans vs. renewal rate correlation</div>
-        </div>
+        <div class="metric-card"><div class="metric-icon"><i data-lucide="trending-up"></i></div><div class="metric-label">Primary</div><div class="metric-value">Goal Attainment</div><div class="metric-desc">% of stated success outcomes achieved at each review cycle</div></div>
+        <div class="metric-card"><div class="metric-icon"><i data-lucide="zap"></i></div><div class="metric-label">Engagement</div><div class="metric-value">Product Adoption</div><div class="metric-desc">Active users, feature utilization, and usage trend vs. baseline</div></div>
+        <div class="metric-card"><div class="metric-icon"><i data-lucide="dollar-sign"></i></div><div class="metric-label">Commercial</div><div class="metric-value">ROI Realized</div><div class="metric-desc">Quantified value delivered against the baseline set in Phase 3</div></div>
+        <div class="metric-card"><div class="metric-icon"><i data-lucide="heart"></i></div><div class="metric-label">Sentiment</div><div class="metric-value">Health Score</div><div class="metric-desc">Composite signal combining NPS, support load, and engagement data</div></div>
+        <div class="metric-card"><div class="metric-icon"><i data-lucide="clock"></i></div><div class="metric-label">Velocity</div><div class="metric-value">Time to Value</div><div class="metric-desc">Days from contract close to first measurable outcome achieved</div></div>
+        <div class="metric-card"><div class="metric-icon"><i data-lucide="repeat"></i></div><div class="metric-label">Retention</div><div class="metric-value">Plan Renewal Rate</div><div class="metric-desc">Accounts with active success plans vs. renewal rate correlation</div></div>
       </div>
-
       <div class="callout">
         <div class="callout-icon"><i data-lucide="info"></i></div>
-        <div class="callout-text">
-          <strong>A note on baselines:</strong> The single most common failure mode in success planning is skipping baseline measurement. Without a documented starting point, you can't prove progress — and at renewal, the customer's memory of where they started will always be worse than reality. Establish baselines on day one, even if the data is imperfect.
-        </div>
+        <div class="callout-text"><strong>A note on baselines:</strong> The single most common failure mode in success planning is skipping baseline measurement. Without a documented starting point, you can't prove progress — and at renewal, the customer's memory of where they started will always be worse than reality. Establish baselines on day one, even if the data is imperfect.</div>
       </div>
     </section>
 
-    <!-- STAKEHOLDER MAP -->
     <section class="section">
       <div class="section-header">
         <span class="section-num">03</span>
         <h2 class="section-title">Stakeholder Map Reference</h2>
       </div>
-
       <p style="color: var(--cream-dim); margin-bottom: 2rem; line-height: 1.8;">Each stakeholder type has distinct success criteria. The success plan needs to speak to all of them — even if only the champion sees the document.</p>
-
       <div class="stakeholder-grid">
-        <div class="stakeholder-card exec">
-          <div class="stakeholder-title">Economic Buyer</div>
-          <div class="stakeholder-role">Executive Sponsor</div>
-          <div class="stakeholder-desc">Owns budget and strategic alignment. Rarely in the weeds. Needs to see ROI, risk reduction, and business impact — in their language.</div>
-          <div class="stakeholder-wants">Cares about</div>
-          <p style="font-size:.88rem;color:var(--text-secondary);margin-top:3px;">Revenue, cost, compliance, competitive positioning</p>
-        </div>
-        <div class="stakeholder-card ops">
-          <div class="stakeholder-title">Day-to-Day Owner</div>
-          <div class="stakeholder-role">Internal Champion</div>
-          <div class="stakeholder-desc">Your primary relationship. Makes the platform work internally. Needs wins they can show up the chain. Their success is often your renewal insurance.</div>
-          <div class="stakeholder-wants">Cares about</div>
-          <p style="font-size:.88rem;color:var(--text-secondary);margin-top:3px;">Adoption, efficiency, team buy-in, looking good to leadership</p>
-        </div>
-        <div class="stakeholder-card end-user">
-          <div class="stakeholder-title">Practitioner</div>
-          <div class="stakeholder-role">End User</div>
-          <div class="stakeholder-desc">Uses the product daily. Low power, high influence on adoption. Skepticism here spreads fast. Early wins at this level protect the whole account.</div>
-          <div class="stakeholder-wants">Cares about</div>
-          <p style="font-size:.88rem;color:var(--text-secondary);margin-top:3px;">Ease of use, time savings, not having to change their workflow</p>
-        </div>
-        <div class="stakeholder-card finance">
-          <div class="stakeholder-title">Potential Blocker</div>
-          <div class="stakeholder-role">Finance / Procurement</div>
-          <div class="stakeholder-desc">Appears at renewal. Doesn't know the history. Sees a line item, not a partnership. Needs quantified ROI documentation — not relationship stories.</div>
-          <div class="stakeholder-wants">Cares about</div>
-          <p style="font-size:.88rem;color:var(--text-secondary);margin-top:3px;">Cost per outcome, contract terms, vendor benchmarking</p>
-        </div>
+        <div class="stakeholder-card exec"><div class="stakeholder-title">Economic Buyer</div><div class="stakeholder-role">Executive Sponsor</div><div class="stakeholder-desc">Owns budget and strategic alignment. Rarely in the weeds. Needs to see ROI, risk reduction, and business impact — in their language.</div><div class="stakeholder-wants">Cares about</div><p style="font-size:.88rem;color:var(--text-secondary);margin-top:3px;">Revenue, cost, compliance, competitive positioning</p></div>
+        <div class="stakeholder-card ops"><div class="stakeholder-title">Day-to-Day Owner</div><div class="stakeholder-role">Internal Champion</div><div class="stakeholder-desc">Your primary relationship. Makes the platform work internally. Needs wins they can show up the chain. Their success is often your renewal insurance.</div><div class="stakeholder-wants">Cares about</div><p style="font-size:.88rem;color:var(--text-secondary);margin-top:3px;">Adoption, efficiency, team buy-in, looking good to leadership</p></div>
+        <div class="stakeholder-card end-user"><div class="stakeholder-title">Practitioner</div><div class="stakeholder-role">End User</div><div class="stakeholder-desc">Uses the product daily. Low power, high influence on adoption. Skepticism here spreads fast. Early wins at this level protect the whole account.</div><div class="stakeholder-wants">Cares about</div><p style="font-size:.88rem;color:var(--text-secondary);margin-top:3px;">Ease of use, time savings, not having to change their workflow</p></div>
+        <div class="stakeholder-card finance"><div class="stakeholder-title">Potential Blocker</div><div class="stakeholder-role">Finance / Procurement</div><div class="stakeholder-desc">Appears at renewal. Doesn't know the history. Sees a line item, not a partnership. Needs quantified ROI documentation — not relationship stories.</div><div class="stakeholder-wants">Cares about</div><p style="font-size:.88rem;color:var(--text-secondary);margin-top:3px;">Cost per outcome, contract terms, vendor benchmarking</p></div>
       </div>
     </section>
 
-    <!-- TEMPLATE -->
     <section class="section">
       <div class="section-header">
         <span class="section-num">04</span>
         <h2 class="section-title">Success Plan Template Structure</h2>
       </div>
-
       <p style="color: var(--cream-dim); margin-bottom: 2rem; line-height: 1.8;">Use this structure as the foundation for every account. Adapt the language to fit the customer's vocabulary — the structure should be consistent, the content should be theirs.</p>
-
       <div class="template-block">
-        <div class="template-block-header">
-          <div class="dot"></div>
-          <span>Strategic Success Plan — Template Fields</span>
-        </div>
+        <div class="template-block-header"><div class="dot"></div><span>Strategic Success Plan — Template Fields</span></div>
         <div style="overflow: hidden; border-radius: 0 0 6px 6px;">
-
-          <div class="template-row">
-            <div class="template-field">Account Overview</div>
-            <div class="template-value">Customer name, contract value, renewal date, CSM owner, key stakeholders with roles and sentiment ratings</div>
-          </div>
-          <div class="template-row">
-            <div class="template-field">Business Context</div>
-            <div class="template-value">Why they bought. What problem they were trying to solve. Internal narrative, key stakeholders who championed the purchase, and any noted friction points.</div>
-          </div>
-          <div class="template-row">
-            <div class="template-field">Success Outcomes</div>
-            <div class="template-value">
-              <em>2–4 goals, each with:</em>
-              <ul>
-                <li>Objective (in customer's language)</li>
-                <li>Baseline metric</li>
-                <li>Target metric + deadline</li>
-                <li>Owner (customer or CSM)</li>
-                <li>Leading indicators to watch</li>
-              </ul>
-            </div>
-          </div>
-          <div class="template-row">
-            <div class="template-field">Milestone Roadmap</div>
-            <div class="template-value">
-              <em>Sequenced timeline with:</em>
-              <ul>
-                <li>30-day quick win</li>
-                <li>90-day checkpoint</li>
-                <li>180-day outcome review</li>
-                <li>Annual strategic review</li>
-              </ul>
-            </div>
-          </div>
-          <div class="template-row">
-            <div class="template-field">Risk Register</div>
-            <div class="template-value">Known blockers, low adoption areas, at-risk stakeholders, and the mitigation plan for each. Updated monthly minimum.</div>
-          </div>
-          <div class="template-row">
-            <div class="template-field">Value Delivered Log</div>
-            <div class="template-value">Running record of wins, milestones hit, and quantified outcomes. This is the source of truth for renewal conversations.</div>
-          </div>
-          <div class="template-row">
-            <div class="template-field">Next Steps</div>
-            <div class="template-value">Always live. Specific actions, owners, and due dates — never "ongoing alignment" or other non-commitments.</div>
-          </div>
-
+          <div class="template-row"><div class="template-field">Account Overview</div><div class="template-value">Customer name, contract value, renewal date, CSM owner, key stakeholders with roles and sentiment ratings</div></div>
+          <div class="template-row"><div class="template-field">Business Context</div><div class="template-value">Why they bought. What problem they were trying to solve. Internal narrative, key stakeholders who championed the purchase, and any noted friction points.</div></div>
+          <div class="template-row"><div class="template-field">Success Outcomes</div><div class="template-value"><em>2–4 goals, each with:</em><ul><li>Objective (in customer's language)</li><li>Baseline metric</li><li>Target metric + deadline</li><li>Owner (customer or CSM)</li><li>Leading indicators to watch</li></ul></div></div>
+          <div class="template-row"><div class="template-field">Milestone Roadmap</div><div class="template-value"><em>Sequenced timeline with:</em><ul><li>30-day quick win</li><li>90-day checkpoint</li><li>180-day outcome review</li><li>Annual strategic review</li></ul></div></div>
+          <div class="template-row"><div class="template-field">Risk Register</div><div class="template-value">Known blockers, low adoption areas, at-risk stakeholders, and the mitigation plan for each. Updated monthly minimum.</div></div>
+          <div class="template-row"><div class="template-field">Value Delivered Log</div><div class="template-value">Running record of wins, milestones hit, and quantified outcomes. This is the source of truth for renewal conversations.</div></div>
+          <div class="template-row"><div class="template-field">Next Steps</div><div class="template-value">Always live. Specific actions, owners, and due dates — never "ongoing alignment" or other non-commitments.</div></div>
         </div>
       </div>
     </section>
 
-    <!-- TIMELINE -->
     <section class="section">
       <div class="section-header">
         <span class="section-num">05</span>
         <h2 class="section-title">Implementation Timeline</h2>
       </div>
-
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-label">Day 1–14</div>
-          <div class="timeline-title">Discovery &amp; Stakeholder Mapping</div>
-          <div class="timeline-desc">Separate conversations with executive sponsor and day-to-day champion. Initial stakeholder map completed. Business context documented.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-label">Day 15–30</div>
-          <div class="timeline-title">Goal Definition &amp; Baseline Capture</div>
-          <div class="timeline-desc">Success outcomes drafted and reviewed with champion. Baselines established. Executive sponsor confirms the plan. Draft roadmap shared.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-label">Day 30</div>
-          <div class="timeline-title">Success Plan Delivered</div>
-          <div class="timeline-desc">Final plan sent to champion for distribution. Loaded into CRM. First milestone (30-day quick win) identified and tracked.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-label">Day 90</div>
-          <div class="timeline-title">First Checkpoint Review</div>
-          <div class="timeline-desc">Progress against all goals reviewed. Risk register updated. Plan refreshed based on any priority shifts. Quick-win outcome documented.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-label">Day 180</div>
-          <div class="timeline-title">Mid-Year Strategic Review</div>
-          <div class="timeline-desc">Executive-level business review. ROI narrative started. Goals recalibrated for next six months. Expansion opportunities surfaced where relevant.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-label">Day 275 (90 before renewal)</div>
-          <div class="timeline-title">Renewal Readiness Begins</div>
-          <div class="timeline-desc">Value Summary document drafted. Full year outcomes compiled. Expansion scoped. Executive sponsor re-engaged for renewal conversation.</div>
-        </div>
+        <div class="timeline-item"><div class="timeline-label">Day 1–14</div><div class="timeline-title">Discovery &amp; Stakeholder Mapping</div><div class="timeline-desc">Separate conversations with executive sponsor and day-to-day champion. Initial stakeholder map completed. Business context documented.</div></div>
+        <div class="timeline-item"><div class="timeline-label">Day 15–30</div><div class="timeline-title">Goal Definition &amp; Baseline Capture</div><div class="timeline-desc">Success outcomes drafted and reviewed with champion. Baselines established. Executive sponsor confirms the plan. Draft roadmap shared.</div></div>
+        <div class="timeline-item"><div class="timeline-label">Day 30</div><div class="timeline-title">Success Plan Delivered</div><div class="timeline-desc">Final plan sent to champion for distribution. Loaded into CRM. First milestone (30-day quick win) identified and tracked.</div></div>
+        <div class="timeline-item"><div class="timeline-label">Day 90</div><div class="timeline-title">First Checkpoint Review</div><div class="timeline-desc">Progress against all goals reviewed. Risk register updated. Plan refreshed based on any priority shifts. Quick-win outcome documented.</div></div>
+        <div class="timeline-item"><div class="timeline-label">Day 180</div><div class="timeline-title">Mid-Year Strategic Review</div><div class="timeline-desc">Executive-level business review. ROI narrative started. Goals recalibrated for next six months. Expansion opportunities surfaced where relevant.</div></div>
+        <div class="timeline-item"><div class="timeline-label">Day 275 (90 before renewal)</div><div class="timeline-title">Renewal Readiness Begins</div><div class="timeline-desc">Value Summary document drafted. Full year outcomes compiled. Expansion scoped. Executive sponsor re-engaged for renewal conversation.</div></div>
       </div>
     </section>
 
-    <!-- CLOSING -->
     <section class="section">
       <div class="callout">
         <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
-        <div class="callout-text">
-          <strong>Field note:</strong> The most valuable part of this process isn't the document — it's the discovery conversations. Customers who have been asked "what does success actually look like to you?" for the first time will tell you things that change how you engage for the rest of the relationship. The plan is just how you keep track of what they told you.
-        </div>
+        <div class="callout-text"><strong>Field note:</strong> The most valuable part of this process isn't the document — it's the discovery conversations. Customers who have been asked "what does success actually look like to you?" for the first time will tell you things that change how you engage for the rest of the relationship. The plan is just how you keep track of what they told you.</div>
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
   <footer>
-    <p>
-      <a href="index.html">csplaybooks.com</a> &nbsp;·&nbsp; Sonya Freeney &nbsp;·&nbsp; Customer Success Portfolio
-    </p>
+    <p><a href="index.html">csplaybooks.com</a> &nbsp;·&nbsp; Sonya Freeney &nbsp;·&nbsp; Customer Success Portfolio</p>
   </footer>
 
-  <script>
-    lucide.createIcons();
-  </script>
+  <script>lucide.createIcons();</script>
 </body>
 </html>
