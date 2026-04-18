@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Support From Scratch | CS Playbooks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wcnl1shu9t");
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f0e8;
+      --bg-card: #ffffff;
+      --bg-card-hover: #faf7f2;
+      --bg-alt: #f9f6f1;
+      --slate: #4a6fa5;
+      --slate-light: #6b8ec4;
+      --slate-dim: rgba(74,111,165,0.1);
+      --amber: #c9901a;
+      --amber-light: #e8a020;
+      --amber-glow: rgba(201, 144, 26, 0.08);
+      --text-primary: #1a1210;
+      --text-secondary: #7a6e66;
+      --text-muted: #a09080;
+      --cream-dim: #4a4038;
+      --border: #ddd7cc;
+      --border-accent: rgba(201,144,26,0.3);
+      --shadow: rgba(42,31,26,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Crimson Text', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--amber-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245,240,232,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--amber); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+    .hero { max-width: 880px; margin: 0 auto; padding: 6rem 2rem 4rem; border-bottom: 1px solid var(--border); }
+    .hero-eyebrow { display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--amber); }
+    .hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 600; line-height: 1.15; color: var(--text-primary); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+    .hero h1 em { color: var(--amber-light); font-style: italic; }
+    .hero-desc { font-size: 1.15rem; color: var(--cream-dim); max-width: 640px; line-height: 1.8; margin-bottom: 2.5rem; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    .hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; padding: 4px 10px; border: 1px solid var(--border-accent); border-radius: 3px; color: var(--amber); background: var(--amber-glow); }
+
+    .content { max-width: 880px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+    .section { margin-bottom: 4rem; }
+    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); letter-spacing: 0.1em; padding-top: 4px; }
+    .section-title { font-size: 1.6rem; font-weight: 600; color: var(--text-primary); }
+
+    .prose { color: var(--cream-dim); font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem; }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+
+    .pull-quote { border-left: 2px solid var(--amber); padding: 1.25rem 1.75rem; margin: 0 0 2.5rem; background: var(--amber-glow); border-radius: 0 4px 4px 0; }
+    .pull-quote p { font-size: 1.2rem; font-style: italic; color: var(--text-primary); line-height: 1.75; }
+
+    .callout { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--slate); border-radius: 0 6px 6px 0; padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .callout-icon { color: var(--slate-light); flex-shrink: 0; margin-top: 2px; }
+    .callout-text { font-size: 1rem; color: var(--cream-dim); line-height: 1.7; }
+    .callout-text strong { color: var(--text-primary); }
+
+    .phases { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 1rem; }
+    .phase-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: border-color 0.2s; }
+    .phase-card:hover { border-color: rgba(201,144,26,0.3); }
+    .phase-header { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem 1.75rem 1rem; }
+    .phase-icon { width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: var(--amber-glow); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; color: var(--amber); margin-top: 2px; }
+    .phase-icon svg { width: 16px; height: 16px; }
+    .phase-title-block { flex: 1; }
+    .phase-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+    .phase-title { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); }
+    .phase-subtitle { font-size: 0.85rem; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; margin-top: 2px; }
+    .phase-body { padding: 0 1.75rem 1.75rem; padding-left: calc(1.75rem + 36px + 1rem); }
+    .phase-body .prose { margin-bottom: 1rem; }
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.98rem; color: var(--cream-dim); line-height: 1.6; }
+    .checklist li .check-icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--slate-light); margin-top: 3px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+    @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+    .insight-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; }
+    .insight-card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .insight-card h4 { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .insight-card p { font-size: 0.95rem; color: var(--cream-dim); line-height: 1.7; }
+
+    .dual-role { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.75rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; }
+    @media (max-width: 600px) { .dual-role { grid-template-columns: 1fr; } }
+    .dual-role-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .dual-role-title { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .dual-role-desc { font-size: 0.9rem; color: var(--cream-dim); line-height: 1.6; }
+    .dual-role-connector { text-align: center; }
+    .connector-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate); background: var(--slate-dim); border: 1px solid rgba(74,111,165,0.2); border-radius: 3px; padding: 4px 10px; display: inline-block; }
+
+    .tool-timeline { display: flex; flex-direction: column; gap: 0; margin-bottom: 2rem; }
+    .tool-stage { display: flex; gap: 1.25rem; align-items: stretch; }
+    .tool-spine { display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; }
+    .tool-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--amber); flex-shrink: 0; margin-top: 4px; }
+    .tool-line { width: 1px; background: var(--border); flex: 1; min-height: 20px; }
+    .tool-stage:last-child .tool-line { display: none; }
+    .tool-content { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; flex: 1; }
+    .tool-stage-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .tool-content h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem; }
+    .tool-content p { font-size: 0.92rem; color: var(--cream-dim); line-height: 1.65; }
+    .tool-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+    .tool-chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px; border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg-alt); }
+
+    .escalation-flow { display: flex; flex-direction: column; gap: 0; margin-bottom: 2rem; }
+    .flow-step { display: flex; gap: 1.25rem; align-items: stretch; }
+    .flow-spine { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .flow-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .flow-dot span { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--amber); font-weight: 500; }
+    .flow-line { width: 2px; background: var(--border); flex: 1; min-height: 16px; margin: 0 auto; }
+    .flow-step:last-child .flow-line { display: none; }
+    .flow-content { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.1rem 1.4rem; margin-bottom: 1rem; flex: 1; }
+    .flow-content h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .flow-content p { font-size: 0.9rem; color: var(--cream-dim); line-height: 1.6; }
+    .flow-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 7px; border-radius: 2px; margin-top: 6px; }
+    .flow-tag.support { background: var(--amber-glow); border: 1px solid var(--border-accent); color: var(--amber); }
+    .flow-tag.csm { background: var(--slate-dim); border: 1px solid rgba(74,111,165,0.2); color: var(--slate); }
+
+    .hire-grid { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .hire-row { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; display: grid; grid-template-columns: 120px 1fr; gap: 1rem; align-items: start; }
+    @media (max-width: 600px) { .hire-row { grid-template-columns: 1fr; } }
+    .hire-stage-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate); background: var(--slate-dim); border: 1px solid rgba(74,111,165,0.2); border-radius: 3px; padding: 4px 8px; text-align: center; line-height: 1.4; }
+    .hire-detail h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .hire-detail p { font-size: 0.92rem; color: var(--cream-dim); line-height: 1.65; }
+
+    .systems-callout { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.75rem; margin-bottom: 2rem; }
+    .systems-callout-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+    .systems-callout-header .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--slate); letter-spacing: 0.1em; text-transform: uppercase; }
+    .systems-callout p { font-size: 0.98rem; color: var(--cream-dim); line-height: 1.75; margin-bottom: 0.75rem; }
+    .systems-callout p:last-child { margin-bottom: 0; }
+    .systems-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+    .sys-chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 10px; border-radius: 3px; border: 1px solid rgba(74,111,165,0.25); color: var(--slate); background: var(--slate-dim); }
+
+    .mistake-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .mistake-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .mistake-icon { color: var(--amber); flex-shrink: 0; margin-top: 2px; }
+    .mistake-body h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .mistake-body p { font-size: 0.92rem; color: var(--cream-dim); line-height: 1.65; }
+
+    footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--amber); margin-bottom: 0.5rem; }
+    .footer-text { font-size: 0.9rem; color: var(--text-muted); }
+    .footer-text a { color: var(--amber-light); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">cs_playbooks</span>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Case Study</div>
+    <h1>Building Support<br><em>While Running CS</em></h1>
+    <p class="hero-desc">
+      What it actually looks like to stand up a frontline Customer Support function from scratch — while simultaneously managing strategic accounts as CSM. Two operating tracks, one integrated motion.
+    </p>
+    <div class="hero-meta">
+      <span class="hero-tag">Support Operations</span>
+      <span class="hero-tag">Team Building</span>
+      <span class="hero-tag">Hiring &amp; Management</span>
+      <span class="hero-tag">Escalation Design</span>
+      <span class="hero-tag">Fintech / Payments</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- 01 THE SITUATION -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">The Situation</h2>
+      </div>
+
+      <div class="pull-quote">
+        <p>The brief was simple on paper: build a support function. The reality was more layered — build it, hire for it, manage it, and keep running your CSM book at the same time.</p>
+      </div>
+
+      <p class="prose">In fintech and payments, customer support isn't a back-office function — it's part of the commercial relationship. When a merchant can't process a transaction, or a client's payment flow breaks mid-day, how fast and how well that gets resolved is felt at the account level. Support quality is relationship quality.</p>
+
+      <p class="prose">The starting point was a company with no formal support infrastructure. Inbound queries arrived by email. Customers called a general phone line for help — and sometimes to make payments directly. No ticketing system. No SLAs. No defined ownership. Questions sat in inboxes until someone picked them up, which meant the most persistent customers got the fastest answers regardless of urgency or commercial importance.</p>
+
+      <p class="prose">As CSM, I was the most visible customer-facing person in the business. When support didn't exist, it defaulted to me. Building it properly wasn't optional — it was the only way to protect the strategic account relationships I was there to manage.</p>
+
+      <div class="dual-role">
+        <div class="dual-role-block">
+          <div class="dual-role-label">Track One</div>
+          <div class="dual-role-title">Building Support</div>
+          <div class="dual-role-desc">Hiring agents, designing process, setting up tooling, defining SLAs — from a blank page.</div>
+        </div>
+        <div class="dual-role-connector">
+          <div class="connector-badge">Running in parallel</div>
+        </div>
+        <div class="dual-role-block">
+          <div class="dual-role-label">Track Two</div>
+          <div class="dual-role-title">Managing CS</div>
+          <div class="dual-role-desc">Strategic account relationships, QBRs, churn prevention, escalation ownership — ongoing throughout.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <i data-lucide="phone" class="callout-icon"></i>
+        <div class="callout-text">
+          <strong>Fintech context:</strong> Taking payments over the phone added a dimension most support playbooks don't account for. Agents needed PCI compliance awareness from day one — handling card data on inbound calls isn't a process you can patch in later. Genesys handled call recording and routing, which also meant compliance and audit requirements were built into the platform rather than managed manually.
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 BUILDING THE FUNCTION -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Building the Support Function</h2>
+      </div>
+
+      <p class="prose">Before a single agent was hired, three things needed to exist: a clear picture of what support actually needed to handle, a basic operational structure, and a realistic view of what "good" looked like at this stage. Without those anchors, the first hire arrives with no context and no guardrails.</p>
+
+      <div class="phases">
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="inbox"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Foundation 01</div>
+              <div class="phase-title">Audit the Inbound</div>
+              <div class="phase-subtitle">Understand what's coming in before designing anything</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">The first step was a manual audit of the inbound email backlog — categorising every query by type, urgency, and customer. In payments, the mix matters: account queries, transaction questions, billing disputes, integration issues, and phone-based payment requests each need a different response path.</p>
+            <ul class="checklist">
+              <li><i data-lucide="check-circle" class="check-icon"></i>Query type breakdown documented (billing, technical, payments, general)</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Volume patterns identified — daily peaks, end-of-month spikes</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Recurring issues flagged for template responses</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Phone-based payment call volume estimated separately</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="sliders"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Foundation 02</div>
+              <div class="phase-title">Design the Operating Model</div>
+              <div class="phase-subtitle">SLAs, channels, and escalation path — defined before go-live</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">A support function without SLAs is just a hope. Response time expectations needed to be set internally before they were communicated to customers — and they needed to be honest. An SLA you can't consistently meet is worse than no SLA at all, because it creates a broken promise at scale.</p>
+            <ul class="checklist">
+              <li><i data-lucide="check-circle" class="check-icon"></i>Response SLAs defined by query type and channel</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Shared support email inbox set up (away from general inbox)</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Phone line assigned to support team via Genesys</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Escalation threshold defined: what goes to CSM and when</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Out-of-hours coverage model agreed</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="file-text"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Foundation 03</div>
+              <div class="phase-title">Build the Knowledge Base</div>
+              <div class="phase-subtitle">Templates and runbooks before the first agent starts</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">The fastest way to get a new agent up to speed is to give them answers to the questions they'll receive in their first week. A basic knowledge base — even a shared doc at this stage — means agents aren't improvising on live customer interactions while they're still finding their footing.</p>
+            <ul class="checklist">
+              <li><i data-lucide="check-circle" class="check-icon"></i>Email response templates for top query types</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Phone payment process runbook — including PCI data handling</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Escalation decision tree: what to resolve vs. what to escalate</li>
+              <li><i data-lucide="check-circle" class="check-icon"></i>Customer-facing FAQ drafted for common questions</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 03 HIRING -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Hiring the Support Team</h2>
+      </div>
+
+      <p class="prose">Frontline support in fintech is a specific hire. The customer base has above-average technical literacy, higher-than-average expectations, and genuine commercial sensitivity around anything related to payments. Agents need to be comfortable on the phone taking payment details, clear in writing, and calm when a client is frustrated about money.</p>
+
+      <div class="pull-quote">
+        <p>The wrong support hire creates more CSM work, not less. Every mishandled ticket or dropped call lands on someone's desk — and in a small team, that desk is usually yours.</p>
+      </div>
+
+      <div class="hire-grid">
+        <div class="hire-row">
+          <div class="hire-stage-badge">MUST HAVE</div>
+          <div class="hire-detail">
+            <h4>Composure under pressure</h4>
+            <p>Payments customers calling about a failed transaction or a billing dispute are not always calm. Agents need to stay measured, gather information accurately, and de-escalate without making promises the business can't keep.</p>
+          </div>
+        </div>
+        <div class="hire-row">
+          <div class="hire-stage-badge">MUST HAVE</div>
+          <div class="hire-detail">
+            <h4>Written clarity</h4>
+            <p>The majority of volume came in by email. Responses that are clear, concise, and accurate the first time reduce back-and-forth and build trust. Agents who write in walls of jargon or vague reassurances create more work, not less.</p>
+          </div>
+        </div>
+        <div class="hire-row">
+          <div class="hire-stage-badge">MUST HAVE</div>
+          <div class="hire-detail">
+            <h4>Process compliance</h4>
+            <p>Taking payments over the phone requires following a defined process without deviation — every time, regardless of how rushed the call feels. PCI compliance isn't optional and it isn't negotiable. Hire people who take procedure seriously.</p>
+          </div>
+        </div>
+        <div class="hire-row">
+          <div class="hire-stage-badge">MUST HAVE</div>
+          <div class="hire-detail">
+            <h4>Escalation judgment</h4>
+            <p>Knowing what to resolve vs. what to escalate is a skill, not a checklist item. Agents who escalate everything become a bottleneck. Agents who escalate nothing become a liability. The ones who read the situation correctly are worth their weight.</p>
+          </div>
+        </div>
+        <div class="hire-row">
+          <div class="hire-stage-badge">NICE TO HAVE</div>
+          <div class="hire-detail">
+            <h4>Payments or fintech familiarity</h4>
+            <p>Not essential — but agents who already understand the vocabulary (gateways, disputes, settlement, chargebacks) ramp significantly faster. Domain context reduces the time before they can handle complex queries independently.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <i data-lucide="users" class="callout-icon"></i>
+        <div class="callout-text">
+          <strong>On sequencing hires:</strong> Starting with one agent before scaling to a full team meant that first hire became a de facto senior agent and knowledge holder. That sequencing matters — agent one shapes the culture and the standards that everyone hired after them inherits.
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 ESCALATION BRIDGE -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">The Escalation Bridge</h2>
+      </div>
+
+      <p class="prose">The most important design decision in a blended support / CSM model is the escalation path. In this setup, support wasn't a separate function that occasionally surfaced account issues — it was a live feed of relationship signals that directly informed my CSM motion. But only if the bridge between the two tracks was well-designed.</p>
+
+      <p class="prose">A poorly designed escalation path has two failure modes: agents escalate too much (the CSM becomes a second-tier support agent, strategic work suffers) or agents escalate too late (a brewing account issue becomes a crisis by the time it surfaces). The goal was a path clear enough for agents to follow consistently, and signal-rich enough to give me the context I needed when something did reach my desk.</p>
+
+      <div class="escalation-flow">
+
+        <div class="flow-step">
+          <div class="flow-spine">
+            <div class="flow-dot"><span>01</span></div>
+            <div class="flow-line"></div>
+          </div>
+          <div class="flow-content">
+            <h4>Inbound Contact</h4>
+            <p>Email or phone via Genesys. Agent picks up, logs the contact, and begins triage against the query type framework.</p>
+            <span class="flow-tag support">Support Team</span>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-spine">
+            <div class="flow-dot"><span>02</span></div>
+            <div class="flow-line"></div>
+          </div>
+          <div class="flow-content">
+            <h4>First Resolution Attempt</h4>
+            <p>Agent handles from the knowledge base. Standard queries resolved at this layer — billing questions, transaction status, general account queries, phone payments processed per runbook.</p>
+            <span class="flow-tag support">Support Team</span>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-spine">
+            <div class="flow-dot"><span>03</span></div>
+            <div class="flow-line"></div>
+          </div>
+          <div class="flow-content">
+            <h4>Escalation Trigger Assessment</h4>
+            <p>If the query meets escalation criteria — senior account, payment dispute above threshold, repeated contact on the same issue, relationship risk language from the customer — the agent flags for CSM review before responding further.</p>
+            <span class="flow-tag support">Support Team</span>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-spine">
+            <div class="flow-dot"><span>04</span></div>
+            <div class="flow-line"></div>
+          </div>
+          <div class="flow-content">
+            <h4>CSM Intake</h4>
+            <p>Escalation reaches me with full context: query history, account tier, previous contacts, agent notes. I assess whether to handle directly, coach the agent on response, or loop in a third party (product, finance, leadership).</p>
+            <span class="flow-tag csm">CSM</span>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-spine">
+            <div class="flow-dot"><span>05</span></div>
+            <div class="flow-line"></div>
+          </div>
+          <div class="flow-content">
+            <h4>Account Signal Feed</h4>
+            <p>Beyond individual escalations, support volume and patterns feed the broader account health picture. A spike in contacts from a key account, a recurring complaint, a customer who's called three times in a week — all of these are signals that inform the proactive CSM cadence.</p>
+            <span class="flow-tag csm">CSM Motion</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="callout">
+        <i data-lucide="zap" class="callout-icon"></i>
+        <div class="callout-text">
+          <strong>Why this matters:</strong> Support is often treated as a cost centre disconnected from the customer relationship. In a well-designed blended model, it's an early warning system. The agent who takes a frustrated phone call on a Tuesday is giving you information you won't see in your CRM until the renewal conversation goes badly.
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 TOOLING -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2 class="section-title">The Tooling Reality</h2>
+      </div>
+
+      <p class="prose">The tools started scrappy and evolved as the process stabilised. The sequencing matters — a ticketing platform bought before the team knows what it's doing is expensive overhead. Tools should systematise a working process, not substitute for one that doesn't exist yet.</p>
+
+      <div class="tool-timeline">
+
+        <div class="tool-stage">
+          <div class="tool-spine">
+            <div class="tool-dot"></div>
+            <div class="tool-line"></div>
+          </div>
+          <div class="tool-content">
+            <div class="tool-stage-label">Stage 01 — Day Zero</div>
+            <h4>Shared Inbox &amp; SharePoint</h4>
+            <p>One support email address, one SharePoint knowledge base, and Genesys handling inbound calls from day one. Unglamorous but functional. The priority was ensuring nothing got lost — a shared inbox everyone could see beat five separate inboxes where queries disappeared, and Genesys gave us call routing and recording without building that infrastructure from scratch.</p>
+            <div class="tool-chips">
+              <span class="tool-chip">Shared email inbox</span>
+              <span class="tool-chip">SharePoint (knowledge base)</span>
+              <span class="tool-chip">Genesys (call handling)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-stage">
+          <div class="tool-spine">
+            <div class="tool-dot"></div>
+            <div class="tool-line"></div>
+          </div>
+          <div class="tool-content">
+            <div class="tool-stage-label">Stage 02 — First 60 Days</div>
+            <h4>Basic Ticket Tracking</h4>
+            <p>Spreadsheet-based ticket log for volume tracking, query categorisation, and SLA monitoring. Not elegant, but it produced the data needed to make the case for a proper ticketing system — and it forced the team to develop logging habits before a platform enforced them.</p>
+            <div class="tool-chips">
+              <span class="tool-chip">Ticket log spreadsheet</span>
+              <span class="tool-chip">Slack (internal escalation)</span>
+              <span class="tool-chip">Email template library</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-stage">
+          <div class="tool-spine">
+            <div class="tool-dot"></div>
+            <div class="tool-line"></div>
+          </div>
+          <div class="tool-content">
+            <div class="tool-stage-label">Stage 03 — 60–180 Days</div>
+            <h4>Helpdesk Platform + Genesys Reporting</h4>
+            <p>Once email ticket volume and team process were stable, a proper helpdesk made sense for the written channel. Genesys was already handling calls — and its reporting suite became a core part of the operating rhythm, surfacing call volume, time-of-day patterns, and handle times. That data fed directly into agent performance reviews alongside ticket quality.</p>
+            <div class="tool-chips">
+              <span class="tool-chip">Zendesk / Freshdesk</span>
+              <span class="tool-chip">Genesys (call reporting)</span>
+              <span class="tool-chip">SLA automation</span>
+              <span class="tool-chip">Escalation routing rules</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-stage">
+          <div class="tool-spine">
+            <div class="tool-dot"></div>
+            <div class="tool-line"></div>
+          </div>
+          <div class="tool-content">
+            <div class="tool-stage-label">Stage 04 — Ongoing</div>
+            <h4>CRM Integration</h4>
+            <p>Support activity connected to the account record in Salesforce — so ticket volume, escalation history, and recurring issues were visible alongside commercial relationship data. This is where the blended model pays off at scale: one account view, not two parallel tracks.</p>
+            <div class="tool-chips">
+              <span class="tool-chip">Salesforce</span>
+              <span class="tool-chip">Helpdesk ↔ CRM sync</span>
+              <span class="tool-chip">Account health signals</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 06 MANAGING THE DUAL TRACK -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2 class="section-title">Managing the Dual Track</h2>
+      </div>
+
+      <p class="prose">Running support build and CSM work in parallel is a prioritisation challenge as much as an operational one. The work of building the support function — hiring, onboarding, process design, quality monitoring — competes directly with the strategic work of managing accounts, running QBRs, and staying proactive on churn risk.</p>
+
+      <p class="prose">The way through is to be deliberate about which track gets which kind of attention, and when.</p>
+
+      <div class="two-col">
+        <div class="insight-card">
+          <div class="insight-card-label">Support Track</div>
+          <h4>Operational &amp; Time-Boxed</h4>
+          <p>Support build work was batched into defined blocks — hiring reviews, process audits, quality checks, training sessions. Reactive escalation handling was addressed as it arrived, but build work was protected from interruption where possible.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card-label">CSM Track</div>
+          <h4>Strategic &amp; Calendar-Driven</h4>
+          <p>Account management operated on a fixed cadence — weekly pulse reviews, monthly account health checks, quarterly business reviews. The calendar was the protection mechanism. If a QBR was in the diary, it happened. Support build work didn't displace strategic account time.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card-label">Where They Intersect</div>
+          <h4>Escalations as CSM Intelligence</h4>
+          <p>The blur between the two tracks was intentional at the escalation layer. Support escalations weren't interruptions to CSM work — they were inputs to it. A pattern of escalations from one account informed the next QBR. A recurring complaint became a product feedback item.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card-label">The Hard Part</div>
+          <h4>Knowing When to Delegate</h4>
+          <p>The most common failure mode in this model is the CSM becoming a second-tier support agent by default. As the team grew in confidence, the work was to push more decisions down — and resist the pull to stay involved in queries the agents were fully capable of handling.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 SYSTEMS -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2 class="section-title">Systems Integration Awareness</h2>
+      </div>
+
+      <p class="prose">The manual phase of this build was always designed with the connected-stack endpoint in mind. Process decisions that seem purely operational — how tickets are categorised, how escalations are documented, how call outcomes are logged — all become data architecture decisions when the tooling matures.</p>
+
+      <div class="systems-callout">
+        <div class="systems-callout-header">
+          <i data-lucide="plug" style="color: var(--slate-light); width:18px; height:18px;"></i>
+          <span class="label">Connected Stack Vision</span>
+        </div>
+        <p>In a mature implementation, support operations and CSM motion share a single account view. <strong>Salesforce</strong> holds the commercial relationship — contract value, renewal date, account tier. The <strong>helpdesk platform</strong> surfaces operational health — ticket volume, resolution times, escalation rate, recurring themes. <strong>Genesys</strong> contributes call data — volume by time of day, handle times, recording access for quality review. <strong>Jira</strong> tracks the product issues that originated as support contacts. And a CS platform like <strong>Gainsight or Totango</strong> synthesises all of these signals into an account health score that both the support team and the CSM can act from.</p>
+        <p>Building that integrated stack from day one isn't realistic at the scrappy stage. But designing the manual process to mirror that eventual architecture means the transition from spreadsheet to platform is an evolution — not a rebuild.</p>
+        <div class="systems-chips">
+          <span class="sys-chip">Salesforce</span>
+          <span class="sys-chip">Zendesk / Freshdesk</span>
+          <span class="sys-chip">Genesys</span>
+          <span class="sys-chip">Jira</span>
+          <span class="sys-chip">Gainsight</span>
+          <span class="sys-chip">Totango</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 WHAT GOES WRONG -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2 class="section-title">What Goes Wrong</h2>
+      </div>
+
+      <p class="prose">The recurring failure modes in this model — from this build and others like it in the fintech space.</p>
+
+      <div class="mistake-list">
+
+        <div class="mistake-item">
+          <i data-lucide="alert-triangle" class="mistake-icon"></i>
+          <div class="mistake-body">
+            <h4>The CSM becomes the default escalation point for everything</h4>
+            <p>If escalation criteria aren't clear, agents escalate everything to avoid being wrong. The CSM's time fills with second-tier support work, strategic account time collapses, and the whole model inverts. Defining — and enforcing — the threshold is ongoing work, not a one-time setup task.</p>
+          </div>
+        </div>
+
+        <div class="mistake-item">
+          <i data-lucide="alert-triangle" class="mistake-icon"></i>
+          <div class="mistake-body">
+            <h4>Phone payment process designed informally</h4>
+            <p>In payments, taking card data over the phone has compliance requirements that can't be improvised. PCI scope, call recording rules, what agents can and can't repeat back — these need to be designed into the process from the start, not bolted on after an incident.</p>
+          </div>
+        </div>
+
+        <div class="mistake-item">
+          <i data-lucide="alert-triangle" class="mistake-icon"></i>
+          <div class="mistake-body">
+            <h4>Support and CS treated as entirely separate tracks</h4>
+            <p>When support and CS operate in silos, the account view is always partial. A CSM going into a renewal conversation without visibility of support volume, escalation history, or recurring complaints is flying blind on a significant part of the customer experience.</p>
+          </div>
+        </div>
+
+        <div class="mistake-item">
+          <i data-lucide="alert-triangle" class="mistake-icon"></i>
+          <div class="mistake-body">
+            <h4>Hiring for personality over process compliance</h4>
+            <p>Frontline support in fintech needs warmth and composure — but it also needs people who follow the process precisely and document consistently. A charming agent who improvises on payment calls or skips logging is a risk. Hire for both.</p>
+          </div>
+        </div>
+
+        <div class="mistake-item">
+          <i data-lucide="alert-triangle" class="mistake-icon"></i>
+          <div class="mistake-body">
+            <h4>Buying the platform before the process is stable</h4>
+            <p>A ticketing system configured before the team knows what it's actually handling produces a platform that reflects aspirations, not reality. The categories are wrong, the workflows don't match how queries arrive, and adoption suffers. Wait until the manual process is stable — then systematise what's working.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 09 FRAMEWORK SUMMARY -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2 class="section-title">The Framework at a Glance</h2>
+      </div>
+
+      <p class="prose">The build sequence — from nothing to a functioning, integrated support and CS operation.</p>
+
+      <div class="phases">
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="search"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Phase 01</div>
+              <div class="phase-title">Audit the Inbound</div>
+              <div class="phase-subtitle">Before any hire or tool decision</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">Categorise every inbound query. Understand the volume, the mix, the peaks. Know what you're building before you build it.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="sliders"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Phase 02</div>
+              <div class="phase-title">Design the Operating Model</div>
+              <div class="phase-subtitle">SLAs, channels, escalation path</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">Define response SLAs by query type, centralise the inbox, document the phone payment process, establish escalation criteria. All before the first agent starts.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="file-text"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Phase 03</div>
+              <div class="phase-title">Build the Knowledge Base</div>
+              <div class="phase-subtitle">Templates, runbooks, decision trees</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">Email templates for the top query types. Phone payment runbook. Escalation decision tree. Agent one should have answers before their first live contact.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="user-check"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Phase 04</div>
+              <div class="phase-title">Hire and Onboard</div>
+              <div class="phase-subtitle">Composure + process compliance, in that order</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">First hire shapes team culture. Hire for composure, written clarity, and process discipline. Domain knowledge is a bonus. Sequence one agent before scaling.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="git-merge"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Phase 05</div>
+              <div class="phase-title">Connect the Escalation Bridge</div>
+              <div class="phase-subtitle">Support signals feed CSM motion</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">Design the escalation path so support activity becomes account intelligence — not just a reactive queue. Volume patterns and recurring issues inform the proactive CSM cadence.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-icon"><i data-lucide="trending-up"></i></div>
+            <div class="phase-title-block">
+              <div class="phase-label">Phase 06</div>
+              <div class="phase-title">Systematise and Scale</div>
+              <div class="phase-subtitle">Platform when the process is proven</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="prose">Introduce the helpdesk platform once manual process is stable. Connect to CRM. Use Genesys reporting data in performance reviews. Delegate more decisions to the team as competence grows. CSM time protected for strategic account work.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <footer>
+    <div class="footer-logo">cs_playbooks</div>
+    <p class="footer-text">Part of the <a href="index.html">CS Playbooks</a> portfolio by Sonya Freeney &mdash; <a href="https://csplaybooks.com">csplaybooks.com</a></p>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+
+</body>
+</html>
