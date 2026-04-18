@@ -1,1 +1,322 @@
-PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICA8dGl0bGU+RnJlZSBDdXN0b21lciBTdWNjZXNzIFRlbXBsYXRlcyAmIEZyYW1ld29ya3MgfCBDUyBQbGF5Ym9va3M8L3RpdGxlPgogICAgPG1ldGEgbmFtZT0iZGVzY3JpcHRpb24iIGNvbnRlbnQ9IkZyZWUgY3VzdG9tZXIgc3VjY2VzcyBmcmFtZXdvcmtzLCB0ZW1wbGF0ZXMsIGFuZCB0b29scyBidWlsdCBieSBhIDIwLXllYXIgQ1MgcHJhY3RpdGlvbmVyLiBDaHVybiBwcmV2ZW50aW9uLCBhY2NvdW50IHBsYXlib29rcywgUUJSIHByZXAsIGFuZCBtb3JlLiI+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9InN0eWxlLmNzcyI+CiAgICA8bGluayByZWw9InByZWNvbm5lY3QiIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20iPgogICAgPGxpbmsgcmVsPSJwcmVjb25uZWN0IiBocmVmPSJodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tIiBjcm9zc29yaWdpbj4KICAgIDxsaW5rIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9UGxheWZhaXIrRGlzcGxheTp3Z2h0QDQwMDs2MDA7NzAwJmZhbWlseT1JbnRlcjp3Z2h0QDMwMDs0MDA7NjAwOzcwMCZkaXNwbGF5PXN3YXAiIHJlbD0ic3R5bGVzaGVldCI+CiAgICA8IS0tIEdvb2dsZSB0YWcgKGd0YWcuanMpIC0tPgo8c2NyaXB0IGFzeW5jIHNyYz0iaHR0cHM6Ly93d3cuZ29vZ2xldGFnbWFuYWdlci5jb20vZ3RhZy9qcz9pZD1HLVlTQ1NIQkJMN1IiPjwvc2NyaXB0Pgo8c2NyaXB0PgogIHdpbmRvdy5kYXRhTGF5ZXIgPSB3aW5kb3cuZGF0YUxheWVyIHx8IFtdOwogIGZ1bmN0aW9uIGd0YWcoKXtkYXRhTGF5ZXIucHVzaChhcmd1bWVudHMpO30KICBndGFnKCdqcycsIG5ldyBEYXRlKCkpOwogIGd0YWcoJ2NvbmZpZycsICdHLVlTQ1NIQkJMN1InKTsKPC9zY3JpcHQ+CiAgICA8IS0tIE1pY3Jvc29mdCBDbGFyaXR5IC0tPgogICAgPHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPgogICAgICAgIChmdW5jdGlvbihjLGwsYSxyLGksdCx5KXsKICAgICAgICAgICAgY1thXT1jW2FdfHxmdW5jdGlvbigpeyhjW2FdLnE9Y1thXS5xfHxbXSkucHVzaChhcmd1bWVudHMpfTsKICAgICAgICAgICAgdD1sLmNyZWF0ZUVsZW1lbnQocik7dC5hc3luYz0xO3Quc3JjPSJodHRwczovL3d3dy5jbGFyaXR5Lm1zL3RhZy8iK2k7CiAgICAgICAgICAgIHk9bC5nZXRFbGVtZW50c0J5VGFnTmFtZShyKVswXTt5LnBhcmVudE5vZGUuaW5zZXJ0QmVmb3JlKHQseSk7CiAgICAgICAgfSkod2luZG93LCBkb2N1bWVudCwgImNsYXJpdHkiLCAic2NyaXB0IiwgIndjbmwxc2h1OXQiKTsKICAgIDwvc2NyaXB0Pgo8c3R5bGU+CiAgLmhlcm8tc3RhdHMgewogICAgZGlzcGxheTogZ3JpZDsKICAgIGdyaWQtdGVtcGxhdGUtY29sdW1uczogMWZyIDFmcjsKICAgIGdhcDogMC43NXJlbTsKICAgIG1hcmdpbi10b3A6IDJyZW07CiAgICBwYWRkaW5nLXRvcDogMS41cmVtOwogICAgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHJnYmEoMjIwLCAyMDUsIDE4MCwgMC4yKTsKICB9CiAgLmhlcm8tc3RhdCB7CiAgICBkaXNwbGF5OiBmbGV4OwogICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsKICAgIGdhcDogMC4xNXJlbTsKICB9CiAgLmhlcm8tc3RhdC12YWx1ZSB7CiAgICBmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXknLCBzZXJpZjsKICAgIGZvbnQtc2l6ZTogMS42cmVtOwogICAgZm9udC13ZWlnaHQ6IDcwMDsKICAgIGNvbG9yOiB2YXIoLS1jcmVhbSk7CiAgICBsaW5lLWhlaWdodDogMTsKICB9CiAgLmhlcm8tc3RhdC1sYWJlbCB7CiAgICBmb250LWZhbWlseTogJ0ludGVyJywgc2Fucy1zZXJpZjsKICAgIGZvbnQtc2l6ZTogMC43MnJlbTsKICAgIGZvbnQtd2VpZ2h0OiA0MDA7CiAgICBjb2xvcjogcmdiYSgyMjAsIDIwNSwgMTgwLCAwLjY1KTsKICAgIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7CiAgICBsZXR0ZXItc3BhY2luZzogMC4wN2VtOwogIH0KICAuaGVyby1kb21haW5zIHsKICAgIG1hcmdpbi10b3A6IDEuNXJlbTsKICAgIHBhZGRpbmctdG9wOiAxLjVyZW07CiAgICBib3JkZXItdG9wOiAxcHggc29saWQgcmdiYSgyMjAsIDIwNSwgMTgwLCAwLjIpOwogIH0KICAuaGVyby1kb21haW5zLWxhYmVsIHsKICAgIGZvbnQtZmFtaWx5OiAnSW50ZXInLCBzYW5zLXNlcmlmOwogICAgZm9udC1zaXplOiAwLjY4cmVtOwogICAgZm9udC13ZWlnaHQ6IDYwMDsKICAgIGNvbG9yOiByZ2JhKDIyMCwgMjA1LCAxODAsIDAuNTUpOwogICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTsKICAgIGxldHRlci1zcGFjaW5nOiAwLjFlbTsKICAgIG1hcmdpbi1ib3R0b206IDAuNzVyZW07CiAgfQogIC5oZXJvLWRvbWFpbi10YWdzIHsKICAgIGRpc3BsYXk6IGZsZXg7CiAgICBmbGV4LXdyYXA6IHdyYXA7CiAgICBnYXA6IDAuNXJlbTsKICB9CiAgLmhlcm8tZG9tYWluLXRhZyB7CiAgICBmb250LWZhbWlseTogJ0ludGVyJywgc2Fucy1zZXJpZjsKICAgIGZvbnQtc2l6ZTogMC43OHJlbTsKICAgIGNvbG9yOiB2YXIoLS1jcmVhbSk7CiAgICBiYWNrZ3JvdW5kOiByZ2JhKDIyMCwgMjA1LCAxODAsIDAuMSk7CiAgICBib3JkZXI6IDFweCBzb2xpZCByZ2JhKDIyMCwgMjA1LCAxODAsIDAuMjUpOwogICAgYm9yZGVyLXJhZGl1czogNHB4OwogICAgcGFkZGluZzogMC4zcmVtIDAuNjVyZW07CiAgICB3aGl0ZS1zcGFjZTogbm93cmFwOwogIH0KICBAbWVkaWEgKG1heC13aWR0aDogNzY4cHgpIHsKICAgIC5oZXJvLXN0YXRzIHsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxZnIgMWZyOyB9CiAgfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8aGVhZGVyIGNsYXNzPSJoZXJvIj4KICAgIDxkaXYgY2xhc3M9Imhlcm8taW5uZXIiPgogICAgICAgIDxkaXYgY2xhc3M9Imhlcm8tbGVmdCI+CiAgICA8ZGl2IGNsYXNzPSJsb2dvLXNlY3Rpb24iIHN0eWxlPSJtYXJnaW4tYm90dG9tOiAxLjVyZW07Ij4KICAgICAgICA8aW1nIHNyYz0iQ1MgUGxheWJvb2tzLnBuZyIgYWx0PSJDUyBQbGF5Ym9va3MgbG9nbyIgY2xhc3M9Imhlcm8tbG9nbyI+CiAgICA8L2Rpdj4KICAgIDxwIHN0eWxlPSJmb250LWZhbWlseTogJ1BsYXlmYWlyIERpc3BsYXknLCBzZXJpZjsgZm9udC13ZWlnaHQ6IDcwMDsgZm9udC1zaXplOiBjbGFtcCgyMHB4LCAyLjV2dywgMjZweCk7IGNvbG9yOiByZ2JhKDI0NSwgMjQ1LCAyNDUsIDAuOTUpOyBtYXJnaW46IDAgMCAwLjI1cmVtIDA7IGxldHRlci1zcGFjaW5nOiAwLjAxZW07Ij5Tb255YSBGcmVlbmV5PC9wPgogICAgPHAgY2xhc3M9InRhZ2xpbmUiPkN1c3RvbWVyIFN1Y2Nlc3MgTWFuYWdlciB8IEJ1aWxkaW5nIFRvb2xzIGZvciBPcGVyYXRpb25hbCBFbXBhdGh5PC9wPgogICAgPHAgY2xhc3M9ImludHJvIj5JJ3ZlIGJlZW4gdGhlIGN1c3RvbWVyLiBOb3cgSSdtIHRoZSBDU00uIDIwIHllYXJzIGluIHBheW1lbnRzLCB1dGlsaXR5IHRlY2gsIGFuZCBCMkIgU2FhUyAtLSBidWlsZGluZyByZWxhdGlvbnNoaXBzIHRoYXQgc3RpY2suPC9wPgogICAgPGRpdiBjbGFzcz0iY3RhLWJ1dHRvbnMiPgogICAgICAgIDxhIGhyZWY9IiNwcm9qZWN0cyIgY2xhc3M9ImJ0biBidG4tcHJpbWFyeSI+VmlldyBQcm9qZWN0czwvYT4KICAgICAgICA8YSBocmVmPSJyZXN1bWUucGRmIiB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9ImJ0biBidG4tc2Vjb25kYXJ5Ij5WaWV3IFJlc3VtZTwvYT4KICAgICAgICA8YSBocmVmPSJ3cml0aW5nL2luZGV4Lmh0bWwiIGNsYXNzPSJidG4gYnRuLXNlY29uZGFyeSI+RmllbGQgTm90ZXM8L2E+CiAgICAgICAgPGEgaHJlZj0iI2NvbnRhY3QiIGNsYXNzPSJidG4gYnRuLXNlY29uZGFyeSI+R2V0IGluIFRvdWNoPC9hPgogICAgPC9kaXY+CgogICAgPGRpdiBjbGFzcz0iaGVyby1zdGF0cyI+CiAgICAgIDxkaXYgY2xhc3M9Imhlcm8tc3RhdCI+CiAgICAgICAgPHNwYW4gY2xhc3M9Imhlcm8tc3RhdC12YWx1ZSI+OSB5cnM8L3NwYW4+CiAgICAgICAgPHNwYW4gY2xhc3M9Imhlcm8tc3RhdC1sYWJlbCI+Q1MgJmFtcDsgSW1wbGVtZW50YXRpb248L3NwYW4+CiAgICAgIDwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJoZXJvLXN0YXQiPgogICAgICAgIDxzcGFuIGNsYXNzPSJoZXJvLXN0YXQtdmFsdWUiPjEzIHlyczwvc3Bhbj4KICAgICAgICA8c3BhbiBjbGFzcz0iaGVyby1zdGF0LWxhYmVsIj5DdXN0b21lci1zaWRlIE9wczwvc3Bhbj4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9Imhlcm8tc3RhdCI+CiAgICAgICAgPHNwYW4gY2xhc3M9Imhlcm8tc3RhdC12YWx1ZSI+MjArPC9zcGFuPgogICAgICAgIDxzcGFuIGNsYXNzPSJoZXJvLXN0YXQtbGFiZWwiPlllYXJzIGluIEZpbnRlY2ggJmFtcDsgUGF5bWVudHM8L3NwYW4+CiAgICAgIDwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJoZXJvLXN0YXQiPgogICAgICAgIDxzcGFuIGNsYXNzPSJoZXJvLXN0YXQtdmFsdWUiPkRGVzwvc3Bhbj4KICAgICAgICA8c3BhbiBjbGFzcz0iaGVyby1zdGF0LWxhYmVsIj5PcGVuIHRvIFJlbW90ZTwvc3Bhbj4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KCiAgICA8ZGl2IGNsYXNzPSJoZXJvLWRvbWFpbnMiPgogICAgICA8ZGl2IGNsYXNzPSJoZXJvLWRvbWFpbnMtbGFiZWwiPkRvbWFpbiBGb2N1czwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJoZXJvLWRvbWFpbi10YWdzIj4KICAgICAgICA8c3BhbiBjbGFzcz0iaGVyby1kb21haW4tdGFnIj5BUC9BUiBBdXRvbWF0aW9uPC9zcGFuPgogICAgICAgIDxzcGFuIGNsYXNzPSJoZXJvLWRvbWFpbi10YWciPlBheW1lbnRzPC9zcGFuPgogICAgICAgIDxzcGFuIGNsYXNzPSJoZXJvLWRvbWFpbi10YWciPlV0aWxpdHkgVGVjaDwvc3Bhbj4KICAgICAgICA8c3BhbiBjbGFzcz0iaGVyby1kb21haW4tdGFnIj5GaW50ZWNoIFNhYVM8L3NwYW4+CiAgICAgICAgPHNwYW4gY2xhc3M9Imhlcm8tZG9tYWluLXRhZyI+T25ib2FyZGluZzwvc3Bhbj4KICAgICAgICA8c3BhbiBjbGFzcz0iaGVyby1kb21haW4tdGFnIj5FUlAgSW50ZWdyYXRpb248L3NwYW4+CiAgICAgIDwvZGl2PgogICAgPC9kaXY+Cgo8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJoZXJvLXJpZ2h0Ij4KICAgICAgICAgICAgPGgyPkFib3V0IE1lPC9oMj4KICAgICAgICAgICAgPHA+SSd2ZSBzcGVudCBteSBjYXJlZXIgb24gYm90aCBzaWRlcyBvZiB0aGUgdGFibGUuIEkndmUgYmVlbiB0aGUgY3VzdG9tZXIgc3RydWdnbGluZyB3aXRoIGludGVncmF0aW9ucywgY29tcGxpYW5jZSBoZWFkYWNoZXMsIGFuZCB1bmNsZWFyIGNvbW11bmljYXRpb24uIE5vdyBJJ20gdGhlIENTTSB3aG8gZ2V0cyBpdCBiZWNhdXNlIEkndmUgbGl2ZWQgaXQuPC9wPgogICAgICAgICAgICA8cD5NeSBhcHByb2FjaCBpcyBncm91bmRlZCBpbiBvcGVyYXRpb25hbCBlbXBhdGh5OiBJIGRvbid0IGp1c3QgbWFuYWdlIGFjY291bnRzLCBJIHNvbHZlIHJlYWwgcHJvYmxlbXMgd2l0aCBjb250ZXh0IGFuZCBjbGFyaXR5LiBXaGV0aGVyIGl0J3MgQVIgYXV0b21hdGlvbiwgdXRpbGl0eSBwYXltZW50IHByb2Nlc3NpbmcsIG9yIGZpbnRlY2ggd29ya2Zsb3dzLCBJIGJyaW5nIGRvbWFpbiBleHBlcnRpc2UgYW5kIGEgYnVpbGRlcidzIG1pbmRzZXQgdG8gZXZlcnkgZW5nYWdlbWVudC48L3A+CiAgICAgICAgICAgIDxwPk15IENTIGNhcmVlciBzcGFucyA5IHllYXJzIG9mIGhhbmRzLW9uIENTTSB3b3JrIGluIGZpbnRlY2ggYW5kIEIyQiBTYWFTLCBiYWNrZWQgYnkgMTMgeWVhcnMgb24gdGhlIGN1c3RvbWVyIHNpZGUgaW4gdXRpbGl0eSBwYXltZW50IG9wZXJhdGlvbnMgLS0gd2hpY2ggaXMgd2hlcmUgdGhlIG9wZXJhdGlvbmFsIGVtcGF0aHkgY29tZXMgZnJvbS4gSSd2ZSBidWlsdCBDUyBmdW5jdGlvbnMgZnJvbSBzY3JhdGNoLCBtYW5hZ2VkIGVudGVycHJpc2UgYm9va3Mgb2YgYnVzaW5lc3MsIGFuZCBkZWxpdmVyZWQgRUJScyB0byBDLXN1aXRlIHN0YWtlaG9sZGVycyBhY3Jvc3MgdXRpbGl0aWVzIGFuZCBpbnN1cmFuY2UgdmVydGljYWxzLiBJIGRvIG15IGJlc3Qgd29yayB3aGVyZSBDUywgb25ib2FyZGluZywgYW5kIGltcGxlbWVudGF0aW9uIG92ZXJsYXAgLS0gd2hlcmUgZ2V0dGluZyBhIGN1c3RvbWVyIHRvIHZhbHVlIGlzbid0IGp1c3QgYSBoYW5kb2ZmLCBpdCdzIHRoZSBqb2IuPC9wPgogICAgICAgICAgICA8cD5UaGUgdG9vbHMgYW5kIGZyYW1ld29ya3MgaW4gdGhpcyBwb3J0Zm9saW8gYXJlbid0IGp1c3QgZGVtb3MgLS0gdGhleSdyZSB0aGluZ3MgSSBhY3R1YWxseSBidWlsdCB0byBtYWtlIENTIHdvcmsgYmV0dGVyLiBJZiBJIGNvdWxkbid0IGZpbmQgdGhlIHJpZ2h0IHRvb2wsIEkgYnVpbHQgaXQuIFRoYXQgc2FtZSBpbnN0aW5jdCBzaG93cyB1cCBpbiBob3cgSSBzdXBwb3J0IG15IGN1c3RvbWVycy48L3A+CiAgICAgICAgICAgIDxwIHN0eWxlPSJmb250LXNpemU6IDAuOXJlbTsgY29sb3I6IHJnYmEoMjQ1LCAyNDUsIDI0NSwgMC42KTsgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHJnYmEoMjIwLCAyMDUsIDE4MCwgMC4yKTsgcGFkZGluZy10b3A6IDFyZW07IG1hcmdpbi10b3A6IDAuNXJlbTsiPjxlbT5JZiB5b3UncmUgYSBoaXJpbmcgbWFuYWdlciBvciBzZWN1aXRlcjogSSdtIGFjdGl2ZWx5IGxvb2tpbmcgZm9yIG15IG5leHQgcm9sZSBpbiBDdXN0b21lciBTdWNjZXNzLCBvbmJvYXJkaW5nLCBvciBpbXBsZW1lbnRhdGlvbiAtLSBpZGVhbGx5IGluIGZpbnRlY2gsIEFSIGF1dG9tYXRpb24sIHBheW1lbnRzLCBvciB1dGlsaXR5IHRlY2guIEknbSBiYXNlZCBpbiB0aGUgRGFsbGFzLUZvcnQgV29ydGggYXJlYSBhbmQgb3BlbiB0byByZW1vdGUuIEZlZWwgZnJlZSB0byByZWFjaCBvdXQgZGlyZWN0bHkgYXQgPGEgaHJlZj0ibWFpbHRvOnNvbnlhLmZyZWVuZXlAZ21haWwuY29tIiBzdHlsZT0iY29sb3I6IHZhcigtLWNyZWFtKTsiPnNvbnlhLmZyZWVuZXlAZ21haWwuY29tPC9hPiBvciBjb25uZWN0IG9uIDxhIGhyZWY9Imh0dHBzOi8vd3d3LmxpbmtlZGluLmNvbS9pbi9zb255YS1mcmVlbmV5IiB0YXJnZXQ9Il9ibGFuayIgc3R5bGU9ImNvbG9yOiB2YXIoLS1jcmVhbSk7Ij5MaW5rZWRJbjwvYT4uPC9lbT48L3A+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KPC9oZWFkZXI+CjxzZWN0aW9uIGlkPSJmaWVsZC1ub3RlcyIgY2xhc3M9InNlY3Rpb24iPgogICAgPGRpdiBjbGFzcz0iY29udGFpbmVyIj4KICAgICAgICA8aDI+RmllbGQgTm90ZXM8L2gyPgogICAgICAgIDxkaXYgY2xhc3M9InByb2plY3RzLWdyaWQiPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJwcm9qZWN0LWNhcmQiPgogICAgICAgICAgICAgICAgPGgzPkJ1aWxkaW5nIEFJIEFnZW50cyBUaGF0IEtub3cgV2hlbiB0byBTdGVwIEJhY2s8L2gzPgogICAgICAgICAgICAgICAgPHA+SG93IHRvIGJ1aWxkIGFuIEFJIHN1cHBvcnQgYWdlbnQgZm9yIEFQL0FSIGFuZCBmaW50ZWNoIHRoYXQgcmVzb2x2ZXMgaXNzdWVzIG9uIGZpcnN0IGNvbnRhY3Qg4oCUIGFuZCBoYW5kcyBvZmYgZ3JhY2VmdWxseSB3aGVuIGl0IHNob3VsZG4ndCBnbyBmdXJ0aGVyLiBBcmNoaXRlY3R1cmUgd2Fsa3Rocm91Z2gsIHdvcmtpbmcgY29kZSwgYW5kIGEgbGl2ZSBkZW1vLjwvcD4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtbGlua3MiPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9IndyaXRpbmcvYnVpbGRpbmctYWktc3VwcG9ydC1hZ2VudHMuaHRtbCIgY2xhc3M9InByb2plY3QtbGluayI+UmVhZCBBcnRpY2xlICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9IndyaXRpbmcvaW5kZXguaHRtbCIgY2xhc3M9InByb2plY3QtbGluayI+QWxsIEZpZWxkIE5vdGVzICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZWNoLXN0YWNrIj4KICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0idGVjaC10YWciPkFJIEFnZW50czwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPkNTIFN0cmF0ZWd5PC9zcGFuPjxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+Q2xhdWRlIEFQSTwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPkZpbnRlY2g8L3NwYW4+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KPC9zZWN0aW9uPgo8c2VjdGlvbiBpZD0icHJvamVjdHMiIGNsYXNzPSJzZWN0aW9uIHNlY3Rpb24tYWx0Ij4KICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CiAgICAgICAgPGgyPkN1c3RvbWVyIFN1Y2Nlc3MgVGVtcGxhdGVzICZhbXA7IFRvb2xzPC9oMj4KICAgICAgICA8ZGl2IGNsYXNzPSJwcm9qZWN0cy1ncmlkIj4KCiAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtY2FyZCI+CiAgICAgICAgICAgICAgICA8aDM+Q1MgQWNjb3VudCBQbGF5Ym9vayBHZW5lcmF0b3I8L2gzPgogICAgICAgICAgICAgICAgPHA+QUktcG93ZXJlZCB0b29sIHRoYXQgZ2VuZXJhdGVzIGN1c3RvbWl6ZWQgY3VzdG9tZXIgc3VjY2VzcyBwbGF5Ym9va3MuIEJ1aWx0IHRvIHN0cmVhbWxpbmUgb25ib2FyZGluZyB3b3JrZmxvd3MgYW5kIHByb3ZpZGUgQ1NNcyB3aXRoIHN0cnVjdHVyZWQsIGFjdGlvbmFibGUgZ3VpZGFuY2UgdGFpbG9yZWQgdG8gdGhlaXIgYWNjb3VudHMuPC9wPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0icHJvamVjdC1saW5rcyI+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0icGxheWJvb2stZ2VuZXJhdG9yLmh0bWwiIGNsYXNzPSJwcm9qZWN0LWxpbmsiPlZpZXcgQ2FzZSBTdHVkeSAmI3gyMTkyOzwvYT4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJodHRwczovL2NzLXBsYXlib29rLWdlbmVyYXRvci52ZXJjZWwuYXBwIiB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9InByb2plY3QtbGluayI+TGl2ZSBEZW1vICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9zbWZyZWVuZXkvY3MtcGxheWJvb2stZ2VuZXJhdG9yIiB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9InByb2plY3QtbGluayI+R2l0SHViICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZWNoLXN0YWNrIj4KICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0idGVjaC10YWciPlJlYWN0ICsgVml0ZTwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPlZlcmNlbDwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPkNsYXVkZSBBUEk8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5BSS1Qb3dlcmVkPC9zcGFuPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgPGRpdiBjbGFzcz0icHJvamVjdC1jYXJkIj4KICAgICAgICAgICAgICAgIDxoMz5RQlIgQnJpZWYgR2VuZXJhdG9yPC9oMz4KICAgICAgICAgICAgICAgIDxwPkFuIEFJLXBvd2VyZWQgcHJlcCB0b29sIHRoYXQgdHVybnMgYWNjb3VudCBkYXRhIGludG8gYSBRQlIgYnJpZWYgeW91IGNhbiBhY3R1YWxseSB3YWxrIGludG8gYSByb29tIHdpdGguIE5hcnJhdGl2ZSwgcmlzayBmbGFncywgOTAtZGF5IHByaW9yaXRpZXMsIG9iamVjdGlvbiByZXNwb25zZXMsIGFuZCByZW5ld2FsIGFuZ2xlIC0tIGFsbCBncm91bmRlZCBpbiB5b3VyIHNwZWNpZmljIGFjY291bnQgYW5kIHN0YWtlaG9sZGVycywgbm90IGdlbmVyaWMgdGVtcGxhdGVzLjwvcD4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtbGlua3MiPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9InFici1jYXNlLXN0dWR5Lmh0bWwiIGNsYXNzPSJwcm9qZWN0LWxpbmsiPlZpZXcgQ2FzZSBTdHVkeSAmI3gyMTkyOzwvYT4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJxYnItdG9vbC5odG1sIiBjbGFzcz0icHJvamVjdC1saW5rIj5UcnkgRGVtbyAmI3gyMTkyOzwvYT4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJxYnItcHJlcC10b29sLmh0bWwiIGRvd25sb2FkIGNsYXNzPSJwcm9qZWN0LWxpbmsiPkRvd25sb2FkIFRvb2wgJiN4MjE5Mjs8L2E+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRlY2gtc3RhY2siPgogICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+Q2xhdWRlIEFQSTwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPkFJLVBvd2VyZWQ8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5Eb3dubG9hZGFibGU8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5RQlIgUHJlcDwvc3Bhbj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtY2FyZCI+CiAgICAgICAgICAgICAgICA8aDM+Q2h1cm4gUmlzayBTaWduYWwgRnJhbWV3b3JrPC9oMz4KICAgICAgICAgICAgICAgIDxwPkEgcHJhY3RpdGlvbmVyJ3MgZ3VpZGUgdG8gaWRlbnRpZnlpbmcsIHNjb3JpbmcsIGFuZCByZXNwb25kaW5nIHRvIGNodXJuIHJpc2sgc2lnbmFscyBhY3Jvc3MgdGhlIGN1c3RvbWVyIGxpZmVjeWNsZS4gRml2ZSBzaWduYWwgY2F0ZWdvcmllcyB3aXRoIDIwKyB3ZWlnaHRlZCByaXNrIGluZGljYXRvcnMsIGZvdXItdGllciByZXNwb25zZSBzeXN0ZW0sIGFuZCBpbXBsZW1lbnRhdGlvbiBndWlkYW5jZSBmb3IgUUJScywgQ1JNIGludGVncmF0aW9uLCBhbmQgZXNjYWxhdGlvbiBtYW5hZ2VtZW50LjwvcD4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtbGlua3MiPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9ImNodXJuLXJpc2stY2FzZS1zdHVkeS11cGRhdGVkLmh0bWwiIGNsYXNzPSJwcm9qZWN0LWxpbmsiPlZpZXcgQ2FzZSBTdHVkeSAmI3gyMTkyOzwvYT4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJjaHVybi1mcmFtZXdvcmsuaHRtbCIgY2xhc3M9InByb2plY3QtbGluayI+VmlldyBGcmFtZXdvcmsgJiN4MjE5Mjs8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iQ2h1cm5fUmlza19TaWduYWxfRnJhbWV3b3JrLmRvY3giIGNsYXNzPSJwcm9qZWN0LWxpbmsiPkRvd25sb2FkIC5kb2N4ICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0ZWNoLXN0YWNrIj4KICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0idGVjaC10YWciPkNTIEZyYW1ld29yazwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPkNodXJuIFByZXZlbnRpb248L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5SaXNrIEFzc2Vzc21lbnQ8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5JbnRlcmFjdGl2ZSBHdWlkZTwvc3Bhbj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtY2FyZCI+CiAgICAgICAgICAgICAgICA8aDM+U3RyYXRlZ2ljIFN1Y2Nlc3MgUGxhbjwvaDM+CiAgICAgICAgICAgICAgICA8cD5BIHNpeC1waGFzZSBtZXRob2RvbG9neSBmb3IgYnVpbGRpbmcgY3VzdG9tZXIgc3VjY2VzcyBwbGFucyB0aGF0IGFjdHVhbGx5IGRyaXZlIHJldGVudGlvbi4gQ292ZXJzIGRpc2NvdmVyeSB0aHJvdWdoIHJlbmV3YWwgcmVhZGluZXNzIOKAlCB3aXRoIHN0YWtlaG9sZGVyIG1hcHBpbmcsIG1lYXN1cmFibGUgZ29hbCBkZWZpbml0aW9uLCBtaWxlc3RvbmUgcm9hZG1hcHMsIGFuZCBhIHN0cnVjdHVyZWQgdGVtcGxhdGUgdGhhdCBjb25uZWN0cyB0byBDUk0gYW5kIHByb2plY3QgdG9vbGluZyBhdCBzY2FsZS48L3A+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJwcm9qZWN0LWxpbmtzIj4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJzdHJhdGVnaWMtc3VjY2Vzcy1wbGFuLmh0bWwiIGNsYXNzPSJwcm9qZWN0LWxpbmsiPlZpZXcgRnJhbWV3b3JrICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9IlN0cmF0ZWdpYy1TdWNjZXNzLVBsYW4tVGVtcGxhdGUuZG9jeCIgZG93bmxvYWQgY2xhc3M9InByb2plY3QtbGluayI+RG93bmxvYWQgVGVtcGxhdGUgJiN4MjE5Mjs8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iQ1MtU3VjY2Vzcy1QbGFuLVRyYWNrZXIueGxzeCIgZG93bmxvYWQgY2xhc3M9InByb2plY3QtbGluayI+RG93bmxvYWQgVHJhY2tlciAmI3gyMTkyOzwvYT4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGVjaC1zdGFjayI+CiAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9InRlY2gtdGFnIj5BY2NvdW50IE1hbmFnZW1lbnQ8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5RQlIgUHJlcDwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPlZhbHVlIFJlYWxpemF0aW9uPC9zcGFuPjxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+UmV0ZW50aW9uPC9zcGFuPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgPGRpdiBjbGFzcz0icHJvamVjdC1jYXJkIj4KICAgICAgICAgICAgICAgIDxoMz5GaW50ZWNoIENTIEVzY2FsYXRpb24gRnJhbWV3b3JrPC9oMz4KICAgICAgICAgICAgICAgIDxwPkEgc3RydWN0dXJlZCBzdXBwb3J0IGFuZCBzdWNjZXNzIGZyYW1ld29yayBmb3IgQVAvQVIsIHBheW1lbnQgcHJvY2Vzc2luZywgYW5kIGZpbnRlY2ggZW52aXJvbm1lbnRzLiBGb3VyLXRpZXIgZXNjYWxhdGlvbiBtb2RlbCwgY29tcGxpYW5jZS1hd2FyZSBTTEFzLCBzaWduYWwgZGV0ZWN0aW9uIG1hdHJpeCwgYW5kIFRpZXIgMyByZXNwb25zZSBwcm90b2NvbCBidWlsdCBmb3IgcmVndWxhdGVkIGZpbmFuY2lhbCBzeXN0ZW1zLjwvcD4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtbGlua3MiPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9ImZpbnRlY2gtY3MtZnJhbWV3b3JrLmh0bWwiIGNsYXNzPSJwcm9qZWN0LWxpbmsiPlZpZXcgRnJhbWV3b3JrICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9IkZpbnRlY2hfQ1NfRXNjYWxhdGlvbl9GcmFtZXdvcmsuZG9jeCIgZG93bmxvYWQgY2xhc3M9InByb2plY3QtbGluayI+RG93bmxvYWQgLmRvY3ggJiN4MjE5Mjs8L2E+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRlY2gtc3RhY2siPgogICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+RmludGVjaCBDUzwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPkFQL0FSPC9zcGFuPjxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+RXNjYWxhdGlvbiBNYW5hZ2VtZW50PC9zcGFuPjxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+UENJLURTU8KgwrcgU09YwqDCtyBOQUNIQTwvc3Bhbj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtY2FyZCI+CiAgICAgICAgICAgICAgICA8aDM+Q3VzdG9tZXIgT25ib2FyZGluZyBTeXN0ZW0gUmVkZXNpZ248L2gzPgogICAgICAgICAgICAgICAgPHA+QW4gZWlnaHQteWVhciBwYXltZW50IHByb2Nlc3NvciBvbmJvYXJkaW5nIHdvcmtib29rIHJlYnVpbHQgZnJvbSBzY3JhdGNoIC0tIGFzIGEgd2hpdGUtbGFiZWwgRXhjZWwgdGVtcGxhdGUsIGEgTm90aW9uIHdvcmtzcGFjZSwgYW5kIGEgbGl2ZSBSZWFjdCBhcHAuIENvdmVycyA2MCsgdGFza3MgYWNyb3NzIGVpZ2h0IGltcGxlbWVudGF0aW9uIHBoYXNlcyB3aXRoIGEgZm9ybXVsYS1saW5rZWQgQ29uZmlnIHRhYiwgdmVyc2lvbiBoaXN0b3J5IGZyb20gdjEuMCB0byB2NC4wLCBhbmQgaW5kdXN0cnkgcHJlc2V0cyBmb3IgZml2ZSB2ZXJ0aWNhbHMuPC9wPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0icHJvamVjdC1saW5rcyI+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0ib25ib2FyZGluZy5odG1sIiBjbGFzcz0icHJvamVjdC1saW5rIj5WaWV3IENhc2UgU3R1ZHkgJiN4MjE5Mjs8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iaHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL3VjP2V4cG9ydD1kb3dubG9hZCZhbXA7aWQ9MXlYQmJ2NlR1LUd2TXNhak5iaWpkS3Myd1RkeGJpTFpuIiBjbGFzcz0icHJvamVjdC1saW5rIj5Eb3dubG9hZCBFeGNlbCAmI3gyMTkyOzwvYT4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGVjaC1zdGFjayI+CiAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9InRlY2gtdGFnIj5GaW50ZWNoIE9wZXJhdGlvbnM8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5FeGNlbDwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPk5vdGlvbjwvc3Bhbj48c3BhbiBjbGFzcz0idGVjaC10YWciPlJlYWN0PC9zcGFuPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgPGRpdiBjbGFzcz0icHJvamVjdC1jYXJkIj4KICAgICAgICAgICAgICAgIDxoMz5TYWFTIENTTSBUb29sa2l0PC9oMz4KICAgICAgICAgICAgICAgIDxwPkNvbXBsZXRlIEN1c3RvbWVyIFN1Y2Nlc3MgTWFuYWdlciBvcGVyYXRpbmcgc3lzdGVtIC0tIHRhc2sgdHJhY2tlciwgZG9jdW1lbnRhdGlvbiBodWIsIGJyYWcgYm9vaywgcHJvamVjdCBwbGFubmVyLCBhbmQgcGVyZm9ybWFuY2UgcmV2aWV3IGFtbW8uIEF2YWlsYWJsZSBmb3IgTm90aW9uIGFuZCBFeGNlbC48L3A+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJwcm9qZWN0LWxpbmtzIj4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJzYWFzLWNzbS10b29sa2l0LXVwZGF0ZWQuaHRtbCIgY2xhc3M9InByb2plY3QtbGluayI+VmlldyBDYXNlIFN0dWR5ICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9zbWZyZWVuZXkvc2Fhc19jc20tdG9vbGtpdCIgdGFyZ2V0PSJfYmxhbmsiIGNsYXNzPSJwcm9qZWN0LWxpbmsiPkdpdEh1YiAmI3gyMTkyOzwvYT4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJodHRwczovL2dpdGh1Yi5jb20vc21mcmVlbmV5L3NhYXNfY3NtLXRvb2xraXQvcmF3L21haW4vQ1NNLU9wZXJhdGluZy1TeXN0ZW0ueGxzeCIgY2xhc3M9InByb2plY3QtbGluayI+RG93bmxvYWQgRXhjZWwgJiN4MjE5Mjs8L2E+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRlY2gtc3RhY2siPgogICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+Tm90aW9uPC9zcGFuPjxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+RXhjZWw8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5Db21wbGV0ZSBTeXN0ZW08L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5TYWFTLVNwZWNpZmljPC9zcGFuPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgPGRpdiBjbGFzcz0icHJvamVjdC1jYXJkIj4KICAgICAgICAgICAgICAgIDxoMz5TdHJhdGVnaWMgQ1NNIFdvcmtib29rPC9oMz4KICAgICAgICAgICAgICAgIDxwPkludGVyYWN0aXZlIGJyb3dzZXItYmFzZWQgd29ya2Jvb2sgY292ZXJpbmcgc3RyYXRlZ2ljIENTTSBwcmFjdGljZSAtLSBmcm9tIHByZS1tZWV0aW5nIHByZXAgdG8gd2Vla2x5IHBsYW5uaW5nIHRvIHBvcnRmb2xpbyBoZWFsdGggdHJhY2tpbmcuIEJ1aWx0IG9uIENoYWQgSG9yZW5mZWxkdCdzIHByb3ZlbiBmcmFtZXdvcmtzLjwvcD4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtbGlua3MiPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9InN0cmF0ZWdpYy1jc20td29ya2Jvb2suaHRtbCIgY2xhc3M9InByb2plY3QtbGluayI+VmlldyBDYXNlIFN0dWR5ICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vaHRtbHByZXZpZXcuZ2l0aHViLmlvLz9odHRwczovL2dpdGh1Yi5jb20vc21mcmVlbmV5L1N0cmF0ZWdpYy1DU00tV29ya2Jvb2svYmxvYi9tYWluL2luZGV4Lmh0bWwiIHRhcmdldD0iX2JsYW5rIiBjbGFzcz0icHJvamVjdC1saW5rIj5PcGVuIFdvcmtib29rICYjeDIxOTI7PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9zbWZyZWVuZXkvU3RyYXRlZ2ljLUNTTS1Xb3JrYm9vayIgdGFyZ2V0PSJfYmxhbmsiIGNsYXNzPSJwcm9qZWN0LWxpbmsiPkdpdEh1YiAmI3gyMTkyOzwvYT4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGVjaC1zdGFjayI+CiAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9InRlY2gtdGFnIj5QdXJlIEhUTUwvQ1NTL0pTPC9zcGFuPjxzcGFuIGNsYXNzPSJ0ZWNoLXRhZyI+SW50ZXJhY3RpdmUgVG9vbHM8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5sb2NhbFN0b3JhZ2U8L3NwYW4+PHNwYW4gY2xhc3M9InRlY2gtdGFnIj5TaW5nbGUgRmlsZTwvc3Bhbj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KPC9zZWN0aW9uPgo8c2VjdGlvbiBpZD0iZXhwZXJ0aXNlIiBjbGFzcz0ic2VjdGlvbiBzZWN0aW9uLWFsdCI+CiAgICA8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogICAgICAgIDxoMj5FeHBlcnRpc2U8L2gyPgogICAgICAgIDxkaXYgY2xhc3M9ImV4cGVydGlzZS1ncmlkIj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0iZXhwZXJ0aXNlLWFyZWEiPgogICAgICAgICAgICAgICAgPGgzPkRvbWFpbiBLbm93bGVkZ2U8L2gzPgogICAgICAgICAgICAgICAgPHVsPgogICAgICAgICAgICAgICAgICAgIDxsaT5BUiBBdXRvbWF0aW9uICZhbXA7IFBheW1lbnRzPC9saT48bGk+VXRpbGl0eSBQYXltZW50IFByb2Nlc3NpbmcgPC9saT4KICAgICAgICAgICAgICAgICAgICA8bGk+QjJCIFNhYVMgSW1wbGVtZW50YXRpb248L2xpPjxsaT5DSVMvRVJQIEludGVncmF0aW9uczwvbGk+PGxpPlNPWCBDb21wbGlhbmNlPC9saT4KICAgICAgICAgICAgICAgIDwvdWw+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJleHBlcnRpc2UtYXJlYSI+CiAgICAgICAgICAgICAgICA8aDM+Q1MgRnJhbWV3b3Jrczwvc3Bhbj48L2gzPgogICAgICAgICAgICAgICAgPHVsPgogICAgICAgICAgICAgICAgICAgIDxsaT5Qcm9hY3RpdmUgUGFydG5lcnNoaXA8L2xpPjxsaT5PdXRjb21lLURyaXZlbiBFbmFibGVtZW50PC9saT4KICAgICAgICAgICAgICAgICAgICA8bGk+SGVhbHRoIFNjb3JlIERldmVsb3BtZW50PC9saT48bGk+UUJSIFN0cmF0ZWd5ICZhbXA7IEV4ZWN1dGlvbjwvbGk+PGxpPkVzY2FsYXRpb24gTWFuYWdlbWVudDwvbGk+CiAgICAgICAgICAgICAgICA8L3VsPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0iZXhwZXJ0aXNlLWFyZWEiPgogICAgICAgICAgICAgICAgPGgzPlRvb2xzICZhbXA7IFBsYXRmb3JtczwvaDM+CiAgICAgICAgICAgICAgICA8dWw+CiAgICAgICAgICAgICAgICAgICAgPGxpPlNhbGVzZm9yY2U8L2xpPjxsaT5Hb25nPC9saT48bGk+UHJvZHVjdEJvYXJkPC9saT48bGk+VGFibGVhdTwvbGk+PGxpPkpJUkEgJmFtcDsgQ29uZmx1ZW5jZTwvbGk+CiAgICAgICAgICAgICAgICA8L3VsPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgIDwvZGl2Pgo8L3NlY3Rpb24+CjxzZWN0aW9uIGlkPSJjb250YWN0IiBjbGFzcz0ic2VjdGlvbiI+CiAgICA8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogICAgICAgIDxoMj5MZXQncyBDb25uZWN0PC9oMj4KICAgICAgICA8cCBjbGFzcz0iY29udGFjdC1pbnRybyI+SW50ZXJlc3RlZCBpbiB3b3JraW5nIHRvZ2V0aGVyIG9yIHdhbnQgdG8gY2hhdCBhYm91dCBDdXN0b21lciBTdWNjZXNzLCBBSSB0b29scywgb3IgYnVpbGRpbmcgYmV0dGVyIENTIHdvcmtmbG93cz8gUmVhY2ggb3V0LjwvcD4KICAgICAgICA8ZGl2IGNsYXNzPSJjb250YWN0LWxpbmtzIj4KICAgICAgICAgICAgPGEgaHJlZj0iaHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL3NvbnlhLWZyZWVuZXkiIHRhcmdldD0iX2JsYW5rIiBjbGFzcz0iY29udGFjdC1saW5rIj5MaW5rZWRJbjwvYT4KICAgICAgICAgICAgPGEgaHJlZj0iaHR0cHM6Ly9naXRodWIuY29tL3NtZnJlZW5leSIgdGFyZ2V0PSJfYmxhbmsiIGNsYXNzPSJjb250YWN0LWxpbmsiPkdpdEh1YjwvYT4KICAgICAgICAgICAgPGEgaHJlZj0ibWFpbHRvOnNvbnlhLmZyZWVuZXlAZ21haWwuY29tIiBjbGFzcz0iY29udGFjdC1saW5rIj5FbWFpbDwvYT4KICAgICAgICA8L2Rpdj4KICAgIDwvZGl2Pgo8L3NlY3Rpb24+Cjxmb290ZXIgY2xhc3M9ImZvb3RlciI+CiAgICA8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogICAgICAgIDxwPiZjb3B5OyAyMDI2IFNvbnlhIEZyZWVuZXkgfCBDUyBQbGF5Ym9va3MuIEJ1aWx0IHdpdGggaW50ZW50aW9uLCBub3QgdGVtcGxhdGVzLjwvcD4KICAgIDwvZGl2Pgo8L2Zvb3Rlcj4KPC9ib2R5Pgo8L2h0bWw+Cg==
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Customer Success Templates & Frameworks | CS Playbooks</title>
+    <meta name="description" content="Free customer success frameworks, templates, and tools built by a 20-year CS practitioner. Churn prevention, account playbooks, QBR prep, and more.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YSCSHBBL7R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YSCSHBBL7R');
+</script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "wcnl1shu9t");
+    </script>
+<style>
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(220, 205, 180, 0.2);
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .hero-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: rgba(220, 205, 180, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .hero-domains {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(220, 205, 180, 0.2);
+  }
+  .hero-domains-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: rgba(220, 205, 180, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .hero-domain-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .hero-domain-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--cream);
+    background: rgba(220, 205, 180, 0.1);
+    border: 1px solid rgba(220, 205, 180, 0.25);
+    border-radius: 4px;
+    padding: 0.3rem 0.65rem;
+    white-space: nowrap;
+  }
+  @media (max-width: 768px) {
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+    <div class="hero-inner">
+        <div class="hero-left">
+    <div class="logo-section" style="margin-bottom: 1.5rem;">
+        <img src="CS Playbooks.png" alt="CS Playbooks logo" class="hero-logo">
+    </div>
+    <p style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(20px, 2.5vw, 26px); color: rgba(245, 245, 245, 0.95); margin: 0 0 0.25rem 0; letter-spacing: 0.01em;">Sonya Freeney</p>
+    <p class="tagline">Customer Success Manager | Building Tools for Operational Empathy</p>
+    <p class="intro">I've been the customer. Now I'm the CSM. 20 years in payments, utility tech, and B2B SaaS -- building relationships that stick.</p>
+    <div class="cta-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="resume.pdf" target="_blank" class="btn btn-secondary">View Resume</a>
+        <a href="writing/index.html" class="btn btn-secondary">Field Notes</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">9 yrs</span>
+        <span class="hero-stat-label">CS &amp; Implementation</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">13 yrs</span>
+        <span class="hero-stat-label">Customer-side Ops</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">20+</span>
+        <span class="hero-stat-label">Years in Fintech &amp; Payments</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">DFW</span>
+        <span class="hero-stat-label">Open to Remote</span>
+      </div>
+    </div>
+
+    <div class="hero-domains">
+      <div class="hero-domains-label">Domain Focus</div>
+      <div class="hero-domain-tags">
+        <span class="hero-domain-tag">AP/AR Automation</span>
+        <span class="hero-domain-tag">Payments</span>
+        <span class="hero-domain-tag">Utility Tech</span>
+        <span class="hero-domain-tag">Fintech SaaS</span>
+        <span class="hero-domain-tag">Onboarding</span>
+        <span class="hero-domain-tag">ERP Integration</span>
+      </div>
+    </div>
+
+</div>
+        <div class="hero-right">
+            <h2>About Me</h2>
+            <p>I've spent my career on both sides of the table. I've been the customer struggling with integrations, compliance headaches, and unclear communication. Now I'm the CSM who gets it because I've lived it.</p>
+            <p>My approach is grounded in operational empathy: I don't just manage accounts, I solve real problems with context and clarity. Whether it's AR automation, utility payment processing, or fintech workflows, I bring domain expertise and a builder's mindset to every engagement.</p>
+            <p>My CS career spans 9 years of hands-on CSM work in fintech and B2B SaaS, backed by 13 years on the customer side in utility payment operations -- which is where the operational empathy comes from. I've built CS functions from scratch, managed enterprise books of business, and delivered EBRs to C-suite stakeholders across utilities and insurance verticals. I do my best work where CS, onboarding, and implementation overlap -- where getting a customer to value isn't just a handoff, it's the job.</p>
+            <p>The tools and frameworks in this portfolio aren't just demos -- they're things I actually built to make CS work better. If I couldn't find the right tool, I built it. That same instinct shows up in how I support my customers.</p>
+            <p style="font-size: 0.9rem; color: rgba(245, 245, 245, 0.6); border-top: 1px solid rgba(220, 205, 180, 0.2); padding-top: 1rem; margin-top: 0.5rem;"><em>If you're a hiring manager or secuiter: I'm actively looking for my next role in Customer Success, onboarding, or implementation -- ideally in fintech, AR automation, payments, or utility tech. I'm based in the Dallas-Fort Worth area and open to remote. Feel free to reach out directly at <a href="mailto:sonya.freeney@gmail.com" style="color: var(--cream);">sonya.freeney@gmail.com</a> or connect on <a href="https://www.linkedin.com/in/sonya-freeney" target="_blank" style="color: var(--cream);">LinkedIn</a>.</em></p>
+        </div>
+    </div>
+</header>
+<section id="field-notes" class="section">
+    <div class="container">
+        <h2>Field Notes</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Building AI Agents That Know When to Step Back</h3>
+                <p>How to build an AI support agent for AP/AR and fintech that resolves issues on first contact — and hands off gracefully when it shouldn't go further. Architecture walkthrough, working code, and a live demo.</p>
+                <div class="project-links">
+                    <a href="writing/building-ai-support-agents.html" class="project-link">Read Article &#x2192;</a>
+                    <a href="writing/index.html" class="project-link">All Field Notes &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">AI Agents</span><span class="tech-tag">CS Strategy</span><span class="tech-tag">Claude API</span><span class="tech-tag">Fintech</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="projects" class="section section-alt">
+    <div class="container">
+        <h2>Customer Success Templates &amp; Tools</h2>
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <h3>CS Account Playbook Generator</h3>
+                <p>AI-powered tool that generates customized customer success playbooks. Built to streamline onboarding workflows and provide CSMs with structured, actionable guidance tailored to their accounts.</p>
+                <div class="project-links">
+                    <a href="playbook-generator.html" class="project-link">View Case Study &#x2192;</a>
+                    <a href="https://cs-playbook-generator.vercel.app" target="_blank" class="project-link">Live Demo &#x2192;</a>
+                    <a href="https://github.com/smfreeney/cs-playbook-generator" target="_blank" class="project-link">GitHub &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">React + Vite</span><span class="tech-tag">Vercel</span><span class="tech-tag">Claude API</span><span class="tech-tag">AI-Powered</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>QBR Brief Generator</h3>
+                <p>An AI-powered prep tool that turns account data into a QBR brief you can actually walk into a room with. Narrative, risk flags, 90-day priorities, objection responses, and renewal angle -- all grounded in your specific account and stakeholders, not generic templates.</p>
+                <div class="project-links">
+                    <a href="qbr-case-study.html" class="project-link">View Case Study &#x2192;</a>
+                    <a href="qbr-tool.html" class="project-link">Try Demo &#x2192;</a>
+                    <a href="qbr-prep-tool.html" download class="project-link">Download Tool &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Claude API</span><span class="tech-tag">AI-Powered</span><span class="tech-tag">Downloadable</span><span class="tech-tag">QBR Prep</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Churn Risk Signal Framework</h3>
+                <p>A practitioner's guide to identifying, scoring, and responding to churn risk signals across the customer lifecycle. Five signal categories with 20+ weighted risk indicators, four-tier response system, and implementation guidance for QBRs, CRM integration, and escalation management.</p>
+                <div class="project-links">
+                    <a href="churn-risk-case-study-updated.html" class="project-link">View Case Study &#x2192;</a>
+                    <a href="churn-framework.html" class="project-link">View Framework &#x2192;</a>
+                    <a href="Churn_Risk_Signal_Framework.docx" class="project-link">Download .docx &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">CS Framework</span><span class="tech-tag">Churn Prevention</span><span class="tech-tag">Risk Assessment</span><span class="tech-tag">Interactive Guide</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Strategic Success Plan</h3>
+                <p>A six-phase methodology for building customer success plans that actually drive retention. Covers discovery through renewal readiness — with stakeholder mapping, measurable goal definition, milestone roadmaps, and a structured template that connects to CRM and project tooling at scale.</p>
+                <div class="project-links">
+                    <a href="strategic-success-plan.html" class="project-link">View Framework &#x2192;</a>
+                    <a href="Strategic-Success-Plan-Template.docx" download class="project-link">Download Template &#x2192;</a>
+                    <a href="CS-Success-Plan-Tracker.xlsx" download class="project-link">Download Tracker &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Account Management</span><span class="tech-tag">QBR Prep</span><span class="tech-tag">Value Realization</span><span class="tech-tag">Retention</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Fintech CS Escalation Framework</h3>
+                <p>A structured support and success framework for AP/AR, payment processing, and fintech environments. Four-tier escalation model, compliance-aware SLAs, signal detection matrix, and Tier 3 response protocol built for regulated financial systems.</p>
+                <div class="project-links">
+                    <a href="fintech-cs-framework.html" class="project-link">View Framework &#x2192;</a>
+                    <a href="Fintech_CS_Escalation_Framework.docx" download class="project-link">Download .docx &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Fintech CS</span><span class="tech-tag">AP/AR</span><span class="tech-tag">Escalation Management</span><span class="tech-tag">PCI-DSS · SOX · NACHA</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Customer Onboarding System Redesign</h3>
+                <p>An eight-year payment processor onboarding workbook rebuilt from scratch -- as a white-label Excel template, a Notion workspace, and a live React app. Covers 60+ tasks across eight implementation phases with a formula-linked Config tab, version history from v1.0 to v4.0, and industry presets for five verticals.</p>
+                <div class="project-links">
+                    <a href="onboarding.html" class="project-link">View Case Study &#x2192;</a>
+                    <a href="https://drive.google.com/uc?export=download&amp;id=1yXBbv6Tu-GvMsajNbijdKs2wTdxbiLZn" class="project-link">Download Excel &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Fintech Operations</span><span class="tech-tag">Excel</span><span class="tech-tag">Notion</span><span class="tech-tag">React</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>SaaS CSM Toolkit</h3>
+                <p>Complete Customer Success Manager operating system -- task tracker, documentation hub, brag book, project planner, and performance review ammo. Available for Notion and Excel.</p>
+                <div class="project-links">
+                    <a href="saas-csm-toolkit-updated.html" class="project-link">View Case Study &#x2192;</a>
+                    <a href="https://github.com/smfreeney/saas_csm-toolkit" target="_blank" class="project-link">GitHub &#x2192;</a>
+                    <a href="https://github.com/smfreeney/saas_csm-toolkit/raw/main/CSM-Operating-System.xlsx" class="project-link">Download Excel &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Notion</span><span class="tech-tag">Excel</span><span class="tech-tag">Complete System</span><span class="tech-tag">SaaS-Specific</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Strategic CSM Workbook</h3>
+                <p>Interactive browser-based workbook covering strategic CSM practice -- from pre-meeting prep to weekly planning to portfolio health tracking. Built on Chad Horenfeldt's proven frameworks.</p>
+                <div class="project-links">
+                    <a href="strategic-csm-workbook.html" class="project-link">View Case Study &#x2192;</a>
+                    <a href="https://htmlpreview.github.io/?https://github.com/smfreeney/Strategic-CSM-Workbook/blob/main/index.html" target="_blank" class="project-link">Open Workbook &#x2192;</a>
+                    <a href="https://github.com/smfreeney/Strategic-CSM-Workbook" target="_blank" class="project-link">GitHub &#x2192;</a>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Pure HTML/CSS/JS</span><span class="tech-tag">Interactive Tools</span><span class="tech-tag">localStorage</span><span class="tech-tag">Single File</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="expertise" class="section section-alt">
+    <div class="container">
+        <h2>Expertise</h2>
+        <div class="expertise-grid">
+            <div class="expertise-area">
+                <h3>Domain Knowledge</h3>
+                <ul>
+                    <li>AR Automation &amp; Payments</li><li>Utility Payment Processing </li>
+                    <li>B2B SaaS Implementation</li><li>CIS/ERP Integrations</li><li>SOX Compliance</li>
+                </ul>
+            </div>
+            <div class="expertise-area">
+                <h3>CS Frameworks</h3>
+                <ul>
+                    <li>Proactive Partnership</li><li>Outcome-Driven Enablement</li>
+                    <li>Health Score Development</li><li>QBR Strategy &amp; Execution</li><li>Escalation Management</li>
+                </ul>
+            </div>
+            <div class="expertise-area">
+                <h3>Tools &amp; Platforms</h3>
+                <ul>
+                    <li>Salesforce</li><li>Gong</li><li>ProductBoard</li><li>Tableau</li><li>JIRA &amp; Confluence</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact" class="section">
+    <div class="container">
+        <h2>Let's Connect</h2>
+        <p class="contact-intro">Interested in working together or want to chat about Customer Success, AI tools, or building better CS workflows? Reach out.</p>
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/sonya-freeney" target="_blank" class="contact-link">LinkedIn</a>
+            <a href="https://github.com/smfreeney" target="_blank" class="contact-link">GitHub</a>
+            <a href="mailto:sonya.freeney@gmail.com" class="contact-link">Email</a>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 Sonya Freeney | CS Playbooks. Built with intention, not templates.</p>
+    </div>
+</footer>
+</body>
+</html>
