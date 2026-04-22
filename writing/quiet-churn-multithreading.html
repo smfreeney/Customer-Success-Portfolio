@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Quiet Churn Problem — Sonya Freeney</title>
+  <meta name="description" content="Quiet churn doesn't announce itself. It happens when you're single-threaded — and by the time you realise it, the decision's already been made. A Field Note on multi-threading as churn prevention."/>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wcnl1shu9t");
+  </script>
+  <style>
+    :root {
+      --bg: #0f0f0f; --surface: #171717; --surface-2: #1e1e1e; --border: #2a2a2a;
+      --slate: #4a6fa5; --slate-lt: #6b8ec4; --amber: #fbbf24; --amber-dim: #c9901a;
+      --cream: #f5f0e8; --muted: #8a8a8a; --text: #e8e4dc; --green: #4ade80; --red: #f87171;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Crimson Text', Georgia, serif; font-size: 1.125rem; line-height: 1.8; min-height: 100vh; }
+    nav { padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; color: var(--amber); text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 1.75rem; }
+    .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cream); }
+    .article-wrap { max-width: 740px; margin: 0 auto; padding: 5rem 2rem 8rem; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--cream); }
+    .back-link::before { content: '← '; }
+    .article-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
+    .article-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--amber); }
+    h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.1rem, 4.5vw, 3.25rem); font-weight: 600; line-height: 1.15; color: var(--cream); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+    h1 em { font-style: italic; color: var(--amber); }
+    .byline { display: flex; align-items: center; gap: 1.5rem; padding: 1.25rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+    .byline-name { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--cream); }
+    .byline-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+    .byline-dot { color: var(--border); }
+    .prose p { margin-bottom: 1.5rem; color: var(--text); font-size: 1.15rem; }
+    .prose p:first-child { font-size: 1.25rem; color: var(--cream); line-height: 1.7; }
+    .prose h2 { font-family: 'Crimson Text', serif; font-size: 1.75rem; font-weight: 600; color: var(--cream); margin: 3rem 0 1rem; line-height: 1.25; }
+    .prose h3 { font-family: 'Crimson Text', serif; font-size: 1.3rem; font-weight: 600; color: var(--cream); margin: 2rem 0 0.75rem; }
+    .prose strong { color: var(--cream); font-weight: 600; }
+    .prose em { font-style: italic; color: var(--amber); }
+    .prose a { color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(251,191,36,0.3); transition: border-color 0.2s; }
+    .prose a:hover { border-color: var(--amber); }
+    .callout { background: rgba(251,191,36,0.05); border: 1px solid rgba(251,191,36,0.18); border-left: 3px solid var(--amber); padding: 1.5rem 1.75rem; border-radius: 2px; margin: 2rem 0; }
+    .callout p { font-size: 1.05rem !important; color: var(--text) !important; margin-bottom: 0 !important; }
+    .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.6rem; }
+    .info-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--slate); padding: 1.5rem 1.75rem; border-radius: 2px; margin: 2rem 0; }
+    .info-block p { font-size: 1rem !important; margin-bottom: 0 !important; color: var(--muted) !important; }
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; margin: 1.5rem 0 2rem; }
+    .step-list li { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; align-items: start; }
+    .step-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: var(--amber); background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+    .step-list li p { font-size: 1.05rem !important; margin-bottom: 0 !important; color: var(--text) !important; }
+    .step-list li strong { color: var(--cream); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; }
+    @media (max-width: 600px) { .article-wrap { padding: 3rem 1.25rem 5rem; } h1 { font-size: 1.9rem; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../index.html">SF / CS Playbooks</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="index.html">Field Notes</a>
+    <a href="../fintech-cs-framework.html">Frameworks</a>
+  </div>
+</nav>
+<article class="article-wrap">
+  <a class="back-link" href="index.html">Field Notes</a>
+  <div class="article-tag">Account Management</div>
+  <h1>The Quiet Churn Problem<br/><em>Why Your Healthiest Accounts Are the Ones to Watch</em></h1>
+  <div class="byline">
+    <span class="byline-name">Sonya Freeney</span>
+    <span class="byline-dot">·</span>
+    <span class="byline-meta">April 2026</span>
+    <span class="byline-dot">·</span>
+    <span class="byline-meta">6 min read</span>
+  </div>
+  <div class="prose">
+
+    <p>The account I'm thinking of had a green health score for eighteen months straight. QBRs mostly happened on schedule. Basic support tickets here and there — nothing that ever really broke down. Normal. Then I checked in ninety days out from renewal — routine touchpoint, no reason to think anything was wrong — and that's when she told me they'd already signed with someone else. Out of her hands, she said. It came from the CFO and procurement. She hadn't been asked for input.</p>
+
+    <p>The decision hadn't been hers to make. It never had been.</p>
+
+    <p>That's the thing about quiet churn — it doesn't announce itself. There's no angry ticket, no executive escalation, no NPS score that bottoms out and sets off an alarm. The account just goes quiet at the end. And by the time you're having that final conversation, you're not in a negotiation. You're in a debrief.</p>
+
+    <h2>What I changed after that call</h2>
+
+    <p>I made three decisions that stuck. First: no account gets to ninety days from renewal without a structured conversation already underway. I moved my renewal tracking window to 180 days minimum — which sounds early until you consider that building an executive relationship, getting a success plan agreed, and creating any kind of meaningful paper trail takes time you don't have if you start at ninety.</p>
+
+    <p>Second: every at-risk account got a formal success plan — not a QBR deck, not a relationship summary, but a documented record of what we'd committed to, what we'd delivered, and what the next twelve months looked like. Something the CFO could read in five minutes and understand without needing the billing manager to translate it. That document became the thing I handed my champion to take into rooms I wasn't invited to.</p>
+
+    <p>Third — and this is the one that made the biggest difference — I started pushing multi-threading up the org much earlier and much more deliberately. Not as a one-off executive briefing at renewal, but as a consistent cadence. Quarterly value updates to finance. Occasional check-ins with IT on the integration health. A named exec sponsor relationship that I owned, not just a name in a field in the CRM.</p>
+
+    <p>None of this is complicated. It just requires starting earlier than feels necessary — which is exactly why most CSMs don't do it until something goes wrong.</p>
+
+    <h2>The accounts that complain are actually the easier ones</h2>
+
+    <p>I know that sounds backwards. Noisy accounts are exhausting. But noise gives you something to work with. A customer who escalates is telling you there's still something worth fighting for. They're still engaged enough to be frustrated. The ones you need to watch are the polite ones — the accounts where everything seems fine and your contact says "great, talk next month" at the end of every call.</p>
+
+    <p>Quiet churn has a specific pattern, and once you've seen it, you recognise it immediately. Engagement gradually flattens. Meetings become shorter, more procedural. Your champion stops asking product questions — they already know what the product does, and they've quietly decided it's not enough. Usage data looks stable on the surface, but if you dig into it, you'll find that the power users have stopped being power users.</p>
+
+    <div class="callout">
+      <div class="callout-label">The pattern</div>
+      <p>Quiet churn accounts don't disengage suddenly. They drift. Gradually, your relationship narrows to one person — and everything you know about the account comes filtered through their perspective. That's not insight. That's a single data point presented as the full picture.</p>
+    </div>
+
+    <p>In utility payments — where billing cycles run monthly, processing volumes are large, and pricing scrutiny from procurement is a fact of life — that narrowing is genuinely dangerous. Your contact might be your biggest internal advocate. They might love the product. But they're not the one fielding the call from procurement when RFP season starts. And if the only person in the room who can speak to the value of what you've built is the utility billing manager, you've got a problem.</p>
+
+    <h2>Why single-threaded relationships feel fine until they don't</h2>
+
+    <p>This is worth being honest about: single-threaded relationships happen for good reasons. Your main contact is responsive and knowledgeable. They're the one who pushed for the implementation. They know the product better than anyone else in the org and they actively don't want you bothering busy executives with things they don't need to be bothered with.</p>
+
+    <p>That's not obstruction — it's a reasonable instinct from someone who's trying to protect their colleagues' time and, quietly, their own status as the person who manages this particular vendor relationship. I've had contacts be very direct about it: <em>"The CFO doesn't really get involved in day-to-day operations, and this is a day-to-day tool."</em></p>
+
+    <p>The problem is that "day-to-day tool" is exactly how your product gets categorised when procurement starts their review. A day-to-day tool gets evaluated on price. A strategic platform gets evaluated on value. The difference between those two framings is often worth the entire contract.</p>
+
+    <p>If the CFO's first real encounter with your product is an RFP line item, you've already lost the framing battle. Someone else is going to show up with a lower number and a confident pitch, and there will be no one in the room who can make the case for why the switching cost and the operational risk and the integration overhead make that lower number a false economy.</p>
+
+    <div class="info-block">
+      <p>The CFO doesn't need to love your product. They need to understand what it would cost to replace it — in time, in risk, in operational disruption. That's a five-minute conversation if you've had it. It's an impossible conversation if the first time they hear your name is in a renewal negotiation.</p>
+    </div>
+
+    <h2>Multi-threading isn't a power move. It's a data problem.</h2>
+
+    <p>Here's the reframe that made multi-threading feel less politically fraught to me: it's not about getting to the executive over your champion's head. It's about having more than one lens on what's actually happening inside the account.</p>
+
+    <p>Your utility billing manager sees one version of reality. The CFO sees a different one — procurement cost, financial risk, operational leverage. The IT administrator knows things about the integration that nobody else in the org tracks. The end users doing invoice processing every day have opinions about the product that never make it into your QBR slides. All of those perspectives matter. Relying on a single contact doesn't mean you're well-informed — it means you're well-informed about one person's experience.</p>
+
+    <p>Multi-threaded accounts surface churn signals earlier, not because you're better at spotting them, but because you simply have access to more signal. The end user who mentions offhand that her team has been manually exporting data for the past month because the integration's been slow — that's a churn signal. You'd never hear it in a QBR with the billing manager.</p>
+
+    <h2>How to get a warm intro without making it awkward</h2>
+
+    <p>The most common reason CSMs stay single-threaded is that they don't want to damage the relationship they have. Fair. Going around your champion is a real risk. But going <em>through</em> your champion — when done right — actually strengthens the relationship, because you're treating them like a strategic partner instead of a gatekeeper.</p>
+
+    <p>The approach I've found works in utility and fintech accounts specifically:</p>
+
+    <ol class="step-list">
+      <li><span class="step-num">1</span><p><strong>Make it about them, not you.</strong> The ask isn't "can I meet your CFO." The ask is "I'd love to put together a business value summary for your renewal — would it be useful to walk your finance team through the operational impact numbers before that conversation starts?" You're giving your champion a reason to make the introduction that has nothing to do with your need for executive access.</p></li>
+      <li><span class="step-num">2</span><p><strong>Build the asset first.</strong> Before you ask for any introduction, produce something worth introducing. A one-page impact summary — processing volume handled, error rate reduction, time saved in reconciliation — gives your champion something to forward with a note rather than a cold request for a meeting. The intro becomes "I thought you'd find this useful" instead of "our vendor wants to meet with you."</p></li>
+      <li><span class="step-num">3</span><p><strong>Frame the CFO conversation as risk management, not a sales call.</strong> Executives in financial operations respond to risk framing. What's the cost of a failed migration mid-billing-cycle? What's the audit exposure if the reconciliation process breaks down during a transition? These are questions the CFO cares about and your champion can't answer alone. That's your in.</p></li>
+      <li><span class="step-num">4</span><p><strong>Don't skip the middle of the org.</strong> Multi-threading isn't just about getting to the top. The IT administrator who manages the ERP integration, the controller who runs the month-end close — these are the people who experience the operational reality of your product daily and who will be consulted when renewal comes up. They don't need executive meetings. They need a CSM who knows their name and checks in occasionally.</p></li>
+    </ol>
+
+    <h2>What you can only see when you're multi-threaded</h2>
+
+    <p>The signals that predict quiet churn almost never come from your main contact. They come from the edges of the relationship — the user who's figured out a workaround, the manager who keeps asking when a particular feature is coming, the administrator who mentions that finance has been asking more questions about the integration than usual.</p>
+
+    <p>"Finance has been asking more questions" is not a casual remark. That is a procurement review beginning. If you're not multi-threaded, you won't hear it. And if you do hear it — too late, from your champion, because she finally felt she had to tell you — you'll be scrambling to build an executive relationship in the middle of a negotiation you should have been positioned for months ago.</p>
+
+    <p>The CFO who already knows your numbers doesn't need to be sold. They need to be reminded. That's a very different conversation.</p>
+
+    <h2>The stakeholder map is your early warning system</h2>
+
+    <p>I've started thinking about multi-threading less as a relationship strategy and more as a monitoring system. Every account has internal dynamics that are invisible to you if you're looking through a single window. Stakeholder mapping — knowing who's in the room when renewal comes up, who influences the CFO, who would actively advocate for keeping you versus who's quietly exploring alternatives — is how you get visibility into those dynamics before they become decisions.</p>
+
+    <p>A green health score tells you your champion is happy. It tells you nothing about what procurement is planning, what the CFO heard at an industry event, or whether your competitor has been quietly running a pilot somewhere in the org. Multi-threading is what fills that gap.</p>
+
+    <div class="callout">
+      <div class="callout-label">The honest version</div>
+      <p>The account I mentioned at the start — I'd been so focused on keeping my champion happy that I'd let her define the entire scope of the relationship. She wasn't withholding information. She just didn't know what she didn't know. Neither did I. Multi-threading isn't about distrust. It's about accepting that no single person has the complete picture, including your best contact.</p>
+    </div>
+
+    <p>Build the relationships before you need them. Map the stakeholders before renewal is on the calendar. Get in front of the CFO with a value story before procurement sends out an RFP. The accounts that churn quietly are almost always the ones where you had one great relationship and mistook it for security.</p>
+
+    <p>It wasn't. It was just a quiet room.</p>
+
+    <p style="margin-top: 2.5rem;">Questions? Want to compare notes on how this plays out in regulated industries? Reach me at <a href="mailto:sonya.freeney@gmail.com">sonya.freeney@gmail.com</a> or <a href="https://www.linkedin.com/in/sonya-freeney" target="_blank">LinkedIn</a>.</p>
+
+  </div>
+  <div class="tag-row">
+    <span class="tag">Churn Prevention</span>
+    <span class="tag">Stakeholder Management</span>
+    <span class="tag">Account Management</span>
+    <span class="tag">Fintech</span>
+    <span class="tag">Utility Payments</span>
+    <span class="tag">Multi-Threading</span>
+    <span class="tag">Customer Success</span>
+  </div>
+</article>
+</body>
+</html>
