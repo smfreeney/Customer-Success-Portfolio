@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People + AI Decision Framework for Utility Customer Success</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #4a5568;
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .framework-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.08), 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .framework-card.ai-lead {
+            border-color: #3182ce;
+        }
+
+        .framework-card.human-lead {
+            border-color: #38a169;
+        }
+
+        .framework-card.collaborative {
+            border-color: #9f7aea;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .ai-lead .card-icon {
+            background: #ebf8ff;
+            color: #3182ce;
+        }
+
+        .human-lead .card-icon {
+            background: #f0fff4;
+            color: #38a169;
+        }
+
+        .collaborative .card-icon {
+            background: #faf5ff;
+            color: #9f7aea;
+        }
+
+        .card-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 12px;
+        }
+
+        .card-description {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .examples-section {
+            margin-top: 24px;
+        }
+
+        .examples-title {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #718096;
+            margin-bottom: 12px;
+        }
+
+        .example-item {
+            padding: 12px 16px;
+            background: #f7fafc;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #2d3748;
+            border-left: 3px solid;
+        }
+
+        .ai-lead .example-item {
+            border-color: #3182ce;
+        }
+
+        .human-lead .example-item {
+            border-color: #38a169;
+        }
+
+        .collaborative .example-item {
+            border-color: #9f7aea;
+        }
+
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .example-context {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .principles-section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .principles-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .principle-item {
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .principle-number {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .principle-text {
+            font-size: 15px;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .footer-text {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 12px;
+        }
+
+        .author {
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .framework-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The People + AI Decision Framework</h1>
+            <p class="subtitle">A practical guide for Platform Success Managers navigating when AI should lead, when humans should lead, and when both work together in utility customer success.</p>
+        </header>
+
+        <div class="framework-grid">
+            <div class="framework-card ai-lead">
+                <div class="card-icon">🤖</div>
+                <h2 class="card-title">AI Should Lead</h2>
+                <p class="card-description">When the task is scalable, repeatable, and data-driven. AI excels at pattern recognition across large datasets and consistent execution.</p>
+                
+                <div class="examples-section">
+                    <div class="examples-title">Utility CS Examples</div>
+                    <div class="example-item">
+                        <div class="example-title">Usage Pattern Analysis</div>
+                        <div class="example-context">AI detects anomalies in payment behavior across 100K+ accounts—flags potential churn risk before humans see it</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-title">Seasonal Trend Forecasting</div>
+                        <div class="example-context">Predicts peak-season load based on historical data, weather patterns, and customer segment behaviors</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-title">Compliance Monitoring</div>
+                        <div class="example-context">Continuously scans for regulatory requirement gaps (PCI, SOX, PUC mandates) across all client implementations</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="framework-card human-lead">
+                <div class="card-icon">👤</div>
+                <h2 class="card-title">Humans Should Lead</h2>
+                <p class="card-description">When the situation requires judgment, relationship capital, or navigating high-stakes decisions. Humans excel at context, empathy, and strategic thinking.</p>
+                
+                <div class="examples-section">
+                    <div class="examples-title">Utility CS Examples</div>
+                    <div class="example-item">
+                        <div class="example-title">Executive Escalations</div>
+                        <div class="example-context">CFO is frustrated with integration delays—this requires relationship repair, not data analysis</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-title">Strategic Roadmap Discussions</div>
+                        <div class="example-context">Client deciding between investing in eMobility vs. grid modernization—needs business context AI can't provide</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-title">Cultural/Political Dynamics</div>
+                        <div class="example-context">Internal stakeholder conflict between IT and Finance teams—requires human mediation and diplomacy</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="framework-card collaborative">
+                <div class="card-icon">🤝</div>
+                <h2 class="card-title">AI + Human Collaboration</h2>
+                <p class="card-description">When AI surfaces insights but human judgment determines action. The sweet spot: AI handles pattern detection, humans provide context and strategic response.</p>
+                
+                <div class="examples-section">
+                    <div class="examples-title">Utility CS Examples</div>
+                    <div class="example-item">
+                        <div class="example-title">Proactive Churn Prevention</div>
+                        <div class="example-context">AI flags declining engagement → Human investigates root cause (budget cuts? Leadership change?) → Tailored intervention</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-title">Expansion Opportunity Identification</div>
+                        <div class="example-context">AI identifies usage patterns suggesting readiness for new module → Human validates with client context → Strategic pitch</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-title">QBR Preparation</div>
+                        <div class="example-context">AI generates performance benchmarks and trend analysis → Human interprets for client's specific goals and regulatory environment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="principles-section">
+            <h3 class="principles-title">Core Principles for Platform Success Managers</h3>
+            <div class="principles-grid">
+                <div class="principle-item">
+                    <div class="principle-number">PRINCIPLE 01</div>
+                    <div class="principle-text">AI doesn't replace empathy—it scales it. Use AI to free up time for high-impact human moments.</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-number">PRINCIPLE 02</div>
+                    <div class="principle-text">Never let AI make decisions you can't explain to a PUC regulator. Utilities need defensible AI, not black-box recommendations.</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-number">PRINCIPLE 03</div>
+                    <div class="principle-text">When in doubt, human leads. AI should augment judgment, not replace it—especially in regulated industries.</div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-number">PRINCIPLE 04</div>
+                    <div class="principle-text">The best Platform Success Managers teach clients to read AI signals, not just react to dashboards.</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p class="footer-text">Framework developed by <span class="author">Sonya Freeney</span></p>
+            <p class="footer-text">20+ years in utility operations & SaaS customer success</p>
+        </footer>
+    </div>
+</body>
+</html>
