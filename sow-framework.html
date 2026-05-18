@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOW Framework & Template | CS Playbooks by Sonya Freeney</title>
+  <meta name="description" content="A complete framework for Platform Success Managers and Implementation Managers who lead Statement of Work creation. Covers the five-step SOW process, common pitfalls, best practices, and a ready-to-use template." />
+  <meta name="author" content="Sonya Freeney" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YSCSHBBL7R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YSCSHBBL7R');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wcnl1shu9t");
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --card: #ffffff;
+      --text: #1a1210;
+      --muted: #5a4a42;
+      --border: #e8e0d0;
+      --amber: #c9901a;
+      --amber-light: #f5e6c8;
+      --slate: #4a6fa5;
+      --slate-light: #e8eef6;
+      --success: #27ae60;
+      --success-light: #e8f6ee;
+      --serif: 'Crimson Text', Georgia, serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--slate); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--card);
+      border-bottom: 2px solid var(--amber);
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(26,18,16,0.06);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--amber);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber); text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 32px 48px;
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .breadcrumb {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .breadcrumb a { color: var(--muted); }
+    .breadcrumb a:hover { color: var(--amber); text-decoration: none; }
+    .breadcrumb-sep { color: var(--border); }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::after {
+      content: '';
+      display: inline-block;
+      height: 1.5px;
+      width: 40px;
+      background: var(--amber);
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 680px;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      background: var(--bg);
+    }
+    .tag.amber { border-color: var(--amber); color: var(--amber); background: var(--amber-light); }
+    .tag.slate { border-color: var(--slate); color: var(--slate); background: var(--slate-light); }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: #fff;
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 11px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: #b07f16; text-decoration: none; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 11px 22px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: var(--slate); color: var(--slate); text-decoration: none; }
+
+    /* ── MAIN LAYOUT ── */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(26,18,16,0.06);
+    }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── PROBLEM STATEMENT ── */
+    .problem-block {
+      padding: 32px 36px;
+      margin-bottom: 32px;
+    }
+    .problem-block p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .problem-block p:last-child { margin-bottom: 0; }
+    .callout {
+      background: var(--slate-light);
+      border-left: 4px solid var(--slate);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .callout strong { color: var(--slate); }
+
+    /* ── PROCESS STEPS ── */
+    .process-section { margin-bottom: 32px; }
+    .steps-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .step-card {
+      display: flex;
+      gap: 20px;
+      padding: 24px 28px;
+      align-items: flex-start;
+    }
+    .step-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--amber);
+      background: var(--amber-light);
+      border: 1.5px solid var(--amber);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+    }
+    .step-body { flex: 1; }
+    .step-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .step-details {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .step-pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      padding: 3px 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--muted);
+    }
+
+    /* ── TWO-COL GRID ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+    .pitfall-card, .practice-card {
+      padding: 24px 28px;
+    }
+    .pitfall-card h3, .practice-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pitfall-list, .practice-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .pitfall-list li, .practice-list li {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .pitfall-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #e05c2a;
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+    .practice-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    /* ── TEMPLATE SECTIONS ── */
+    .template-section { margin-bottom: 32px; }
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      padding: 28px;
+    }
+    .template-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .template-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--amber);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .template-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist-section { margin-bottom: 32px; }
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 28px;
+    }
+    @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: var(--card);
+    }
+
+    /* ── WHO IT'S FOR ── */
+    .audience-section { margin-bottom: 32px; }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      padding: 28px;
+    }
+    .audience-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .audience-role {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .audience-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── DOWNLOAD BLOCK ── */
+    .download-block {
+      padding: 32px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      background: var(--card);
+      border: 2px solid var(--amber);
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+    .download-meta { flex: 1; min-width: 200px; }
+    .download-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .download-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .download-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    /* ── CONTEXT NOTE ── */
+    .context-note {
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      border-left: 4px solid var(--slate);
+      border-radius: 0 12px 12px 0;
+    }
+    .context-note p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .context-note p:last-child { margin-bottom: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 28px 32px;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-brand {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── UTILITY ── */
+    .mb-8 { margin-bottom: 8px; }
+    .mb-16 { margin-bottom: 16px; }
+    .mb-32 { margin-bottom: 32px; }
+
+    /* icon inline sizing */
+    [data-lucide] { width: 16px; height: 16px; stroke-width: 2; vertical-align: middle; }
+    .icon-lg { width: 20px; height: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">CS Playbooks</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#projects">Projects</a></li>
+        <li><a href="/writing/">Writing</a></li>
+        <li><a href="https://cs-playbook-generator.vercel.app" target="_blank" rel="noopener">Playbook Generator ↗</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="breadcrumb">
+        <a href="/">csplaybooks.com</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="/#projects">Projects</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>SOW Framework</span>
+      </div>
+
+      <div class="hero-eyebrow">Implementation · Delivery · Project Scoping</div>
+
+      <h1>SOW Framework &amp; Template</h1>
+      <p class="hero-sub">How to write effective Statements of Work for platform implementations — from sales handoff through client sign-off.</p>
+
+      <div class="tag-row">
+        <span class="tag amber">Implementation</span>
+        <span class="tag amber">Delivery</span>
+        <span class="tag slate">Project Scoping</span>
+        <span class="tag slate">B2B SaaS</span>
+        <span class="tag">Platform Success</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="downloads/How_to_Write_an_Effective_SOW.docx" class="btn-primary" download>
+          <i data-lucide="download" class="icon-lg"></i>
+          Download the Framework
+        </a>
+        <a href="#the-process" class="btn-secondary">
+          <i data-lucide="arrow-down"></i>
+          See the Process
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- THE PROBLEM -->
+    <div class="card problem-block mb-32">
+      <div class="section-label">The Problem This Solves</div>
+      <p>Most Customer Success resources focus on post-launch relationship management. QBRs, health scores, renewal playbooks — all useful, but they assume the implementation went well. They start at the wrong point in the story.</p>
+      <p>Platform Success Managers and Implementation Managers live in the gap that most CS frameworks ignore: the pre-implementation scoping work that happens before a single line of code is configured. The SOW is where the project either gets set up to succeed or quietly loaded with the assumptions that will blow up three months later.</p>
+      <div class="callout">
+        <strong>This framework fills that gap.</strong> It shows how to bridge sales promises and delivery reality, document the assumptions that protect both sides, and create a roadmap that prevents the "wait, that wasn't in scope" conversations when things go live.
+      </div>
+      <p>You've been on both sides of SOW creation. You know what a well-scoped implementation looks like — and you know what it costs when scope, timeline, and stakeholder alignment aren't locked down from day one.</p>
+    </div>
+
+    <!-- THE PROCESS -->
+    <div class="process-section" id="the-process">
+      <div class="section-label">The Five-Step Process</div>
+      <div class="steps-grid">
+
+        <div class="card step-card">
+          <div class="step-number">01</div>
+          <div class="step-body">
+            <div class="step-title">Gather Context from Sales</div>
+            <div class="step-desc">Before touching a blank doc, get the full picture from the sales team. What was promised? What's the client expecting? Where are the landmines?</div>
+            <div class="step-details">
+              <span class="step-pill">Ask the right questions</span>
+              <span class="step-pill">Spot red flags early</span>
+              <span class="step-pill">Sales handoff checklist</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card step-card">
+          <div class="step-number">02</div>
+          <div class="step-body">
+            <div class="step-title">Discovery Session with Client</div>
+            <div class="step-desc">Confirm business objectives, map stakeholders, understand the current infrastructure, and surface constraints the sales team didn't know about.</div>
+            <div class="step-details">
+              <span class="step-pill">Business objectives</span>
+              <span class="step-pill">Stakeholder mapping</span>
+              <span class="step-pill">Constraint identification</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card step-card">
+          <div class="step-number">03</div>
+          <div class="step-body">
+            <div class="step-title">Technical Scoping with Delivery Team</div>
+            <div class="step-desc">Validate feasibility, surface dependencies, and close the gap between what sales sold and what delivery can actually build in the timeline given.</div>
+            <div class="step-details">
+              <span class="step-pill">Feasibility validation</span>
+              <span class="step-pill">Dependency mapping</span>
+              <span class="step-pill">Bridge sales &amp; delivery</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card step-card">
+          <div class="step-number">04</div>
+          <div class="step-body">
+            <div class="step-title">Draft the SOW</div>
+            <div class="step-desc">Write the document using the eight required sections. Be specific. Use measurable criteria. Define what's out of scope as clearly as what's in.</div>
+            <div class="step-details">
+              <span class="step-pill">8-section structure</span>
+              <span class="step-pill">Plain language</span>
+              <span class="step-pill">Out-of-scope definition</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card step-card">
+          <div class="step-number">05</div>
+          <div class="step-body">
+            <div class="step-title">Review &amp; Iteration</div>
+            <div class="step-desc">Internal review first. Then client walkthrough — not email delivery, an actual walkthrough. Final sign-off with the right stakeholders in the room.</div>
+            <div class="step-details">
+              <span class="step-pill">Internal review</span>
+              <span class="step-pill">Client walkthrough</span>
+              <span class="step-pill">Exec sign-off</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PITFALLS + BEST PRACTICES -->
+    <div class="section-label mb-16">Common Pitfalls &amp; Best Practices</div>
+    <div class="two-col mb-32">
+
+      <div class="card pitfall-card">
+        <h3><i data-lucide="alert-triangle" style="color:#e05c2a"></i> Common SOW Pitfalls</h3>
+        <ul class="pitfall-list">
+          <li>Vague scope that leaves room for "that's obviously included" arguments</li>
+          <li>Timelines built on best-case assumptions, not realistic delivery capacity</li>
+          <li>Missing dependencies — especially third-party integrations and client-side IT</li>
+          <li>Assuming technical capabilities the client doesn't actually have</li>
+          <li>No change management process for when (not if) scope shifts</li>
+        </ul>
+      </div>
+
+      <div class="card practice-card">
+        <h3><i data-lucide="check-circle" style="color:#27ae60"></i> SOW Best Practices</h3>
+        <ul class="practice-list">
+          <li>Be specific — ambiguous language is a liability, not flexibility</li>
+          <li>Use measurable acceptance criteria so "done" means the same thing to everyone</li>
+          <li>Document assumptions explicitly; they're your protection when reality diverges</li>
+          <li>Build in buffer time — delivery always has surprises</li>
+          <li>Define out-of-scope as clearly as in-scope</li>
+          <li>Get stakeholder buy-in before final sign-off, not after</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- TEMPLATE STRUCTURE -->
+    <div class="template-section">
+      <div class="section-label">The 8-Section Template</div>
+      <div class="card">
+        <div class="template-grid">
+          <div class="template-item">
+            <span class="template-num">01</span>
+            <span class="template-name">Project Overview</span>
+          </div>
+          <div class="template-item">
+            <span class="template-num">02</span>
+            <span class="template-name">Scope of Work<br><small style="font-family:var(--mono);font-size:10px;color:var(--muted)">In Scope + Out of Scope</small></span>
+          </div>
+          <div class="template-item">
+            <span class="template-num">03</span>
+            <span class="template-name">Deliverables<br><small style="font-family:var(--mono);font-size:10px;color:var(--muted)">With target dates</small></span>
+          </div>
+          <div class="template-item">
+            <span class="template-num">04</span>
+            <span class="template-name">Implementation Timeline &amp; Milestones<br><small style="font-family:var(--mono);font-size:10px;color:var(--muted)">4-phase structure</small></span>
+          </div>
+          <div class="template-item">
+            <span class="template-num">05</span>
+            <span class="template-name">Roles &amp; Responsibilities<br><small style="font-family:var(--mono);font-size:10px;color:var(--muted)">Vendor vs. client</small></span>
+          </div>
+          <div class="template-item">
+            <span class="template-num">06</span>
+            <span class="template-name">Assumptions &amp; Dependencies</span>
+          </div>
+          <div class="template-item">
+            <span class="template-num">07</span>
+            <span class="template-name">Change Management Process</span>
+          </div>
+          <div class="template-item">
+            <span class="template-num">08</span>
+            <span class="template-name">Acceptance Criteria<br><small style="font-family:var(--mono);font-size:10px;color:var(--muted)">With sign-off section</small></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12-POINT CHECKLIST -->
+    <div class="checklist-section">
+      <div class="section-label">12-Point Final Checklist</div>
+      <div class="card">
+        <div class="checklist-grid">
+          <div class="check-item"><div class="check-box"></div><span>Scope clearly defined — no ambiguous language</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Out-of-scope items explicitly listed</span></div>
+          <div class="check-item"><div class="check-box"></div><span>All deliverables have target dates and owners</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Timeline includes buffer; not best-case only</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Technical dependencies documented</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Third-party integrations scoped and confirmed</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Client-side responsibilities clearly assigned</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Assumptions documented and shared</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Change management process defined</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Acceptance criteria are measurable, not subjective</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Stakeholder sign-off from the right people</span></div>
+          <div class="check-item"><div class="check-box"></div><span>Delivery team has reviewed and confirmed feasibility</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHO IT'S FOR -->
+    <div class="audience-section">
+      <div class="section-label">Who Should Use This</div>
+      <div class="card">
+        <div class="audience-grid">
+          <div class="audience-card">
+            <div class="audience-role">Platform Success Managers</div>
+            <div class="audience-desc">Leading SOW creation from the sales cycle through implementation and beyond.</div>
+          </div>
+          <div class="audience-card">
+            <div class="audience-role">Implementation Managers</div>
+            <div class="audience-desc">Scoping complex B2B SaaS projects where technical feasibility needs validation before commit.</div>
+          </div>
+          <div class="audience-card">
+            <div class="audience-role">Customer Success Managers</div>
+            <div class="audience-desc">Involved in pre-sales technical discovery or inheriting accounts post-implementation.</div>
+          </div>
+          <div class="audience-card">
+            <div class="audience-role">Solutions Engineers</div>
+            <div class="audience-desc">Working with delivery teams on scoping and translating business requirements into technical spec.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOWNLOAD CTA -->
+    <div class="download-block">
+      <div class="download-meta">
+        <div class="download-title">How to Write an Effective SOW</div>
+        <div class="download-desc">Complete guide + ready-to-use template. Covers the five-step process, pitfalls, best practices, 12-point checklist, and an 8-section SOW template ready to customize for your next implementation.</div>
+        <div class="download-badge">
+          <i data-lucide="file-text"></i>
+          &nbsp;Word Document · ~17 pages · Free download
+        </div>
+      </div>
+      <a href="downloads/How_to_Write_an_Effective_SOW.docx" class="btn-primary" download>
+        <i data-lucide="download" class="icon-lg"></i>
+        Download Framework
+      </a>
+    </div>
+
+    <!-- CONTEXT NOTE -->
+    <div class="card context-note">
+      <div class="section-label">Why This Framework Exists</div>
+      <p>This came out of a realization: most CS frameworks start at go-live. They assume implementation went smoothly and the account is ready for the relationship management motion. But the work that determines whether an implementation succeeds or becomes a firefight happens before any of that — in the scoping conversations, the sales handoff, the technical discovery that either surfaces the constraints early or buries them until they become escalations.</p>
+      <p>Platform Success Managers who lead SOW creation are doing some of the highest-leverage work in the customer lifecycle. Getting scope, timeline, and stakeholder alignment locked down from day one is what separates implementations that generate advocates from ones that generate churn.</p>
+      <p>This framework codifies that process — built from 20+ years of seeing what works on both sides of implementation.</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">CS Playbooks</div>
+      <div class="footer-copy">Built by Sonya Freeney · csplaybooks.com · Free frameworks and templates for Customer Success professionals</div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+
+</body>
+</html>
