@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The First 90 Days — Sonya Freeney</title>
+  <meta name="description" content="The biggest mistake a new Platform Success Manager can make is treating the first 30 days as orientation. They're not. A Field Note on the 30-60-90 and what actually matters."/>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wcnl1shu9t");
+  </script>
+  <style>
+    :root {
+      --bg: #0f0f0f; --surface: #171717; --surface-2: #1e1e1e; --border: #2a2a2a;
+      --slate: #4a6fa5; --slate-lt: #6b8ec4; --amber: #fbbf24; --amber-dim: #c9901a;
+      --cream: #f5f0e8; --muted: #8a8a8a; --text: #e8e4dc; --green: #4ade80; --red: #f87171;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Crimson Text', Georgia, serif; font-size: 1.125rem; line-height: 1.8; min-height: 100vh; }
+    nav { padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; color: var(--amber); text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 1.75rem; }
+    .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cream); }
+    .article-wrap { max-width: 740px; margin: 0 auto; padding: 5rem 2rem 8rem; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--cream); }
+    .back-link::before { content: '← '; }
+    .article-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
+    .article-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--amber); }
+    h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.1rem, 4.5vw, 3.25rem); font-weight: 600; line-height: 1.15; color: var(--cream); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+    h1 em { font-style: italic; color: var(--amber); }
+    .byline { display: flex; align-items: center; gap: 1.5rem; padding: 1.25rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+    .byline-name { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--cream); }
+    .byline-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+    .byline-dot { color: var(--border); }
+    .prose p { margin-bottom: 1.5rem; color: var(--text); font-size: 1.15rem; }
+    .prose p:first-child { font-size: 1.25rem; color: var(--cream); line-height: 1.7; }
+    .prose h2 { font-family: 'Crimson Text', serif; font-size: 1.75rem; font-weight: 600; color: var(--cream); margin: 3rem 0 1rem; line-height: 1.25; }
+    .prose h3 { font-family: 'Crimson Text', serif; font-size: 1.3rem; font-weight: 600; color: var(--cream); margin: 2rem 0 0.75rem; }
+    .prose strong { color: var(--cream); font-weight: 600; }
+    .prose em { font-style: italic; color: var(--amber); }
+    .prose a { color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(251,191,36,0.3); transition: border-color 0.2s; }
+    .prose a:hover { border-color: var(--amber); }
+    .callout { background: rgba(251,191,36,0.05); border: 1px solid rgba(251,191,36,0.18); border-left: 3px solid var(--amber); padding: 1.5rem 1.75rem; border-radius: 2px; margin: 2rem 0; }
+    .callout p { font-size: 1.05rem !important; color: var(--text) !important; margin-bottom: 0 !important; }
+    .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.6rem; }
+    .info-block { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--slate); padding: 1.5rem 1.75rem; border-radius: 2px; margin: 2rem 0; }
+    .info-block p { font-size: 1rem !important; margin-bottom: 0 !important; color: var(--muted) !important; }
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; margin: 1.5rem 0 2rem; }
+    .step-list li { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; align-items: start; }
+    .step-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: var(--amber); background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+    .step-list li p { font-size: 1.05rem !important; margin-bottom: 0 !important; color: var(--text) !important; }
+    .step-list li strong { color: var(--cream); }
+    .phase-marker { display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber-dim); margin-bottom: 0.5rem; }
+    .phase-marker::before { content: ''; display: inline-block; width: 18px; height: 1px; background: var(--amber-dim); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; }
+    .downloads { margin: 3rem 0 2rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.75rem; }
+    .downloads-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; }
+    .downloads-label::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--amber); }
+    .download-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+    .download-item:hover { border-color: rgba(251,191,36,0.4); background: var(--surface-2); }
+    .download-icon { color: var(--amber); flex-shrink: 0; }
+    .download-title { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--cream); font-weight: 500; margin-bottom: 0.2rem; }
+    .download-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.05em; }
+    @media (max-width: 600px) { .article-wrap { padding: 3rem 1.25rem 5rem; } h1 { font-size: 1.9rem; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../index.html">SF / CS Playbooks</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="index.html">Field Notes</a>
+    <a href="../fintech-cs-framework.html">Frameworks</a>
+  </div>
+</nav>
+<article class="article-wrap">
+  <a class="back-link" href="index.html">Field Notes</a>
+  <div class="article-tag">Platform Success</div>
+  <h1>The First 90 Days<br/><em>What Actually Matters in a New PSM Role</em></h1>
+  <div class="byline">
+    <span class="byline-name">Sonya Freeney</span>
+    <span class="byline-dot">·</span>
+    <span class="byline-meta">May 2026</span>
+    <span class="byline-dot">·</span>
+    <span class="byline-meta">7 min read</span>
+  </div>
+  <div class="prose">
+
+    <p>I've started a few new customer-facing roles over the years, and the thing nobody tells you upfront is that how you spend the first thirty days determines a lot about the next two years. Not just whether you close a deal or hit a number — those matter too — but whether you end up operating from a real foundation or from a patchwork of assumptions you never had time to test.</p>
+
+    <p>The plan I use now has three phases. Not because thirty-day checkpoints are magic, but because the work genuinely changes character at each one. Month one is about building the map. Month two is about starting to drive. Month three is about connecting what you're seeing to where the client needs to be in three to five years. Those aren't interchangeable. Trying to skip ahead — treating an early win as a substitute for the intelligence-gathering you haven't done yet — tends to catch up with you somewhere between day 60 and renewal.</p>
+
+    <h2>Month one is intelligence gathering, not orientation</h2>
+
+    <p>Here's the reframe that changed how I approach new roles: the first 30 days aren't orientation. They're reconnaissance. Every conversation, every shadowed call, every product deep-dive — I'm building a picture I'll be drawing on for the next two years. The PSM who shows up to day one with a diagnosis is the one who ends up solving the wrong problems very confidently.</p>
+
+    <p>So I listen first. Not passively — I'm mapping the platform ecosystem, identifying where clients see ROI fastest, understanding where adoption stalls and why. I'm sitting on escalation calls alongside more experienced colleagues, not to observe, but to learn what the real conversations sound like versus the polished ones. I'm interviewing internal teams — implementation, support, sales engineering, product — specifically to understand what they wish the PSMs they hand accounts to already knew. That last question always produces something useful.</p>
+
+    <p>By weeks three and four, I'm into the client portfolio itself. Utilization audits. Volume and trend analysis. For payment and usage platforms especially, you need to understand seasonal patterns — when stress hits the system, what "normal" looks like for each client — before you can have an informed conversation about anything. Underutilization is almost always the first signal of either risk or a dormant opportunity, and you need to be able to tell the difference.</p>
+
+    <div class="callout">
+      <div class="callout-label">The deliverable that matters</div>
+      <p>I want to come out of month one with a risk/opportunity matrix — at minimum three accounts flagged for immediate action. One that's at risk and needs attention now. One that's expansion-ready and just needs someone to start the conversation. And one quick win: something sitting unconfigured, some feature that would immediately reduce pain if the client knew it existed. That matrix is the foundation everything in month two gets built on.</p>
+    </div>
+
+    <p>I don't believe in showing up to day one with a diagnosis. I show up with a framework for listening. Clients can tell the difference between a PSM who's genuinely curious about their business and a PSM who's running through a checklist. And in regulated industries — utilities, energy, water — that distinction matters more than it does elsewhere. These clients deploy platforms they'll eventually need to explain to regulators and auditors. They're not looking for a vendor relationship. They're looking for someone who actually understands what they're trying to accomplish.</p>
+
+    <h2>Month two: listening stops, leading starts</h2>
+
+    <p>By day 31, I've mapped the portfolio. I know where the risks live. I know where the opportunities are. Month two is where I start acting on it — deliberately, not reactively, which is its own discipline.</p>
+
+    <p>The client-facing shift is significant. The meetings I'm scheduling now aren't status calls. They're strategy sessions. The agenda is their business goals first, platform performance second, roadmap alignment third. That order isn't incidental — it signals to the client that I'm thinking about their outcomes, not just product adoption metrics.</p>
+
+    <p>I also try to run one platform optimization workshop in month two. This is a working session built around the highest utilization gap I found in month one. The goal is to walk the client's team through how to get more value from what they already own — no new spend, no expansion pitch, just capability they've been leaving on the table. It's one of the fastest ways to establish credibility with a client who's been skeptical about whether their CS investment actually translates into anything.</p>
+
+    <div class="info-block">
+      <p>The temptation in month two is to try to impress everyone at once. I've learned that the most impressive thing you can do is solve one real problem completely rather than half-solve five of them. An early win that actually sticks — a documented expansion opportunity, a churn prevention that you can point to specifically — is worth more than a month of visible effort that doesn't move anything.</p>
+    </div>
+
+    <p>The internal work in month two is just as important. I establish cross-functional syncs — product, support, sales, professional services — not to report, but to exchange intelligence. What are clients asking for that isn't on the roadmap? What implementation gaps are creating downstream PSM headaches? That intel loop is how you start getting ahead of issues instead of reacting to them. I also try to build the escalation reflex early: looping in delivery and support teams before situations become emergencies. The PSMs who earn a reputation for being genuinely easy to work with are the ones who over-communicate early and under-escalate late. That's a learnable habit, but it requires making it a priority in month two rather than something you get around to eventually.</p>
+
+    <h2>Month three: from competent to strategic</h2>
+
+    <div class="phase-marker">Days 61–90</div>
+
+    <p>By day 61, I should be able to run my portfolio without constant internal support. That's the baseline expectation for month three — not a goal, just the minimum. The actual work is shifting from competent to strategic, which means connecting what clients are doing today with where they need to be in three to five years and demonstrating that the platform is the vehicle that gets them there.</p>
+
+    <p>For at least one strategic account, I want to have a 12 to 24 month roadmap built out — something that ties platform capabilities to their stated infrastructure or business goals, that shows them what the product can do in year two that they aren't thinking about yet. This is where PSMs who've genuinely done the intelligence work in month one have a real advantage: you know enough about the account to make that roadmap feel specific and earned rather than like a template with their logo on it.</p>
+
+    <p>In regulated industries particularly, I've found it valuable to develop what I think of as a future-state framework — one that connects platform capabilities to the pressures that are actually bearing down on the client's sector. Grid modernization. AI adoption. Regulatory scrutiny of automated billing decisions. Affordability mandates in utility contexts. These aren't abstract forces; they show up in my clients' planning conversations all the time, and a PSM who can speak to them from both sides — vendor and former customer — creates a different kind of partnership than one who knows the product roadmap cold but doesn't understand the regulatory environment the client is navigating.</p>
+
+    <div class="callout">
+      <div class="callout-label">The QBR that's actually worth attending</div>
+      <p>I try to build a QBR format that opens with the client's goals, demonstrates the platform's contribution toward those goals, surfaces at least one insight they didn't have before the meeting, and closes with a clear mutual action plan. Not a metrics deck. A strategic review. The difference is whether the client leaves thinking about their business or about your product.</p>
+    </div>
+
+    <h2>The three things underneath all of it</h2>
+
+    <p>The structure of a 30-60-90 is useful, but the structure isn't really the point. Three beliefs shape how I work in platform success roles, and they apply regardless of what phase I'm in.</p>
+
+    <p>The first is that I don't wait for health scores to turn red. In highly regulated industries, the gap between "things seem fine" and "this is now an emergency" is genuinely smaller than in other sectors. Procurement scrutiny happens faster, switching costs get weaponized in RFPs, and a client who felt fine six months ago can have a very different organizational reality by renewal. Tracking utilization patterns, support ticket trends, and stakeholder engagement isn't paranoia — it's the actual job.</p>
+
+    <p>The second is that I don't teach clients how to use features. I help them achieve business outcomes. A payment platform isn't a payment platform — it's a tool to reduce days sales outstanding, increase auto-pay adoption, eliminate the call center volume that comes from customers confused about whether their payment posted. When you lead with features, you get evaluated on features. When you lead with outcomes, you get evaluated on whether the client's business got better. That's a different conversation at renewal.</p>
+
+    <p>The third is trust through transparency. Clients in regulated industries deploy platforms they'll eventually need to explain to regulators, auditors, and boards. They need a PSM who understands that "defensible" matters just as much as "effective." I know what it's like to sit on the client side of that equation — which makes me a more useful partner when they're navigating it. That's not something you can fake. But it is something you can establish in the first 90 days, if you spend that time actually learning the client's world rather than performing expertise you haven't earned yet.</p>
+
+    <p>The first 90 days matter because the habits and relationships you build in that window are hard to undo. Show up curious. Build the map before you start driving. Solve one real problem completely. And get in front of the right stakeholders before you actually need them.</p>
+
+    <p>Everything else follows from that.</p>
+
+    <p style="margin-top: 2.5rem;">Questions? Want to compare notes on how this plays out in utility or fintech accounts? Reach me at <a href="mailto:sonya.freeney@gmail.com">sonya.freeney@gmail.com</a> or <a href="https://www.linkedin.com/in/sonya-freeney" target="_blank">LinkedIn</a>.</p>
+
+  </div>
+  <div class="downloads">
+    <div class="downloads-label">Downloads</div>
+    <a class="download-item" href="../assets/30-60-90-Day-Plan-PSM.docx" download>
+      <div class="download-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="18"/><line x1="15" y1="15" x2="12" y2="18"/></svg>
+      </div>
+      <div class="download-text">
+        <div class="download-title">30-60-90 Day Plan — Platform Success Manager</div>
+        <div class="download-meta">Complete formatted plan · docx</div>
+      </div>
+    </a>
+    <a class="download-item" href="../assets/30-60-90-PSM-Template.docx" download>
+      <div class="download-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="18"/><line x1="15" y1="15" x2="12" y2="18"/></svg>
+      </div>
+      <div class="download-text">
+        <div class="download-title">30-60-90 Template — Blank</div>
+        <div class="download-meta">Fill-in-your-own version · docx</div>
+      </div>
+    </a>
+  </div>
+  <div class="tag-row">
+    <span class="tag">Platform Success</span>
+    <span class="tag">Onboarding</span>
+    <span class="tag">30-60-90</span>
+    <span class="tag">Account Management</span>
+    <span class="tag">Utility Payments</span>
+    <span class="tag">Fintech</span>
+    <span class="tag">Customer Success</span>
+  </div>
+</article>
+</body>
+</html>
